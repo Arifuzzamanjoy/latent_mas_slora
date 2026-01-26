@@ -1,0 +1,27 @@
+[
+  {
+    "question": "A 34-year-old man comes to the physician because of a 3-week history of colicky abdominal pain and diarrhea. He has bowel movements 10–12 times daily; the stool contains blood and mucus. Colonoscopy shows a bleeding, ulcerated rectal mucosa with several pseudopolyps. Which of the following is this patient at greatest risk of developing?\nA. Hemolytic uremic syndrome\nB. Oral ulcers\nC. Colorectal cancer\nD. Pancreatic cancer",
+    "answer": "C",
+    "gold_letter": "C"
+  },
+  {
+    "question": "A 64-year-old man with asthma on high-dose fluticasone inhaler presents with sore mouth for 1 week. Exam shows white patches on oral mucosa. What is the most appropriate next step in management?\nA. Fluconazole\nB. Isotretinoin\nC. Nystatin\nD. Penicillin V",
+    "answer": "C",
+    "gold_letter": "C"
+  },
+  {
+    "question": "A 45-year-old mechanic presents with acute-onset shortness of breath while repairing a tractor. He is pale, diaphoretic with contracted pupils. Diffuse wheezes are noted. What is the best treatment?\nA. Succinylcholine\nB. Inhaled ipratropium and oxygen\nC. Atropine and pralidoxime\nD. Inhaled albuterol and oxygen",
+    "answer": "C",
+    "gold_letter": "C"
+  },
+  {
+    "question": "What is the result of 15 × 7 + 23?\nA. 105\nB. 128\nC. 135\nD. 142",
+    "answer": "B",
+    "gold_letter": "B"
+  },
+  {
+    "question": "Which data structure uses LIFO (Last In First Out) principle?\nA. Queue\nB. Stack\nC. Array\nD. Linked List",
+    "answer": "B",
+    "gold_letter": "B"
+  }
+]

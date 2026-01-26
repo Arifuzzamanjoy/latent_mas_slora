@@ -1,0 +1,18 @@
+# Core Dependencies
+torch>=2.1.0
+transformers>=4.40.0
+peft>=0.10.0
+accelerate>=0.27.0
+bitsandbytes>=0.43.0
+safetensors>=0.4.0
+
+# Optional: vLLM for production serving
+# vllm>=0.4.0  # Uncomment if using vLLM backend
+
+# Utilities
+tqdm>=4.66.0
+numpy>=1.24.0
+huggingface_hub>=0.21.0
+
+# Evaluation
+datasets>=2.18.0
