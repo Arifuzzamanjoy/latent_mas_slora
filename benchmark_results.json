@@ -1,0 +1,76 @@
+{
+  "meta": {
+    "timestamp": "2026-01-26T21:19:47.628582",
+    "model": "Qwen/Qwen2.5-3B-Instruct",
+    "questions": 3
+  },
+  "questions": [
+    {
+      "id": 1,
+      "domain": "MATH",
+      "question": "Find all values of x that satisfy: 2x\u00b3 - 5x\u00b2 - 3x = 0",
+      "expected": "x = 0, x = 3, x = -0.5",
+      "modes": {
+        "true_latent": {
+          "error": "No agents registered. Call add_agent() first."
+        },
+        "fast": {
+          "error": "No agents registered. Call add_agent() first."
+        },
+        "normal": {
+          "error": "No agents registered. Call add_agent() first."
+        }
+      }
+    },
+    {
+      "id": 2,
+      "domain": "CODE",
+      "question": "Write a Python function to find the longest palindromic substring in a given string. Include time complexity analysis.",
+      "expected": "O(n\u00b2) or O(n) with Manacher's",
+      "modes": {
+        "true_latent": {
+          "error": "No agents registered. Call add_agent() first."
+        },
+        "fast": {
+          "error": "No agents registered. Call add_agent() first."
+        },
+        "normal": {
+          "error": "No agents registered. Call add_agent() first."
+        }
+      }
+    },
+    {
+      "id": 3,
+      "domain": "REASONING",
+      "question": "A farmer has chickens and rabbits. He counts 35 heads and 94 legs total. How many chickens and how many rabbits does he have? Show your reasoning step by step.",
+      "expected": "23 chickens, 12 rabbits",
+      "modes": {
+        "true_latent": {
+          "error": "No agents registered. Call add_agent() first."
+        },
+        "fast": {
+          "error": "No agents registered. Call add_agent() first."
+        },
+        "normal": {
+          "error": "No agents registered. Call add_agent() first."
+        }
+      }
+    }
+  ],
+  "summary": {
+    "mode_totals": {
+      "true_latent": {
+        "time_s": 0,
+        "tokens": 0
+      },
+      "fast": {
+        "time_s": 0,
+        "tokens": 0
+      },
+      "normal": {
+        "time_s": 0,
+        "tokens": 0
+      }
+    }
+  }
+}

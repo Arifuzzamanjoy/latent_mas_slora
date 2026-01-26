@@ -15,11 +15,25 @@ from peft import get_peft_model
 
 from .core.latent_memory import LatentMemory, KVCacheManager
 from .core.latent_reasoner import LatentReasoner
-from .agents.configs import AgentConfig, AgentRole, HIERARCHICAL_AGENTS
+from .agents.configs import (
+    AgentConfig, AgentRole, HIERARCHICAL_AGENTS,
+    MEDICAL_PIPELINE_AGENTS, MATH_PIPELINE_AGENTS, CODING_PIPELINE_AGENTS,
+)
 from .agents.agent_pool import AgentPool
 from .lora.adapter_manager import LoRAAdapterManager, QWEN25_LORA_REGISTRY
 from .pipelines.hierarchical import HierarchicalPipeline, PipelineResult
 from .pipelines.sequential import SequentialPipeline
+from .routing import Domain, SemanticRouter, auto_route
+
+
+# Domain to agent pipeline mapping
+DOMAIN_AGENTS = {
+    Domain.CODE: CODING_PIPELINE_AGENTS,
+    Domain.MATH: MATH_PIPELINE_AGENTS,
+    Domain.MEDICAL: MEDICAL_PIPELINE_AGENTS,
+    Domain.REASONING: HIERARCHICAL_AGENTS,
+    Domain.GENERAL: HIERARCHICAL_AGENTS,
+}
 
 
 @dataclass 
@@ -286,6 +300,7 @@ class LatentMASSystem:
         max_new_tokens: Optional[int] = None,
         temperature: Optional[float] = None,
         self_consistency: int = 1,
+        true_latent: bool = False,
         **kwargs,
     ) -> PipelineResult:
         """
@@ -293,11 +308,12 @@ class LatentMASSystem:
         
         Args:
             question: Input question
-            pipeline: "hierarchical" or "sequential"
+            pipeline: "hierarchical", "sequential", or "true_latent"
             agents: List of agent names (default: all registered)
             max_new_tokens: Override max tokens
             temperature: Override temperature
             self_consistency: Number of samples for self-consistency voting (1 = disabled)
+            true_latent: Use TRUE LatentMAS (only final agent generates text)
             
         Returns:
             PipelineResult with answer and traces
@@ -308,6 +324,16 @@ class LatentMASSystem:
         # Default to all registered agents
         if agents is None:
             agents = self._pool.list_agents()
+        
+        # TRUE LatentMAS mode
+        if true_latent or pipeline == "true_latent":
+            return self._pipeline.run_true_latent(
+                question,
+                agents=agents,
+                max_new_tokens=max_new_tokens,
+                temperature=temperature,
+                **kwargs,
+            )
         
         if pipeline == "hierarchical":
             if self_consistency > 1:

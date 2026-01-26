@@ -1,0 +1,45 @@
+{
+  "accuracy": 0.4,
+  "results": [
+    {
+      "idx": 0,
+      "prediction": "UNKNOWN",
+      "gold": "C",
+      "correct": false,
+      "tokens": 2875,
+      "latency_ms": 83913
+    },
+    {
+      "idx": 1,
+      "prediction": "D",
+      "gold": "D",
+      "correct": true,
+      "tokens": 2941,
+      "latency_ms": 78934
+    },
+    {
+      "idx": 2,
+      "prediction": "C",
+      "gold": "D",
+      "correct": false,
+      "tokens": 3015,
+      "latency_ms": 79770
+    },
+    {
+      "idx": 3,
+      "prediction": "C",
+      "gold": "C",
+      "correct": true,
+      "tokens": 2985,
+      "latency_ms": 80560
+    },
+    {
+      "idx": 4,
+      "prediction": "UNKNOWN",
+      "gold": "C",
+      "correct": false,
+      "tokens": 3013,
+      "latency_ms": 80988
+    }
+  ]
+}

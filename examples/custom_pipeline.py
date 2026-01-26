@@ -81,7 +81,7 @@ Provide the solution with explanation."""
     result = system.run(
         question=question,
         pipeline="hierarchical",
-        max_new_tokens=500,
+        max_new_tokens=1024,
         temperature=0.4,
     )
     
@@ -156,7 +156,7 @@ def create_math_pipeline():
     result = system.run(
         question=question,
         pipeline="hierarchical",
-        max_new_tokens=500,
+        max_new_tokens=1024,
         temperature=0.3,
     )
     
