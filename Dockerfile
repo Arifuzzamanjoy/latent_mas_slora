@@ -1,5 +1,6 @@
 # LatentMAS + S-LoRA RunPod Serverless Worker
 # Multi-agent reasoning with domain-specific LoRA adapters
+# hadolint ignore=DL3006
 FROM runpod/base:0.6.3-cuda12.1.0
 
 # Set environment variables
@@ -14,6 +15,7 @@ ENV PYTHONUNBUFFERED=1 \
 WORKDIR /app
 
 # Install system dependencies
+# hadolint ignore=DL3008
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     wget \
@@ -21,14 +23,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Upgrade pip for Python 3.11
-RUN python3.11 -m pip install --upgrade pip setuptools wheel
+# hadolint ignore=DL3013,DL3042
+RUN python3.11 -m pip install --no-cache-dir --upgrade pip==24.0 setuptools==69.0.3 wheel==0.42.0
 
 # Copy requirements first for caching
 COPY requirements.txt /app/requirements.txt
 
 # Install Python dependencies
+# hadolint ignore=DL3013
 RUN python3.11 -m pip install --no-cache-dir -r /app/requirements.txt && \
-    python3.11 -m pip install --no-cache-dir runpod requests
+    python3.11 -m pip install --no-cache-dir runpod==1.7.0 requests==2.31.0
 
 # Copy source code
 COPY src/ /app/src/
