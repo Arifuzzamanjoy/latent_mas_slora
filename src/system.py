@@ -600,7 +600,7 @@ class LatentMASSystem:
         auto_load_adapters: bool = False,
         use_advanced_router: bool = True,
         use_fast_router: bool = False,
-    ) -> Union[SemanticRouter, AdvancedHybridRouter, "FastKeywordRouter"]:
+    ) -> Union[SemanticRouter, AdvancedHybridRouter, "FastKeywordRouter"]:  # noqa: F821
         """
         Enable domain-based routing for intelligent LoRA selection.
         
