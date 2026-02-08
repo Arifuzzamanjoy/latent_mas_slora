@@ -110,6 +110,7 @@ class SequentialPipeline:
                 input_ids=input_ids,
                 attention_mask=attention_mask,
                 num_steps=self.latent_steps,
+                question=question,  # For adaptive steps
             )
             
             self.memory.store_hidden_state(agent_name, latent_result.final_hidden)

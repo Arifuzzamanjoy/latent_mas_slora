@@ -36,6 +36,9 @@ class SemanticRouter:
         self._model = None
         self._domain_embeddings: Dict[Domain, torch.Tensor] = {}
         self._initialized = False
+        # OPTIMIZATION: Cache query embeddings to avoid redundant encoding
+        self._query_embedding_cache: Dict[str, torch.Tensor] = {}
+        self._cache_max_size = 100
     
     def _lazy_init(self) -> None:
         """Lazy initialization of embedding model"""
@@ -45,6 +48,13 @@ class SemanticRouter:
         if self.use_embeddings:
             try:
                 from sentence_transformers import SentenceTransformer
+                import warnings
+                import logging
+                
+                # Suppress harmless warnings about position_ids
+                logging.getLogger("sentence_transformers").setLevel(logging.WARNING)
+                warnings.filterwarnings("ignore", message=".*position_ids.*")
+                
                 print("[Router] Loading embedding model...")
                 self._model = SentenceTransformer(self.model_name)
                 self._precompute_domain_embeddings()
@@ -72,16 +82,35 @@ class SemanticRouter:
             # Domain centroid = mean of exemplars
             self._domain_embeddings[domain] = embeddings.mean(dim=0)
     
-    def _semantic_score(self, text: str, domain: Domain) -> float:
-        """Compute semantic similarity to domain centroid"""
-        if self._model is None or domain not in self._domain_embeddings:
-            return 0.0
+    def _get_query_embedding(self, text: str) -> torch.Tensor:
+        """Get or compute query embedding with caching"""
+        # Check cache first
+        if text in self._query_embedding_cache:
+            return self._query_embedding_cache[text]
         
+        # Compute embedding
         text_emb = self._model.encode(
             text,
             convert_to_tensor=True,
             normalize_embeddings=True,
         )
+        
+        # Cache it (with size limit)
+        if len(self._query_embedding_cache) >= self._cache_max_size:
+            # Remove oldest entry
+            oldest_key = next(iter(self._query_embedding_cache))
+            del self._query_embedding_cache[oldest_key]
+        
+        self._query_embedding_cache[text] = text_emb
+        return text_emb
+    
+    def _semantic_score(self, text: str, domain: Domain) -> float:
+        """Compute semantic similarity to domain centroid (with cached embedding)"""
+        if self._model is None or domain not in self._domain_embeddings:
+            return 0.0
+        
+        # OPTIMIZATION: Use cached query embedding
+        text_emb = self._get_query_embedding(text)
         
         similarity = torch.nn.functional.cosine_similarity(
             text_emb.unsqueeze(0),
@@ -139,19 +168,22 @@ class SemanticRouter:
     def get_best_domain(
         self,
         prompt: str,
-        confidence_threshold: float = 0.25,
+        confidence_threshold: float = 0.20,
     ) -> Tuple[Domain, float]:
         """
         Get single best domain for prompt.
         
         Returns GENERAL if confidence is below threshold.
         """
-        results = self.route(prompt, top_k=1)
+        results = self.route(prompt, top_k=3)
         
         if not results:
             return Domain.GENERAL, 0.0
         
         domain, confidence = results[0]
+        
+        # Simply use the highest-scoring domain; no bias toward any specific domain
+        # This ensures context-sensitive routing based purely on semantic similarity and keywords
         
         if confidence < confidence_threshold:
             return Domain.GENERAL, confidence

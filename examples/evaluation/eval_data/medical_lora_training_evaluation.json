@@ -1,0 +1,602 @@
+[
+  {
+    "id": "medical_training_40546",
+    "question": "What is a common feature of left middle cerebral artery territory infarct that is typically not seen in a right middle cerebral artery territory infarct?",
+    "options": {
+      "A": "Aphasia"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "**  \n**Acute Ischemic Stroke (Left MCA Territory)**  \n\n*Urgent Action Needed:* Immediate neuroimaging (CT/MRI) to confirm and assess for reperfusion therapy (e.g., thrombolysis/thrombectomy). Blood pressure management and secondary stroke prevention (e.g., antiplatelets, statins) should follow.",
+    "explanation": "Aphasia",
+    "reasoning": "****  \n\nThe patient presents with a sudden onset of **expressive and receptive language deficits** (jumbled speech, word-finding difficulty, impaired reading/writing, and delayed comprehension), accompanied by **right-hand weakness**. These symptoms localize to the **left hemisphere of the brain**, specifically regions involved in language (Broca’s area, Wernicke’s area, and/or the arcuate fasciculus) and motor control (left motor cortex affecting right-sided strength). Key considerations:  \n\n1. **Ischemic Stroke (Most Likely)**:  \n   - Sudden onset of **aphasia** (language impairment) + **right-hand weakness** suggests a **left middle cerebral artery (MCA) stroke**, affecting language-dominant (typically left) hemisphere.  \n   - Risk factors include **hypertension (poor medication adherence)** and possible undiagnosed atrial fibrillation or atherosclerosis.  \n   - Family history of stroke further elevates suspicion.  \n\n2. **Transient Ischemic Attack (TIA)**:  \n   - If symptoms resolve within 24 hours, this could represent a \"warning\" stroke, but the persistence makes full stroke more likely.  \n\n3. **Other Neurological Causes (Less Likely Here)**:  \n   - **Seizure (e.g., Todd’s paralysis)**: Unlikely without episodic features (e.g., preceding aura, rhythmic movements).  \n   - **Migraine (Aphasic Migraine)**: Rare without headache or visual aura.  \n   - **Mass Lesion (Tumor, Abscess)**: Typically subacute progression, not sudden onset.  \n\n**"
+  },
+  {
+    "id": "medical_training_40548",
+    "question": "In which specific part of the body's circulation are endothelial cells not involved in the production of thrombomodulin?",
+    "options": {
+      "A": "Cerebral microcirculation"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "**  \nMost likely **mixed etiology**:  \n- **Primary diagnosis:** **Chronic stress/anxiety with tension-type headaches** (contributing to vasomotor dysfunction).  \n- **Secondary concern:** **Possible migraine variant or microvascular changes** (needs evaluation if symptoms persist despite stress management).  \n\n*Next Steps:*  \n- Rule out anemia, thyroid dysfunction, or hypertension.  \n- Consider neuroimaging if focal deficits emerge (unlikely here).  \n- Trial of stress reduction + hydration; reassess in 2–4 weeks.  \n\n*(This balances the patient’s biomedical curiosity with pragmatic, low-risk management.)*",
+    "explanation": "Cerebral microcirculation",
+    "reasoning": "****  \n\nThe patient presents with a constellation of symptoms including:  \n- **Dull, constant headaches** (especially in the temples)  \n- **Episodes of dizziness**  \n- **Blurred or flickering vision**  \n- **Memory lapses/cognitive fog**  \n\nThese symptoms could arise from several potential causes:  \n\n1. **Cerebral Microcirculation Dysfunction**  \n   - The patient correctly notes that cerebral microvessels have lower thrombomodulin expression, increasing clotting risk in small vessels.  \n   - Impaired microcirculation (e.g., due to chronic hypertension, microangiopathy, or hypercoagulability) could lead to transient hypoperfusion, causing headaches, dizziness, and cognitive symptoms.  \n\n2. **Chronic Stress/Anxiety**  \n   - Stress exacerbates vasoconstriction and endothelial dysfunction, potentially worsening microcirculatory flow.  \n   - Can also manifest as tension headaches, brain fog, and even visual disturbances (e.g., \"stress-induced visual snow\").  \n\n3. **Migraine Variant**  \n   - Some migraines present with atypical symptoms (e.g., dizziness, cognitive dysfunction, visual flickering without classic aura).  \n\n4. **Other Considerations**  \n   - **Medication Overuse (Aspirin):** While low-dose aspirin is generally protective, rebound effects or rare bleeding risks could contribute.  \n   - **Sleep Disorders/Dehydration:** Common mimics for cognitive and headache symptoms.  \n\nThe patient’s insight into thrombomodulin suggests a plausible link between microvascular health and symptoms, but stress and migraine remain high on the differential.  \n\n**"
+  },
+  {
+    "id": "medical_training_40550",
+    "question": "What anaesthetic modality should be avoided in patients with sickle cell disease?",
+    "options": {
+      "A": "IV. Regional Anaesthesia"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "**  \nThe safest approach for this patient is **carefully managed general anesthesia** with strict avoidance of hypoxia, hypovolemia, and acidosis. Neuraxial anesthesia should be avoided unless strongly indicated and discussed with a hematologist.",
+    "explanation": "IV. Regional Anaesthesia",
+    "reasoning": "****  \n\nThe patient has **sickle cell disease (SCD)**, a genetic disorder causing abnormal hemoglobin (HbS) that leads to chronic hemolytic anemia, vaso-occlusive crises, and multi-organ complications. Their concerns about anesthesia are valid due to the following risks:  \n\n1. **Hypoxia & Acidosis** – Low oxygen tension (e.g., from general anesthesia, hypoventilation, or poor perfusion) promotes HbS polymerization, increasing sickling and vaso-occlusion.  \n2. **Dehydration & Hypothermia** – Perioperative fasting, blood loss, or cold operating rooms can trigger sickling by increasing blood viscosity and vascular stasis.  \n3. **Regional Anesthesia Risks** – While neuraxial (spinal/epidural) anesthesia is sometimes used cautiously, **sympathetic blockade** may cause vasodilation in some areas but compensatory vasoconstriction elsewhere, potentially reducing blood flow to at-risk tissues (e.g., bone marrow, spleen). Epidural-induced hypotension could also impair perfusion.  \n4. **Pain & Stress** – Surgical stress releases catecholamines, which may worsen vasoconstriction and sickle cell crises.  \n\n**Key Recommendations for Safe Anesthesia:**  \n- **General Anesthesia:** Preferred with meticulous attention to **oxygenation, hydration, and normothermia**. Avoid hypoventilation (use higher FiO₂ if needed).  \n- **Regional Anesthesia:** *Controversial*—may be considered in select cases (e.g., limb surgery) but avoided in high-risk scenarios (e.g., severe cardiopulmonary disease, active crisis).  \n- **Preoperative Optimization:** Hydration, Hb ≥ 10 g/dL (consider transfusion if low), hydroxyurea continuation, and aggressive pain management.  \n- **Postoperative Monitoring:** Watch for acute chest syndrome, thromboembolism, or worsening pain crises.  \n\n**"
+  },
+  {
+    "id": "medical_training_40551",
+    "question": "A 12-year-old male patient with asthma and mouth breathing presents with chronic marginal gingivitis in the maxillary anterior teeth. Among the following expected clinical features: high arched palate, decreased salivary rate, and greater overjet, what is one feature that would not be expected in relation to his oral health?",
+    "options": {
+      "A": "Low caries rate"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "** **Chronic Gingivitis** secondary to **mouth breathing** and **asthma inhaler use**, compounded by **malocclusion (overjet/high palate)**. The low caries rate is atypical but plausibly explained by inhaler pH or dietary factors.  \n\n**Management Steps:**  \n- Improve oral hygiene (electric toothbrush, fluoride rinse).  \n- Hydrate + sugar-free gum to stimulate saliva.  \n- Inhaler rinse/post-use mouthwash to reduce medication residue.  \n- Dental referral for orthodontic/oral hygiene evaluation.",
+    "explanation": "Low caries rate",
+    "reasoning": "****  \n\n1. **Gingival Inflammation (Red, Puffy, Bleeding Gums):**  \n   - **Primary Suspect:** Chronic mouth breathing leads to **xerostomia (dry mouth)**, reducing saliva’s protective effects (e.g., antibacterial, buffering). This creates an environment favoring **plaque accumulation** and **gingivitis**.  \n   - **Contributing Factors:**  \n     - **Asthma Inhalers (Albuterol):** Beta-agonists can cause **localized irritation** and **vasodilation**, worsening gingival inflammation. Dry mouth is also a side effect.  \n     - **High/Narrow Palate + Overjet:** Malocclusion (misaligned teeth) makes oral hygiene harder, trapping plaque near the gums.  \n     - **Snoring/Sleep Apnea Risk:** Chronic mouth breathing (especially at night) exacerbates dryness and inflammation.  \n\n2. **Low Caries Rate (Unexpected Feature):**  \n   - **Possible Explanations:**  \n     - **Albuterol’s pH:** Some inhalers have a **neutral or high pH**, which may reduce *Streptococcus mutans* (cavity-causing bacteria) activity.  \n     - **Diet/Genetics:** If the patient avoids sugary foods or has fluoride exposure, this could offset dry mouth-related caries risk.  \n\n3. **Other Considerations:**  \n   - **Allergic Rhinitis:** If present (common in asthma patients), nasal congestion would worsen mouth breathing.  \n   - **Drug-Induced Gingival Overgrowth:** Unlikely here (typically linked to phenytoin, calcium channel blockers, or cyclosporine).  \n\n**"
+  },
+  {
+    "id": "medical_training_40552",
+    "question": "Type I membranoproliferative glomerulonephritis is commonly associated with systemic lupus erythematosus (SLE), persistent hepatitis C infections, and neoplastic diseases. What condition listed here is not commonly associated with Type I membranoproliferative glomerulonephritis?",
+    "options": {
+      "A": "Paial lipodystrophy"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "Lupus Nephritis (likely active SLE-related glomerulonephritis)**",
+    "explanation": "Paial lipodystrophy",
+    "reasoning": "****  \n\nThe patient presents with several concerning symptoms that strongly suggest kidney dysfunction, likely related to their underlying lupus (systemic lupus erythematosus, SLE). Here’s the breakdown:  \n\n1. **Peripheral Edema (Swelling in Ankles/Legs)** – This is a classic sign of fluid retention, often due to impaired kidney function (nephrotic syndrome or nephritic syndrome) where protein loss or sodium retention leads to edema.  \n\n2. **Foamy Urine** – Indicates **proteinuria**, a hallmark of kidney damage, particularly glomerular disease (e.g., lupus nephritis).  \n\n3. **Dark Urine & Nocturia** – Could suggest **hematuria** (blood in urine) or **decreased concentrating ability** of the kidneys, both seen in glomerulonephritis.  \n\n4. **Fatigue & Headache** – May be due to **anemia** (from kidney dysfunction reducing erythropoietin production) or **hypertension** (common in kidney disease).  \n\n5. **Lower Back Pain** – While nonspecific, kidney inflammation (e.g., lupus nephritis) can cause dull flank/back discomfort.  \n\n6. **Lupus History** – SLE is a major risk factor for **lupus nephritis**, which can present with proteinuria, hematuria, edema, and hypertension.  \n\n7. **Hepatitis C History** – While treated, past HCV infection can rarely cause **membranoproliferative glomerulonephritis (MPGN)**, but this is less likely given the patient’s lupus history.  \n\n8. **Partial Lipodystrophy Mention** – Correctly dismissed; it’s not linked to Type I MPGN in this context.  \n\n**Most Likely Diagnosis:** **Lupus Nephritis (Class III, IV, or V likely)**  \n\n**Supporting Evidence:**  \n- SLE patients have a high risk of kidney involvement (~50%).  \n- Proteinuria, hematuria, edema, and hypertension fit nephrotic/nephritic syndrome.  \n- Foamy urine strongly suggests significant protein loss.  \n- Fatigue and headaches may reflect uremia or hypertension from renal dysfunction.  \n\n**Next Steps:**  \n- **Urinalysis** (confirm proteinuria, hematuria, casts).  \n- **24-hour urine protein or spot urine protein-to-creatinine ratio**.  \n- **Serum creatinine/eGFR** (assess kidney function).  \n- **Anti-dsDNA, C3/C4 levels** (lupus activity markers).  \n- **Kidney biopsy** (gold standard for diagnosing lupus nephritis class).  \n\n**"
+  },
+  {
+    "id": "medical_training_40554",
+    "question": "What is the method used for the estimation of chlorine demand of water?",
+    "options": {
+      "A": "Horrock’s apparatus"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "**  \n**Acute infectious gastroenteritis, likely bacterial (e.g., E. coli, Vibrio cholerae) or parasitic (e.g., Giardia), secondary to contaminated water exposure.** Cholera should be considered if in an endemic area or after consuming untreated water.  \n\n**Next Steps:**  \n- **Rehydration (oral rehydration solutions or IV fluids if severe).**  \n- **Stool testing** for pathogens if symptoms persist >48 hours or if bloody.  \n- **Avoid anti-diarrheals** if bacterial infection is suspected (may prolong toxin clearance).  \n- **Boil/sterilize drinking water** if contamination is suspected.",
+    "explanation": "Horrock’s apparatus",
+    "reasoning": "****  \n\nThe patient presents with **acute gastrointestinal symptoms** (nausea, cramping, watery diarrhea) accompanied by **dehydration** (dry mouth, persistent thirst, weakness, tachycardia, and pale skin). The key considerations include:  \n\n1. **Infectious Gastroenteritis (Viral/Bacterial/Parasitic):**  \n   - **Viral (e.g., Norovirus, Rotavirus):** Rapid-onset nausea, vomiting, diarrhea, and dehydration. Highly contagious but typically self-limiting.  \n   - **Bacterial (e.g., E. coli, Salmonella, Campylobacter):** Often from contaminated food/water, with possible fever and bloody stools.  \n   - **Parasitic (e.g., Giardia, Cryptosporidium):** Prolonged diarrhea, bloating, and fatigue, often from untreated water.  \n\n2. **Waterborne Illness (e.g., Cholera):**  \n   - **Cholera (Vibrio cholerae):** Profuse \"rice-water\" diarrhea, severe dehydration, and electrolyte imbalances. Likely in areas with poor sanitation.  \n   - **Other Contaminants:** Heavy metals or chemical toxins (e.g., chlorine byproducts) could cause similar symptoms but are less likely without specific exposure history.  \n\n3. **Non-Infectious Causes:**  \n   - **Food Poisoning:** Toxins (e.g., Staphylococcus aureus) cause rapid vomiting/diarrhea without fever.  \n   - **Medication Side Effects or IBS:** Less likely given acute onset and dehydration.  \n\n**Supporting Clues:**  \n- The **water contamination concern** raises suspicion for bacterial/parasitic pathogens.  \n- **Dehydration signs (tachycardia, dry mouth, weakness)** suggest significant fluid/electrolyte loss, consistent with cholera or severe gastroenteritis.  \n- **Absence of fever** makes invasive bacterial infection (e.g., dysentery) less likely but doesn’t rule it out.  \n\n**"
+  },
+  {
+    "id": "medical_training_40555",
+    "question": "In which specific area does a lesion cause homonymous hemianopia with typical sparing of the macula?",
+    "options": {
+      "A": "Visual coex"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "** **Occipital lobe infarction (ischemic stroke in the right posterior cerebral artery territory)** is the most likely diagnosis. Migraine with persistent aura or a structural lesion (e.g., tumor) are less likely but should be ruled out with imaging.",
+    "explanation": "Visual coex",
+    "reasoning": "****  \n\nThe patient describes **homonymous hemianopia with macular sparing**—a loss of vision in the same half of the visual field in both eyes (left-sided in this case), while central (macular) vision remains intact. This strongly suggests a lesion affecting the **post-chiasmal visual pathway**, specifically the **occipital lobe** (primary visual cortex) or the **optic radiations** in the parietal/temporal lobes.  \n\nKey clinical clues:  \n- **Left-sided visual field loss** (homonymous hemianopia) indicates right-sided brain pathology (since visual pathways cross at the optic chiasm).  \n- **Macular sparing** (preserved central vision) is classic for **occipital lobe lesions**, as the macular region has dual blood supply (posterior and middle cerebral arteries), making it more resistant to ischemia.  \n- **Flashes of light (photopsia)** could suggest **migraine aura** or **retinal/occipital irritation** (e.g., from ischemia or cortical spreading depression).  \n- **Headaches and depth perception issues** may accompany occipital lobe dysfunction or increased intracranial pressure (though the absence of severe headache makes migraine or stroke more likely than a tumor).  \n\n**Differential Diagnoses:**  \n1. **Ischemic Stroke (Occipital Lobe Infarction)** – Most likely, given sudden onset and vascular risk factors (if present). Posterior cerebral artery (PCA) occlusion is a common cause.  \n2. **Migraine with Aura** – Less likely if deficits persist beyond typical aura duration (20-60 mins), but hemianopia can occur in complicated migraine.  \n3. **Occipital Lobe Tumor or Mass Lesion** – Possible but less likely without progressive symptoms or severe headache.  \n4. **Posterior Reversible Encephalopathy Syndrome (PRES)** – Unlikely without hypertension or other systemic signs.  \n\n**Urgency:** This requires **immediate neuroimaging (MRI with diffusion-weighted imaging)** to rule out acute stroke, as timely intervention (e.g., thrombolysis) may be critical.  \n\n**"
+  },
+  {
+    "id": "medical_training_40556",
+    "question": "Which hematological abnormality's prevalence and degree are known to correlate with disease activity in systemic lupus erythematosus (SLE)?",
+    "options": {
+      "A": "Lymphopenia"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "** **Systemic lupus erythematosus (SLE) flare** with active mucocutaneous, musculoskeletal, and hematologic involvement.  \n\n*Next Steps:* Confirm with anti-dsDNA/anti-Smith antibodies, complement levels (C3/C4), and urinalysis to assess for nephritis. Adjust immunosuppressive therapy (e.g., hydroxychloroquine, steroids) and monitor for infection risks.*",
+    "explanation": "Lymphopenia",
+    "reasoning": "****  \n\nThe patient presents with a constellation of symptoms highly suggestive of **systemic lupus erythematosus (SLE)**, an autoimmune disease with multi-organ involvement. Key findings include:  \n\n1. **Fatigue & Malaise** – A hallmark of SLE, often disproportionate to activity or rest.  \n2. **Arthralgia/Joint Swelling** – Symmetric joint pain (hands/knees) with morning stiffness mimics rheumatoid arthritis but is common in lupus.  \n3. **Malar Rash** – The \"butterfly\" rash over cheeks/nose, photosensitive but present without sun exposure, is pathognomonic for SLE.  \n4. **Fever** – Low-grade fevers occur during flares due to systemic inflammation.  \n5. **Recurrent Infections/Oral Ulcers** – Linked to lymphopenia (low lymphocytes), a known SLE feature, and immune dysregulation.  \n6. **Weight Loss** – Chronic inflammation and reduced appetite contribute.  \n7. **Lymphopenia** – Supports SLE diagnosis (per 2019 EULAR/ACR criteria) and correlates with disease activity.  \n\nOther considerations (e.g., infections, other autoimmune diseases) are less likely given the chronicity, rash, and hematologic findings. The patient’s self-awareness of lupus complications (lymphopenia flares) further aligns with an SLE flare.  \n\n**"
+  },
+  {
+    "id": "medical_training_40557",
+    "question": "What is the most likely viral cause of fulminant hepatic failure in a young pregnant woman?",
+    "options": {
+      "A": "Hepatitis E virus"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "** **Acute Hepatitis E Virus (HEV) Infection** with fulminant hepatic failure, complicating pregnancy.  \n\n**Next Steps:**  \n- **Urgent labs:** Liver function tests (AST/ALT, bilirubin, INR), HEV IgM serology.  \n- **Monitor for encephalopathy/coagulopathy** (signs of liver failure).  \n- **Supportive care:** IV fluids, antiemetics, possible NICU coordination for preterm delivery if maternal deterioration occurs.  \n- **Avoid hepatotoxic medications** (e.g., acetaminophen).",
+    "explanation": "Hepatitis E virus",
+    "reasoning": "****  \n\n1. **Key Symptoms & Findings:**  \n   - **Jaundice (yellow skin/eyes):** Indicates liver dysfunction (elevated bilirubin).  \n   - **Fatigue, nausea, vomiting, weight loss:** Non-specific but severe, suggesting systemic involvement.  \n   - **Right upper quadrant pain:** Points to liver inflammation or stretching of Glisson’s capsule.  \n   - **Dark urine & pale stools:** Classic signs of cholestasis (bile flow obstruction).  \n   - **Pruritus (itching):** Caused by bile salt deposition under the skin due to impaired excretion.  \n   - **No fever:** Makes bacterial infections (e.g., cholangitis) less likely.  \n   - **Pregnancy (likely 3rd trimester):** Increases risk of severe outcomes from certain infections (e.g., HEV).  \n\n2. **Differential Diagnosis:**  \n   - **Viral Hepatitis (A, B, C, E):**  \n     - **Hepatitis E (HEV):** *Most likely*. HEV genotype 1/2 is endemic in developing regions, spreads via contaminated water/food, and causes fulminant hepatitis in pregnant women (mortality up to 20-30%).  \n     - Hepatitis A/B/C: Less likely due to rapid progression (B/C usually chronic; A rarely causes fulminant failure in pregnancy).  \n   - **Acute Fatty Liver of Pregnancy (AFLP):** Rare but life-threatening; typically presents with jaundice, coagulopathy, and encephalopathy later in pregnancy.  \n   - **Intrahepatic Cholestasis of Pregnancy (ICP):** Causes itching + jaundice but lacks systemic symptoms (e.g., pain, vomiting).  \n   - **Gallbladder Disease (e.g., choledocholithiasis):** Would typically cause fever + fluctuating pain (absent here).  \n\n3. **Support for HEV Diagnosis:**  \n   - **Epidemiology:** Street food exposure fits fecal-oral transmission.  \n   - **Timing:** Rapid onset of jaundice + systemic symptoms aligns with acute HEV.  \n   - **Pregnancy:** HEV is notorious for causing fulminant hepatic failure in the 3rd trimester.  \n\n**"
+  },
+  {
+    "id": "medical_training_40559",
+    "question": "In myasthenia gravis, which type of muscles are affected by weakness?",
+    "options": {
+      "A": "Only skeletal muscles are involved"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "** **Myasthenia Gravis (MG)**",
+    "explanation": "Only skeletal muscles are involved",
+    "reasoning": "****  \n\nThe patient presents with **fatigable skeletal muscle weakness** (arms, legs, face, jaw, eyelids) that worsens with activity and improves with rest, along with **ptosis (drooping eyelids)**, **dysarthria (slurred speech)**, and **difficulty chewing/swallowing**. These symptoms are **localized to voluntary muscles**, sparing smooth/cardiac muscles (no breathing or heart symptoms). Key observations:  \n\n1. **Fluctuating Weakness** – Symptoms worsen with use (e.g., chewing, lifting arms) and improve after rest, which is hallmark for **neuromuscular junction disorders**.  \n2. **Ptosis & Bulbar Symptoms** – Eyelid drooping and speech/swallowing issues suggest **ocular/bulbar muscle involvement**, common in **myasthenia gravis (MG)**.  \n3. **No Autonomic/Cardiac Involvement** – Rules out conditions like Lambert-Eaton syndrome (which often has autonomic symptoms) or muscular dystrophies (which are progressive, not fatigable).  \n4. **Antibiotic Trigger** – **Azithromycin** (a macrolide) can exacerbate MG by impairing neuromuscular transmission, hinting at pre-existing NMJ dysfunction.  \n\n**Differential Diagnoses:**  \n- **Myasthenia Gravis (MG)** (most likely) – Autoantibodies (e.g., anti-AChR, anti-MuSK) attack postsynaptic NMJ receptors, causing fatigable weakness.  \n- **Lambert-Eaton Myasthenic Syndrome (LEMS)** – Less likely; typically presents with proximal limb weakness + autonomic dysfunction (dry mouth, constipation).  \n- **Botulism** – Unlikely; acute onset with descending paralysis, often with GI symptoms.  \n- **Thyroid Myopathy** – Would cause persistent weakness, not fatigability.  \n\n**Support for MG:**  \n- **Fatigability** (key feature).  \n- **Ocular/bulbar symptoms** (ptosis, dysarthria).  \n- **Response to antibiotics** (macrolides worsen MG).  \n\n**Next Steps:**  \n- **Antibody testing** (anti-AChR, anti-MuSK).  \n- **Edrophonium (Tensilon) test** – Rapid improvement in weakness supports MG.  \n- **EMG with repetitive nerve stimulation** – Decremental response confirms NMJ disorder.  \n\n**"
+  },
+  {
+    "id": "medical_training_40561",
+    "question": "Which protease inhibitor of HIV is ritonavir boosting not recommended with?",
+    "options": {
+      "A": "Nelfinavir"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "** Adverse effects of nelfinavir (protease inhibitor toxicity).  \n\n**Next Steps:**  \n- **Symptom management** (e.g., loperamide for diarrhea, antihistamines for rash).  \n- **Consider switching ART** to a better-tolerated regimen (e.g., integrase inhibitor-based therapy).  \n- **Avoid ritonavir boosting** with nelfinavir due to interaction risks.  \n- **Monitor viral load/CD4** to ensure HIV control remains stable.",
+    "explanation": "Nelfinavir",
+    "reasoning": "****  \n\nThe patient is experiencing gastrointestinal symptoms (diarrhea, nausea, loss of appetite), dermatological symptoms (rash), and systemic fatigue while taking **nelfinavir**, a protease inhibitor (PI) used in HIV treatment. These symptoms are consistent with known **adverse effects of nelfinavir**, which commonly include:  \n- **GI disturbances** (diarrhea in up to 20-30% of patients, nausea, abdominal discomfort)  \n- **Rash** (mild to moderate, sometimes hypersensitivity-related)  \n- **Fatigue** (possibly due to chronic GI effects leading to malabsorption or drug-induced metabolic strain)  \n\nAdditionally, the patient mentions **ritonavir boosting**, which is **not recommended with nelfinavir** due to:  \n- **Pharmacokinetic interactions**: Ritonavir inhibits CYP3A4, but nelfinavir’s metabolism is complex, and boosting may unpredictably alter drug levels.  \n- **Reduced efficacy**: Some studies suggest ritonavir may decrease nelfinavir’s active metabolite levels, compromising viral suppression.  \n\nAlternative considerations:  \n1. **HIV progression or opportunistic infection** – Unlikely if the patient is adherent, but fatigue and GI symptoms warrant CD4/viral load check.  \n2. **Other drug toxicity** – If on additional meds (e.g., antibiotics, antifungals), interactions or side effects could contribute.  \n3. **Hypersensitivity reaction** – Rash + fatigue could suggest drug allergy, though nelfinavir-related rash is typically mild.  \n\n**Most likely diagnosis**: **Nelfinavir-associated adverse effects (GI toxicity, rash, and fatigue).**  \n\n**"
+  },
+  {
+    "id": "medical_training_40562",
+    "question": "Which virus is the leading cause of croup syndrome in young children and is known to cause hem adsorption of red blood cells when infecting mammalian cells in culture?",
+    "options": {
+      "A": "Parainfluenza virus"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "** **Viral croup (likely parainfluenza virus).**  \n\n**Parent Guidance:**  \n- Monitor for **increased work of breathing** (retractions, flaring nostrils).  \n- Use **humidified air** (e.g., steamy bathroom) or **cool night air** to ease symptoms.  \n- Seek emergency care if **stridor at rest, lethargy, or dehydration** occurs.  \n- Most cases resolve in 3–7 days with supportive care.",
+    "explanation": "Parainfluenza virus",
+    "reasoning": "****  \n\nThe patient's symptoms—barking cough (often described as \"seal-like\"), stridor (high-pitched noise on inhalation), hoarseness, fever, and worsening symptoms at night—are classic for **croup (laryngotracheobronchitis)**. This is typically caused by a **viral infection**, most commonly **parainfluenza virus** (types 1 and 3). Other viruses (e.g., RSV, adenovirus, or influenza) can also cause croup, but parainfluenza is the leading culprit.  \n\n**Supporting Evidence:**  \n1. **Epidemiology:** Exposure to daycare increases risk of viral respiratory infections.  \n2. **Symptoms:**  \n   - **Stridor** suggests upper airway obstruction (swelling in the larynx/trachea).  \n   - **Barking cough** is pathognomonic for croup.  \n   - **Worsening at night** is typical due to cooler air and circadian changes in inflammation.  \n3. **Fever & Prodrome:** Initial cold-like symptoms (runny nose, mild cough) precede the characteristic croup symptoms, fitting a viral etiology.  \n\n**Differential Considerations:**  \n- **Bacterial tracheitis** (more severe, toxic appearance, purulent secretions).  \n- **Epiglottitis** (rare due to vaccination, but presents with drooling, dysphagia, and tripod positioning).  \n- **Foreign body aspiration** (sudden onset, no fever, focal wheezing).  \n- **Allergic reaction/angioedema** (no fever, associated rash/swelling).  \n\n**Why Not COVID-19 or Severe Allergy?**  \n- COVID-19 in young children usually causes mild cold-like symptoms; croup is uncommon.  \n- Allergic reactions typically lack fever and have other features (e.g., urticaria).  \n\n**"
+  },
+  {
+    "id": "medical_training_40563",
+    "question": "During a pleural tap procedure performed in the midaxillary line, name the muscle that is not pierced by the needle.",
+    "options": {
+      "A": "Transversus thoracis"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "** **Pleural effusion with associated pleuritis**, likely secondary to infection (e.g., parapneumonic effusion) or inflammatory etiology. Further evaluation (imaging, thoracentesis with fluid analysis) is needed to confirm.  \n\n*(Note: If fever persists, empyema must be ruled out. If effusion recurs rapidly, consider TB or malignancy.)*",
+    "explanation": "Transversus thoracis",
+    "reasoning": "****  \n\nThe patient presents with several key symptoms:  \n1. **Pleuritic chest pain** (sharp, worse with breathing/coughing/movement) – Suggests irritation of the pleura, as seen in pleurisy, pleural effusion, or infection (e.g., pneumonia).  \n2. **Dyspnea (shortness of breath) and \"heavy\" chest pressure** – Consistent with fluid accumulation (pleural effusion) or lung restriction.  \n3. **Dry cough and low-grade fever** – Raises concern for infectious (viral/bacterial pleuritis, tuberculosis) or inflammatory causes (e.g., autoimmune pleuritis).  \n4. **Ineffective response to NSAIDs** – Suggests the underlying cause may not be purely inflammatory (e.g., infection or malignancy).  \n\n**Anatomic clue:** The patient recalls a prior procedure involving needle insertion between the ribs while avoiding the *transversus thoracis* muscle (located posteriorly on the anterior thoracic wall). This muscle is relevant in thoracentesis (pleural fluid drainage), reinforcing the likelihood of pleural pathology (e.g., recurrent effusion).  \n\n**Differential considerations:**  \n- **Pleural effusion** (exudative vs. transudative): Likely given dyspnea, pleuritic pain, and prior drainage. Causes include infection (parapneumonic), heart failure (though fever is atypical), or malignancy.  \n- **Pleurisy**: Often viral (e.g., post-COVID, enterovirus) but may accompany effusion.  \n- **Pneumonia**: Fever + cough + pleuritic pain, but auscultation would reveal crackles.  \n- **Pulmonary embolism**: Less likely without sudden onset or hemoptysis, but possible.  \n\n**Red flags:** Fever suggests infection (empyema, TB) or inflammatory disease; lack of NSAID response warrants exclusion of malignancy or complicated effusion.  \n\n**"
+  },
+  {
+    "id": "medical_training_40564",
+    "question": "What is the drug that is combined with tazobactam and is effective against Pseudomonas aeruginosa?",
+    "options": {
+      "A": "Piperacillin"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "**  \n**Bacterial pneumonia, possibly hospital-acquired (including *Pseudomonas aeruginosa* consideration).**  \n\n**Next Steps:**  \n- **Chest X-ray** to confirm consolidation/effusion.  \n- **Sputum Culture & Blood Cultures** to identify pathogen and guide targeted therapy.  \n- **Empiric Antibiotics:** Piperacillin-tazobactam (if *Pseudomonas* is suspected) or a respiratory fluoroquinolone (e.g., levofloxacin) for broader coverage.  \n- **Supportive Care:** Hydration, antipyretics, and monitoring for complications (e.g., sepsis, pleural effusion).  \n\n*Note: If symptoms persist or risk factors for TB exist, further testing (e.g., AFB smears, PCR) should be pursued.*",
+    "explanation": "Piperacillin",
+    "reasoning": "****  \n\nThe patient presents with a constellation of symptoms highly suggestive of a lower respiratory tract infection, likely bacterial pneumonia. Key findings include:  \n\n1. **Fever & Night Sweats** – Persistent high fever and drenching night sweats are classic systemic signs of infection, possibly severe (e.g., bacterial pneumonia, tuberculosis, or atypical pathogens like Legionella).  \n2. **Productive Cough with Purulent Sputum** – Thick, green/yellow mucus indicates bacterial involvement (e.g., *Streptococcus pneumoniae*, *Haemophilus influenzae*, or *Pseudomonas aeruginosa* in high-risk patients).  \n3. **Pleuritic Chest Pain & Dyspnea** – Sharp pain on inspiration suggests pleural irritation, common in lobar pneumonia or pleural effusion.  \n4. **Fatigue & Systemic Symptoms** – Consistent with a significant infectious burden.  \n\n**Additional Considerations:**  \n- **Pseudomonas Risk Factors:** The patient’s hospital exposure raises concern for nosocomial pathogens like *Pseudomonas*, especially if they have prior lung disease (e.g., COPD, bronchiectasis) or recent antibiotic use. Piperacillin-tazobactam (Zosyn) is indeed a first-line empiric treatment for suspected *Pseudomonas*.  \n- **Antibiotic Side Effects:** GI upset (nausea/diarrhea) is common with broad-spectrum antibiotics like Zosyn; probiotics or monitoring for *C. difficile* may be warranted.  \n- **Other Differentials:**  \n  - **Tuberculosis (TB):** Night sweats and prolonged symptoms are red flags, but absence of hemoptysis/weight loss makes this less likely.  \n  - **Atypical Pneumonia (e.g., Legionella):** Requires macrolides/fluoroquinolones if suspected.  \n  - **Viral Pneumonia:** Less likely given purulent sputum.  \n\n**"
+  },
+  {
+    "id": "medical_training_40566",
+    "question": "What test can be used to differentiate Vibrio cholerae from E.coli based on their enzymatic activity?",
+    "options": {
+      "A": "Oxidase test"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "** **Cholera (Vibrio cholerae infection)**.\n**Supportive evidence:** Profuse watery diarrhea, severe dehydration, rice-water stools, and seafood exposure. Confirmation requires stool culture (oxidase-positive) or PCR.  \n\n**Next steps:**  \n1. **Immediate oral rehydration solution (ORS)** or IV fluids if unable to tolerate oral intake.  \n2. **Stool testing** (microscopy for motile Vibrios, oxidase test, culture).  \n3. **Consider antibiotics** (e.g., doxycycline or azithromycin) if confirmed, though rehydration is the priority.  \n4. **Public health notification** if cholera is suspected (reportable disease in many regions).  \n\n*Note:* If oxidase-negative, pivot to ETEC or other bacterial causes.",
+    "explanation": "Oxidase test",
+    "reasoning": "****  \n\nThe patient presents with **profuse watery diarrhea (rice-water stools), severe dehydration (dry mouth, dizziness, cold/clammy skin), and a history of recent undercooked seafood consumption**. These symptoms, along with the absence of bloody stools or high fever, strongly suggest **secretory diarrhea**—a hallmark of **toxin-mediated gastrointestinal infections**.  \n\nKey considerations:  \n1. **Cholera (Vibrio cholerae)**:  \n   - **Classic rice-water stools** and rapid dehydration align with cholera.  \n   - **Oxidase-positive** (vs. E. coli, which is oxidase-negative).  \n   - Common after seafood consumption (especially in endemic areas or contaminated water sources).  \n\n2. **Enterotoxigenic E. coli (ETEC)**:  \n   - Also causes watery diarrhea but typically less severe dehydration.  \n   - May include more nausea/vomiting.  \n   - **Oxidase-negative**.  \n\n3. **Norovirus or viral gastroenteritis**:  \n   - More likely if vomiting were prominent.  \n   - Stools are rarely as voluminous as in cholera.  \n\n4. **Non-infectious causes (e.g., osmotic diarrhea)**:  \n   - Unlikely given the acuity, seafood exposure, and dehydration.  \n\n**The severity of dehydration, rice-water stools, and seafood exposure make cholera the most probable diagnosis**, though ETEC is a close second. Rapid fluid resuscitation and stool testing (including oxidase testing) are critical.  \n\n**"
+  },
+  {
+    "id": "medical_training_40568",
+    "question": "What is the most likely condition indicated by a continuous, clear watery discharge from the nose after a fall, with stable vitals, reported two days afterwards?",
+    "options": {
+      "A": "CSF rhinorrhoea"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "** **Cerebrospinal fluid (CSF) rhinorrhea secondary to suspected skull base fracture.**",
+    "explanation": "CSF rhinorrhoea",
+    "reasoning": "****  \nThe patient's symptoms—persistent, unilateral clear nasal drainage that worsens with positional changes (e.g., bending forward), a salty taste in the throat, and a recent history of trauma—are highly suggestive of **cerebrospinal fluid (CSF) rhinorrhea**. Key points supporting this:  \n1. **Trauma Association**: The fall could have caused a skull base fracture (even without severe head impact), disrupting the dura and allowing CSF to leak into the nasal cavity via the sinuses.  \n2. **Fluid Characteristics**: CSF is typically clear, watery, and continuous (unlike allergic rhinitis, which is intermittent and often bilateral). The salty taste is classic due to CSF’s high sodium content.  \n3. **Positional Worsening**: Leaks often increase with maneuvers that raise intracranial pressure (e.g., bending forward).  \n4. **Headaches**: Mild headaches may reflect intracranial hypotension from CSF loss.  \n\nOther possibilities include:  \n- **Allergic/nonallergic rhinitis**: Unlikely due to unilateral presentation and lack of itchiness/sneezing.  \n- **Sinusitis**: Typically causes thick, colored mucus with congestion/fever.  \n- **Post-traumatic nasal discharge**: Could be serous fluid from mucosal injury, but positional worsening and salty taste are less common.  \n\n**Urgent evaluation** is needed to confirm CSF (e.g., beta-2 transferrin testing, imaging for skull base defects) due to risks of meningitis.  \n\n**"
+  },
+  {
+    "id": "medical_training_40569",
+    "question": "Under the RNTCP, which drugs are currently tested for drug sensitivity in the diagnosis of MDR TB?",
+    "options": {
+      "A": "Rifampicin, Isoniazide and Ethambutol"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "**  \n**Suspected Multidrug-Resistant Tuberculosis (MDR-TB)** pending confirmation via sputum GeneXpert MTB/RIF and culture with drug susceptibility testing.  \n\n*Next Steps:*  \n- Immediate sputum testing (smear, GeneXpert, culture/DST).  \n- Isolation precautions (if infectious) until AFB smears are negative.  \n- Referral to a TB specialist for potential second-line therapy if resistance is confirmed.  \n- Screening of close contacts for TB exposure.",
+    "explanation": "Rifampicin, Isoniazide and Ethambutol",
+    "reasoning": "****  \n\nThe patient presents with classic symptoms of tuberculosis (TB), including persistent cough, hemoptysis (coughing up blood), night sweats, unintentional weight loss, and fatigue. These symptoms strongly suggest active TB infection. The patient’s history of prior TB treatment raises concerns about potential drug resistance, particularly multidrug-resistant TB (MDR-TB), which is resistant to at least isoniazid and rifampicin.  \n\nKey considerations:  \n1. **Recurrent TB vs. Treatment Failure/Relapse:** The recurrence of symptoms after prior treatment could indicate relapse (incomplete eradication of the original strain) or reinfection with a new strain.  \n2. **Drug Resistance:** The patient’s lack of improvement on first-line drugs (rifampicin, isoniazid, ethambutol) suggests possible resistance, especially given the global rise in MDR-TB.  \n3. **Diagnostic Workup:** Confirmation requires:  \n   - **Sputum Testing:** Acid-fast bacilli (AFB) smear, nucleic acid amplification tests (e.g., GeneXpert MTB/RIF to detect TB and rifampicin resistance), and culture with drug susceptibility testing (DST) to identify resistance patterns.  \n   - **Chest Imaging:** To assess lung involvement (e.g., cavities, infiltrates).  \n4. **Treatment Implications:** If MDR-TB is confirmed, second-line drugs (e.g., bedaquiline, linezolid, fluoroquinolones) will be needed under a longer, more complex regimen.  \n\n**"
+  },
+  {
+    "id": "medical_training_40570",
+    "question": "A patient exhibited swelling in his right foot accompanied by multiple discharging sinuses containing brown granules, and the lesion did not improve with antibiotic treatment. What is the causative agent responsible for this condition?",
+    "options": {
+      "A": "Madurella mycetomatis"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "**  \n**Mycetoma (likely eumycetoma caused by *Madurella mycetomatis*)**  \n\n**Next Steps:**  \n- **Microscopy & Culture** of discharge (KOH, Gram stain, fungal/bacterial cultures)  \n- **Imaging (X-ray/MRI)** to assess bone involvement (common in advanced cases)  \n- **Biopsy** for histopathology (granulomas with granules)  \n- **Treatment:**  \n  - **Eumycetoma:** Long-term antifungals (itraconazole, posaconazole) ± surgical debridement  \n  - **Actinomycetoma:** Prolonged antibiotics (e.g., co-trimoxazole + amikacin)  \n\nEarly diagnosis is crucial to prevent irreversible bone destruction.",
+    "explanation": "Madurella mycetomatis",
+    "reasoning": "****  \n\n1. **Chronic, Progressive Swelling with Sinus Tracts & Discharge:** The patient describes a slowly worsening foot infection with swelling, tender skin, and sinus tracts oozing brownish, grainy material. This is highly suggestive of **mycetoma**, a chronic subcutaneous infection characterized by the triad of:  \n   - **Tumor-like swelling** (localized mass)  \n   - **Sinus tracts** (draining openings)  \n   - **Granules in discharge** (microscopic aggregates of fungal or bacterial filaments)  \n\n2. **Failure of Antibiotics:** The lack of response to antibiotics suggests a **fungal (eumycetoma)** rather than bacterial (actinomycetoma) cause, though some bacterial mycetomas (e.g., *Nocardia*) can also be resistant to standard antibiotics.  \n\n3. **Epidemiological Clues:** The patient lives in a rural area with a history of walking barefoot, increasing exposure to soil-borne pathogens. Mycetoma is endemic in tropical/subtropical regions (\"Madura foot\" is a classic term for this condition).  \n\n4. **Granules in Discharge:** The brownish, grainy material is pathognomonic for mycetoma. Fungal mycetoma (e.g., *Madurella mycetomatis*) often produces **black or brown granules**, while bacterial mycetoma (e.g., *Actinomadura*, *Nocardia*) may produce white/yellow granules.  \n\n5. **Hard, Lumpy Tissue & Systemic Symptoms:** The induration and warmth suggest deep tissue invasion with possible secondary bacterial infection. Low-grade fever may indicate chronic inflammation or superinfection.  \n\n**"
+  },
+  {
+    "id": "medical_training_40571",
+    "question": "What is the recommended vaccination schedule for pre-exposure rabies prophylaxis?",
+    "options": {
+      "A": "0, 7, 28 days"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "**  \nPre-exposure rabies vaccination (3-dose series: days 0, 7, and 21/28) with mild, self-limited side effects expected. Boosters may be needed for sustained high-risk exposure.",
+    "explanation": "0, 7, 28 days",
+    "reasoning": "****  \nThe patient is inquiring about pre-exposure rabies vaccination, which is recommended for individuals traveling to or living in high-risk areas where rabies is endemic. The standard pre-exposure prophylaxis (PrEP) schedule consists of three doses of the rabies vaccine administered intramuscularly on days 0, 7, and 21 or 28. Common side effects include localized pain, redness, or swelling at the injection site, as well as mild systemic symptoms like headache, fatigue, or low-grade fever. Severe allergic reactions are rare. Immunity from the primary series is long-lasting, but booster doses may be recommended for individuals with continued high-risk exposure, depending on serologic testing (e.g., rabies virus neutralizing antibody titers).  \n\n**"
+  },
+  {
+    "id": "medical_training_40572",
+    "question": "What is the most specific test for diagnosing Rheumatoid arthritis?",
+    "options": {
+      "A": "Anti-ccp antibody"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "** **Rheumatoid arthritis (RA)** is the most likely diagnosis. Anti-CCP testing is the most specific serologic marker to confirm. Early referral to rheumatology is critical to prevent joint damage.",
+    "explanation": "Anti-ccp antibody",
+    "reasoning": "****  \n\nThe patient presents with several hallmark symptoms of an inflammatory joint disorder:  \n1. **Morning stiffness lasting >1 hour** – Highly suggestive of inflammatory arthritis (e.g., rheumatoid arthritis [RA] or psoriatic arthritis) rather than osteoarthritis (OA), where stiffness typically resolves within 30 minutes.  \n2. **Symmetrical joint pain/swelling** (hands/feet) – RA commonly affects small joints bilaterally, while OA is more asymmetric and localized.  \n3. **Systemic symptoms** (fatigue, low-grade fever) – Indicates systemic inflammation, which aligns with autoimmune arthritis.  \n4. **Family history of RA** – RA has a genetic component (e.g., HLA-DR4 association).  \n5. **Poor response to NSAIDs** – Inflammatory arthritis often requires DMARDs (e.g., methotrexate) for control.  \n\n**Diagnostic Considerations:**  \n- **Rheumatoid arthritis (RA)** is the most likely diagnosis given the symmetry, systemic features, and family history.  \n- **Anti-CCP antibody** is highly specific (~95%) for RA and more predictive than rheumatoid factor (RF), which can be positive in other conditions (e.g., Sjögren’s, chronic infections).  \n- **Differential diagnoses:** Psoriatic arthritis (check for nail/skin changes), lupus (evaluate for rash/renal involvement), or gout (acute attacks, urate crystals).  \n\n**Next Steps:**  \n- **Lab tests:** Anti-CCP, RF, ESR/CRP (inflammatory markers), CBC (anemia of chronic disease).  \n- **Imaging:** X-rays (erosions in RA) or ultrasound/MRI for early synovitis.  \n\n**"
+  },
+  {
+    "id": "medical_training_40575",
+    "question": "In the management of missile injuries, which action is typically not performed?",
+    "options": {
+      "A": "Removal of fragments of bone"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "** **Post-traumatic wound infection (likely cellulitis/abscess) with suspected retained foreign body or osteomyelitis.** Urgent evaluation (imaging, wound culture, and possibly surgical intervention) is needed to prevent complications like chronic infection or systemic spread.",
+    "explanation": "Removal of fragments of bone",
+    "reasoning": "****  \nThe patient presents with several concerning symptoms following a traumatic leg injury:  \n1. **Local signs of infection** – Throbbing pain, redness, warmth, swelling, and purulent (pus) discharge with a foul odor strongly suggest a **bacterial infection**, likely **cellulitis** or an **abscess**. The presence of a fever and systemic fatigue further supports this.  \n2. **Possible retained foreign body or bone fragment** – The patient describes a hard, tender mass under the skin near the wound, which could be a **bone fragment**, **debris from the injury**, or even an **infected hematoma** (collection of blood). Retained foreign material is a known risk factor for persistent or worsening infection.  \n3. **Failed pain management** – Ibuprofen’s ineffectiveness suggests the pain is either severe (possibly due to **osteomyelitis**, an infection of the bone) or compounded by mechanical irritation from the fragment.  \n4. **Systemic involvement** – Low-grade fever and exhaustion indicate the infection may be spreading, raising concerns about **sepsis** if untreated.  \n\nGiven the history of trauma, the most likely scenario is a **post-traumatic wound infection with possible retained foreign material or osteomyelitis**. Retained fragments are sometimes left in place if removal would cause excessive tissue damage, but if they’re contributing to infection or pain, surgical intervention (debridement or removal) may be necessary.  \n\n**"
+  },
+  {
+    "id": "medical_training_40576",
+    "question": "Which technique is not indicated for anesthetizing the lower anterior teeth?",
+    "options": {
+      "A": "Mental nerve block"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "**  \n**Irreversible pulpitis** (likely due to caries or microfracture) with secondary **localized gingival inflammation**. Immediate dental evaluation (X-ray, vitality testing) is needed. A **mental nerve block** could be considered for anesthesia if restorative treatment is required, but diagnosis must precede intervention to avoid masking symptoms. Nerve damage risk from injections is minimal with proper technique.",
+    "explanation": "Mental nerve block",
+    "reasoning": "****  \nThe patient describes **sharp, cold-sensitive pain** in the lower front teeth, progressing to a lingering dull ache, with localized gum redness but no swelling/bleeding. Key considerations:  \n\n1. **Dentin Hypersensitivity**: Exposed dentin (e.g., from gum recession, enamel erosion) can cause cold-triggered sharp pain. However, persistent dull ache suggests possible pulp involvement.  \n2. **Pulpitis**: Reversible (cold-triggered pain resolves quickly) vs. irreversible (lingering pain, spontaneous symptoms). The latter often indicates pulp necrosis or infection.  \n3. **Periapical Pathology**: If pulpitis progresses, periapical abscess or inflammation may develop, though absence of swelling/fever makes acute infection less likely.  \n4. **Referred Pain**: Rare but possible (e.g., from adjacent teeth or myofascial sources).  \n5. **Nerve Irritation**: Unlikely without trauma/surgery history, but mental nerve involvement could mimic tooth pain if compressed (e.g., by denture pressure).  \n\nGum redness hints at localized inflammation (e.g., gingivitis, early periodontitis), but the primary issue appears **odontogenic** (tooth-related).  \n\n**"
+  },
+  {
+    "id": "medical_training_40578",
+    "question": "Which subtype of Hodgkin lymphoma is characterized by being negative for CD15 and CD30 markers?",
+    "options": {
+      "A": "Lymphocyte predominance"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "** **Lymphocyte-predominant Hodgkin lymphoma (LPHL)** is a strong consideration, though classic HL or NHL cannot be excluded without biopsy. The CD15/CD30-negative profile aligns with LPHL, but histopathology is definitive.",
+    "explanation": "Lymphocyte predominance",
+    "reasoning": "****  \n\nThe patient presents with several concerning symptoms that warrant a thorough evaluation:  \n\n1. **Painless lymphadenopathy (neck and axillary nodes):** Persistent, non-tender lymph node enlargement is a hallmark of lymphoproliferative disorders, including Hodgkin lymphoma (HL) and non-Hodgkin lymphoma (NHL). The absence of pain or signs of acute infection (e.g., redness, warmth) reduces the likelihood of reactive lymphadenopathy.  \n\n2. **B symptoms (night sweats, unintentional weight loss, fever):** These systemic symptoms are classic in Hodgkin lymphoma and some aggressive NHL subtypes. Night sweats (drenching) are particularly suggestive.  \n\n3. **Fatigue and pruritus:** Non-specific but common in HL, especially with advanced disease. Pruritus can occur without a rash in HL due to cytokine release.  \n\n4. **CD15/CD30 negativity:** The patient’s reference to these markers hints at lymphocyte-predominant Hodgkin lymphoma (LPHL), a rare subtype (5% of HL) where Reed-Sternberg cells are typically CD15-/CD30- (unlike classic HL). LPHL often presents with slower-growing lymphadenopathy and fewer B symptoms but can still progress.  \n\n**Differential Diagnosis:**  \n- **Hodgkin lymphoma (classic or LPHL):** Top consideration given B symptoms + lymphadenopathy. LPHL is plausible if CD15/CD30-.  \n- **Non-Hodgkin lymphoma (e.g., diffuse large B-cell):** Less likely without rapid node growth or extranodal involvement but possible.  \n- **Infections (e.g., EBV, HIV, TB):** Would typically cause tender nodes or other infectious signs (unlikely here).  \n- **Autoimmune disease (e.g., sarcoidosis):** Rarely causes drenching night sweats or weight loss.  \n\n**Next Steps:**  \n- **Excisional lymph node biopsy** (gold standard for lymphoma diagnosis).  \n- **Imaging (CT/PET-CT)** to assess disease extent.  \n- **Labs:** CBC (look for cytopenias), LDH, ESR, HIV/EBV testing.  \n\n**"
+  },
+  {
+    "id": "medical_training_40580",
+    "question": "What term is used to describe the condition where an individual feigns a false pregnancy and experiences all subjective symptoms of pregnancy despite not being pregnant?",
+    "options": {
+      "A": "Pseudocyesis"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "** Pseudocyesis (false pregnancy)",
+    "explanation": "Pseudocyesis",
+    "reasoning": "****  \n\nThe patient presents with classic symptoms of pregnancy—amenorrhea (missed periods), nausea, breast tenderness, abdominal enlargement, perceived fetal movements, fatigue, appetite changes, and back pain—yet objective testing (urine pregnancy tests and ultrasound) confirms no actual pregnancy. This strongly suggests **pseudocyesis (false pregnancy)**, a rare condition where psychological factors lead to both the belief of being pregnant and physical manifestations mimicking pregnancy.  \n\nKey considerations:  \n1. **Psychological Factors** – The patient expresses a strong desire for pregnancy, which is a known trigger for pseudocyesis. The mind-body connection can induce hormonal and physiological changes (e.g., elevated prolactin, disrupted menstrual cycles).  \n2. **Physical Symptoms** – Hormonal imbalances (e.g., hyperprolactinemia) can cause amenorrhea, breast changes, and nausea. Abdominal distension may result from altered posture, bloating, or subconscious muscle contractions. \"Fetal movements\" are often misinterpreted gas or intestinal activity.  \n3. **Ruling Out Organic Causes** –  \n   - **Pregnancy tests and ultrasound** definitively exclude true pregnancy.  \n   - Other conditions (e.g., ovarian tumors, endocrine disorders like hyperprolactinemia) could mimic symptoms but are less likely given the patient’s psychological context.  \n4. **Stress and Somatic Symptom Disorder** – Chronic stress or unresolved emotional conflict (e.g., infertility struggles) can manifest somatically, reinforcing the false belief.  \n\n**"
+  },
+  {
+    "id": "medical_training_40581",
+    "question": "What is the likelihood of adrenal suppression occurring in patients receiving inhaled steroids compared to other forms of steroid therapy?",
+    "options": {
+      "A": "Adrenal suppression is less likely to occur in patients receiving inhaled steroids."
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "** **Secondary adrenal insufficiency due to inhaled glucocorticoid use.**",
+    "explanation": "Adrenal suppression is less likely to occur in patients receiving inhaled steroids.",
+    "reasoning": "****  \n\nThe patient presents with fatigue, dizziness (especially upon standing), salt cravings, unintentional weight loss, and variable appetite. These symptoms are highly suggestive of **adrenal insufficiency**, particularly **secondary adrenal suppression** due to exogenous steroid use.  \n\nKey considerations:  \n1. **Inhaled Steroids and Adrenal Suppression** – While systemic absorption is lower with inhaled steroids compared to oral or injectable forms, **prolonged high-dose use** can still suppress the hypothalamic-pituitary-adrenal (HPA) axis. This is more likely if the patient is on a high-potency steroid (e.g., fluticasone), uses high doses, or has additional risk factors (e.g., concurrent oral steroid bursts, CYP3A4 inhibitor use).  \n2. **Symptoms of Adrenal Insufficiency** – The fatigue, orthostatic dizziness (suggesting hypotension), salt cravings (due to aldosterone deficiency in primary adrenal insufficiency, though less common in secondary), and weight loss align with cortisol deficiency.  \n3. **Differential Diagnoses** – Other possibilities include:  \n   - **Anemia** (fatigue, dizziness) but lacks salt cravings.  \n   - **Hypothyroidism** (fatigue, weight changes) but typically causes cold intolerance and constipation.  \n   - **Electrolyte imbalances** (e.g., hyponatremia from cortisol deficiency).  \n   - **Primary adrenal disorders (Addison’s disease)**, though less likely without hyperpigmentation or hyperkalemia.  \n\n**Next Steps:**  \n- Check **morning serum cortisol** and **ACTH** to assess adrenal function.  \n- Consider an **ACTH stimulation test** if baseline cortisol is indeterminate.  \n- Review the **dose and duration** of the inhaled steroid; taper if necessary and consider alternatives.  \n- Rule out other causes of fatigue (e.g., TSH, CBC, electrolytes).  \n\n**"
+  },
+  {
+    "id": "medical_training_40582",
+    "question": "Which assay is not used for the estimation of total serum protein?",
+    "options": {
+      "A": "Bromocresol green"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "**  \nThe most likely diagnosis is **hypoalbuminemia secondary to chronic liver disease, nephrotic syndrome, or severe malnutrition**. Urgent lab work (serum albumin, total protein, liver/kidney function tests) and further evaluation (e.g., urinalysis for proteinuria) are needed to confirm the underlying cause.",
+    "explanation": "Bromocresol green",
+    "reasoning": "****  \n\nThe patient presents with several concerning symptoms:  \n1. **Fatigue and muscle weakness** – Suggests possible metabolic, nutritional, or systemic dysfunction.  \n2. **Peripheral edema (ankle/feet swelling)** – Points to fluid retention, which could be due to low serum albumin (hypoalbuminemia), heart failure, kidney disease, or liver dysfunction.  \n3. **Unintentional weight loss and poor appetite** – Raises suspicion for chronic illness (e.g., malignancy, chronic kidney/liver disease) or malnutrition.  \n\n**Key Considerations:**  \n- **Hypoalbuminemia** (low albumin) is a likely contributor to edema, as albumin maintains oncotic pressure. Causes include:  \n  - **Liver disease** (reduced synthesis, e.g., cirrhosis).  \n  - **Kidney disease** (protein loss, e.g., nephrotic syndrome).  \n  - **Malnutrition/malabsorption** (e.g., chronic protein deficiency).  \n- **Total protein levels** (measured via Biuret method or refractometry) would help differentiate:  \n  - **Low total protein + low albumin** → Suggests liver disease or malnutrition.  \n  - **Normal/high total protein + low albumin** → May indicate nephrotic syndrome (loss of albumin but increased compensatory globulins).  \n- **Bromocresol green** is indeed used for albumin assays, not total protein, confirming the patient’s understanding.  \n\n**Supporting Clues:**  \n- The patient’s self-education aligns with clinical suspicion of protein/albumin imbalance.  \n- Swelling without high salt intake further supports hypoalbuminemia over simple fluid overload.  \n\n**"
+  },
+  {
+    "id": "medical_training_40584",
+    "question": "According to the Frankel behavioral rating scale, how is a negative child characterized in terms of their attitude toward accepting treatment?",
+    "options": {
+      "A": "A child who shows reluctance to accept treatment with some evidence of negative attitude."
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "**  \n**Probable Adjustment Disorder with Depressed Mood (F43.21) or Oppositional Defiance in the Context of Chronic Illness**  \n*(Note: If symptoms persist >6 months or include severe hopelessness/suicidal ideation, Major Depressive Disorder should be ruled out.)*  \n\n**Recommendations:**  \n- **Behavioral Therapy** (e.g., CBT to address negative thought patterns and improve coping).  \n- **Family Counseling** to reduce power struggles and foster collaborative care.  \n- **Pediatric Psychology Consultation** to assess for underlying anxiety/depression.  \n- **Motivational Interviewing** to enhance engagement in treatment.  \n\n*If somatic symptoms (fatigue, sleep disturbances) are prominent, further medical workup may be needed to exclude organic causes.*",
+    "explanation": "A child who shows reluctance to accept treatment with some evidence of negative attitude.",
+    "reasoning": "****  \nThe patient's behavior—resistance to medical treatment, pessimism about recovery, irritability, and withdrawal—suggests a psychological or emotional response to illness rather than a purely physical issue. Key considerations include:  \n\n1. **Psychological Reactance:** The child may feel a loss of autonomy due to illness/treatment, leading to defiance as a way to regain control (\"I don’t want to\").  \n2. **Depression or Adjustment Disorder:** Chronic illness can trigger hopelessness (\"It’s not going to help anyway\"), irritability, and social withdrawal.  \n3. **Anxiety:** Fear of treatment side effects or unresolved health anxiety might manifest as avoidance.  \n4. **Developmental Factors:** If the child is adolescent, oppositional behavior could stem from normal developmental pushback exacerbated by illness.  \n5. **Learned Helplessness:** Repeated health struggles may lead to passive resignation (\"given up before trying\").  \n\nThe *Frankel \"negative\" rating* aligns with observable behaviors (reluctance, resistance) and attitudes (pessimism). This pattern often correlates with poorer adherence to treatment and worse outcomes if unaddressed.  \n\n**"
+  },
+  {
+    "id": "medical_training_40585",
+    "question": "What is the classic CT appearance of an acute subdural hematoma?",
+    "options": {
+      "A": "Cresent-shaped hyperdense lesion"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "** **Acute Subdural Hematoma (SDH)** (high suspicion pending CT confirmation).  \n\n*Urgent next step: Emergency CT head + neurosurgical evaluation.*",
+    "explanation": "Cresent-shaped hyperdense lesion",
+    "reasoning": "****  \n\nThe patient presents with concerning symptoms following a head injury, including:  \n- **Worsening headache** (throbbing, pressure-like)  \n- **Nausea and vomiting**  \n- **Blurred vision**  \n- **Cognitive impairment** (difficulty concentrating, jumbled thoughts)  \n- **Neck stiffness**  \n- **Drowsiness** (near-syncope)  \n\nThese symptoms suggest **increased intracranial pressure (ICP)**, which can occur due to several post-traumatic complications:  \n1. **Subdural Hematoma (SDH)** – Likely given the mechanism (head trauma), progressive symptoms, and drowsiness. A crescent-shaped bleed on CT would confirm this.  \n2. **Epidural Hematoma (EDH)** – Less likely without a \"lucid interval\" (though not always present) or focal neurological deficits (e.g., unilateral weakness).  \n3. **Traumatic Subarachnoid Hemorrhage (SAH)** – Could explain headache and neck stiffness but less likely without thunderclap onset.  \n4. **Severe Concussion/Post-Traumatic Migraine** – Possible but doesn’t typically cause progressive drowsiness or vomiting without improvement.  \n5. **Diffuse Axonal Injury (DAI)** – Unlikely without prolonged unconsciousness initially.  \n\nThe **red flags** (worsening headache, vomiting, altered mental status, drowsiness) strongly suggest **a mass lesion (e.g., SDH)** compressing the brain. Immediate imaging (CT head) is critical to rule out life-threatening bleeding.  \n\n**"
+  },
+  {
+    "id": "medical_training_40589",
+    "question": "What happens to the standard error when the sample size is increased in random sampling?",
+    "options": {
+      "A": "The standard error decreases."
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "**  \nThis is not a medical diagnosis but a correct statistical observation: **Increasing sample size reduces standard error, improving estimate precision.** Additional factors like population variability (σ) and sampling bias also matter.",
+    "explanation": "The standard error decreases.",
+    "reasoning": "****  \n\nThe patient's description focuses on statistical concepts rather than medical symptoms, specifically discussing the relationship between sample size and standard error in statistical analysis. Key points include:  \n- **Sample Size & Standard Error:** Correctly notes that increasing sample size reduces standard error (SE), as SE = σ/√n (where σ = population standard deviation, n = sample size). Larger *n* tightens estimates.  \n- **Small Sample Risks:** Recognizes that small samples yield higher SE, leading to less precise estimates (e.g., measuring 5 vs. 500 people’s heights).  \n- **Confounding Factors:** Asks about other influences on SE, such as high data variability (larger σ increases SE) or sampling bias (e.g., non-random samples skewing estimates).  \n\nNo medical symptoms are described, so this is purely a statistics query. The patient demonstrates understanding but seeks validation and deeper nuance (e.g., how distribution shape or sampling methods affect SE).  \n\n**"
+  },
+  {
+    "id": "medical_training_40590",
+    "question": "What syndrome is characterized by ipsilateral optic atrophy with contralateral papilloedema?",
+    "options": {
+      "A": "Foster kennedy syndrome"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "**  \n**Foster Kennedy syndrome secondary to an anterior cranial fossa mass (likely meningioma).**  \n\n**Next Steps:**  \n- **Urgent brain MRI with contrast** to identify the mass.  \n- **Formal ophthalmologic evaluation** (visual fields, fundoscopy).  \n- **Neurosurgical consultation** for potential resection/biopsy.",
+    "explanation": "Foster kennedy syndrome",
+    "reasoning": "****  \n\nThe patient presents with a constellation of concerning neurological and ophthalmological symptoms:  \n\n1. **Progressive Unilateral Vision Loss (Left Eye):**  \n   - Diminished vision, color desaturation, and worsening acuity suggest **optic nerve dysfunction**.  \n   - Possible causes: **Optic neuritis, ischemic optic neuropathy, compression (e.g., tumor, aneurysm), or chronic papilledema leading to atrophy**.  \n\n2. **Headaches (Right-Sided) with Nausea/Vomiting:**  \n   - Persistent, severe headaches with nausea/vomiting raise concern for **increased intracranial pressure (ICP)**.  \n   - **Worsening with straining/bending** suggests ICP-related phenomena (e.g., **papilledema**).  \n\n3. **Swelling/Pressure in the Right Eye:**  \n   - Described as \"swollen white part\" and blurry vision with positional changes strongly indicates **papilledema** (optic disc swelling due to elevated ICP).  \n\n4. **Anosmia (Left-Sided):**  \n   - Loss of smell on the same side as the vision loss suggests **localized compression near the olfactory nerve (CN I) and optic nerve (CN II)**.  \n\n5. **Dizziness:**  \n   - Non-specific but could relate to **mass effect or elevated ICP affecting vestibular pathways**.  \n\n**Key Pattern:**  \n- **Ipsilateral optic atrophy (left eye vision loss)** + **contralateral papilledema (right eye swelling)** + **anosmia** = **Foster Kennedy syndrome**.  \n- This syndrome classically occurs with **an anterior cranial fossa mass (e.g., meningioma, glioma) compressing the optic nerve on one side (causing atrophy) while elevating ICP (causing contralateral papilledema)**.  \n\n**Differential Diagnoses:**  \n- **Meningioma (olfactory groove/planum sphenoidale):** Most likely given anosmia + Foster Kennedy.  \n- **Glioma (e.g., frontal lobe tumor):** Less common but possible.  \n- **Idiopathic Intracranial Hypertension (IIH):** Unlikely without obesity/typical demographics and due to unilateral findings.  \n- **Chronic Subdural Hematoma:** Less likely without trauma history.  \n\n**"
+  },
+  {
+    "id": "medical_training_40592",
+    "question": "What anatomic structure is characterized by a worm-hole radiolucency on a radiograph?",
+    "options": {
+      "A": "Nutrient canal"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "** Incidental nutrient canal (normal anatomy) with symptoms consistent with **medial tibial stress syndrome (shin splints)** or early **stress reaction**. Reassurance and activity modification are advised.",
+    "explanation": "Nutrient canal",
+    "reasoning": "****  \n\nThe patient describes a dull, persistent shin pain with mild swelling, exacerbated by weight-bearing activities. The X-ray finding of a \"worm-hole\" appearance in the bone is highly suggestive of a **nutrient canal**, a normal anatomical feature where blood vessels enter the bone to supply it. However, the patient’s symptoms raise several possibilities:  \n\n1. **Nutrient Canal (Most Likely Benign Finding)**  \n   - Nutrient canals are natural tunnels in bones that house blood vessels and nerves. On X-ray, they appear as thin, radiolucent (dark) lines with sclerotic (bright) borders, often described as \"worm-like.\"  \n   - They are typically asymptomatic but can be mistaken for fractures or lytic lesions (e.g., tumors or infections) due to their linear appearance.  \n   - The patient’s pain is likely unrelated to the canal itself but may stem from overuse (e.g., shin splints, early stress reaction).  \n\n2. **Stress Fracture**  \n   - Common in active individuals (e.g., runners, weightlifters).  \n   - Pain is typically focal, worsens with activity, and improves with rest.  \n   - X-rays may initially appear normal; MRI or bone scan is more sensitive for early stress fractures.  \n   - The \"worm-hole\" description is unlikely to represent a fracture unless there is cortical disruption or periosteal reaction.  \n\n3. **Shin Splints (Medial Tibial Stress Syndrome)**  \n   - Diffuse ache along the tibia due to repetitive stress.  \n   - Often bilateral, with tenderness along the inner shin.  \n   - X-rays are usually normal but may show mild periosteal thickening in chronic cases.  \n\n4. **Other Considerations (Less Likely)**  \n   - **Bone Tumor/Infection:** Unlikely without systemic symptoms (e.g., fever, night pain, weight loss) or aggressive radiographic features (e.g., bone destruction, soft-tissue mass).  \n   - **Compartment Syndrome:** Typically presents with severe pain, tightness, and neurologic symptoms (e.g., numbness), which are absent here.  \n\n**Conclusion:** The \"worm-hole\" finding is almost certainly a nutrient canal, a normal variant. The pain is more likely due to **overuse (e.g., shin splints or early stress reaction)** rather than the canal itself. If symptoms persist despite rest and NSAIDs, further imaging (e.g., MRI) could rule out a stress fracture.  \n\n**"
+  },
+  {
+    "id": "medical_training_40593",
+    "question": "Which joint in a child's hand is most commonly dislocated?",
+    "options": {
+      "A": "Metacarpophalangeal joint"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "** **Traumatic dislocation of the metacarpophalangeal (MCP) joint** (likely dorsal). Immediate orthopedic assessment is needed for reduction and to rule out associated fractures.",
+    "explanation": "Metacarpophalangeal joint",
+    "reasoning": "****  \n1. **Mechanism of Injury:** The child fell onto an outstretched hand, a classic mechanism for traumatic joint injuries. The force could cause dislocation, fracture, or ligament damage at the metacarpophalangeal (MCP) joint.  \n2. **Symptoms:**  \n   - **Localized pain/swelling at the MCP joint:** Suggests acute structural damage (e.g., dislocation, fracture).  \n   - **\"Crooked\" appearance and inability to straighten:** Highly indicative of dislocation (common in pediatric hand trauma) or a Salter-Harris fracture (growth plate injury).  \n   - **Bruising and \"stuck\" feeling:** Implies soft tissue injury (e.g., volar plate tear) or displacement.  \n   - **Poor response to ibuprofen:** Pain from mechanical derangement (e.g., dislocation) often persists despite NSAIDs.  \n3. **Differential Diagnosis:**  \n   - **MCP joint dislocation (most likely):** Typically dorsal displacement (finger appears hyperextended). The \"crooked\" description fits.  \n   - **Fracture (e.g., Salter-Harris type II):** Possible if growth plate is involved, though dislocation is more common in this scenario.  \n   - **Volar plate injury:** May cause similar stiffness but usually lacks obvious deformity.  \n   - *Nursemaid's elbow is irrelevant here (affects radial head, not MCP).*  \n4. **Urgency:** Requires prompt evaluation (reduction under sedation if dislocated to avoid complications like avascular necrosis).  \n\n**"
+  },
+  {
+    "id": "medical_training_40595",
+    "question": "What is the Bimolar technique used to refer to in terms of jaw imaging views?",
+    "options": {
+      "A": "Oblique lateral views of the right and left sides"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "**  \n**Temporomandibular joint disorder (TMD)**—likely secondary to **bruxism/jaw clenching**. Conservative management (jaw rest, soft diet, heat therapy, night guard) and follow-up imaging are recommended.",
+    "explanation": "Oblique lateral views of the right and left sides",
+    "reasoning": "****  \n\nThe patient presents with classic symptoms of **temporomandibular joint (TMJ) dysfunction**, including:  \n- **Unilateral jaw pain** (now bilateral) that worsens with chewing/yawning  \n- **Clicking/popping sounds** with jaw movement  \n- **Sensation of jaw \"locking\" or reduced mobility**  \n- **Referred pain near the ear** (common due to shared nerve innervation)  \n- **Possible nocturnal bruxism (teeth grinding/clenching)**—a major risk factor for TMJ disorders  \n\nOther considerations:  \n1. **Dental causes** (e.g., malocclusion, cracked tooth) could contribute but are less likely given the joint-specific symptoms (clicking, locking).  \n2. **Arthritis** (e.g., osteoarthritis) may cause similar symptoms but typically occurs in older patients or those with systemic joint issues.  \n3. **Myofascial pain syndrome** could explain muscle tenderness but wouldn’t account for joint noises.  \n4. **Infection (e.g., parotitis)** is unlikely without fever/swelling.  \n\nThe **bimolar X-ray technique** (oblique lateral views) is appropriate to evaluate the mandibular condyles and joint space for structural abnormalities (e.g., degenerative changes, disc displacement).  \n\n**"
+  },
+  {
+    "id": "medical_training_40597",
+    "question": "A 15-year-old boy who is 6-foot tall and has severe acne is experiencing difficulty in school due to fighting and trouble controlling his anger. He has an unremarkable past medical history and is up-to-date on vaccinations. After a chromosomal workup, what chromosomal abnormality most likely explains his behavioral and physical presentation?",
+    "options": {
+      "A": "XYY syndrome"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "** **XYY syndrome (Jacobs syndrome)**  \n\n*Next Steps:*  \n- **Karyotype testing** (to confirm 47,XYY chromosomal pattern)  \n- **Endocrine evaluation** (testosterone, growth hormone levels if needed)  \n- **Behavioral/psychological support** (therapy, coping strategies for emotional regulation)  \n- **Dermatology referral** (for severe acne management)",
+    "explanation": "XYY syndrome",
+    "reasoning": "****  \n\nThe patient presents with a combination of **tall stature, severe acne, and behavioral issues (aggression, impulsivity, and emotional dysregulation)**. These symptoms, particularly when occurring together, raise suspicion for an underlying **chromosomal or endocrine disorder**.  \n\n1. **Tall Stature & Growth Pattern**  \n   - The patient is **6 feet tall at 15 years old**, which is significantly above average for his age. While familial tall stature is possible, the combination with other symptoms suggests a possible **chromosomal abnormality** (e.g., **XYY syndrome**) or **hormonal imbalance** (e.g., excess growth hormone or androgen exposure).  \n\n2. **Severe Acne**  \n   - Acne is common in adolescence due to hormonal changes, but **treatment-resistant, severe acne** may indicate **elevated androgens** (e.g., testosterone), which can be seen in **XYY syndrome** or other hyperandrogenic conditions.  \n\n3. **Behavioral & Emotional Dysregulation**  \n   - The patient describes **uncontrollable anger, impulsivity, and frequent fights**, which are **classically associated with XYY syndrome** (also called **Jacobs syndrome**). While not all individuals with XYY exhibit aggression, **increased impulsivity and emotional dysregulation** are well-documented features.  \n\n4. **Absence of Other Medical Issues**  \n   - The patient has no history of major illnesses, making **acquired conditions (e.g., brain injury, thyroid dysfunction) less likely**. The constellation of symptoms strongly suggests a **genetic or chromosomal cause**.  \n\n**XYY syndrome** is the most likely diagnosis given:  \n- **Tall stature** (due to extra Y chromosome influencing growth)  \n- **Severe acne** (linked to elevated androgens)  \n- **Behavioral challenges** (impulsivity, aggression, and emotional dysregulation)  \n\n**"
+  },
+  {
+    "id": "medical_training_40599",
+    "question": "A 39-year-old woman presents with weight gain, abnormal menstrual cycles, depression, weakness, purplish striae on the abdomen, and bruises over the lower extremities. Laboratory studies show elevated cortisol secretion while thyroid function tests are normal. If the patient is diagnosed with adrenal hyperfunction, what additional symptom might she exhibit related to her elevated androgen levels?",
+    "options": {
+      "A": "Hirsutism"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "**  \n**Most likely diagnosis: Cushing’s syndrome (likely ACTH-dependent, e.g., Cushing’s disease from pituitary adenoma).**  \n\n*(If rapid onset, severe hypertension, or hypokalemia were noted, adrenal carcinoma would also be considered.)*",
+    "explanation": "Hirsutism",
+    "reasoning": "****  \n\nThe patient presents with a constellation of symptoms that strongly suggest **endocrine dysfunction**, particularly involving **glucocorticoid excess** (hypercortisolism). Key findings include:  \n\n1. **Weight gain with central obesity (face & abdomen)** – A hallmark of **Cushing’s syndrome**, where cortisol promotes fat redistribution.  \n2. **Menstrual irregularities & hirsutism (excess facial/body hair)** – Indicates **androgen excess**, which can occur due to adrenal overproduction (e.g., adrenal tumor or hyperplasia) or pituitary ACTH excess (Cushing’s disease).  \n3. **Depression, fatigue, and easy bruising** – Cortisol excess affects mood, energy, and skin fragility due to collagen breakdown.  \n4. **Purple striae** – Unlike typical stretch marks, these are wide, deeply colored, and suggest rapid stretching of thin skin (a classic sign of hypercortisolism).  \n5. **Unintentional weight gain despite no dietary changes** – Suggests metabolic disruption from excess cortisol.  \n\nAdditional clues (if present) like **hypertension, muscle weakness, or hyperglycemia** would further support **Cushing’s syndrome**. The differential includes:  \n- **Pituitary adenoma (Cushing’s disease)** – Most common cause of endogenous hypercortisolism.  \n- **Adrenal tumor** – Direct cortisol secretion independent of ACTH.  \n- **Exogenous steroid use** – Ruled out here (patient denies medications).  \n- **PCOS** – Less likely given the prominence of cortisol-related signs (striae, bruising) rather than isolated androgen excess.  \n\n**Next steps:**  \n- **Late-night salivary cortisol** or **24-hour urinary free cortisol** for screening.  \n- **Dexamethasone suppression test** to assess cortisol feedback.  \n- **ACTH level** to distinguish pituitary (high ACTH) vs. adrenal (low ACTH) causes.  \n- Imaging (MRI pituitary or adrenal CT) if biochemical testing confirms hypercortisolism.  \n\n**"
+  },
+  {
+    "id": "medical_training_40601",
+    "question": "In a patient with gastric outlet obstruction due to a peptic ulcer, what is the most likely site of obstruction?",
+    "options": {
+      "A": "Pylorus"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "**  \n**Gastric outlet obstruction secondary to peptic ulcer disease (likely pyloric stenosis from chronic ulcer scarring).**  \n\n*Next Steps:* Confirm with imaging (abdominal X-ray showing gastric distension) or endoscopy (to visualize ulcer/stricture). Treatment may involve IV fluids, nasogastric decompression, PPIs, and possibly endoscopic dilation or surgery if scarring is severe.",
+    "explanation": "Pylorus",
+    "reasoning": "****  \n\nThe patient's symptoms strongly suggest a **gastric outlet obstruction (GOO) secondary to a peptic ulcer**, likely caused by chronic NSAID (ibuprofen) use and stress. Here’s the breakdown:  \n\n1. **Epigastric Pain (Burning/Aching, Worse When Hungry or Postprandial)** – Classic for peptic ulcer disease (PUD), particularly duodenal ulcers, which often cause \"hunger pain\" relieved by eating. However, the progression to persistent pain and vomiting suggests complications.  \n\n2. **Early Satiety, Postprandial Vomiting of Undigested Food, Weight Loss** – These are hallmark signs of **gastric outlet obstruction**, where scarring/swelling (often from chronic ulcers) narrows the pylorus, preventing proper stomach emptying.  \n\n3. **NSAID Use (Ibuprofen) and Stress** – Major risk factors for peptic ulcers, as NSAIDs impair mucosal protection and stress increases acid secretion.  \n\n4. **Failed Response to Antacids/PPIs** – Suggests structural obstruction (e.g., pyloric stenosis from ulcer scarring) rather than just acid-related irritation.  \n\n5. **Bloating and Excessive Belching** – Due to food stagnation and fermentation in the stomach.  \n\n**Differential Diagnoses:**  \n- **Peptic Ulcer Disease (PUD) with Gastric Outlet Obstruction** (most likely).  \n- **Gastroparesis** (less likely, as NSAID use and ulcer symptoms point more toward mechanical obstruction).  \n- **Gastric Cancer** (possible but less probable without alarm symptoms like hematemesis or age/risk factors).  \n\n**"
+  },
+  {
+    "id": "medical_training_40604",
+    "question": "Which urinary cast is most closely associated with the presence of renal pathology?",
+    "options": {
+      "A": "Broad cast"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "**  \nThe most likely diagnosis is **acute or chronic kidney injury with nephrotic/nephritic features**, potentially exacerbated by NSAID use. Immediate evaluation (urinalysis, serum creatinine, albumin, and renal ultrasound) is needed to differentiate between:  \n- **NSAID-induced AKI or AIN**  \n- **Glomerulonephritis** (e.g., IgA nephropathy)  \n- **Nephrotic syndrome** (e.g., minimal change disease)  \n- **Progression of undiagnosed CKD**  \n\n*Next steps:* Check for proteinuria, hematuria, casts (hyaline/granular in AKI; broad/waxy in CKD), and assess GFR. Discontinue NSAIDs and monitor for reversible causes.*",
+    "explanation": "Broad cast",
+    "reasoning": "****  \nThe patient presents with a constellation of symptoms highly suggestive of kidney dysfunction:  \n1. **Fatigue and edema (ankle/foot swelling):** These are classic signs of fluid retention and reduced kidney function, potentially due to impaired filtration and sodium/water imbalance.  \n2. **Dark, foamy urine and oliguria (decreased output):** Dark urine may indicate hematuria or concentrated waste products, while foamy urine suggests proteinuria (e.g., nephrotic syndrome). Oliguria raises concern for reduced glomerular filtration rate (GFR).  \n3. **Flank pain:** Dull back pain near the kidneys could reflect parenchymal inflammation (e.g., glomerulonephritis) or obstructive pathology.  \n4. **Nausea/loss of appetite and shortness of breath:** These are systemic signs of uremia (buildup of waste products) or fluid overload, potentially leading to pulmonary congestion.  \n5. **NSAID use (ibuprofen):** Chronic NSAID use can cause acute kidney injury (AKI) or chronic kidney disease (CKD) via vasoconstriction of renal arterioles or interstitial nephritis.  \n6. **Family history:** Genetic predisposition (e.g., polycystic kidney disease) or shared environmental risks may contribute.  \n\n**Key considerations:**  \n- **Proteinuria + edema + hypoalbuminemia** would suggest nephrotic syndrome.  \n- **Hematuria + hypertension + oliguria** may indicate glomerulonephritis (e.g., post-infectious or IgA nephropathy).  \n- **Broad/waxy casts** on urinalysis are seen in advanced CKD, reflecting tubular damage.  \n- **NSAID toxicity** could manifest as acute interstitial nephritis (AIN) or hemodynamically mediated AKI.  \n\n**"
+  },
+  {
+    "id": "medical_training_40606",
+    "question": "What is one mechanism that intrauterine contraceptive devices (IUCDs) do not utilize to prevent pregnancy?",
+    "options": {
+      "A": "Inhibit ovulation"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "**  \nNormal hormonal IUD effects (e.g., Mirena). No evidence of malfunction—light periods and occasional cramping are expected. Ovulation suppression varies and isn’t necessary for efficacy.",
+    "explanation": "Inhibit ovulation",
+    "reasoning": "****  \nThe patient’s concerns center around understanding how their IUD works, particularly regarding ovulation suppression and menstrual changes. Key points to consider:  \n1. **IUD Types and Mechanisms**:  \n   - *Hormonal IUDs* (e.g., Mirena, Kyleena): Release progestin, which primarily thickens cervical mucus, thins the endometrial lining, and may *partially* suppress ovulation (especially in the first year), but not consistently enough to halt periods entirely. Lighter/irregular bleeding is common.  \n   - *Copper IUDs* (e.g., Paragard): Non-hormonal; work by creating a local inflammatory reaction toxic to sperm/eggs. Do *not* suppress ovulation, so regular periods (often heavier) persist.  \n\n2. **Patient’s Symptoms**:  \n   - Regular but lighter periods suggest a hormonal IUD (consistent with endometrial thinning).  \n   - Cramping post-insertion is typical (uterine adjustment to the device), and absence of fever/discharge rules out infection.  \n\n3. **Ovulation Confusion**:  \n   - Hormonal IUDs may inhibit ovulation in ~50% of cycles, but this isn’t their primary mechanism. The patient’s ongoing menses align with partial or absent ovulation suppression.  \n\n4. **Safety**:  \n   - Neither type requires systemic ovulation suppression to be effective. Thickened mucus and endometrial changes are sufficient for contraception.  \n\n**"
+  },
+  {
+    "id": "medical_training_40612",
+    "question": "According to psychosexual theory, during which stage of development does personality and skill development occur?",
+    "options": {
+      "A": "Latency stage"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "**  \nYour symptoms (perfectionism, anxiety, relational difficulties) likely stem from **maladaptive coping strategies formed during the latency stage**, compounded by environmental factors (e.g., pressure to conform, limited emotional expression). This doesn’t imply pathology but highlights how developmental experiences echo into adulthood.  \n\n**Next Steps:**  \n- Explore therapy (e.g., psychodynamic or CBT) to address root causes.  \n- Reflect on specific latency-stage memories (e.g., how failures/successes were handled).  \n- Discuss medication adjustments with your provider if anxiety feels tied to these patterns.  \n\nYou’re not \"overthinking\"—you’re connecting empirically supported dots!",
+    "explanation": "Latency stage",
+    "reasoning": "****  \nYour reflections align well with psychodynamic theories (particularly Freud’s latency stage) and modern developmental psychology. Here’s the breakdown:  \n\n1. **Latency Stage Context (6–12 years):**  \n   - This phase is marked by repressed sexual impulses (per Freud) and redirected energy toward skill-building (school, hobbies, friendships).  \n   - Healthy development here fosters competence, emotional regulation, and social adaptability. Disruptions (e.g., excessive pressure, lack of play, or rigid expectations) can lead to:  \n     - **Perfectionism/Overworking:** Compensating for unmet needs for approval or control during this stage.  \n     - **Conflict Avoidance/Shyness:** If emotional expression was discouraged, leading to suppressed feelings.  \n     - **\"Stuck\" Habits:** Rigid routines may develop if creativity/exploration were limited.  \n\n2. **Present Symptoms Connection:**  \n   - **Anxiety/Medication Use:** Chronic stress from unresolved latency-stage pressures (e.g., \"being good\" at all costs) can manifest as adult anxiety.  \n   - **Relationship Struggles:** Latency is when kids practice peer dynamics. Missed opportunities here might delay emotional intimacy skills.  \n\n3. **Key Insight:**  \n   While Freud’s model is debated, modern research confirms that middle childhood shapes:  \n   - Self-esteem (via mastery of skills),  \n   - Coping mechanisms (e.g., perfectionism as a response to high expectations),  \n   - Neural pathways for stress (if emotional outlets were lacking).  \n\n**"
+  },
+  {
+    "id": "medical_training_40613",
+    "question": "What is the incorrect source of origin for a nasolabial cyst?",
+    "options": {
+      "A": "Arises from odontoid epithelium"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "** **Nasolabial cyst** (a non-odontogenic developmental cyst arising from nasolacrimal duct remnants).  \n\n*Next Steps:* Imaging (e.g., CT/MRI) can confirm the diagnosis, and surgical excision is curative. Reassure the patient that this is benign and unrelated to dental pathology.",
+    "explanation": "Arises from odontoid epithelium",
+    "reasoning": "****  \nThe patient describes a persistent, firm swelling near the nose and upper lip with mild discomfort, pressure, and occasional numbness. Key features to consider:  \n1. **Location:** Nasolabial (or nasoalveolar) cysts typically occur in the soft tissue of the nasolabial fold, aligning with the described site.  \n2. **Symptoms:** Slow-growing, painless (or mildly painful) swelling is classic for these cysts. Pressure effects (numbness, dull ache) may arise from compression of adjacent nerves or structures.  \n3. **Dental History:** While nasolabial cysts are **non-odontogenic** (not tooth-related), the patient’s concern about a past dental procedure is understandable but likely unrelated. These cysts arise from embryonic remnants of the nasolacrimal duct, not odontogenic tissue.  \n4. **Differential Diagnosis:**  \n   - **Odontogenic cysts** (e.g., radicular cyst): Unlikely without tooth pain or decay.  \n   - **Abscess:** Would typically be painful, erythematous, and fluctuant.  \n   - **Benign soft tissue tumors** (e.g., lipoma): Usually softer and mobile.  \n   - **Nasolabial cyst:** Best fits the clinical picture—slow-growing, firm, and localized to the nasolabial area.  \n\n**"
+  },
+  {
+    "id": "medical_training_40615",
+    "question": "What is the type of Amyloidosis caused by a mutation in the transthyretin protein?",
+    "options": {
+      "A": "Familial amyloidotic polyneuropathy"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "**  \n**Hereditary transthyretin amyloidosis (hATTR) with polyneuropathy (familial amyloidotic polyneuropathy, FAP).**",
+    "explanation": "Familial amyloidotic polyneuropathy",
+    "reasoning": "****  \n\nThe patient presents with a constellation of symptoms affecting multiple organ systems, including:  \n1. **Neurological symptoms** – Chronic tingling, numbness, burning pain (small-fiber neuropathy), and muscle weakness (motor neuropathy), particularly in the extremities. These suggest progressive peripheral neuropathy.  \n2. **Autonomic dysfunction** – Postural dizziness (orthostatic hypotension), gastrointestinal dysmotility (early satiety, nausea, diarrhea), and cardiac symptoms (palpitations, arrhythmias).  \n3. **Cardiac involvement** – Shortness of breath, leg swelling (possible heart failure due to restrictive cardiomyopathy), and arrhythmias.  \n4. **Unintentional weight loss** – Likely due to malabsorption from GI dysmotility and/or chronic illness.  \n5. **Family history** – Father had similar symptoms with confirmed nerve and heart involvement, raising suspicion of a hereditary disorder.  \n\nThe most striking clue is the **family history of a rare condition involving nerve damage and cardiac issues**, along with the patient’s mention of **transthyretin (TTR)**. This strongly suggests **hereditary transthyretin amyloidosis (hATTR)**, specifically **familial amyloidotic polyneuropathy (FAP)**.  \n\n**Key Supporting Evidence:**  \n- hATTR amyloidosis is caused by misfolded **transthyretin protein** depositing in nerves, heart, GI tract, and other organs.  \n- Symptoms align with **polyneuropathy, autonomic dysfunction, cardiomyopathy, and GI dysmotility**—classic for FAP.  \n- Autosomal dominant inheritance fits the father’s history.  \n\n**Differential Diagnoses to Consider:**  \n- **Diabetic neuropathy** (but no history of diabetes).  \n- **Chronic inflammatory demyelinating polyneuropathy (CIDP)** (less likely with autonomic/cardiac involvement).  \n- **AL amyloidosis** (but no monoclonal protein or plasma cell disorder suggested).  \n- **Vitamin B12 deficiency** (would not explain cardiac/GI symptoms).  \n\n**Next Steps for Confirmation:**  \n1. **Genetic testing** for *TTR gene mutations* (definitive for hATTR).  \n2. **Tissue biopsy** (fat pad, nerve, or heart) with Congo red staining to detect amyloid deposits.  \n3. **Cardiac workup** (echocardiogram for wall thickening, ECG for conduction abnormalities).  \n4. **Serum/urine protein electrophoresis** to rule out AL amyloidosis.  \n\n**"
+  },
+  {
+    "id": "medical_training_40616",
+    "question": "What is the recommended management for moderate to severe hepatic insufficiency according to Pugh's classification?",
+    "options": {
+      "A": "Ohotopic liver transplantation"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "** **Decompensated cirrhosis with complications (ascites, hepatic encephalopathy, coagulopathy, jaundice).**  \n\n**Next Steps:**  \n- **Immediate:** Optimize medical management (salt restriction, diuretics, lactulose/rifaximin).  \n- **Transplant workup:** Refer to a liver transplant center for evaluation (assess MELD score, rule out contraindications like active infection or cancer).  \n- **Supportive care:** Address malnutrition, monitor for variceal bleeding, and vaccinate against hepatitis A/B if not immune.  \n\nThe patient’s fear is valid—transplant is life-saving but requires timely intervention. Prognosis depends on disease severity and eligibility for transplant.",
+    "explanation": "Ohotopic liver transplantation",
+    "reasoning": "****  \n\nThe patient presents with multiple classic signs of **advanced liver dysfunction**, likely due to **cirrhosis** (chronic scarring of the liver). Here’s the breakdown of symptoms and their implications:  \n\n1. **Jaundice (yellow skin/eyes)** – Indicates **hyperbilirubinemia**, a sign the liver cannot properly process bilirubin due to impaired function.  \n2. **Ascites (swollen abdomen)** – Caused by **portal hypertension** (high pressure in liver blood vessels) and low albumin (liver-produced protein), leading to fluid leakage into the abdomen.  \n3. **Pruritus (itching)** – Likely due to bile salt accumulation from **cholestasis** (impaired bile flow).  \n4. **Fatigue, nausea, anorexia** – Common in liver failure due to toxin buildup and metabolic disturbances.  \n5. **Easy bruising/swollen legs (edema)** – Results from **coagulopathy** (liver fails to produce clotting factors) and **hypoalbuminemia** (low albumin causing fluid retention).  \n6. **Confusion/memory issues (hepatic encephalopathy)** – Caused by **ammonia buildup** (liver cannot detoxify), affecting the brain.  \n\nThe patient’s medications (diuretics for ascites, lactulose for encephalopathy) and lab findings confirm **decompensated cirrhosis** (liver failure with complications). Given the severity, **liver transplantation evaluation is appropriate**—this is the definitive treatment for end-stage liver disease when other therapies fail.  \n\n**"
+  },
+  {
+    "id": "medical_training_40617",
+    "question": "What is the most common diagnostic investigation of choice for a newborn presenting with jaundice?",
+    "options": {
+      "A": "Total and Direct Bilirubin"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "**: **Physiological neonatal jaundice** (likely exacerbated by breastfeeding difficulty and birth trauma), but **TSB + fractionation** is critical to exclude pathological causes (e.g., hemolysis, cholestasis).  \n\n**Next Steps**:  \n- Immediate TSB testing.  \n- If TSB is high: Phototherapy (thresholds vary by age/hours of life).  \n- If direct bilirubin elevated: Investigate liver/biliary pathology.  \n- Ensure adequate breastfeeding/latch support (consider lactation consultation).",
+    "explanation": "Total and Direct Bilirubin",
+    "reasoning": "**  \nThe patient's symptoms—jaundice (yellowing of skin and sclera), lethargy, and poor feeding—are classic signs of **neonatal hyperbilirubinemia**, a common condition in newborns. Here’s the detailed breakdown:  \n\n1. **Timing and Progression**:  \n   - Physiological jaundice typically appears after 24 hours of life (peaking around days 3–5), which aligns with this case.  \n   - The spread from face to chest/arms suggests rising bilirubin levels (consistent with the **Kramer scale** for jaundice severity).  \n\n2. **Potential Causes**:  \n   - **Breastfeeding-associated jaundice**: Poor feeding can exacerbate dehydration and reduce bilirubin excretion.  \n   - **Hemolytic causes**: Bruising from delivery (e.g., cephalohematoma) increases red blood cell breakdown, raising bilirubin.  \n   - **Pathological causes** (less likely but must be ruled out):  \n     - **Liver dysfunction** (e.g., biliary atresia) if direct bilirubin is elevated.  \n     - **Blood group incompatibility** (e.g., ABO/Rh incompatibility) if jaundice appears <24h or is severe.  \n\n3. **Key Diagnostics**:  \n   - **Total serum bilirubin (TSB)**: Confirms hyperbilirubinemia and guides treatment thresholds.  \n   - **Direct vs. indirect bilirubin**:  \n     - Indirect bilirubin dominance suggests **physiological/breastfeeding jaundice** or hemolysis.  \n     - Elevated direct bilirubin (>20% of TSB) warrants evaluation for **cholestasis/liver disease**.  \n   - Additional tests if pathology suspected: Blood type/Coombs test, liver enzymes, G6PD screening.  \n\n4. **Red Flags**:  \n   - Lethargy/poor feeding could indicate **acute bilirubin encephalopathy** if bilirubin is extremely high (neurotoxic risk).  \n\n**"
+  },
+  {
+    "id": "medical_training_40619",
+    "question": "What condition is a contraindication to the use of a local anesthetic agent?",
+    "options": {
+      "A": "Hypersensitivity to the drug"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "**  \n**Likely diagnosis: IgE-mediated hypersensitivity reaction to local anesthetics (e.g., lidocaine, novocaine).**  \n\n**Next Steps:**  \n1. **Allergist referral** for skin testing/graded challenge.  \n2. **Avoid all \"-caine\" anesthetics** until cleared by testing.  \n3. **Medical alert bracelet** noting the allergy.  \n4. **Premedication plan** (e.g., antihistamines/corticosteroids) if future exposure is unavoidable.  \n\n*(Note: This avoids misdiagnosing non-allergic reactions (e.g., epinephrine effects) while addressing the patient’s safety concerns.)*",
+    "explanation": "Hypersensitivity to the drug",
+    "reasoning": "****  \nThe patient describes symptoms consistent with an **IgE-mediated hypersensitivity reaction** to local anesthetics (e.g., lidocaine, novocaine), including:  \n- **Cutaneous**: Redness, itching, hives (urticaria) at the injection site.  \n- **Angioedema**: Swelling of lips/tongue (mucosal involvement).  \n- **Systemic**: Chest tightness, tachycardia, dizziness (suggestive of **anaphylaxis**).  \n- **Recurrence**: Similar reactions to multiple \"-caine\" anesthetics, indicating a possible class hypersensitivity.  \n\n**Key Considerations:**  \n1. **True Allergy vs. Adverse Reaction**:  \n   - True IgE-mediated allergies to local anesthetics are rare; more often, reactions are due to additives (e.g., epinephrine, preservatives) or vasovagal responses.  \n   - However, the **reproducibility** of symptoms (hives, angioedema, hypotension) strongly suggests allergy.  \n\n2. **Testing Options**:  \n   - **Skin prick testing/intradermal testing** with preservative-free local anesthetics can confirm IgE sensitivity.  \n   - **Graded drug challenge** under supervision may be used if testing is equivocal.  \n\n3. **Alternatives for Future Procedures**:  \n   - **Non-\"caine\" anesthetics**: Diphenhydramine (antihistamine) or benzyl alcohol can be used off-label for local anesthesia.  \n   - **General anesthesia** may be required for major procedures if no safe local option exists.  \n\n**"
+  },
+  {
+    "id": "medical_training_40623",
+    "question": "Which structure among those associated with the ankle joint does not contribute to its stability?",
+    "options": {
+      "A": "Cruciate ligament"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "** **Chronic lateral ankle instability (secondary to ATFL/CFL laxity from prior sprain).**  \n\n**Next Steps:**  \n- Physical exam (anterior drawer test for ATFL integrity, tenderness over ligaments).  \n- MRI if OCL or tendon pathology is suspected.  \n- Focus on **proprioceptive rehab, bracing, or surgical referral** if conservative measures fail.",
+    "explanation": "Cruciate ligament",
+    "reasoning": "****  \n\n1. **Key Symptoms & Clues:**  \n   - **Chronic instability** (ankle \"giving out\")  \n   - **Recurrent swelling/tenderness** (especially laterally)  \n   - **Sharp pain deep in the joint** (suggests structural damage)  \n   - **History of prior ankle sprain** (likely inadequately rehabilitated)  \n   - **Popping sensation** (possible ligament laxity or cartilage issue)  \n   - **No mention of knee pain** (rules out referred pain from cruciate ligaments)  \n\n2. **Anatomical Focus:**  \n   - The **lateral ankle ligaments** (anterior talofibular ligament/ATFL, calcaneofibular ligament/CFL) are the most commonly injured in sprains.  \n   - The **syndesmotic ligaments** (between tibia/fibula) or **deltoid ligament** (medially) are less likely here given the lateral tenderness.  \n   - **Cruciate ligaments are absent in the ankle**—confusion suggests the patient is misapplying knee anatomy.  \n\n3. **Mechanism of Injury:**  \n   - Inversion sprains (rolling ankle inward) typically damage the ATFL/CFL.  \n   - Incomplete healing or inadequate rehab can lead to **ligamentous laxity**, causing chronic instability.  \n\n4. **Differential Diagnoses:**  \n   - **Chronic lateral ankle instability** (most likely, due to ligamentous incompetence).  \n   - **Osteochondral lesion (OCL)** of the talus (if deep pain persists, though less likely without locking/clicking).  \n   - **Peroneal tendon dysfunction** (less likely without posterolateral pain or weakness).  \n   - **Subtle syndesmotic injury** (unlikely without high-ankle pain or history of severe trauma).  \n\n5. **Supporting Evidence:**  \n   - Prior sprain + recurrent instability strongly suggests **ATFL insufficiency**.  \n   - Popping may indicate **ligament catching** or **subluxing peroneal tendons** (but less prominent here).  \n\n**"
+  },
+  {
+    "id": "medical_training_40626",
+    "question": "What is the name of the technique that involves combining reversible and irreversible hydrocolloids, specifically allowing the irreversible hydrocolloid to bond effectively?",
+    "options": {
+      "A": "Laminate technique"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "**  \n**Ill-fitting dentures due to alveolar bone resorption.**  \n\n### Recommended Actions:  \n1. **Denture Relining/Rebasing:** A temporary soft reline or permanent hard reline can adapt the denture base to the current ridge shape.  \n2. **New Dentures:** If the current set is >5–7 years old, a remake with updated impressions may be needed.  \n3. **Dental Implant Consultation:** For severe bone loss, implant-supported dentures provide superior stability.  \n4. **Oral Exam:** Rule out mucosal lesions or infections (e.g., candidiasis) contributing to discomfort.  \n\n*(The laminate technique mentioned by the patient refers to advanced fabrication methods but isn’t a standalone solution without addressing the underlying fit issue.)*",
+    "explanation": "Laminate technique",
+    "reasoning": "****  \n\nThe patient describes several key symptoms:  \n1. **Denture instability** (slipping, poor fit)  \n2. **Sore spots and gum irritation** (likely due to friction or pressure points)  \n3. **Reduced effectiveness of denture adhesive** (suggesting structural changes in the dentures or oral tissues)  \n\n### Potential Causes:  \n1. **Bone Resorption (Most Likely):**  \n   - Over time, the alveolar ridge (jawbone supporting dentures) naturally shrinks due to lack of tooth roots, leading to looser dentures.  \n   - This is common in long-term denture wearers and explains the gradual loss of fit.  \n\n2. **Denture Wear or Damage:**  \n   - Worn-down denture teeth or a warped base can alter fit.  \n   - Acrylic may degrade over 5–10 years, requiring replacement.  \n\n3. **Poor Initial Fit or Fabrication:**  \n   - If the dentures were improperly molded (e.g., inaccurate impressions), they may never have fit optimally.  \n\n4. **Oral Mucosal Changes:**  \n   - Conditions like denture stomatitis (fungal infection) or gum inflammation could exacerbate discomfort.  \n\n5. **Adhesive Issues:**  \n   - Overuse or improper application of adhesive can interfere with fit rather than improve it.  \n\n### Why Bone Resorption is the Leading Cause:  \n- The patient mentions a *gradual* decline in fit, which aligns with bone loss.  \n- Sore spots arise from dentures moving unpredictably over a reshaped ridge.  \n- Adhesives compensate initially but become less effective as bone loss progresses.  \n\n**"
+  },
+  {
+    "id": "medical_training_40630",
+    "question": "What is a condition not associated with Antiphospholipid syndrome?",
+    "options": {
+      "A": "Thrombocytosis"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "**  \n**Essential thrombocythemia (ET)** is the most likely diagnosis. Urgent evaluation with a **CBC (to confirm thrombocytosis), peripheral blood smear, JAK2/CALR/MPL mutation testing**, and assessment for thrombosis/bleeding risk is warranted.",
+    "explanation": "Thrombocytosis",
+    "reasoning": "****  \nThe patient presents with a constellation of symptoms suggestive of a hematologic disorder, particularly involving abnormal platelet function or count. Key findings include:  \n1. **Persistent headaches, dizziness, and lightheadedness** – These could indicate microvascular disturbances, possibly due to hyperviscosity or thrombotic complications from elevated platelets.  \n2. **Paresthesia (tingling/numbness) in extremities** – Suggests possible small vessel ischemia or neuropathy, which can occur in thrombocytosis.  \n3. **Fatigue, night sweats, and chest discomfort** – Systemic symptoms may point to an underlying myeloproliferative neoplasm (e.g., essential thrombocythemia), where cytokine release or hypermetabolism occurs.  \n4. **Easy bruising and petechiae (non-blanching red spots)** – Paradoxically, very high platelet counts can lead to acquired von Willebrand disease or platelet dysfunction, causing bleeding despite thrombocytosis.  \n5. **Family history of clotting issues (though not antiphospholipid syndrome)** – While not definitive, it raises suspicion for inherited or acquired hypercoagulable states.  \n6. **Ineffective ibuprofen use** – NSAIDs may not address the root cause (e.g., platelet-mediated symptoms) and could exacerbate bleeding risk.  \n\n**Differential Considerations:**  \n- **Essential thrombocythemia (ET)** (most likely): A myeloproliferative neoplasm causing elevated platelets, with symptoms of thrombosis/bleeding and systemic manifestations (fatigue, night sweats).  \n- **Secondary thrombocytosis:** Reactive causes (e.g., infection, inflammation, iron deficiency) are less likely given the absence of obvious triggers and the presence of systemic symptoms.  \n- **Other myeloproliferative disorders (e.g., polycythemia vera)** – Less likely without erythrocytosis, but JAK2 mutation testing would help differentiate.  \n- **Hyperviscosity syndromes** – Unlikely without other lab abnormalities (e.g., paraproteins).  \n\n**"
+  },
+  {
+    "id": "medical_training_40631",
+    "question": "In a class III cavity preparation of an incisor tooth, where are the retentive points specifically placed to ensure proper retention and stability?",
+    "options": {
+      "A": "Entirely in dentin"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "**:  \n**Reversible pulpitis secondary to dentin caries** (early pulp irritation from decay). Urgent dental evaluation is needed to:  \n1. Remove decay and place a filling/sealant to protect the dentin.  \n2. Assess pulp vitality—if reversible, a filling may suffice; if irreversible, root canal therapy could be needed.  \n3. Address bruxism with a nightguard to prevent further damage.  \n\n*Delaying care risks progression to irreversible pulpitis or abscess.*",
+    "explanation": "Entirely in dentin",
+    "reasoning": "**  \n\nThe patient describes **lingering sensitivity to cold, sweets, and biting pressure** in a front tooth, which suggests **irritation of the dentin or pulp** (the inner layers of the tooth). Key clues include:  \n1. **Dentin Exposure**: The dentist previously noted a cavity \"entirely in the dentin,\" meaning enamel is compromised, exposing the sensitive dentin beneath. This aligns with cold/sweet sensitivity.  \n2. **Lingering Pain**: Brief sensitivity is typical of dentin exposure, but lingering pain (even for seconds) hints at **early pulp inflammation** (reversible pulpitis). Untreated, this could progress to irreversible pulpitis or infection.  \n3. **Grinding (Bruxism)**: This can worsen micro-fractures or enamel loss, exacerbating sensitivity.  \n4. **Failed Sensitivity Management**: Sensodyne helps block dentin tubules, but if decay is advancing or pulp irritation exists, it may not suffice.  \n\n**Differential Diagnoses**:  \n- **Dentin Hypersensitivity** (exposed dentin from decay, grinding, or gum recession).  \n- **Reversible Pulpitis** (early pulp inflammation; pain subsides after stimulus).  \n- **Deep Caries** (cavity nearing the pulp, risking infection).  \n- **Cracked Tooth Syndrome** (micro-fractures from grinding, though less common in front teeth).  \n\n**"
+  },
+  {
+    "id": "medical_training_40632",
+    "question": "What is the medical interpretation when a newborn has an APGAR score of 6 at 5 minutes after birth?",
+    "options": {
+      "A": "Moderate asphyxia"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "** **Moderate perinatal asphyxia with suspected hypoxic-ischemic encephalopathy (HIE).**  \n\n*Next steps:*  \n1. Continuous cardiorespiratory monitoring.  \n2. Blood gas (to assess acidosis) and neurologic exam (e.g., Sarnat staging).  \n3. Consider EEG if seizures are suspected.  \n4. Discuss eligibility for therapeutic hypothermia (if within 6h of birth).  \n5. Parental counseling about short-term monitoring and long-term neurodevelopmental follow-up.",
+    "explanation": "Moderate asphyxia",
+    "reasoning": "****  \n\nThe patient's symptoms—persistent cyanosis (especially acrocyanosis), weak cry, respiratory distress (slow and shallow breathing), hypotonia (floppiness), lethargy, and poor feeding—are classic signs of **perinatal asphyxia**. The APGAR score of 6 at five minutes further supports this, as scores between 4–6 indicate moderate asphyxia. The history of a prolonged labor with fetal heart rate decelerations suggests an intrapartum hypoxic event (e.g., umbilical cord compression, placental insufficiency), which likely led to inadequate oxygen delivery (hypoxia) and poor perfusion (ischemia) to the baby’s tissues, including the brain.  \n\nThe transient improvement with oxygen aligns with compensatory resuscitation, but the lingering hypotonia and lethargy raise concern for **hypoxic-ischemic encephalopathy (HIE)**, a potential complication of perinatal asphyxia. HIE can manifest in three stages:  \n- **Stage 1 (Mild):** Hyperalertness, normal tone, symptoms resolve in 24h.  \n- **Stage 2 (Moderate):** Lethargy, hypotonia, weak suck, seizures (likely this case).  \n- **Stage 3 (Severe):** Stupor, flaccidity, absent reflexes.  \n\nLong-term risks (e.g., cerebral palsy, developmental delay) depend on the severity and timeliness of intervention (e.g., therapeutic hypothermia if criteria are met).  \n\n**"
+  },
+  {
+    "id": "medical_training_40638",
+    "question": "What is the preferred route of access for total parenteral nutrition in a patient who requires it for less than 14 days without any indication for the use of a central catheter?",
+    "options": {
+      "A": "Peripheral vein"
+    },
+    "answer": "A",
+    "dataset": "medical_intelligence_questions",
+    "context": "**  \n**Severe malnutrition and dehydration secondary to chronic nausea/vomiting (likely gastroparesis, functional GI disorder, or eating disorder).** Short-term peripheral IV nutrition (PPN) is appropriate while investigating the root cause.",
+    "explanation": "Peripheral vein",
+    "reasoning": "****  \n\nThe patient presents with a constellation of symptoms including persistent nausea, vomiting, weakness, unintentional weight loss, dehydration (dry mouth, dizziness upon standing), and failure of oral rehydration/anti-nausea measures. These findings strongly suggest **severe malnutrition and dehydration secondary to prolonged inadequate intake and/or malabsorption**. Key considerations:  \n\n1. **Gastrointestinal Causes**  \n   - **Gastroparesis** (delayed gastric emptying) could explain nausea/vomiting but typically occurs with diabetes or post-viral illness.  \n   - **Gastroenteritis/Infection** (e.g., viral, bacterial, or parasitic) is less likely given the chronicity (>2 weeks).  \n   - **Inflammatory Bowel Disease (IBD)** or **celiac disease** could cause malabsorption but often includes diarrhea (not mentioned here).  \n   - **Gastric outlet obstruction** (e.g., pyloric stenosis, tumor) may present with vomiting but usually involves projectile vomiting.  \n\n2. **Metabolic/Endocrine Causes**  \n   - **Hypercalcemia** or **adrenal insufficiency** can cause nausea/vomiting/weakness but would likely have additional lab abnormalities.  \n   - **Diabetic ketoacidosis (DKA)** is unlikely without hyperglycemia/polyuria.  \n\n3. **Neurologic/Psychiatric Causes**  \n   - **Cyclic vomiting syndrome** or **cannabinoid hyperemesis syndrome** (if applicable) could fit but often has episodic patterns.  \n   - **Eating disorders** (e.g., anorexia nervosa) should be considered given weight loss and food aversion.  \n\n4. **Medication/Toxin-Induced**  \n   - Certain drugs (e.g., opioids, chemotherapy) or toxins (e.g., heavy metals) may cause chronic nausea/vomiting.  \n\nGiven the severity of malnutrition/dehydration and failed oral interventions, **short-term peripheral parenteral nutrition (PPN)** is reasonable if:  \n- The patient has **adequate peripheral venous access** (avoids central line risks).  \n- The formulation is **low-osmolality** (to reduce thrombophlebitis risk).  \n- It’s used as a **bridge** until the underlying cause is identified and treated.  \n\n**"
+  }
+]

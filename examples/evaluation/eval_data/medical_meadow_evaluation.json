@@ -1,0 +1,602 @@
+[
+  {
+    "id": "meadow_0000",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "C: Colonoscopy"
+    },
+    "answer": "C",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "C: Colonoscopy",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0001",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "E: Cytoplasmic inclusion bodies with keratin"
+    },
+    "answer": "C",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "E: Cytoplasmic inclusion bodies with keratin",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0002",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "C: Increased pulmonary capillary pressure"
+    },
+    "answer": "C",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "C: Increased pulmonary capillary pressure",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0003",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "E: Lactase deficiency"
+    },
+    "answer": "A",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "E: Lactase deficiency",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0004",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "E: Intravenous immunoglobulin"
+    },
+    "answer": "A",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "E: Intravenous immunoglobulin",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0005",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "E: Alternative splicing"
+    },
+    "answer": "A",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "E: Alternative splicing",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0006",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "A: Proper sleep hygiene"
+    },
+    "answer": "A",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "A: Proper sleep hygiene",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0007",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "B: ↑ peripheral vascular resistance"
+    },
+    "answer": "B",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "B: ↑ peripheral vascular resistance",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0008",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "A: Small black colonies on tellurite agar"
+    },
+    "answer": "A",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "A: Small black colonies on tellurite agar",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0009",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "C: Fine needle aspiration with cytology"
+    },
+    "answer": "C",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "C: Fine needle aspiration with cytology",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0010",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "B: IgE"
+    },
+    "answer": "B",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "B: IgE",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0011",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "E: MacConkey agar"
+    },
+    "answer": "C",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "E: MacConkey agar",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0012",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "A: Autosomal recessive"
+    },
+    "answer": "A",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "A: Autosomal recessive",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0013",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "A: Cancel the surgery"
+    },
+    "answer": "A",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "A: Cancel the surgery",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0014",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "B: Avoid meat"
+    },
+    "answer": "B",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "B: Avoid meat",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0015",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "B: Pseudomonas keratitis"
+    },
+    "answer": "B",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "B: Pseudomonas keratitis",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0016",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "D: Chvostek sign, QT prolongation, decreased PTH, decreased serum calcium, increased serum phosphate"
+    },
+    "answer": "D",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "D: Chvostek sign, QT prolongation, decreased PTH, decreased serum calcium, increased serum phosphate",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0017",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "C: Subacute sclerosing panencephalitis"
+    },
+    "answer": "C",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "C: Subacute sclerosing panencephalitis",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0018",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "C: Synaptophysin"
+    },
+    "answer": "C",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "C: Synaptophysin",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0019",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "B: Herpes simplex infection"
+    },
+    "answer": "B",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "B: Herpes simplex infection",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0020",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "A: Type 1 - anaphylactic hypersensitivity reaction"
+    },
+    "answer": "A",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "A: Type 1 - anaphylactic hypersensitivity reaction",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0021",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "C: Haloperidol"
+    },
+    "answer": "C",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "C: Haloperidol",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0022",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "D: Nitric oxide"
+    },
+    "answer": "D",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "D: Nitric oxide",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0023",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "A: Decreased sensation over the cheekbone, nasolabial fold, and the upper lip"
+    },
+    "answer": "A",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "A: Decreased sensation over the cheekbone, nasolabial fold, and the upper lip",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0024",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "D: Hypertension"
+    },
+    "answer": "D",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "D: Hypertension",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0025",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "D: Ectopic pregnancy"
+    },
+    "answer": "D",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "D: Ectopic pregnancy",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0026",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "A: Periosteum"
+    },
+    "answer": "A",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "A: Periosteum",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0027",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "C: Antagonist at bradykinin receptor"
+    },
+    "answer": "C",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "C: Antagonist at bradykinin receptor",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0028",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "B: Propylthiouracil"
+    },
+    "answer": "B",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "B: Propylthiouracil",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0029",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "B: ATP-binding cassette transporter dysfunction"
+    },
+    "answer": "B",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "B: ATP-binding cassette transporter dysfunction",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0030",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "E: Sepsis"
+    },
+    "answer": "A",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "E: Sepsis",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0031",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "C: Binds to a nuclear receptor"
+    },
+    "answer": "C",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "C: Binds to a nuclear receptor",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0032",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "B: Have the baby sleep in supine position"
+    },
+    "answer": "B",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "B: Have the baby sleep in supine position",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0033",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "D: Para-amino hippuric acid"
+    },
+    "answer": "D",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "D: Para-amino hippuric acid",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0034",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "B: Macrophages"
+    },
+    "answer": "B",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "B: Macrophages",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0035",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "A: Fatty casts"
+    },
+    "answer": "A",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "A: Fatty casts",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0036",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "C: Intranasal naloxone"
+    },
+    "answer": "C",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "C: Intranasal naloxone",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0037",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "A: Cautery of an arteriovenous malformation"
+    },
+    "answer": "A",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "A: Cautery of an arteriovenous malformation",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0038",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "B: Myeloperoxidase"
+    },
+    "answer": "B",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "B: Myeloperoxidase",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0039",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "E: Clarify the daughter's reasons for the request"
+    },
+    "answer": "C",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "E: Clarify the daughter's reasons for the request",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0040",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "D: Skin"
+    },
+    "answer": "D",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "D: Skin",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0041",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "C: CT angiography of the head"
+    },
+    "answer": "C",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "C: CT angiography of the head",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0042",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "C: IP3"
+    },
+    "answer": "C",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "C: IP3",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0043",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "A: Hypoalbuminemia"
+    },
+    "answer": "A",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "A: Hypoalbuminemia",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0044",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "D: Increased total lung capacity (TLC)"
+    },
+    "answer": "D",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "D: Increased total lung capacity (TLC)",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0045",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "B: Administer desmopressin"
+    },
+    "answer": "B",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "B: Administer desmopressin",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0046",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "B: Urine microalbumin to creatinine ratio"
+    },
+    "answer": "B",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "B: Urine microalbumin to creatinine ratio",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0047",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "B: Acetaminophen"
+    },
+    "answer": "B",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "B: Acetaminophen",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0048",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "C: Homogentisic acid oxidase"
+    },
+    "answer": "C",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "C: Homogentisic acid oxidase",
+    "metamap_phrases": null
+  },
+  {
+    "id": "meadow_0049",
+    "question": "Please answer with one of the option in the bracket",
+    "options": {
+      "A": "D: Partial molar pregnancy"
+    },
+    "answer": "D",
+    "dataset": "medical_meadow",
+    "context": null,
+    "explanation": "D: Partial molar pregnancy",
+    "metamap_phrases": null
+  }
+]

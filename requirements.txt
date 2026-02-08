@@ -16,3 +16,17 @@ huggingface_hub>=0.21.0
 
 # Evaluation
 datasets>=2.18.0
+
+# RAG Dependencies
+sentence-transformers>=2.2.0  # For embeddings
+# pypdf>=4.0.0  # Optional: PDF support
+# PyPDF2>=3.0.0  # Alternative PDF support
+
+# Training Dependencies (included in torch/transformers)
+# Additional training utilities included in base packages
+
+# Tool Use (optional dependencies)
+# requests>=2.28.0  # For web fetch tool (usually pre-installed)
+
+# Conversation Persistence (included in stdlib)
+# json, pathlib, threading - all stdlib

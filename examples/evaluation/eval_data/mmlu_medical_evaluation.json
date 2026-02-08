@@ -1,0 +1,722 @@
+[
+  {
+    "id": "mmlu_anatomy_0000",
+    "question": "A lesion causing compression of the facial nerve at the stylomastoid foramen will cause ipsilateral",
+    "options": {
+      "A": "paralysis of the facial muscles.",
+      "B": "paralysis of the facial muscles and loss of taste.",
+      "C": "paralysis of the facial muscles, loss of taste and lacrimation.",
+      "D": "paralysis of the facial muscles, loss of taste, lacrimation and decreased salivation."
+    },
+    "answer": "A",
+    "dataset": "mmlu_anatomy",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_anatomy_0001",
+    "question": "A \"dished face\" profile is often associated with",
+    "options": {
+      "A": "a protruding mandible due to reactivation of the condylar cartilage by acromegaly.",
+      "B": "a recessive maxilla due to failure of elongation of the cranial base.",
+      "C": "an enlarged frontal bone due to hydrocephaly.",
+      "D": "defective development of the maxillary air sinus."
+    },
+    "answer": "B",
+    "dataset": "mmlu_anatomy",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_anatomy_0002",
+    "question": "Which of the following best describes the structure that collects urine in the body?",
+    "options": {
+      "A": "Bladder",
+      "B": "Kidney",
+      "C": "Ureter",
+      "D": "Urethra"
+    },
+    "answer": "A",
+    "dataset": "mmlu_anatomy",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_anatomy_0003",
+    "question": "Which of the following structures is derived from ectomesenchyme?",
+    "options": {
+      "A": "Motor neurons",
+      "B": "Skeletal muscles",
+      "C": "Melanocytes",
+      "D": "Sweat glands"
+    },
+    "answer": "C",
+    "dataset": "mmlu_anatomy",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_anatomy_0004",
+    "question": "Which of the following describes the cluster of blood capillaries found in each nephron in the kidney?",
+    "options": {
+      "A": "Afferent arteriole",
+      "B": "Glomerulus",
+      "C": "Loop of Henle",
+      "D": "Renal pelvis"
+    },
+    "answer": "B",
+    "dataset": "mmlu_anatomy",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_anatomy_0005",
+    "question": "A patient suffers a broken neck with damage to the spinal cord at the level of the sixth cervical vertebra.",
+    "options": {
+      "A": "They will be unable to breathe without life support.",
+      "B": "They will only be able to breathe quietly.",
+      "C": "It is impossible to predict an effect on breathing.",
+      "D": "Breathing will be unaffected."
+    },
+    "answer": "B",
+    "dataset": "mmlu_anatomy",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_anatomy_0006",
+    "question": "Which of the following anatomical regions of abdomen lies just distal to the sternum?",
+    "options": {
+      "A": "Epigastric",
+      "B": "Hypochondriac",
+      "C": "Hypogastric",
+      "D": "Lumbar"
+    },
+    "answer": "A",
+    "dataset": "mmlu_anatomy",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_anatomy_0007",
+    "question": "Which of the following best describes the human body's defense mechanism against environmental bacteria?",
+    "options": {
+      "A": "Hair in the nose",
+      "B": "Mucous membranes",
+      "C": "Osteoblasts",
+      "D": "Saliva"
+    },
+    "answer": "B",
+    "dataset": "mmlu_anatomy",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_clinical_knowledge_0000",
+    "question": "What size of cannula would you use in a patient who needed a rapid blood transfusion (as of 2020 medical knowledge)?",
+    "options": {
+      "A": "18 gauge.",
+      "B": "20 gauge.",
+      "C": "22 gauge.",
+      "D": "24 gauge."
+    },
+    "answer": "A",
+    "dataset": "mmlu_clinical_knowledge",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_clinical_knowledge_0001",
+    "question": "The key attribute in successful marathon running is:",
+    "options": {
+      "A": "strength.",
+      "B": "power.",
+      "C": "stride length.",
+      "D": "stamina."
+    },
+    "answer": "D",
+    "dataset": "mmlu_clinical_knowledge",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_clinical_knowledge_0002",
+    "question": "Which of the following is the commonest cause of dementia in the UK?",
+    "options": {
+      "A": "Alzheimer's disease.",
+      "B": "Cerebrovascular (stroke) disease.",
+      "C": "Lewy body dementia.",
+      "D": "HIV infection."
+    },
+    "answer": "A",
+    "dataset": "mmlu_clinical_knowledge",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_clinical_knowledge_0003",
+    "question": "Which of the following is NOT a symptom of anaphylaxis?",
+    "options": {
+      "A": "Stridor.",
+      "B": "Bradycardia.",
+      "C": "Severe wheeze.",
+      "D": "Rash."
+    },
+    "answer": "B",
+    "dataset": "mmlu_clinical_knowledge",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_clinical_knowledge_0004",
+    "question": "In what situation are closed pouches applied?",
+    "options": {
+      "A": "The patient has a semi-formed or liquid output.",
+      "B": "The patient has a colostomy.",
+      "C": "In the immediate post-operative period.",
+      "D": "The patient has a urostomy."
+    },
+    "answer": "B",
+    "dataset": "mmlu_clinical_knowledge",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_clinical_knowledge_0005",
+    "question": "With an increasing number of sprints the:",
+    "options": {
+      "A": "anaerobic contribution progressively increases.",
+      "B": "pH of the muscle falls below 6.0.",
+      "C": "blood glucose concentration falls below 3 mmol/L.",
+      "D": "relative contribution of aerobic metabolism increases."
+    },
+    "answer": "D",
+    "dataset": "mmlu_clinical_knowledge",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_clinical_knowledge_0006",
+    "question": "Which of the following is true in diplopia?",
+    "options": {
+      "A": "Diplopia can never occur if one eye is covered",
+      "B": "The outer image is always the false image",
+      "C": "A fourth nerve palsy occurs when the patient looks upwards",
+      "D": "A sixth nerve palsy causes a divergent squint"
+    },
+    "answer": "B",
+    "dataset": "mmlu_clinical_knowledge",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_clinical_knowledge_0007",
+    "question": "Sodium bicarbonate ingestion improves middle distance running performance by:",
+    "options": {
+      "A": "elevating the pH and buffering capacity of the extracellular fluid allowing a faster efflux of hydrogen ions from muscle.",
+      "B": "reducing the pH and buffering capacity of the extracellular fluid allowing a faster efflux of hydrogen ions from muscle.",
+      "C": "elevating the pH and buffering capacity of the extracellular fluid allowing a faster influx of hydrogen ions into muscle.",
+      "D": "elevating the pre-exercise muscle pH."
+    },
+    "answer": "A",
+    "dataset": "mmlu_clinical_knowledge",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_college_medicine_0000",
+    "question": "A police officer carries out hundreds of traffic stops every year. When his supervisor is reviewing the officer’s records for the past year, he notices that the officer is equally likely to stop people of various genders, ages, and races. However, he is significantly more likely to write tickets for middle-aged white males with dark hair and eyes. When confronted with this fact, the officer truthfully states that he has no idea why that is, and that it must simply be a coincidence. Unbeknownst to the officer, this behavior is tied to the fact that these men look like his father, with whom he had an abusive relationship as a child. What psychological framework would directly address the unconscious bias in his behavior? ",
+    "options": {
+      "A": "Behaviorist",
+      "B": "Psychoanalytic",
+      "C": "Cognitive behavioral",
+      "D": "Humanistic"
+    },
+    "answer": "B",
+    "dataset": "mmlu_college_medicine",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_college_medicine_0001",
+    "question": "Who set the world record for the mile race in 1886?",
+    "options": {
+      "A": "R Bannister",
+      "B": "S Coe",
+      "C": "J DiMaggio",
+      "D": "WG George"
+    },
+    "answer": "D",
+    "dataset": "mmlu_college_medicine",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_college_medicine_0002",
+    "question": "Which of the following statements identifies a chemically based sensory system?\nI. Gustatory system\nII. Auditory system\nIII. Olfactory system",
+    "options": {
+      "A": "I only",
+      "B": "II only",
+      "C": "III only",
+      "D": "I and III only"
+    },
+    "answer": "D",
+    "dataset": "mmlu_college_medicine",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_college_medicine_0003",
+    "question": "The complete resynthesis of phosphocreatine after very high intensity exercise normally takes:",
+    "options": {
+      "A": "about 10 seconds.",
+      "B": "about 30 seconds.",
+      "C": "about 1 minute.",
+      "D": "about 4 minutes."
+    },
+    "answer": "D",
+    "dataset": "mmlu_college_medicine",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_college_medicine_0004",
+    "question": "A race car attempting to jump a series of 8 buses is set up on a flat track with a ramp at the end. Engineers assigned to the project have determined that, in order to jump the buses, the car must reach a velocity of 130 km/h. If the distance of the track is 50m, at what rate must the car accelerate to reach this velocity?",
+    "options": {
+      "A": "13 m/s^2",
+      "B": "26 m/s^2",
+      "C": "7 m/s^2",
+      "D": "17 m/s^2"
+    },
+    "answer": "A",
+    "dataset": "mmlu_college_medicine",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_college_medicine_0005",
+    "question": "Fatty acids are transported into the mitochondria bound to:",
+    "options": {
+      "A": "thiokinase.",
+      "B": "coenzyme A (CoA).",
+      "C": "acetyl-CoA.",
+      "D": "carnitine."
+    },
+    "answer": "D",
+    "dataset": "mmlu_college_medicine",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_college_medicine_0006",
+    "question": "Sauna use, sometimes referred to as \"sauna bathing,\" is characterized by short-term passive exposure to extreme heat. This exposure elicits mild hyperthermia – an increase in the body's core temperature – that induces a thermoregulatory response involving neuroendocrine, cardiovascular, and cytoprotective mechanisms that work together to restore homeostasis and condition the body for future heat stressors… In recent decades, sauna bathing has emerged as a means to increase lifespan and improve overall health, based on compelling data from observational, interventional, and mechanistic studies. Of particular interest are the findings from studies of participants in the Kuopio Ischemic Heart Disease Risk Factor (KIHD) Study, an ongoing prospective population-based cohort study of health outcomes in more than 2,300 middle-aged men from eastern Finland, which identified strong links between sauna use and reduced death and disease… The KIHD findings showed that men who used the sauna two to three times per week were 27 percent less likely to die from cardiovascular-related causes than men who didn't use the sauna.[2] Furthermore, the benefits they experienced were found to be dose-dependent: Men who used the sauna roughly twice as often, about four to seven times per week, experienced roughly twice the benefits – and were 50 percent less likely to die from cardiovascular-related causes.[2] In addition, frequent sauna users were found to be 40 percent less likely to die from all causes of premature death. These findings held true even when considering age, activity levels, and lifestyle factors that might have influenced the men's health.[2]... The KIHD also revealed that frequent sauna use reduced the risk of developing dementia and Alzheimer's disease in a dose-dependent manner. Men who used the sauna two to three times per week had a 66 percent lower risk of developing dementia and a 65 percent lower risk of developing Alzheimer's disease, compared to men who used the sauna only one time per week… The health benefits associated with sauna use extended to other aspects of mental health, as well. Men participating in the KIHD study who used the sauna four to seven times per week were 77 percent less likely to develop psychotic disorders, regardless of the men's dietary habits, socioeconomic status, physical activity, and inflammatory status (as measured by C-reactive protein)…Exposure to high temperature stresses the body, eliciting a rapid, robust response. The skin and core body temperatures increase markedly, and sweating ensues. The skin heats first, rising to 40°C (104°F), and then changes in core body temperature occur, rising slowly from 37°C (98.6°F, or normal) to 38°C (100.4°F) and then rapidly increasing to 39°C (102.2°F)…  Cardiac output, a measure of the amount of work the heart performs in response to the body's need for oxygen, increases by 60 to 70 percent, while the heart rate (the number of beats per minute) increases and the stroke volume (the amount of blood pumped) remains unchanged.[5] During this time, approximately 50 to 70 percent of the body's blood flow is redistributed from the core to the skin to facilitate sweating. The average person loses approximately 0.5 kg of sweat while sauna bathing.[11] Acute heat exposure also induces a transient increase in overall plasma volume to mitigate the decrease in core blood volume. This increase in plasma volume not only provides a reserve source of fluid for sweating, but it also acts like the water in a car's radiator, cooling the body to prevent rapid increases in core body temperature and promoting heat tolerance… Repeated sauna use acclimates the body to heat and optimizes the body's response to future exposures, likely due to a biological phenomenon known as hormesis, a compensatory defense response following exposure to a mild stressor that is disproportionate to the magnitude of the stressor. Hormesis triggers a vast array of protective mechanisms that not only repair cell damage but also provide protection from subsequent exposures to more devastating stressors… The physiological responses to sauna use are remarkably similar to those experienced during moderate- to vigorous-intensity exercise. In fact, sauna use has been proposed as an alternative to exercise for people who are unable to engage in physical activity due to chronic disease or physical limitations.[13]\n\nBased on the article, which of the following statements is the author likely to agree with?",
+    "options": {
+      "A": "Heart surgery patients who cannot run on treadmills may benefit from sauna use.",
+      "B": "Patients on a diet would benefit from sauna use.",
+      "C": "Salt restriction would be equal to sauna use for hypertensive patients.",
+      "D": "Patients with skin conditions may be cured with sauna use."
+    },
+    "answer": "A",
+    "dataset": "mmlu_college_medicine",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_college_medicine_0007",
+    "question": "Diisopropylfluorophosphate (DFP) binds to the active site of acetylcholinesterase (ACE) in the synapses of neurons. When DFP binds to ACE, the ACE enzyme is rendered permanently inactive. This makes DFP a potent toxin, with lethal amounts at less than 100 mg. The interaction between DFP and ACE can best be characterized as:",
+    "options": {
+      "A": "Competitive inhibition",
+      "B": "Noncompetitive inhibition",
+      "C": "Irreversible inhibition",
+      "D": "Partially competitive inhibition"
+    },
+    "answer": "C",
+    "dataset": "mmlu_college_medicine",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_medical_genetics_0000",
+    "question": "In a Robertsonian translocation fusion occurs at the:",
+    "options": {
+      "A": "telomeres.",
+      "B": "centromeres.",
+      "C": "histones.",
+      "D": "ends of the long arms."
+    },
+    "answer": "B",
+    "dataset": "mmlu_medical_genetics",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_medical_genetics_0001",
+    "question": "Zinc finger proteins and helix-turn-helix proteins are",
+    "options": {
+      "A": "types of DNA-binding proteins",
+      "B": "involved in the control of translation",
+      "C": "components of ribosomes",
+      "D": "part of the hemoglobin in blood cells"
+    },
+    "answer": "A",
+    "dataset": "mmlu_medical_genetics",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_medical_genetics_0002",
+    "question": "If the frequency of males affected with an X-linked recessive condition in a human population is .10 (one in ten), what will be the expected frequency of affected females?",
+    "options": {
+      "A": "0.01",
+      "B": "0.001",
+      "C": "0.02",
+      "D": "0.0001"
+    },
+    "answer": "A",
+    "dataset": "mmlu_medical_genetics",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_medical_genetics_0003",
+    "question": "In DNA adenine normally pairs with:",
+    "options": {
+      "A": "cytosine.",
+      "B": "guanine.",
+      "C": "thymine.",
+      "D": "uracil."
+    },
+    "answer": "C",
+    "dataset": "mmlu_medical_genetics",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_medical_genetics_0004",
+    "question": "The pattern of inheritance shown by malignant hyperthermia (hyperpyrexia) is:",
+    "options": {
+      "A": "autosomal dominant.",
+      "B": "autosomal recessive.",
+      "C": "X-linked dominant.",
+      "D": "X-linked recessive."
+    },
+    "answer": "A",
+    "dataset": "mmlu_medical_genetics",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_medical_genetics_0005",
+    "question": "Mapping of human chromosomes:",
+    "options": {
+      "A": "has been restricted to the sex chromosomes because of small family sizes",
+      "B": "proceeded much more successfully as large numbers of DNA markers became available.",
+      "C": "has determined that the number of linkage groups is about twice the number of chromosomes",
+      "D": "has demonstrated that almost all of the DNA is involved in coding for genes"
+    },
+    "answer": "B",
+    "dataset": "mmlu_medical_genetics",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_medical_genetics_0006",
+    "question": "Intergenerational transmission to offspring can occur as a result of parental exposures to ______.",
+    "options": {
+      "A": "war",
+      "B": "natural disasters",
+      "C": "hunger",
+      "D": "all of these"
+    },
+    "answer": "D",
+    "dataset": "mmlu_medical_genetics",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_medical_genetics_0007",
+    "question": "Asp235Phe in a molecular report indicates that:",
+    "options": {
+      "A": "asparagine has been replaced by phenylalanine.",
+      "B": "phenylalanine has been replaced by asparagine.",
+      "C": "aspartic acid has been replaced by phenylalanine.",
+      "D": "phenylalanine has been replaced by aspartic acid."
+    },
+    "answer": "C",
+    "dataset": "mmlu_medical_genetics",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_professional_medicine_0000",
+    "question": "A 67-year-old woman comes to the physician for a follow-up examination. She had a pulmonary embolism and required treatment in the hospital for 3 weeks. She had a retroperitoneal hemorrhage; anticoagulant therapy was temporarily discontinued, and she underwent placement of an inferior vena cava (IVC) filter. She had a hematoma that was resolving on discharge from the hospital 2 weeks ago. Today, she says she has had a persistent sensation of tingling and numbness of her left thigh that she did not report in the hospital because she thought it would go away; the sensation has improved somewhat during the past week. Her only medication is warfarin. Vital signs are within normal limits. Examination of the skin shows no abnormalities. Muscle strength is normal. Sensation to light touch is decreased over a 5 x 5-cm area on the lateral aspect of the left anterior thigh. Which of the following is the most likely cause of this patient's decreased sensation?",
+    "options": {
+      "A": "Cerebral infarction during the hospitalization",
+      "B": "Complication of the IVC filter placement",
+      "C": "Compression of the lateral femoral cutaneous nerve",
+      "D": "Hematoma of the left thigh"
+    },
+    "answer": "C",
+    "dataset": "mmlu_professional_medicine",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_professional_medicine_0001",
+    "question": "A 25-year-old gravida 3 para 2 female is admitted to the hospital at 39 weeks' gestation in active labor. She had been having regular contractions every 4 minutes, but is now having only a few intermittent, weak contractions. She has received medication for pain twice in the past 6 hours. Examination shows no reason for obstructed labor. The fetal head is engaged, the membranes are intact, the fetal heart tones are normal, and the cervix is 100% effaced and 7 cm dilated. The most likely diagnosis is",
+    "options": {
+      "A": "Braxton Hicks contractions",
+      "B": "lower uterine retraction ring",
+      "C": "hypotonic uterine dysfunction",
+      "D": "primary dysfunctional labor"
+    },
+    "answer": "C",
+    "dataset": "mmlu_professional_medicine",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_professional_medicine_0002",
+    "question": "A 5-year-old boy is brought to the physician by his mother because of a 2-day history of a low-grade fever, cough, and runny nose. His temperature is 38°C (100.4°F). Examination findings are consistent with a diagnosis of a common cold. The physician refers to a randomized, double-blind, placebo-controlled clinical trial that evaluated the effectiveness of a new drug for the treatment of the common cold. The mean time for resolution of symptoms for patients receiving the new drug was 6.4 days, compared with a mean time of 6.7 days for patients receiving the placebo (p=0.04). Which of the following is the most appropriate interpretation of these study results?",
+    "options": {
+      "A": "The findings are clinically and statistically significant",
+      "B": "The findings are clinically insignificant but statistically significant",
+      "C": "The findings are clinically significant but statistically insignificant",
+      "D": "The findings are neither clinically nor statistically significant"
+    },
+    "answer": "B",
+    "dataset": "mmlu_professional_medicine",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_professional_medicine_0003",
+    "question": "A 9-year-old boy is brought to the office by his parents for a well-child examination. The patient and his family immigrated to the United States 2 months ago and he has not been evaluated by a physician in 4 years. He has been generally healthy. Medical history is significant for pneumonia at age 3 years. He takes no medications. He is at the 25th percentile for height, weight, and BMI. Vital signs are temperature 37.0°C (98.6°F), pulse 82/min, respirations 20/min, and blood pressure 112/74 mm Hg. Cardiac examination discloses a grade 3/6 systolic murmur audible along the left sternal border at the third and fourth intercostal spaces. Femoral pulses are weak and brachial pulses are strong; there is a radiofemoral delay. Chest xray discloses mild cardiomegaly with left ventricular prominence. ECG shows left ventricular hypertrophy. This patient is at greatest risk for which of the following complications?",
+    "options": {
+      "A": "Atrial fibrillation",
+      "B": "Cor pulmonale",
+      "C": "Systemic hypertension",
+      "D": "Tricuspid valve regurgitation"
+    },
+    "answer": "C",
+    "dataset": "mmlu_professional_medicine",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_professional_medicine_0004",
+    "question": "A 25-year-old woman comes to the physician because of a 2-month history of numbness in her right hand. During this period, she has had tingling in the right ring and small fingers most of the time. She has no history of serious illness and takes no medications. She is employed as a cashier and uses a computer at home. She played as a pitcher in a softball league for 5 years until she stopped 2 years ago. Vital signs are within normal limits. Examination shows full muscle strength. Palpation of the right elbow produces a jolt of severe pain in the right ring and small fingers. Sensation to pinprick and light touch is decreased over the medial half of the right ring finger and the entire small finger. The most likely cause of these findings is entrapment of which of the following on the right?",
+    "options": {
+      "A": "Median nerve at the wrist",
+      "B": "Musculocutaneous nerve at the forearm",
+      "C": "Radial nerve at the forearm",
+      "D": "Ulnar nerve at the elbow"
+    },
+    "answer": "D",
+    "dataset": "mmlu_professional_medicine",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_professional_medicine_0005",
+    "question": "Six healthy subjects participate in a study of muscle metabolism during which hyperglycemia and hyperinsulinemia is induced. Muscle biopsy specimens obtained from the subjects during the resting state show significantly increased concentrations of malonyl-CoA. The increased malonyl-CoA concentration most likely directly inhibits which of the following processes in these subjects?",
+    "options": {
+      "A": "Fatty acid oxidation",
+      "B": "Fatty acid synthesis",
+      "C": "Gluconeogenesis",
+      "D": "Glycogenolysis"
+    },
+    "answer": "A",
+    "dataset": "mmlu_professional_medicine",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_professional_medicine_0006",
+    "question": "A 72-year-old woman with advanced ovarian cancer metastatic to the liver is brought to the physician by her son because she cries all the time and will not get out of bed. On a 10-point scale, she rates the pain as a 1 to 2. She also has hypertension and major depressive disorder. She has received chemotherapy for 2 years. Current medications also include oxycodone (10 mg twice daily), hydrochlorothiazide (25 mg/d), and fluoxetine (20 mg/d). She is 165 cm (5 ft 5 in) tall and weighs 66 kg (145 lb); BMI is 24 kg/m2 . Her temperature is 37°C (98.6°F), pulse is 110/min, respirations are 12/min, and blood pressure is 120/80 mm Hg. Examination shows a firm, distended abdomen with moderate tenderness over the liver. On mental status examination, she is oriented to person, place, and time. She has good eye contact but appears sad and cries easily. Which of the following is the most appropriate next step in management?",
+    "options": {
+      "A": "Reassurance",
+      "B": "Assess for suicidal ideation",
+      "C": "Begin dextroamphetamine therapy",
+      "D": "Increase oxycodone dosage"
+    },
+    "answer": "B",
+    "dataset": "mmlu_professional_medicine",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_professional_medicine_0007",
+    "question": "A 65-year-old woman has a 6-month history of progressive irritability, palpitations, heat intolerance, frequent bowel movements, and a 6.8-kg (15-lb) weight loss. She has had a neck mass for more than 10 years. 131I scan shows an enlarged thyroid gland with multiple areas of increased and decreased uptake. Which of the following is the most likely diagnosis?",
+    "options": {
+      "A": "Defect in thyroxine (T4) biosynthesis",
+      "B": "Graves' disease",
+      "C": "Multinodular goiter",
+      "D": "Riedel's thyroiditis"
+    },
+    "answer": "C",
+    "dataset": "mmlu_professional_medicine",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_college_biology_0000",
+    "question": "Based on the characteristic population curves that result from plotting population growth of a species, the most effective means of controlling the mosquito population is to",
+    "options": {
+      "A": "maintain the population at a point corresponding to the midpoint of its logistic curve",
+      "B": "opt for zero population control once the K value of the curve has been reached",
+      "C": "reduce the carrying capacity cif the environment to lower the K value",
+      "D": "increase the mortality rate"
+    },
+    "answer": "C",
+    "dataset": "mmlu_college_biology",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_college_biology_0001",
+    "question": "A frameshift mutation is created when",
+    "options": {
+      "A": "telomeric sequences are removed from DNA",
+      "B": "a codon's nucleotide sequence changes so that it calls for production of a different amino acid than the original one",
+      "C": "a base pair is either inserted or deleted in a gene",
+      "D": "a codon's nucleotide sequence is changed so that instead of coding for a given amino acid it acts to terminate translation"
+    },
+    "answer": "C",
+    "dataset": "mmlu_college_biology",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_college_biology_0002",
+    "question": "To prevent desiccation and injury, the embryos of terrestrial vertebrates are encased within a fluid secreted by the",
+    "options": {
+      "A": "amnion",
+      "B": "chorion",
+      "C": "allantois",
+      "D": "yolk sac"
+    },
+    "answer": "A",
+    "dataset": "mmlu_college_biology",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_college_biology_0003",
+    "question": "Which of the following is a second messenger that stimulates release of calcium ions into the cytoplasm?",
+    "options": {
+      "A": "Prostaglandins",
+      "B": "Inositol triphosphate",
+      "C": "Cyclic AMP",
+      "D": "Calmodulin"
+    },
+    "answer": "B",
+    "dataset": "mmlu_college_biology",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_college_biology_0004",
+    "question": "Synthesis of an RNA/DNA hybrid from a single-stranded RNA template requires",
+    "options": {
+      "A": "a DNA or RNA primer and reverse transcriptase",
+      "B": "a DNA or RNA primer and DNA polymerase",
+      "C": "RNase only",
+      "D": "reverse transcriptase only"
+    },
+    "answer": "A",
+    "dataset": "mmlu_college_biology",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_college_biology_0005",
+    "question": "In order for the Hardy-Weinberg law to operate with respect to a population of organisms, each of the following conditions must be met EXCEPT:",
+    "options": {
+      "A": "Genes are exchanged with other populations.",
+      "B": "Population size is large.",
+      "C": "Natural selection does not take place.",
+      "D": "Matings are random."
+    },
+    "answer": "A",
+    "dataset": "mmlu_college_biology",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_college_biology_0006",
+    "question": "The Barr body found within female mammalian cells' nuclei is an example of",
+    "options": {
+      "A": "euchromatin",
+      "B": "heterochromatin",
+      "C": "a cistron",
+      "D": "pseudogenes"
+    },
+    "answer": "B",
+    "dataset": "mmlu_college_biology",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "mmlu_college_biology_0007",
+    "question": "Which of the following is NOT a source of atmospheric carbon?",
+    "options": {
+      "A": "Respiration",
+      "B": "Photosynthesis",
+      "C": "Bacterial decomposition",
+      "D": "Combustion of fossil fuels"
+    },
+    "answer": "B",
+    "dataset": "mmlu_college_biology",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  }
+]

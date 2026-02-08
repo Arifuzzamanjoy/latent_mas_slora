@@ -1,0 +1,702 @@
+[
+  {
+    "id": "pubmedqa_0000",
+    "question": "Do mitochondria play a role in remodelling lace plant leaves during programmed cell death?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "A",
+    "dataset": "pubmedqa",
+    "context": "Programmed cell death (PCD) is the regulated death of cells within an organism. The lace plant (Aponogeton madagascariensis) produces perforations in its leaves through PCD. The leaves of the plant consist of a latticework of longitudinal and transverse veins enclosing areoles. PCD occurs in the cells at the center of these areoles and progresses outwards, stopping approximately five cells from the vasculature. The role of mitochondria during PCD has been recognized in animals; however, it has been less studied during PCD in plants. The following paper elucidates the role of mitochondrial dynamics during developmentally regulated PCD in vivo in A. madagascariensis. A single areole within a window stage leaf (PCD is occurring) was divided into three areas based on the progression of PCD; cells that will not undergo PCD (NPCD), cells in early stages of PCD (EPCD), and cells in late stages of PCD (LPCD). Window stage leaves were stained with the mitochondrial dye MitoTracker Red CMXRos and examined. Mitochondrial dynamics were delineated into four categories (M1-M4) based on characteristics including distribution, motility, and membrane potential (ΔΨm). A TUNEL assay showed fragmented nDNA in a gradient over these mitochondrial stages. Chloroplasts and transvacuolar strands were also examined using live cell imaging. The possible importance of mitochondrial permeability transition pore (PTP) formation during PCD was indirectly examined via in vivo cyclosporine A (CsA) treatment. This treatment resulted in lace plant leaves with a significantly lower number of perforations compared to controls, and that displayed mitochondrial dynamics similar to that of non-PCD cells.",
+    "explanation": "Results depicted mitochondrial dynamics in vivo as PCD progresses within the lace plant, and highlight the correlation of this organelle with other organelles during developmental PCD. To the best of our knowledge, this is the first report of mitochondria and chloroplasts moving on transvacuolar strands to form a ring structure surrounding the nucleus during developmental PCD. Also, for the first time, we have shown the feasibility for the use of CsA in a whole plant system. Overall, our findings implicate the mitochondria as playing a critical and early role in developmentally regulated PCD in the lace plant.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0001",
+    "question": "Landolt C and snellen e acuity: differences in strabismus amblyopia?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "B",
+    "dataset": "pubmedqa",
+    "context": "Assessment of visual acuity depends on the optotypes used for measurement. The ability to recognize different optotypes differs even if their critical details appear under the same visual angle. Since optotypes are evaluated on individuals with good visual acuity and without eye disorders, differences in the lower visual acuity range cannot be excluded. In this study, visual acuity measured with the Snellen E was compared to the Landolt C acuity. 100 patients (age 8 - 90 years, median 60.5 years) with various eye disorders, among them 39 with amblyopia due to strabismus, and 13 healthy volunteers were tested. Charts with the Snellen E and the Landolt C (Precision Vision) which mimic the ETDRS charts were used to assess visual acuity. Three out of 5 optotypes per line had to be correctly identified, while wrong answers were monitored. In the group of patients, the eyes with the lower visual acuity, and the right eyes of the healthy subjects, were evaluated. Differences between Landolt C acuity (LR) and Snellen E acuity (SE) were small. The mean decimal values for LR and SE were 0.25 and 0.29 in the entire group and 0.14 and 0.16 for the eyes with strabismus amblyopia. The mean difference between LR and SE was 0.55 lines in the entire group and 0.55 lines for the eyes with strabismus amblyopia, with higher values of SE in both groups. The results of the other groups were similar with only small differences between LR and SE.",
+    "explanation": "Using the charts described, there was only a slight overestimation of visual acuity by the Snellen E compared to the Landolt C, even in strabismus amblyopia. Small differences in the lower visual acuity range have to be considered.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0002",
+    "question": "Syncope during bathing in infants, a pediatric form of water-induced urticaria?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "A",
+    "dataset": "pubmedqa",
+    "context": "Apparent life-threatening events in infants are a difficult and frequent problem in pediatric practice. The prognosis is uncertain because of risk of sudden infant death syndrome. Eight infants aged 2 to 15 months were admitted during a period of 6 years; they suffered from similar maladies in the bath: on immersion, they became pale, hypotonic, still and unreactive; recovery took a few seconds after withdrawal from the bath and stimulation. Two diagnoses were initially considered: seizure or gastroesophageal reflux but this was doubtful. The hypothesis of an equivalent of aquagenic urticaria was then considered; as for patients with this disease, each infant's family contained members suffering from dermographism, maladies or eruption after exposure to water or sun. All six infants had dermographism. We found an increase in blood histamine levels after a trial bath in the two infants tested. The evolution of these \"aquagenic maladies\" was favourable after a few weeks without baths. After a 2-7 year follow-up, three out of seven infants continue to suffer from troubles associated with sun or water.",
+    "explanation": "\"Aquagenic maladies\" could be a pediatric form of the aquagenic urticaria.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0003",
+    "question": "Are the long-term results of the transanal pull-through equal to those of the transabdominal pull-through?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "B",
+    "dataset": "pubmedqa",
+    "context": "The transanal endorectal pull-through (TERPT) is becoming the most popular procedure in the treatment of Hirschsprung disease (HD), but overstretching of the anal sphincters remains a critical issue that may impact the continence. This study examined the long-term outcome of TERPT versus conventional transabdominal (ABD) pull-through for HD. Records of 41 patients more than 3 years old who underwent a pull-through for HD (TERPT, n = 20; ABD, n = 21) were reviewed, and their families were thoroughly interviewed and scored via a 15-item post-pull-through long-term outcome questionnaire. Patients were operated on between the years 1995 and 2003. During this time, our group transitioned from the ABD to the TERPT technique. Total scoring ranged from 0 to 40: 0 to 10, excellent; 11 to 20 good; 21 to 30 fair; 31 to 40 poor. A 2-tailed Student t test, analysis of covariance, as well as logistic and linear regression were used to analyze the collected data with confidence interval higher than 95%. Overall scores were similar. However, continence score was significantly better in the ABD group, and the stool pattern score was better in the TERPT group. A significant difference in age at interview between the 2 groups was noted; we therefore reanalyzed the data controlling for age, and this showed that age did not significantly affect the long-term scoring outcome between groups.",
+    "explanation": "Our long-term study showed significantly better (2-fold) results regarding the continence score for the abdominal approach compared with the transanal pull-through. The stool pattern and enterocolitis scores were somewhat better for the TERPT group. These findings raise an important issue about the current surgical management of HD; however, more cases will need to be studied before a definitive conclusion can be drawn.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0004",
+    "question": "Can tailored interventions increase mammography use among HMO women?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "A",
+    "dataset": "pubmedqa",
+    "context": "Telephone counseling and tailored print communications have emerged as promising methods for promoting mammography screening. However, there has been little research testing, within the same randomized field trial, of the efficacy of these two methods compared to a high-quality usual care system for enhancing screening. This study addressed the question: Compared to usual care, is tailored telephone counseling more effective than tailored print materials for promoting mammography screening? Three-year randomized field trial. One thousand ninety-nine women aged 50 and older recruited from a health maintenance organization in North Carolina. Women were randomized to 1 of 3 groups: (1) usual care, (2) tailored print communications, and (3) tailored telephone counseling. Adherence to mammography screening based on self-reports obtained during 1995, 1996, and 1997. Compared to usual care alone, telephone counseling promoted a significantly higher proportion of women having mammograms on schedule (71% vs 61%) than did tailored print (67% vs 61%) but only after the first year of intervention (during 1996). Furthermore, compared to usual care, telephone counseling was more effective than tailored print materials at promoting being on schedule with screening during 1996 and 1997 among women who were off-schedule during the previous year.",
+    "explanation": "The effects of the intervention were most pronounced after the first intervention. Compared to usual care, telephone counseling seemed particularly effective at promoting change among nonadherent women, the group for whom the intervention was developed. These results suggest that telephone counseling, rather than tailored print, might be the preferred first-line intervention for getting nonadherent women on schedule for mammography screening. Many questions would have to be answered about why the tailored print intervention was not more powerful. Nevertheless, it is clear that additional interventions will be needed to maintain women's adherence to mammography. Medical Subject Headings (MeSH): mammography screening, telephone counseling, tailored print communications, barriers.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0005",
+    "question": "Double balloon enteroscopy: is it efficacious and safe in a community setting?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "A",
+    "dataset": "pubmedqa",
+    "context": "From March 2007 to January 2011, 88 DBE procedures were performed on 66 patients. Indications included evaluation anemia/gastrointestinal bleed, small bowel IBD and dilation of strictures. Video-capsule endoscopy (VCE) was used prior to DBE in 43 of the 66 patients prior to DBE evaluation. The mean age was 62 years. Thirty-two patients were female, 15 were African-American; 44 antegrade and 44 retrograde DBEs were performed. The mean time per antegrade DBE was 107.4±30.0 minutes with a distance of 318.4±152.9 cm reached past the pylorus. The mean time per lower DBE was 100.7±27.3 minutes with 168.9±109.1 cm meters past the ileocecal valve reached. Endoscopic therapy in the form of electrocautery to ablate bleeding sources was performed in 20 patients (30.3%), biopsy in 17 patients (25.8%) and dilation of Crohn's-related small bowel strictures in 4 (6.1%). 43 VCEs with pathology noted were performed prior to DBE, with findings endoscopically confirmed in 32 cases (74.4%). In 3 cases the DBE showed findings not noted on VCE.",
+    "explanation": "DBE appears to be equally safe and effective when performed in the community setting as compared to a tertiary referral center with a comparable yield, efficacy, and complication rate.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0006",
+    "question": "30-Day and 1-year mortality in emergency general surgery laparotomies: an area of concern and need for improvement?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "C",
+    "dataset": "pubmedqa",
+    "context": "Emergency surgery is associated with poorer outcomes and higher mortality with recent studies suggesting the 30-day mortality to be 14-15%. The aim of this study was to analyse the 30-day mortality, age-related 30-day mortality and 1-year mortality following emergency laparotomy. We hope this will encourage prospective data collection, improvement of care and initiate strategies to establish best practice in this area. This was a retrospective study of patients who underwent emergency laparotomy from June 2010 to May 2012. The primary end point of the study was 30-day mortality, age-related 30-day mortality and 1-year all-cause mortality. 477 laparotomies were performed in 446 patients. 57% were aged<70 and 43% aged>70 years. 30-day mortality was 12, 4% in those aged<70 years and 22% in those>70 years (p<0.001). 1-year mortality was 25, 15% in those aged under 70 years and 38% in those aged>70 years (p<0.001).",
+    "explanation": "Emergency laparotomy carries a high rate of mortality, especially in those over the age of 70 years, and more needs to be done to improve outcomes, particularly in this group. This could involve increasing acute surgical care manpower, early recognition of patients requiring emergency surgery, development of clear management protocols for such patients or perhaps even considering centralisation of emergency surgical services to specialist centres with multidisciplinary teams involving emergency surgeons and care of the elderly physicians in hospital and related community outreach services for post-discharge care.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0007",
+    "question": "Is adjustment for reporting heterogeneity necessary in sleep disorders?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "B",
+    "dataset": "pubmedqa",
+    "context": "Anchoring vignettes are brief texts describing a hypothetical character who illustrates a certain fixed level of a trait under evaluation. This research uses vignettes to elucidate factors associated with sleep disorders in adult Japanese before and after adjustment for reporting heterogeneity in self-reports. This study also evaluates the need for adjusting for reporting heterogeneity in the management of sleep and energy related problems in Japan. We investigated a dataset of 1002 respondents aged 18 years and over from the Japanese World Health Survey, which collected information through face-to-face interview from 2002 to 2003. The ordered probit model and the Compound Hierarchical Ordered Probit (CHOPIT) model, which incorporated anchoring vignettes, were employed to estimate and compare associations of sleep and energy with socio-demographic and life-style factors before and after adjustment for differences in response category cut-points for each individual. The prevalence of self-reported problems with sleep and energy was 53 %. Without correction of cut-point shifts, age, sex, and the number of comorbidities were significantly associated with a greater severity of sleep-related problems. After correction, age, the number of comorbidities, and regular exercise were significantly associated with a greater severity of sleep-related problems; sex was no longer a significant factor. Compared to the ordered probit model, the CHOPIT model provided two changes with a subtle difference in the magnitude of regression coefficients after correction for reporting heterogeneity.",
+    "explanation": "Sleep disorders are common in the general adult population of Japan. Correction for reporting heterogeneity using anchoring vignettes is not a necessary tool for proper management of sleep and energy related problems among Japanese adults. Older age, gender differences in communicating sleep-related problems, the presence of multiple morbidities, and regular exercise should be the focus of policies and clinical practice to improve sleep and energy management in Japan.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0008",
+    "question": "Do mutations causing low HDL-C promote increased carotid intima-media thickness?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "B",
+    "dataset": "pubmedqa",
+    "context": "Although observational data support an inverse relationship between high-density lipoprotein (HDL) cholesterol and coronary heart disease (CHD), genetic HDL deficiency states often do not correlate with premature CHD. Carotid intima-media thickness (cIMT) measurements were obtained in cases comprising 10 different mutations in LCAT, ABCA1 and APOA1 to further evaluate the relationship between low HDL resulting from genetic variation and early atherosclerosis. In a 1:2 case-control study of sex and age-related (+/-5 y) subjects (n=114), cIMT was nearly identical between cases (0.66+/-0.17 cm) and controls (0.65+/-0.18 cm) despite significantly lower HDL cholesterol (0.67 vs. 1.58 mmol/l) and apolipoprotein A-I levels (96.7 vs. 151.4 mg/dl) (P<0.05)",
+    "explanation": "Genetic variants identified in the present study may be insufficient to promote early carotid atherosclerosis.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0009",
+    "question": "A short stay or 23-hour ward in a general and academic children's hospital: are they effective?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "A",
+    "dataset": "pubmedqa",
+    "context": "We evaluated the usefulness of a short stay or 23-hour ward in a pediatric unit of a large teaching hospital, Westmead Hospital, and an academic Children's hospital, The New Children's Hospital, to determine if they are a useful addition to the emergency service. This is a descriptive comparison of prospectively collected data on all children admitted to the short stay ward at Westmead Hospital (WH) during 1994 and the short stay ward at the New Children's Hospital (NCH) during 1997-98. These hospitals service an identical demographic area with the latter (NCH) a tertiary referral center. The following outcome measures were used: length of stay, appropriateness of stay, rate of admission to an in-hospital bed, and rate of unscheduled visits within 72 hours of discharge. Adverse events were reported and patient follow-up was attempted at 48 hours after discharge in all cases. The short stay ward accounted for 10.3% (Westmead Hospital) and 14.7% (New Children's Hospital) of admissions, with 56% medical in nature, 30% surgical, and the remainder procedural or psychological. Admission patterns were similar, with asthma, gastroenteritis, convulsion, pneumonia, and simple surgical conditions accounting for most short stay ward admissions. The short stay ward increased hospital efficiency with an average length of stay of 17.5 hours (Westmead Hospital) compared to 20.5 hours (New Children's Hospital). The users of the short stay ward were children of young age less than 2 years, with stay greater than 23 hours reported in only 1% of all admissions to the short stay ward. The rate of patient admission to an in-hospital bed was low, (4% [Westmead Hospital] compared to 6% [New Children's Hospital]), with the number of unscheduled visits within 72 hours of short stay ward discharge less than 1%. There were no adverse events reported at either short stay ward, with parental satisfaction high. The short stay ward was developed through reallocation of resources from within the hospital to the short stay ward. This resulted in estimated savings of $1/2 million (Westmead Hospital) to $2.3 million (New Children's Hospital) to the hospital, due to more efficient bed usage.",
+    "explanation": "This data demonstrates the robust nature of the short stay ward. At these two very different institutions we have shown improved bed efficient and patient care in a cost-effective way. We have also reported on greater parental satisfaction and early return of the child with their family to the community.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0010",
+    "question": "Did Chile's traffic law reform push police enforcement?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "A",
+    "dataset": "pubmedqa",
+    "context": "The objective of the current study is to determine to what extent the reduction of Chile's traffic fatalities and injuries during 2000-2012 was related to the police traffic enforcement increment registered after the introduction of its 2005 traffic law reform. A unique dataset with assembled information from public institutions and analyses based on ordinary least square and robust random effects models was carried out. Dependent variables were traffic fatality and severe injury rates per population and vehicle fleet. Independent variables were: (1) presence of new national traffic law; (2) police officers per population; (3) number of traffic tickets per police officer; and (4) interaction effect of number of traffic tickets per police officer with traffic law reform. Oil prices, alcohol consumption, proportion of male population 15-24 years old, unemployment, road infrastructure investment, years' effects and regions' effects represented control variables. Empirical estimates from instrumental variables suggest that the enactment of the traffic law reform in interaction with number of traffic tickets per police officer is significantly associated with a decrease of 8% in traffic fatalities and 7% in severe injuries. Piecewise regression model results for the 2007-2012 period suggest that police traffic enforcement reduced traffic fatalities by 59% and severe injuries by 37%.",
+    "explanation": "Findings suggest that traffic law reforms in order to have an effect on both traffic fatality and injury rates reduction require changes in police enforcement practices. Last, this case also illustrates how the diffusion of successful road safety practices globally promoted by WHO and World Bank can be an important influence for enhancing national road safety practices.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0011",
+    "question": "Therapeutic anticoagulation in the trauma patient: is it safe?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "B",
+    "dataset": "pubmedqa",
+    "context": "Trauma patients who require therapeutic anticoagulation pose a difficult treatment problem. The purpose of this study was to determine: (1) the incidence of complications using therapeutic anticoagulation in trauma patients, and (2) if any patient factors are associated with these complications. An 18-month retrospective review was performed on trauma patients>or= 15 years old who received therapeutic anticoagulation using unfractionated heparin (UH) and/or fractionated heparin (FH). Forty different pre-treatment and treatment patient characteristics were recorded. Complications of anticoagulation were documented and defined as any unanticipated discontinuation of the anticoagulant for bleeding or other adverse events. One-hundred-fourteen trauma patients were initiated on therapeutic anticoagulation. The most common indication for anticoagulation was deep venous thrombosis (46%). Twenty-four patients (21%) had at least 1 anticoagulation complication. The most common complication was a sudden drop in hemoglobin concentration requiring blood transfusion (11 patients). Five patients died (4%), 3 of whom had significant hemorrhage attributed to anticoagulation. Bivariate followed by logistic regression analysis identified chronic obstructive pulmonary disease (OR = 9.2, 95%CI = 1.5-54.7), UH use (OR = 3.8, 95%CI = 1.1-13.0), and lower initial platelet count (OR = 1.004, 95%CI = 1.000-1.008) as being associated with complications. Patients receiving UH vs. FH differed in several characteristics including laboratory values and anticoagulation indications.",
+    "explanation": "Trauma patients have a significant complication rate related to anticoagulation therapy, and predicting which patients will develop a complication remains unclear. Prospective studies are needed to determine which treatment regimen, if any, is appropriate to safely anticoagulate this high risk population.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0012",
+    "question": "Differentiation of nonalcoholic from alcoholic steatohepatitis: are routine laboratory markers useful?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "A",
+    "dataset": "pubmedqa",
+    "context": "Specific markers for differentiation of nonalcoholic (NASH) from alcoholic steatohepatitis (ASH) are lacking. We investigated the role of routine laboratory parameters in distinguishing NASH from ASH. Liver biopsies performed at our hospital over a 10-year period were reviewed, 95 patients with steatohepatitis identified and their data prior to biopsy reevaluated. The diagnosis NASH or ASH was assigned (other liver diseases excluded) on the basis of the biopsy and history of alcohol consumption (<140 g/week). Logistic regression models were used for analysis. NASH was diagnosed in 58 patients (61%; 30 f) and ASH in 37 (39%; 9 f). High-grade fibrosis (59% vs. 19%, P<0.0001) and an AST/ALT ratio>1 (54.1% vs 20.7%, P = 0.0008) were more common in ASH. The MCV was elevated in 53% of ASH patients and normal in all NASH patients (P<0.0001). Multivariate analysis identified the MCV (P = 0.0013), the AST/ALT ratio (P = 0.011) and sex (P = 0.0029) as relevant regressors (aROC = 0.92). The AST/ALT ratio (P<0.0001) and age (P = 0.00049) were independent predictors of high-grade fibrosis. Differences in MCV were more marked in high-grade fibrosis.",
+    "explanation": "Higher MCVs and AST/ALT ratios in ASH reflect the severity of underlying liver disease and do not differentiate NASH from ASH. Instead, these biomarkers might prove useful in guiding selection of patients for liver biopsy and in targeting therapy.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0013",
+    "question": "Prompting Primary Care Providers about Increased Patient Risk As a Result of Family History: Does It Work?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "B",
+    "dataset": "pubmedqa",
+    "context": "Electronic health records have the potential to facilitate family history use by primary care physicians (PCPs) to provide personalized care. The objective of this study was to determine whether automated, at-the-visit tailored prompts about family history risk change PCP behavior. Automated, tailored prompts highlighting familial risk for heart disease, stroke, diabetes, and breast, colorectal, or ovarian cancer were implemented during 2011 to 2012. Medical records of a cohort of community-based primary care patients, aged 35 to 65 years, who previously participated in our Family Healthware study and had a moderate or strong familial risk for any of the 6 diseases were subsequently reviewed. The main outcome measures were PCP response to the prompts, adding family history risk to problem summary lists, and patient screening status for each disease. The 492 eligible patients had 847 visits during the study period; 152 visits had no documentation of response to a family history prompt. Of the remaining 695 visits, physician responses were reviewed family history (n = 372, 53.5%), discussed family history (n = 159, 22.9%), not addressed (n = 155, 22.3%), and reviewed family history and ordered tests/referrals (n = 5, 0.7%). There was no significant change in problem summary list documentation of risk status or screening interventions for any of the 6 diseases.",
+    "explanation": "No change occurred upon instituting simple, at-the-visit family history prompts geared to improve PCPs' ability to identify patients at high risk for 6 common conditions. The results are both surprising and disappointing. Further studies should examine physicians' perception of the utility of prompts for family history risk.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0014",
+    "question": "Do emergency ultrasound fellowship programs impact emergency medicine residents' ultrasound education?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "A",
+    "dataset": "pubmedqa",
+    "context": "Recent years have seen a rapid proliferation of emergency ultrasound (EUS) programs in the United States. To date, there is no evidence supporting that EUS fellowships enhance residents' ultrasound (US) educational experiences. The purpose of this study was to determine the impact of EUS fellowships on emergency medicine (EM) residents' US education. We conducted a cross-sectional study at 9 academic medical centers. A questionnaire on US education and bedside US use was pilot tested and given to EM residents. The primary outcomes included the number of US examinations performed, scope of bedside US applications, barriers to residents' US education, and US use in the emergency department. The secondary outcomes were factors that would impact residents' US education. The outcomes were compared between residency programs with and without EUS fellowships. A total of 244 EM residents participated in this study. Thirty percent (95% confidence interval, 24%-35%) reported they had performed more than 150 scans. Residents in programs with EUS fellowships reported performing more scans than those in programs without fellowships (P = .04). Significant differences were noted in most applications of bedside US between residency programs with and without fellowships (P<.05). There were also significant differences in the barriers to US education between residency programs with and without fellowships (P<.05).",
+    "explanation": "Emergency US fellowship programs had a positive impact on residents' US educational experiences. Emergency medicine residents performed more scans overall and also used bedside US for more advanced applications in programs with EUS fellowships.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0015",
+    "question": "Patient-Controlled Therapy of Breathlessness in Palliative Care: A New Therapeutic Concept for Opioid Administration?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "A",
+    "dataset": "pubmedqa",
+    "context": "Breathlessness is one of the most distressing symptoms experienced by patients with advanced cancer and noncancer diagnoses alike. Often, severity of breathlessness increases quickly, calling for rapid symptom control. Oral, buccal, and parenteral routes of provider-controlled drug administration have been described. It is unclear whether patient-controlled therapy (PCT) systems would be an additional treatment option. To investigate whether intravenous opioid PCT can be an effective therapeutic method to reduce breathlessness in patients with advanced disease. Secondary aims were to study the feasibility and acceptance of opioid PCT in patients with refractory breathlessness. This was a pilot observational study with 18 inpatients with advanced disease and refractory breathlessness receiving opioid PCT. Breathlessness was measured on a self-reported numeric rating scale. Richmond Agitation Sedation Scale scores, Palliative Performance Scale scores, vital signs, and a self-developed patient satisfaction questionnaire were used for measuring secondary outcomes. Descriptive and interference analyses (Friedman test) and post hoc analyses (Wilcoxon tests and Bonferroni corrections) were performed. Eighteen of 815 patients (advanced cancer; median age = 57.5 years [range 36-81]; 77.8% female) received breathlessness symptom control with opioid PCT; daily morphine equivalent dose at Day 1 was median = 20.3 mg (5.0-49.6 mg); Day 2: 13.0 mg (1.0-78.5 mg); Day 3: 16.0 mg (8.3-47.0 mg). Numeric rating scale of current breathlessness decreased (baseline: median = 5 [range 1-10]; Day 1: median = 4 [range 0-8], P < 0.01; Day 2: median = 4 [range 0-5], P < 0.01). Physiological parameters were stable over time. On Day 3, 12/12 patients confirmed that this mode of application provided relief of breathlessness.",
+    "explanation": "Opioid PCT is a feasible and acceptable therapeutic method to reduce refractory breathlessness in palliative care patients.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0016",
+    "question": "Is there still a need for living-related liver transplantation in children?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "A",
+    "dataset": "pubmedqa",
+    "context": "To assess and compare the value of split-liver transplantation (SLT) and living-related liver transplantation (LRT). The concept of SLT results from the development of reduced-size transplantation. A further development of SLT, the in situ split technique, is derived from LRT, which itself marks the optimized outcome in terms of postoperative graft function and survival. The combination of SLT and LRT has abolished deaths on the waiting list, thus raising the question whether living donor liver transplantation is still necessary. Outcomes and postoperative liver function of 43 primary LRT patients were compared with those of 49 primary SLT patients (14 ex situ, 35 in situ) with known graft weight performed between April 1996 and December 2000. Survival rates were analyzed using the Kaplan-Meier method. After a median follow-up of 35 months, actual patient survival rates were 82% in the SLT group and 88% in the LRT group. Actual graft survival rates were 76% and 81%, respectively. The incidence of primary nonfunction was 12% in the SLT group and 2.3% in the LRT group. Liver function parameters (prothrombin time, factor V, bilirubin clearance) and surgical complication rates did not differ significantly. In the SLT group, mean cold ischemic time was longer than in the LRT group. Serum values of alanine aminotransferase during the first postoperative week were significantly higher in the SLT group. In the LRT group, there were more grafts with signs of fatty degeneration than in the SLT group.",
+    "explanation": "The short- and long-term outcomes after LRT and SLT did not differ significantly. To avoid the risk for the donor in LRT, SLT represents the first-line therapy in pediatric liver transplantation in countries where cadaveric organs are available. LRT provides a solution for urgent cases in which a cadaveric graft cannot be found in time or if the choice of the optimal time point for transplantation is vital.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0017",
+    "question": "Do patterns of knowledge and attitudes exist among unvaccinated seniors?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "A",
+    "dataset": "pubmedqa",
+    "context": "To examine patterns of knowledge and attitudes among adults aged>65 years unvaccinated for influenza. Surveyed Medicare beneficiaries in 5 areas; clustered unvaccinated seniors by their immunization related knowledge and attitudes. Identified 4 clusters: Potentials (45%) would receive influenza vaccine to prevent disease; Fearful Uninformeds (9%) were unsure if influenza vaccine causes illness; Doubters (27%) were unsure if vaccine is efficacious; Misinformeds (19%) believed influenza vaccine causes illness. More Potentials (75%) and Misinformeds (70%) ever received influenza vaccine than did Fearful Uninformeds (18%) and Doubters (29%).",
+    "explanation": "Findings suggest that cluster analyses may be useful in identifying groups for targeted health messages.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0018",
+    "question": "Is there a model to teach and practice retroperitoneoscopic nephrectomy?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "A",
+    "dataset": "pubmedqa",
+    "context": "Although the retroperitoneal approach has been the preferred choice for open urological procedures, retroperitoneoscopy is not the preferred approach for laparoscopy. This study aims to develop a training model for retroperitoneoscopy and to establish an experimental learning curve. Fifteen piglets were operated on to develop a standard retroperitoneoscopic nephrectomy (RPN) training model. All procedures were performed with three ports. Intraoperative data (side, operative time, blood loss, peritoneal opening) were recorded. Animals were divided into groups A, the first eight, and B, the last seven cases. Data were statistically analyzed. We performed fifteen RPNs. The operative time varied from 15 to 50 minutes (median 30 minutes). Blood loss varied from 5 to 100 mL (median 20 mL). We experienced five peritoneal openings; we had two surgical vascular complications managed laparoscopically. There was statistical difference between groups A and B for peritoneal opening (p = 0.025), operative time (p = 0.0037), and blood loss (p = 0.026). RPN in a porcine model could simulate the whole procedure, from creating the space to nephrectomy completion. Experimental learning curve was eight cases, after statistical data analysis.",
+    "explanation": "RPN in a porcine model is feasible and could be very useful for teaching and practicing retroperitoneoscopy.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0019",
+    "question": "Cardiovascular risk in a rural adult West African population: is resting heart rate also relevant?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "A",
+    "dataset": "pubmedqa",
+    "context": "Elevated resting heart rate (RHR) is a neglected marker in cardiovascular risk factor studies of sub-Saharan African populations. This study aimed to determine the prevalence of elevated RHR and other risk factors for cardiovascular disease (CVD) and to investigate any associations between RHR and these risk factors in a rural population in Ghana. Cross-sectional analysis. A total of 574 adults aged between 18-65 years were randomly sampled from a population register. Data collected included those on sociodemographic variables and anthropometric, blood pressure (BP), and RHR measurements. Within-person variability in RHR was calculated using data from repeat measurements taken 2 weeks apart. Of study participants, 36% were male. Prevalence of casual high BP was 19%. In the population, 10% were current cigarette smokers and habitual alcohol use was high at 56%. As measured by body mass index, 2% were obese and 14% had abdominal obesity. RHR was elevated (>90 bpm) in 19%. Overall, 79% of study participants were found to have at least one CVD risk factor. RHR was significantly associated with age, waist circumference, and BP. Individuals with an elevated RHR had a higher risk (OR 1.94, 95% CI 1.15-3.26%, p = 0.013) of casual high BP compared with participants with normal RHR independently of several established CVD risk factors. The regression dilution ratio of RHR was 0.75 (95% CI 0.62-0.89).",
+    "explanation": "Significant associations were observed between RHR and several established cardiovascular risk factors. Prospective studies are needed in sub-Saharan African populations to establish the potential value of RHR in cardiovascular risk assessment.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0020",
+    "question": "Israeli hospital preparedness for terrorism-related multiple casualty incidents: can the surge capacity and injury severity distribution be better predicted?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "A",
+    "dataset": "pubmedqa",
+    "context": "The incidence of large-scale urban attacks on civilian populations has significantly increased across the globe over the past decade. These incidents often result in Hospital Multiple Casualty Incidents (HMCI), which are very challenging to hospital teams. 15 years ago the Emergency and Disaster Medicine Division in the Israeli Ministry of Health defined a key of 20 percent of each hospital's bed capacity as its readiness for multiple casualties. Half of those casualties are expected to require immediate medical treatment. This study was performed to evaluate the efficacy of the current readiness guidelines based on the epidemiology of encountered HMCIs. A retrospective study of HMCIs was recorded in the Israeli Defense Force (IDF) home front command and the Israeli National Trauma Registry (ITR) between November 2000 and June 2003. An HMCI is defined by the Emergency and Disaster Medicine Division in the Israeli Ministry of Health as>or=10 casualties or>or=4 suffering from injuries with an ISS>or=16 arriving to a single hospital. The study includes a total of 32 attacks, resulting in 62 HMCIs and 1292 casualties. The mean number of arriving casualties to a single hospital was 20.8+/-13.3 (range 4-56, median 16.5). In 95% of the HMCIs the casualty load was<or=52. Based on severity scores and ED discharges 1022 (79.2%) casualties did not necessitate immediate medical treatment.",
+    "explanation": "Hospital preparedness can be better defined by a fixed number of casualties rather than a percentile of its bed capacity. Only 20% of the arriving casualties will require immediate medical treatment. Implementation of this concept may improve the utilisation of national emergency health resources both in the preparation phase and on real time.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0021",
+    "question": "Acute respiratory distress syndrome in children with malignancy--can we predict outcome?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "A",
+    "dataset": "pubmedqa",
+    "context": "The purpose of this study was to delineate early respiratory predictors of mortality in children with hemato-oncology malignancy who developed acute respiratory distress syndrome (ARDS). We conducted a retrospective chart review of children with malignant and ARDS who needed mechanical ventilation and were admitted to a pediatric intensive care unit from January 1987 to January 1997. Seventeen children with ARDS and malignancy aged 10.5 +/- 5.1 years were identified. Six of the 17 children (35.3%) survived. Sepsis syndrome was present in 70.6% of all the children. Peak inspiratory pressure, positive end-expiratory pressure (PEEP), and ventilation index values could distinguish outcome by day 3. A significant relationship between respiratory data and outcome related to efficiency of oxygenation, as determined by PaO(2)/FIO(2) and P(A-a)O(2), was present from day 8 after onset of mechanical ventilation.",
+    "explanation": "Peak inspiratory pressure, PEEP, and ventilation index values could distinguish survivors from nonsurvivors by day 3. This may assist in early application of supportive nonconventional therapies in children with malignancy and ARDS.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0022",
+    "question": "Secondhand smoke risk in infants discharged from an NICU: potential for significant health disparities?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "A",
+    "dataset": "pubmedqa",
+    "context": "Secondhand smoke exposure (SHSe) threatens fragile infants discharged from a neonatal intensive care unit (NICU). Smoking practices were examined in families with a high respiratory risk infant (born at very low birth weight; ventilated>12 hr) in a Houston, Texas, NICU. Socioeconomic status, race, and mental health status were hypothesized to be related to SHSe and household smoking bans. Data were collected as part of The Baby's Breath Project, a hospital-based SHSe intervention trial targeting parents with a high-risk infant in the NICU who reported a smoker in the household (N = 99). Measures of sociodemographics, smoking, home and car smoking bans, and depression were collected. Overall, 26% of all families with a high-risk infant in the NICU reported a household smoker. Almost half of the families with a smoker reported an annual income of less than $25,000. 46.2% of families reported having a total smoking ban in place in both their homes and cars. Only 27.8% families earning less than $25,000 reported having a total smoking ban in place relative to almost 60% of families earning more (p<.01). African American and Caucasian families were less likely to have a smoking ban compared with Hispanics (p<.05). Mothers who reported no smoking ban were more depressed than those who had a household smoking ban (p<.02).",
+    "explanation": "The most disadvantaged families were least likely to have protective health behaviors in place to reduce SHSe and, consequently, are most at-risk for tobacco exposure and subsequent tobacco-related health disparities. Innovative SHSe interventions for this vulnerable population are sorely needed.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0023",
+    "question": "Do nomograms designed to predict biochemical recurrence (BCR) do a better job of predicting more clinically relevant prostate cancer outcomes than BCR?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "A",
+    "dataset": "pubmedqa",
+    "context": "To examine the ability of various postoperative nomograms to predict prostate cancer-specific mortality (PCSM) and to validate that they could predict aggressive biochemical recurrence (BCR). Prostate-specific antigen (PSA), grade, and stage are the classic triad used to predict BCR after radical prostatectomy (RP). Multiple nomograms use these to predict risk of BCR. A previous study showed that several nomograms could predict aggressive BCR (prostate-specific antigen doubling time [PSADT] <9 months) more accurately than BCR. However, it remains unknown if they can predict more definitive endpoints, such as PCSM. We performed Cox analyses to examine the ability of 4 postoperative nomograms, the Duke Prostate Center (DPC) nomogram, the Kattan postoperative nomogram, the Johns Hopkins Hospital (JHH) nomogram, and the joint Center for Prostate Disease Research(CPDR)/Cancer of the Prostate Strategic Urologic Research Endeavor (CaPSURE) nomogram to predict BCR and PCSM among 1778 men in the Shared Equal Access Regional Cancer Hospital (SEARCH) database who underwent RP between 1990 and 2009. We also compared their ability to predict BCR and aggressive BCR in a subset of men. We calculated the c-index for each nomogram to determine its predictive accuracy for estimating actual outcomes. We found that each nomogram could predict aggressive BCR and PCSM in a statistically significant manner and that they all predicted PCSM more accurately than they predicted BCR (ie, with higher c-index values).",
+    "explanation": "Currently available nomograms used to predict BCR accurately predict PCSM and other more clinically relevant endpoints. Moreover, not only do they significantly predict PCSM, but do so with generally greater accuracy than BCR.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0024",
+    "question": "Are reports of mechanical dysfunction in chronic oro-facial pain related to somatisation?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "A",
+    "dataset": "pubmedqa",
+    "context": "(i) To examine the association between self-reported mechanical factors and chronic oro-facial pain. (ii) To test the hypothesis that this relationship could be explained by: (a) reporting of psychological factors, (b) common association of self-reported mechanical factors with other unexplained syndromes. A population based cross-sectional study of 4200 randomly selected adults registered with a General Medical Practice in North West, England. The study examined the association of chronic oro-facial pain with a variety of self-reported mechanical factors: teeth grinding, facial trauma, missing teeth and the feeling that the teeth did not fit together properly. Information was also collected on demographic factors, psychological factors and the reporting of other frequently unexplained syndromes. An adjusted response rate of 72% was achieved. Only two mechanical factors: teeth grinding (odds ratio (OR) 2.0, 95% CI 1.3-3.0) and facial trauma (OR 2.0; 95% CI 1.3-2.9) were independently associated with chronic oro-facial pain after adjusting for psychological factors. However, these factors were also commonly associated with the reporting of other frequently unexplained syndromes: teeth grinding (odds ratio (OR) 1.8, 95% CI 1.5-2.2), facial trauma (OR 2.1; 95% CI 1.7-2.6).",
+    "explanation": "Self-reported mechanical factors associated with chronic oro-facial pain are confounded, in part, by psychological factors and are equally common across other frequently unexplained syndromes. They may represent another feature of somatisation. Therefore the use of extensive invasive therapy such as occlusal adjustments and surgery to change mechanical factors may not be justified in many cases.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0025",
+    "question": "Amblyopia: is visual loss permanent?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "B",
+    "dataset": "pubmedqa",
+    "context": "The records of 465 patients with an established diagnosis of age related macular degeneration who had attended a specialist macular clinic between 1990 and 1998 were scrutinised. A full clinical examination and standardised refraction had been carried out in 189 of these cases on a minimum of two occasions. Cases were looked for where an improvement of one or more lines of either distance or near acuity was recorded in the eye unaffected by macular disease. In each one of these cases the improvement in visual acuity could not be attributed to treatment of other existing pathology. 12 such cases were detected. In nine of these the eye showing improvement of acuity had a history of amblyopia. The mean improvement in distance and near acuity in amblyopic eyes by 12 months was 3.3 and 1.9 lines logMAR respectively. The improvement in acuity generally occurred between 1 and 12 months from baseline and remained stable over the period of follow up.",
+    "explanation": "Older people with a history of amblyopia who develop visual loss in the previously normal eye can experience recovery of visual function in the amblyopic eye over a period of time. This recovery in visual function occurs in the wake of visual loss in the fellow eye and the improvement appears to be sustained.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0026",
+    "question": "Implementation of epidural analgesia for labor: is the standard of effective analgesia reachable in all women?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "A",
+    "dataset": "pubmedqa",
+    "context": "Social and cultural factors combined with little information may prevent the diffusion of epidural analgesia for pain relief during childbirth. The present study was launched contemporarily to the implementation of analgesia for labor in our Department in order to perform a 2 years audit on its use. The goal is to evaluate the epidural acceptance and penetration into hospital practice by women and care givers and safety and efficacy during childbirth. This audit cycle measured epidural analgesia performance against 4 standards: (1) Implementation of epidural analgesia for labor to all patients; (2) Acceptance and good satisfaction level reported by patients and caregivers. (3) Effectiveness of labor analgesia; (4) No maternal or fetal side effects. During the audit period epidural analgesia increased from 15.5% of all labors in the first trimester of the study to 51% in the last trimester (p<0.005). Satisfaction levels reported by patients and care givers were good. A hierarchical clustering analysis identified two clusters based on VAS (Visual Analogue Scale) time course: in 226 patients (cluster 1) VAS decreased from 8.5±1.4 before to 4.1±1.3 after epidural analgesia; in 1002 patients (cluster 2) VAS decreased from 8.12±1.7 before (NS vs cluster 1), to 0.76±0.79 after (p<0.001 vs before and vs cluster 2 after). No other differences between clusters were observed.",
+    "explanation": "Present audit shows that the process of implementation of labor analgesia was quick, successful and safe, notwithstanding the identification of one cluster of women with suboptimal response to epidural analgesia that need to be further studies, overall pregnant womens'adhesion to labor analgesia was satisfactory.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0027",
+    "question": "Does HER2 immunoreactivity provide prognostic information in locally advanced urothelial carcinoma patients receiving adjuvant M-VEC chemotherapy?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "C",
+    "dataset": "pubmedqa",
+    "context": "To evaluate the impact of HER2 immunoreactivity on clinical outcome in locally advanced urothelial carcinoma patients who received surgery alone, or methotrexate, vinblastine, epirubicin, and cisplatin (M-VEC) as adjuvant chemotherapy. We studied 114 formalin-fixed paraffin-embedded specimens obtained from locally advanced urothelial carcinoma patients receiving surgery alone or adjuvant M-VEC. The authors evaluated HER2 immunoreactivity using immunohistochemical staining and explored the influence of pathological parameters and HER2 immunoreactivity on progression-free survival (PFS) and disease-specific overall survival (OS) using univariate and multivariate Cox's analyses. Urothelial carcinoma of the bladder had a significantly higher frequency of HER2 immunoreactivity than that of the upper urinary tract (60.7 vs. 20.7%, p<0.0001). Overall, nodal status was a strong and independent prognostic indicator for clinical outcome. The HER2 immunoreactivity was significantly associated with PFS (p = 0.02) and disease-specific OS (p = 0.005) in advanced urothelial carcinoma patients. As for patients with adjuvant M-VEC, HER2 immunoreactivity was a significant prognostic factor for PFS (p = 0.03) and disease-specific OS (p = 0.02) using univariate analysis, but not multivariate analysis, and not for patients receiving watchful waiting.",
+    "explanation": "HER2 immunoreactivity might have a limited prognostic value for advanced urothelial carcinoma patients with adjuvant M-VEC.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0028",
+    "question": "Is halofantrine ototoxic?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "A",
+    "dataset": "pubmedqa",
+    "context": "Halofantrine is a newly developed antimalarial drug used for the treatment of Plasmodium falciparum malaria. The introduction of this drug has been delayed because of its possible side effects, and due to insufficient studies on adverse reactions in humans. There have been no studies investigating its effect on hearing. Thirty guinea pigs were divided into three groups: a control group, a halofantrine therapeutic dose group and a halofantrine double therapeutic dose group. One cochlea specimen from each animal was stained with haematoxylin and eosin and the other with toluidine blue. No changes were detected in the control group. The halofantrine therapeutic dose group showed loss and distortion of inner hair cells and inner phalangeal cells, and loss of spiral ganglia cells. In the halofantrine double therapeutic dose group, the inner and outer hair cells were distorted and there was loss of spiral ganglia cells.",
+    "explanation": "Halofantrine has mild to moderate pathological effects on cochlea histology, and can be considered an ototoxic drug.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0029",
+    "question": "Visceral adipose tissue area measurement at a single level: can it represent visceral adipose tissue volume?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "A",
+    "dataset": "pubmedqa",
+    "context": "Measurement of visceral adipose tissue (VAT) needs to be accurate and sensitive to change for risk monitoring. The purpose of this study is to determine the CT slice location where VAT area can best reflect changes in VAT volume and body weight. 60 plain abdominal CT images from 30 males [mean age (range) 51 (41-68) years, mean body weight (range) 71.1 (101.9-50.9) kg] who underwent workplace screenings twice within a 1-year interval were evaluated. Automatically calculated and manually corrected areas of the VAT of various scan levels using \"freeform curve\" region of interest on CT were recorded and compared with body weight changes. The strongest correlations of VAT area with VAT volume and body weight changes were shown in a slice 3 cm above the lower margin of L3 with r values of 0.853 and 0.902, respectively.",
+    "explanation": "VAT area measurement at a single level 3 cm above the lower margin of the L3 vertebra is feasible and can reflect changes in VAT volume and body weight. Advances in knowledge: As VAT area at a CT slice 3cm above the lower margin of L3 can best reflect interval changes in VAT volume and body weight, VAT area measurement should be selected at this location.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0030",
+    "question": "Necrotizing fasciitis: an indication for hyperbaric oxygenation therapy?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "B",
+    "dataset": "pubmedqa",
+    "context": "The accepted treatment protocol for necrotizing fasciitis (NF) consists of extensive surgery and wide spectrum antibiotics. Hyperbaric oxygenation (HBO) has been recommended as adjuvant therapy for NF, improving patient mortality and outcome. However, the beneficial effect of HBO for NF remains controversial. A retrospective evaluation of treatment outcome in 37 patients treated for NF between 1984 and 1993 was carried out. The mortality rate, morbidity criteria, and risk factors for grave prognosis were compared between a group of 25 patients who received HBO as part of their treatment protocol and a group of the remaining 12 patients treated by surgical excision and antibiotics alone. The two groups were found to be similar with regard to age, gender, the incidence of individual risk factors for ominous prognosis, and the Acute Physiology and Chronic Health Evaluation (APACHE) II score for disease's severity on presentation. The mortality rate among the HBO-treated patients was 36%, as opposed to 25% in the non-HBO group. The mean number of surgical débridements required per patient was significantly higher in the HBO group: 3.3 compared with 1.5 in the non-HBO-treated patients. Although the average length of hospitalization for survivors was shorter for the HBO group, the difference between the groups did not reach statistical significance.",
+    "explanation": "The results of this study cast doubt on the suggested advantage of HBO in reducing patient mortality and morbidity when used as adjuvant therapy for NF.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0031",
+    "question": "Is the Hawkins sign able to predict necrosis in fractures of the neck of the astragalus?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "C",
+    "dataset": "pubmedqa",
+    "context": "To assess if the Hawkins sign can predict whether or not astragalus fractures of the neck will develop avascular necrosis. It is also assessed whether the occurrence of this complication is related to the displacement of the fracture, soft tissue injury, or delay in the reduction or surgery. The results were compared with those found in the literature. A retrospective study was conducted on 23 talar neck fractures recorded over a a period of thirteen years. The following variables were analysed: displacement of the fracture, soft tissue injury, delay and type of treatment, complications, observation of the Hawkins sign, and functional outcome. There were 7 type I Hawkins fractures, 11 type II, and 4 type III and 1 type IV. Four cases developed avascular necrosis (2 Hawkins type II and 2 type III). Hawkins sign was observed in 12 cases, of which none developed necrosis. Four cases with negative Hawkins sign developed necrosis. No statistically significant differences were found when comparing the development of avascular necrosis with the displacement of the fracture, soft tissue injury, or delay in treatment. Differences were found when comparing the development of avascular necrosis with the Hawkins sign (P=.03).",
+    "explanation": "A positive Hawkins sign rules out that the fractured talus has developed avascular necrosis, but its absence does not confirm it.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0032",
+    "question": "Is a mandatory general surgery rotation necessary in the surgical clerkship?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "B",
+    "dataset": "pubmedqa",
+    "context": "Changes in the spectrum of general surgery and the delivery of surgical care have placed the requirement for a mandatory general surgery rotation in the surgical clerkship in question. We tested the hypothesis that equal mastery of surgical clerkship objectives can be obtained in a clerkship with and without general surgery. Students chose any two surgical rotations and were assessed by written examination, objective structured clinical examination (OSCE), ward evaluations, self-assessment objectives questionnaire, and satisfaction survey. Data for 54 students showed no differences in scores between groups on any parameter. No specific concerns related to the absence of general surgery were identified.",
+    "explanation": "Effective undergraduate surgical education can be offered in many specialty settings. Removal of the requirement for general surgery in clerkship may lead to a more effective use of all educational opportunities. A careful analysis of local programs and facilities is necessary before suggesting this change to other institutions.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0033",
+    "question": "Is Acupuncture Efficacious for Treating Phonotraumatic Vocal Pathologies?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "A",
+    "dataset": "pubmedqa",
+    "context": "To investigate the effectiveness of acupuncture in treating phonotraumatic vocal fold lesions.STUDY DESIGN/ A total of 123 dysphonic individuals with benign vocal pathologies were recruited. They were given either genuine acupuncture (n = 40), sham acupuncture (n = 44), or no treatment (n = 39) for 6 weeks (two 30-minute sessions/wk). The genuine acupuncture group received needles puncturing nine voice-related acupoints for 30 minutes, two times a week for 6 weeks, whereas the sham acupuncture group received blunted needles stimulating the skin surface of the nine acupoints for the same frequency and duration. The no-treatment group did not receive any intervention but attended just the assessment sessions. One-hundred seventeen subjects completed the study (genuine acupuncture = 40; sham acupuncture = 43; and no treatment = 34), but only 84 of them had a complete set of vocal functions and quality of life measures (genuine acupuncture = 29; sham acupuncture = 33; and no-treatment = 22) and 42 of them with a complete set of endoscopic data (genuine acupuncture = 16; sham acupuncture = 15; and no treatment = 11). Significant improvement in vocal function, as indicated by the maximum fundamental frequency produced, and also perceived quality of life, were found in both the genuine and sham acupuncture groups, but not in the no-treatment group. Structural (morphological) improvements were, however, only noticed in the genuine acupuncture group, which demonstrated a significant reduction in the size of the vocal fold lesions.",
+    "explanation": "The findings showed that acupuncture of voice-related acupoints could bring about improvement in vocal function and healing of vocal fold lesions.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0034",
+    "question": "Is aneurysm repair justified for the patients aged 80 or older after aneurysmal subarachnoid hemorrhage?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "A",
+    "dataset": "pubmedqa",
+    "context": "With the advancement of an aging society in the world, an increasing number of elderly patients have been hospitalized due to aneurysmal subarachnoid hemorrhage (aSAH). There is no study that compares the elderly cases of aSAH who receive the definitive treatment with those who treated conservatively. The aim of this study was to investigate the feasibility of the definitive surgery for the acute subarachnoid cases aged 80 or older. We reviewed 500 consecutive cases with acute aSAH with surgical indication for aneurysm repair. Inoperable cases such as dead-on-arrival and the cases with both pupils dilated were excluded. We compared the cases aged 80 or older that received clipping or coil embolization with the controls that the family selected conservative treatment. 69 cases were included in this study (ranged 80-98, male:female=9:60). 56 cases (81.2%) had an aneurysm in the anterior circulation. 23 cases received clipping, 20 cases coil embolization and 26 cases treated conservatively. The cases with aneurysm repair showed significantly better clinical outcome than the controls, while World Federation of Neurological Surgeons (WFNS) grade on admission and premorbid modified Rankin Scale showed no difference between them.",
+    "explanation": "Better prognosis was obtained when ruptured aneurysm was repaired in the elderly than it was treated conservatively. From the results of this study, we should not hesitate to offer the definitive surgery for the elderly with aSAH.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0035",
+    "question": "Do general practice characteristics influence uptake of an information technology (IT) innovation in primary care?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "B",
+    "dataset": "pubmedqa",
+    "context": "Recent evaluations of IT innovations in primary care have highlighted variations between centres and practices in uptake and use. We evaluated whether structural characteristics of a general practice were associated with variations in use of a web-based clinical information system underpinning a Managed Clinical Network in diabetes, between the years 2001 and 2003. Using a computerised audit trail, we calculated the numbers of web-based operations that occurred in each practice, stratified by staff type and year, and adjusted for the numbers of registered diabetic patients. In regression analyses, we determined whether total use was associated with structural characteristics of the practice (total list size, training status, numbers of GPs (general practitioners), mean age of the GPs, numbers of female GPs, level of deprivation of the population and whether staff had received advanced training in diabetes care). Initially there were a few practices which made very frequent use of the information system, with relatively high numbers of practices using the facility infrequently. However, overall use gradually became more evenly spread. This effect was particularly evident among nurse users. Frequent use by GPs was evident in only a small number of practices, with mean GP use decreasing over the three years. In linear regression analyses, none of the general practice variables were associated with online use, either overall or stratified by staff type, except for the numbers of diabetes-educated staff. This was consistently associated with increased use by nurses and GPs.",
+    "explanation": "The analyses show that structural characteristics of a practice are not associated with uptake of a new IT facility, but that its use may be influenced by post-graduate education in the relevant clinical condition. For this diabetes system at least, practice nurse use was critical in spreading uptake beyond initial GP enthusiasts and for sustained and rising use in subsequent years.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0036",
+    "question": "Prognosis of well differentiated small hepatocellular carcinoma--is well differentiated hepatocellular carcinoma clinically early cancer?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "B",
+    "dataset": "pubmedqa",
+    "context": "The purpose of this study is to examine whether or not well differentiated (w-d) hepatocellular carcinoma (HCC) is indeed clinically early cancer. Seventy six patients with solitary small HCCs up to 3 cm in diameter, who underwent hepatectomy, were observed for at least 2 years for possible recurrence. These patients were divided into two groups: 10 patients with w-d HCCs (Edmondson and Steiner's grade I) and 66 patients with less differentiated (l-d) HCCs (Edmondson and Steiner's grade I-II, II-III, and III). The histological analysis revealed that w-d HCCs had lower incidences of fibrous capsule formation (P<0.01), when compared to l-d HCCs. There were no significant differences in the incidence of intrahepatic metastasis, or portal vein invasion. In a resected specimen of w-d HCC, barium sulfate and gelatin were injected into portal vein and a transparent specimen was made. The transparent specimen showed that the portal vein in the tumor seemed to be intact. Microscopically, cancer cell infiltration into the fibrous frame of the portal tract was present. There were no significant differences in the disease free survival between the two groups. An analysis of tumor volume doubling time in recurrent foci suggested that minute cancerous foci had been present at the time of operation.",
+    "explanation": "W-d HCCs were clinically demonstrated not to be early cancer, because there was no significant difference in disease free survival between the patients with w-d and l-d HCCs.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0037",
+    "question": "Do follow-up recommendations for abnormal Papanicolaou smears influence patient adherence?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "B",
+    "dataset": "pubmedqa",
+    "context": "To compare adherence to follow-up recommendations for colposcopy or repeated Papanicolaou (Pap) smears for women with previously abnormal Pap smear results. Retrospective cohort study. Three northern California family planning clinics. All women with abnormal Pap smear results referred for initial colposcopy and a random sample of those referred for repeated Pap smear. Medical records were located and reviewed for 90 of 107 women referred for colposcopy and 153 of 225 women referred for repeated Pap smears. Routine clinic protocols for follow-up--telephone call, letter, or certified letter--were applied without regard to the type of abnormality seen on a Pap smear or recommended examination. Documented adherence to follow-up within 8 months of an abnormal result. Attempts to contact the patients for follow-up, adherence to follow-up recommendations, and patient characteristics were abstracted from medical records. The probability of adherence to follow-up vs the number of follow-up attempts was modeled with survival analysis. Cox proportional hazards models were used to examine multivariate relationships related to adherence. The rate of overall adherence to follow-up recommendations was 56.0% (136/243). Adherence to a second colposcopy was not significantly different from that to a repeated Pap smear (odds ratio, 1.40; 95% confidence interval, 0.80-2.46). The use of as many as 3 patient reminders substantially improved adherence to follow-up. Women without insurance and women attending 1 of the 3 clinics were less likely to adhere to any follow-up recommendation (hazard ratio for no insurance, 0.43 [95% confidence interval, 0.20-0.93], and for clinic, 0.35 [95% confidence interval, 0.15-0.73]).",
+    "explanation": "Adherence to follow-up was low in this family planning clinic population, no matter what type of follow-up was advised. Adherence was improved by the use of up to 3 reminders. Allocating resources to effective methods for improving adherence to follow-up of abnormal results may be more important than which follow-up procedure is recommended.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0038",
+    "question": "Biomolecular identification of allergenic pollen: a new perspective for aerobiological monitoring?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "A",
+    "dataset": "pubmedqa",
+    "context": "Accurate and updated information on airborne pollen in specific areas can help allergic patients. Current monitoring systems are based on a morphologic identification approach, a time-consuming method that may represent a limiting factor for sampling network enhancement. To verify the feasibility of developing a real-time polymerase chain reaction (PCR) approach, an alternative to optical analysis, as a rapid, accurate, and automated tool for the detection and quantification of airborne allergenic pollen taxa. The traditional cetyl trimethyl ammonium bromide-based method was modified for DNA isolation from pollen. Taxon-specific DNA sequences were identified via bioinformatics or literature searches and were PCR amplified from the matching allergenic taxa; based on the sequences of PCR products, complementary or degenerate TaqMan probes were developed. The accuracy of the quantitative real-time PCR assay was tested on 3 plant species. The setup of a modified DNA extraction protocol allowed us to achieve good-quality pollen DNA. Taxon-specific nuclear gene fragments were identified and sequenced. Designed primer pairs and probes identified selected pollen taxa, mostly at the required classification level. Pollen was properly identified even when collected on routine aerobiological tape. Preliminary quantification assays on pollen grains were successfully performed on test species and in mixes.",
+    "explanation": "The real-time PCR approach revealed promising results in pollen identification and quantification, even when analyzing pollen mixes. Future perspectives could concern the development of multiplex real-time PCR for the simultaneous detection of different taxa in the same reaction tube and the application of high-throughput molecular methods.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0039",
+    "question": "Does diabetes mellitus influence the efficacy of FDG-PET in the diagnosis of cervical cancer?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "B",
+    "dataset": "pubmedqa",
+    "context": "Compared with computed tomography (CT) and magnetic resonance imaging (MRI), positron emission tomography (PET) may have additional value in the assessment of primary and recurrent cervical cancer. However, the degree of tumour uptake of (18)F-2-fluoro-2-deoxy-D: -glucose (FDG) uptake is sometimes influenced by diabetes mellitus (DM). Therefore, we conducted this prospective study to compare the diagnostic ability of FDG-PET in patients with cervical cancer complicated by DM and those without DM. Patients with untreated locally advanced primary or clinically curable recurrent cervical carcinoma were enrolled. Both FDG-PET and MRI/CT scans were performed within 2 weeks. Patients were categorised into the following groups: hyperglycaemic DM (fasting blood sugar>126 mg/dl), euglycaemic DM and non-DM. The lesions were confirmed histologically or by clinical follow-up. The receiver operating characteristic curve method, with calculation of the area under the curve (AUC), was used to evaluate the discriminative power. From February 2001 to January 2003, 219 patients (75 with primary and 144 with recurrent cervical cancer) were eligible for analysis. Sixteen had hyperglycaemic DM, 12 had euglycaemic DM and 191 were in the non-DM group. The diagnostic power of PET in the hyperglycaemic DM, euglycaemic DM and non-DM groups did not differ significantly with regard to the identification of either metastatic lesions (AUC, 0.967/0.947/0.925, P>0.05) or primary tumours/local recurrence (AUC, 0.950/0.938/0.979, P>0.05). Considering all DM patients, PET showed a significantly higher detection power than MRI/CT scans in respect of metastatic lesions (AUC=0.956 vs 0.824, P=0.012).",
+    "explanation": "In comparison with its accuracy in non-DM patients, the accuracy of PET in cervical cancer patients with mild to moderate DM was not significantly reduced.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0040",
+    "question": "Biomechanical and wound healing characteristics of corneas after excimer laser keratorefractive surgery: is there a difference between advanced surface ablation and sub-Bowman's keratomileusis?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "A",
+    "dataset": "pubmedqa",
+    "context": "To describe the biomechanical and wound healing characteristics of corneas after excimer laser keratorefractive surgery. Histologic, ultrastructural, and cohesive tensile strength evaluations were performed on 25 normal human corneal specimens, 206 uncomplicated LASIK specimens, 17 uncomplicated sub-Bowman's keratomileusis (SBK) specimens, 4 uncomplicated photorefractive keratectomy (PRK) specimens, 2 uncomplicated advanced surface ablation (ASA) specimens, 5 keratoconus specimens, 12 postoperative LASIK ectasia specimens, and 1 postoperative PRK ectasia specimen and compared to previously published studies. Histologic and ultrastructural studies of normal corneas showed significant differences in the direction of collagen fibrils and/or the degree of lamellar interweaving in Bowman's layer, the anterior third of the corneal stroma, the posterior two-thirds of the corneal stroma, and Descemet's membrane. Cohesive tensile strength testing directly supported these morphologic findings as the stronger, more rigid regions of the cornea were located anteriorly and peripherally. This suggests that PRK and ASA, and secondarily SBK, should be biomechanically safer than conventional LASIK with regard to risk for causing keratectasia after surgery. Because adult human corneal stromal wounds heal slowly and incompletely, all excimer laser keratorefractive surgical techniques still have some distinct disadvantages due to inadequate reparative wound healing. Despite reducing some of the risk for corneal haze compared to conventional PRK, ASA cases still can develop corneal haze or breakthrough haze from the hypercellular fibrotic stromal scarring. In contrast, similar to conventional LASIK, SBK still has the short- and long-term potential for interface wound complications from the hypocellular primitive stromal scar.",
+    "explanation": "Ophthalmic pathology and basic science research show that SBK and ASA are improvements in excimer laser keratorefractive surgery compared to conventional LASIK or PRK, particularly with regard to maintaining corneal biomechanics and perhaps moderately reducing the risk of corneal haze. However, most of the disadvantages caused by wound healing issues remain.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0041",
+    "question": "Does radiotherapy of the primary rectal cancer affect prognosis after pelvic exenteration for recurrent rectal cancer?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "A",
+    "dataset": "pubmedqa",
+    "context": "Radiotherapy reduces local recurrence rates but is also capable of short- and long-term toxicity. It may also render treatment of local recurrence more challenging if it develops despite previous radiotherapy. This study examined the impact of radiotherapy for the primary rectal cancer on outcomes after pelvic exenteration for local recurrence. We conducted a retrospective review of exenteration databases. The study took place at a quaternary referral center that specializes in pelvic exenteration. Patients referred for pelvic exenteration from October 1994 to November 2012 were reviewed. Patients who did and did not receive radiotherapy as part of their primary rectal cancer treatment were compared. The main outcomes of interest were resection margins, overall survival, disease-free survival, and surgical morbidities. There were 108 patients, of which 87 were eligible for analysis. Patients who received radiotherapy for their primary rectal cancer (n = 41) required more radical exenterations (68% vs 44%; p = 0.020), had lower rates of clear resection margins (63% vs 87%; p = 0.010), had increased rates of surgical complications per patient (p = 0.014), and had a lower disease-free survival (p = 0.022). Overall survival and disease-free survival in patients with clear margins were also lower in the primary irradiated patients (p = 0.049 and p<0.0001). This difference in survival persisted in multivariate analysis that corrected for T and N stages of the primary tumor. This study is limited by its retrospective nature and heterogeneous radiotherapy regimes among radiotherapy patients.",
+    "explanation": "Patients who previously received radiotherapy for primary rectal cancer treatment have worse oncologic outcomes than those who had not received radiotherapy after pelvic exenteration for locally recurrent rectal cancer.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0042",
+    "question": "Can a practicing surgeon detect early lymphedema reliably?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "C",
+    "dataset": "pubmedqa",
+    "context": "Lymphedema may be identified by simpler circumference changes as compared with changes in limb volume. Ninety breast cancer patients were prospectively enrolled in an academic trial, and seven upper extremity circumferences were measured quarterly for 3 years. A 10% volume increase or greater than 1 cm increase in arm circumference identified lymphedema with verification by a lymphedema specialist. Sensitivity and specificity of several different criteria for detecting lymphedema were compared using the academic trial as the standard. Thirty-nine cases of lymphedema were identified by the academic trial. Using a 10% increase in circumference at two sites as the criterion, half the lymphedema cases were detected (sensitivity 37%). When using a 10% increase in circumference at any site, 74.4% of cases were detected (sensitivity 49%). Detection by a 5% increase in circumference at any site was 91% sensitive.",
+    "explanation": "An increase of 5% in circumference measurements identified the most potential lymphedema cases compared with an academic trial.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0043",
+    "question": "Colorectal cancer with synchronous liver metastases: does global management at the same centre improve results?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "B",
+    "dataset": "pubmedqa",
+    "context": "Synchronous liver metastases (SLM) occur in 20% of colorectal cancers (CRC). Resection of SLM and CLC can be undertaken at different centres (separate management, SM) or at the same centre (global management, GM). Retrospective study of SLM and CRC resections carried out during 01/2000 - 12/2006 by SM or GM, using a combined or delayed strategy. Morphologic characteristics and type of CRC and SLM resection were similar for the GM (n = 45) or SM (n = 66) groups. In patients with delayed liver resection (62 SM, 17 GM), chemotherapy prior to liver surgery was used in 92% and 38% of SM and GM patients (P<0.0001) and the median delay between procedures was 212 and 182 days, respectively (P = 0.04). First step of liver resection was more often performed during colorectal surgery in the GM group (62 vs. 6% for SM, P<0.0001) and the mean number of procedures (CRC+SLM) was lower (1.6 vs. 2.3, P = 0.003). Three-month mortality was 3% for GM and 0% for SM (n.s.). Overall survival rates were 67% and 51% for SM and GM at 3 years (n.s.), and 35 and 31% at 5 years (n.s.). Disease-free survival to 5 years was higher in SM patients (14% vs. 11%, P = 0.009).",
+    "explanation": "GM of CRC and SLM was associated with fewer procedures but did not influence overall survival. SM was associated with a longer delay and increased use of chemotherapy between procedures, suggesting that more rigorous selection of SM patients for surgery may explain the higher disease-free survival after SLM resection.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0044",
+    "question": "Is motion perception deficit in schizophrenia a consequence of eye-tracking abnormality?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "A",
+    "dataset": "pubmedqa",
+    "context": "Studies have shown that schizophrenia patients have motion perception deficit, which was thought to cause eye-tracking abnormality in schizophrenia. However, eye movement closely interacts with motion perception. The known eye-tracking difficulties in schizophrenia patients may interact with their motion perception. Two speed discrimination experiments were conducted in a within-subject design. In experiment 1, the stimulus duration was 150 msec to minimize the chance of eye-tracking occurrence. In experiment 2, the duration was increased to 300 msec, increasing the possibility of eye movement intrusion. Regular eye-tracking performance was evaluated in a third experiment. At 150 msec, speed discrimination thresholds did not differ between schizophrenia patients (n = 38) and control subjects (n = 33). At 300 msec, patients had significantly higher thresholds than control subjects (p = .03). Furthermore, frequencies of eye tracking during the 300 msec stimulus were significantly correlated with speed discrimination in control subjects (p = .01) but not in patients, suggesting that eye-tracking initiation may benefit control subjects but not patients. The frequency of eye tracking during speed discrimination was not significantly related to regular eye-tracking performance.",
+    "explanation": "Speed discrimination, per se, is not impaired in schizophrenia patients. The observed abnormality appears to be a consequence of impairment in generating or integrating the feedback information from eye movements. This study introduces a novel approach to motion perception studies and highlights the importance of concurrently measuring eye movements to understand interactions between these two systems; the results argue for a conceptual revision regarding motion perception abnormality in schizophrenia.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0045",
+    "question": "Transgastric endoscopic splenectomy: is it possible?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "A",
+    "dataset": "pubmedqa",
+    "context": "We have previously reported the feasibility of diagnostic and therapeutic peritoneoscopy including liver biopsy, gastrojejunostomy, and tubal ligation by an oral transgastric approach. We present results of per-oral transgastric splenectomy in a porcine model. The goal of this study was to determine the technical feasibility of per-oral transgastric splenectomy using a flexible endoscope. We performed acute experiments on 50-kg pigs. All animals were fed liquids for 3 days prior to procedure. The procedures were performed under general anesthesia with endotracheal intubation. The flexible endoscope was passed per orally into the stomach and puncture of the gastric wall was performed with a needle knife. The puncture was extended to create a 1.5-cm incision using a pull-type sphincterotome, and a double-channel endoscope was advanced into the peritoneal cavity. The peritoneal cavity was insufflated with air through the endoscope. The spleen was visualized. The splenic vessels were ligated with endoscopic loops and clips, and then mesentery was dissected using electrocautery. Endoscopic splenectomy was performed on six pigs. There were no complications during gastric incision and entrance into the peritoneal cavity. Visualization of the spleen and other intraperitoneal organs was very good. Ligation of the splenic vessels and mobilization of the spleen were achieved using commercially available devices and endoscopic accessories.",
+    "explanation": "Transgastric endoscopic splenectomy in a porcine model appears technically feasible. Additional long-term survival experiments are planned.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0046",
+    "question": "It's Fournier's gangrene still dangerous?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "A",
+    "dataset": "pubmedqa",
+    "context": "Fournier's gangrene is known to have an impact in the morbidity and despite antibiotics and aggressive debridement, the mortality rate remains high. To assess the morbidity and mortality in the treatment of Fournier's gangrene in our experience. The medical records of 14 patients with Fournier's gangrene who presented at the University Hospital Center \"Mother Teresa\" from January 1997 to December 2006 were reviewed retrospectively to analyze the outcome and identify the risk factor and prognostic indicators of mortality. Of the 14 patients, 5 died and 9 survived. Mean age was 54 years (range from 41-61): it was 53 years in the group of survivors and 62 years in deceased group. There was a significant difference in leukocyte count between patients who survived (range 4900-17000/mm) and those died (range 20.300-31000/mm3). Mean hospital stay was about 19 days (range 2-57 days).",
+    "explanation": "The interval from the onset of clinical symptoms to the initial surgical intervention seems to be the most important prognostic factor with a significant impact on outcome. Despite extensive therapeutic efforts, Fournier's gangrene remains a surgical emergency and early recognition with prompt radical debridement is the mainstays of management.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0047",
+    "question": "Is it appropriate to implant kidneys from elderly donors in young recipients?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "A",
+    "dataset": "pubmedqa",
+    "context": "Kidneys from elderly donors tend to be implanted in recipients who are also elderly. We present the results obtained after 10 years of evolution on transplanting elderly kidneys into young recipients. Ninety-one consecutive transplants are studied, carried out in our center with kidneys from cadaver donors older than 60 years implanted in recipients younger than 60 years. The control group is made up of 91 transplants, matched with those from the study group, whose donor and recipient were younger than 60 years. There were no differences between groups with regard to recipient age, sex, cause of death and renal function of the donor, hepatitis C and cytomegalovirus serologies, cold ischemia time, tubular necrosis, immediate diuresis, need for dialysis, human leukocyte antigen incompatibilities, hypersensitized patients, acute rejection, waiting time on dialysis, and days of admission. Survival in both groups at 1, 5, and 10 years was 97.6%, 87.2%, and 76.6% vs. 98.8%, 87.5%, and 69.5% for the patient (P=0.642), 92.9%, 81.3%, and 64.2% vs. 93.9%, 76.4%, and 69.5% for the graft (P=0.980), and 94.4%, 92.6%, and 77.4% vs. 94.3%, 86.7%, and 84.4% for the graft with death censured (P=0.747), respectively. Creatininaemias at 1, 5, and 10 years were 172, 175, and 210 vs. 139, 134, and 155 (P<0.05).",
+    "explanation": "We conclude that patient and graft survival on transplanting kidneys from elderly donors to young recipients is superimposable on that obtained with young donors. However, renal function is better in the group of young donors.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0048",
+    "question": "Do provider service networks result in lower expenditures compared with HMOs or primary care case management in Florida's Medicaid program?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "A",
+    "dataset": "pubmedqa",
+    "context": "To determine the impact of Florida's Medicaid Demonstration 4 years post-implementation on per member per month (PMPM) Medicaid expenditures and whether receiving care through HMOs versus provider service networks (PSNs) in the Demonstration was associated with PMPM expenditures.DATA: Florida Medicaid claims from two fiscal years prior to implementation of the Demonstration (FY0405, FY0506) and the first four fiscal years after implementation (FY0607-FY0910) from two urban Demonstration counties and two urban non-Demonstration counties. A difference-in-difference approach was used to compare changes in enrollee expenditures before and after implementation of the Demonstration overall and specifically for HMOs and PSNs. Claims data were extracted for enrollees in the Demonstration and non-Demonstration counties and collapsed into monthly amounts (N = 26,819,987 person-months). Among SSI enrollees, the Demonstration resulted in lower increases in PMPM expenditures over time ($40) compared with the non-Demonstration counties ($186), with Demonstration PSNs lowering PMPM expenditures by $7 more than HMOs. Savings were also seen among TANF enrollees but to a lesser extent.",
+    "explanation": "The Medicaid Demonstration in Florida appears to result in lower PMPM expenditures. Demonstration PSNs generated slightly greater reductions in expenditures compared to Demonstration HMOs. PSNs appear to be a promising model for delivering care to Medicaid enrollees.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "pubmedqa_0049",
+    "question": "Assessment of carotid artery stenosis before coronary artery bypass surgery. Is it always necessary?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Maybe"
+    },
+    "answer": "B",
+    "dataset": "pubmedqa",
+    "context": "Extracranial internal carotid artery stenosis is a risk factor for perioperative stroke in patients undergoing coronary artery bypass surgery (CAB). Although selective and non-selective methods of preoperative carotid screening have been advocated, it remains unclear if this screening is clinically relevant.AIM: To test whether selective carotid screening is as effective as non-selective screening in detecting significant carotid disease. The case records of patients consecutively undergoing CAB were reviewed. Patients were stratified retrospectively into high- or low-risk groups according to risk factors for significant carotid stenosis and perioperative stroke: peripheral vascular disease (PVD), carotid bruit, diabetes mellitus, age>70 years and/or history of cerebrovascular disease. Prevalence of carotid stenosis detected by ultrasonography, surgical management and perioperative stroke rates were determined in each group. Overall, 205 consecutive patients underwent preoperative carotid screening. The prevalence of significant carotid stenosis was 5.8%. Univariate analysis confirmed that PVD (P=0.005), carotid bruit (P=0.003) and diabetes mellitus (P=0.05) were significant risk factors for stenosis. Carotid stenosis was a risk factor for stroke (P=0.03). Prevalence of carotid stenosis was higher in the high-risk group (9.1%) than the low-risk group (1.2%) (P<0.05). All concomitant or staged carotid endarterectomies/CAB (5/205) and all patients who had perioperative strokes (5/205) were in the high-risk group (P=0.01).",
+    "explanation": "In our cohort, selective screening of patients aged>70 years, with carotid bruit, a history of cerebrovascular disease, diabetes mellitus or PVD would have reduced the screening load by 40%, with trivial impact on surgical management or neurological outcomes.",
+    "metamap_phrases": null
+  }
+]

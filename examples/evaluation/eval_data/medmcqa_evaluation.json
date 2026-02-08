@@ -1,0 +1,752 @@
+[
+  {
+    "id": "medmcqa_0000",
+    "question": "Which of the following is not true for myelinated nerve fibers:",
+    "options": {
+      "A": "Impulse through myelinated fibers is slower than non-myelinated fibers",
+      "B": "Membrane currents are generated at nodes of Ranvier",
+      "C": "Saltatory conduction of impulses is seen",
+      "D": "Local anesthesia is effective only when the nerve is not covered by myelin sheath"
+    },
+    "answer": "A",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0001",
+    "question": "Which of the following is not true about glomerular capillaries')",
+    "options": {
+      "A": "The oncotic pressure of the fluid leaving the capillaries is less than that of fluid entering it",
+      "B": "Glucose concentration in the capillaries is the same as that in glomerular filtrate",
+      "C": "Constriction of afferent aeriole decreases the blood flow to the glomerulas",
+      "D": "Hematocrit of the fluid leaving the capillaries is less than that of the fluid entering it"
+    },
+    "answer": "A",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": "Ans-a. The oncotic pressure of the fluid leaving the capillaries is less than that of fluid entering it Guyton I LpJ1 4-.;anong 23/e p653-6_)Glomerular oncotic pressure (due to plasma protein content) is higher than that of filtrate oncotic pressure in Bowman's capsule\"Since glucose is freely filtered and the fluid in the Bowman's capsule is isotonic with plasma, the concentration of glucose in the filtrate is the same as in the capillaries",
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0002",
+    "question": "A 29 yrs old woman with a pregnancy of 17 week has a 10 years old boy with down syndrome. She does not want another down syndrome kid; best advice to her is",
+    "options": {
+      "A": "No test is required now as her age is below 35 years",
+      "B": "Ultra sound at this point of time will definitely tell her that next baby will be down syndromic or not",
+      "C": "Amniotic fluid samples plus chromosomal analysis will definitely tell her that next baby will be down syndromic or not",
+      "D": "blood screening at this point of time will clear the exact picture"
+    },
+    "answer": "C",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0003",
+    "question": "Axonal transport is:",
+    "options": {
+      "A": "Antegrade",
+      "B": "Retrograde",
+      "C": "Antegrade and retrograde",
+      "D": "None"
+    },
+    "answer": "C",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": "Fast anterograde (400 mm/day) transport occurs by kinesin molecular motor and retrograde transport (200 mm/day) occurs by dynein molecular motor.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0004",
+    "question": "Low insulin to glucagon ratio is seen in all of these except:",
+    "options": {
+      "A": "Glycogen synthesis",
+      "B": "Glycogen breakdown",
+      "C": "Gluconeogenesis",
+      "D": "Ketogenesis"
+    },
+    "answer": "A",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": "Answer- A. Glycogen synthesisLow insulin to glucagon ratio implies a catabolic state, i.e. usage of body stores to form energy, typically seen in fasting state ancl diabetes mellitus. Hence, this state will promote glycogen breakdown, gluconeogenesis as well as ketone body formation, while at the same time inhibiting glycogen synthesis and storage.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0005",
+    "question": "Concentration of tropicamide:",
+    "options": {
+      "A": "0.01",
+      "B": "0.02",
+      "C": "0.03",
+      "D": "0.04"
+    },
+    "answer": "A",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": "Answer- A. 0.01Tropicamide is the shoest acting mydriatic, concentration used is 0.5-l% drops (0.005-0.010).Tropicamide:Concentration used: 0.5-l% drops (0.005-0.010)Duration of action: Though effective for upto 3 hours, maximum effect appear 30 minutes after the last drop and lasts for only 10-15 minutesUsed in Adults.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0006",
+    "question": "Which of the following statements is true regarding H I N1 Influenza?",
+    "options": {
+      "A": "Pregnant woman with sore throat can be staed immediately on oseltamivir without diagnostic testing under category B",
+      "B": "People on long-term steroids cannot receive Os-eltam ivir",
+      "C": "Category B concerns with low risk cases",
+      "D": "Category B patients have to undergo immediate testing"
+    },
+    "answer": "A",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": "Ans: A. Pregnant woman with sore throat can be staed immediately on oseltamivir without diagnostic testing under category B(Ref. http..ilviww.molifir.nic.in/WriteReadData/1892s/ 804456402Categorisation.pcifi)Pregnant woman with sore throat can be staed immediately on oseltamivir without diagnostic testing under category B.Drug of choice - Oseltamivir (given for 10 days post-exposure). Priority groups (in order) for Influenza vaccinesPregnant womenHealthy young childrenAge >6 months with chronic medical conditionsHealthy adults 49-65 years15-49 years healthy young adultsHealthy adults > 65 years",
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0007",
+    "question": "Which of the following are not a branch of external carotid Aery in Kiesselbach's plexus.",
+    "options": {
+      "A": "Sphenopalatine aery",
+      "B": "Anterior ethmoidal aery",
+      "C": "Greater palatine aery",
+      "D": "Septal branch of superior labial aery"
+    },
+    "answer": "B",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": "*Kiesselbach's plexus: Antero superior pa is supplied by ANTERIOR & POSTERIOR ETHMOIDAL AERIES which are branches of ophthalmic aery, branch of INTERNAL CAROTID AERY. Antero inferior pa is supplied by SUPERIOR LABIAL AERY - branch of facial aery, which is branch of EXTERNAL CAROTID AERY. Postero superior pa is supplied by SPHENO-PALATINE AERY - branch of MAXILLARY aery, which is branch of ECA. POSTERO INFERIOR pa is supplied by branches of GREATER PALATINE AERY - branch of ECA Antero inferior pa/vestibule of septum contain anastomosis b/w septal ramus of superior labial branch of facial aery & branches of sphenopalatine, greater palatine & anterior ethmoidal aeries. These form a large capillary network called KIESSELBACH'S PLEXUS If dryness persists, bleeding will occur Therefore, in given options, Anterior ethmoidal aery is a branch of ICA not ECA",
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0008",
+    "question": "Diagnosis of the following ECG-",
+    "options": {
+      "A": "Ventricular bigeminy",
+      "B": "Electrical alternans",
+      "C": "P pulmonale",
+      "D": "Left ventricular failure"
+    },
+    "answer": "B",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": "Option A- Broad QRS complex with normal sinus rhythm Digoxine toxicity Option B- P wave with fluctuating QRS complexes is seen. showing ELECTRICAL ALTERANS seen in large pericardial effusion in which hea is swinging. Option C- N Height in P wave: 2.5mm But in P-pulmonale: || by 1.5mm",
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0009",
+    "question": "A blue new born presents with cyanosis. The X–ray chest reveal oligaemic lung field and normal sized heart. Most likely diagnosis is –",
+    "options": {
+      "A": "Ebstein's anomaly",
+      "B": "Pulmonary atresia",
+      "C": "Transposition of great arteries",
+      "D": "Tetralogy of fallot"
+    },
+    "answer": "B",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": "The findings in this newborn are\nCyanosis at birth\nOligaemic lung .fields\nNormal sized heart\nLets see each option one by one\nEbstein anomaly - It can be easily ruled out as there is marked cardiomegaly in it.\nTransposition of great vessels- There is cardiomegaly and plethoric lung fields see in it. So ruled out.\nNow the real confusion - between PA and TOF.\nTOF - in TOF there is oligaemic lung fields and normal sized heart but usually cyanosis is not present at birth.\n \nNelson states -  \"Often cyanosis is not present at birth. but with increasing hypertrophy of the right ventricular infimdibulum and patient growth, cyanosis occurs later in the 1st year of life. But some cases may present with cyanosis at birth.\"\n\na Pulmonary atresia -\n\nThe child is cyanotic at birth\nThere is pulmonary oligaemia\nBut the heart is of variable size (from small to enlarge)",
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0010",
+    "question": "27.\tThe lateral spread of dental caries is facilitated mostly  by the",
+    "options": {
+      "A": "Enamel spindles",
+      "B": "Dentinoenamel junction",
+      "C": "Enamel lamellae",
+      "D": "Striae of Retzius"
+    },
+    "answer": "B",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0011",
+    "question": "A second-year PG resident tells you to perform an ABG of a patient. All of the following are true about performing an ABG except:",
+    "options": {
+      "A": "Before performing the ABG, syringe should be loaded with 0.3 cc of heparin",
+      "B": "Normal pH, HCO. and PCO, levels may not indicate absence of an acid-base imbalance",
+      "C": "A different site should be tried i f modified Allen's test is negative",
+      "D": "Radial aery is the preferred site"
+    },
+    "answer": "A",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": "Ans: A. Before performing the ABG, syringe should be loaded with 0.3 cc of heparin(Ref: Harrison 18/e p364; http:// emedicine.medscape.comlaiclell 902703-overview).Care should be taken when measuring blood gases to obtain the aerial blood sample without using excessive heparin.Heparin should be expelled from the syringe after loading as it may lead to false pCO2 readings.Precautions:Most syringes come pre-packaged & contain a small amount of heparin, to prevent coagulation.Other syringes may need to be heparinized, by drawing up a small amount of liquid heparin & squiing it out again to remove air bubbles.Once the sample is obtained, care is taken to eliminate visible gas bubbles, as these bubbles can dissolve into the sample & cause inaccurate results.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0012",
+    "question": "Respiratory rhythm generation center is located at:",
+    "options": {
+      "A": "Dorsal respiratory group",
+      "B": "Pre-Botzinger complex",
+      "C": "Ventral respiratory neurons",
+      "D": "Pneumotaxic center"
+    },
+    "answer": "B",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": "Ans: B. Pre-Botzinger complexRef: Ganong 25Ie p656, 24Ie p658)Rhythmic respiration is initiated by a small group of synaptically coupled pacemaker cells in the pre-Botzinger complex (pre-BOTC) on either side of the medulla between the nucleus ambiguus and the lateral reticular nucleus.The main components of the respiratory control pattern generator responsible for automatic respiration are located in the medulla. Rhythmic respiration is initiated by a small group of synaptically coupled pacemaker cells in the pre-Botzinger complex (pre-BOTC) on either side of the medulla between the nucleus ambiguus and the lateral reticular nucleus.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0013",
+    "question": "Gait apraxia is seen in thromboembolic episode involving:",
+    "options": {
+      "A": "ACA",
+      "B": "MCA",
+      "C": "PCA",
+      "D": "Posterior choroidal aery"
+    },
+    "answer": "A",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": "Ans. a. ACA (Ref: Harrison 19/e p163, 18/e p193)Gait apraxia is seen in thromboembolic episode involving anterior cerebral aery.Frontal lobe is mainly supplied by anterior cerebral aery; its occlusion leads to gait apraxia",
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0014",
+    "question": "Heavy forces on periodontal ligament causes:",
+    "options": {
+      "A": "Hyalinization",
+      "B": "Osteoclastic activity around tooth",
+      "C": "Osteoblastic activity around tooth",
+      "D": "Crest bone resorption"
+    },
+    "answer": "A",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0015",
+    "question": "About N. gonorrhoea, all are true except",
+    "options": {
+      "A": "Most common cause of urethritis in male",
+      "B": "All stains are highly susceptible to penicillin",
+      "C": "Wide spread axoregnic stains cause disseminated gonococcal infection",
+      "D": "Found exclusively in human beings"
+    },
+    "answer": "B",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0016",
+    "question": "A patient who was on ventilator and being ventilated for past few days, suddenly pulls out the endotracheal tube. What is the next step of management?",
+    "options": {
+      "A": "Assess the patient, give bag and mask ventilation and look for spontaneous breathing",
+      "B": "Sta bag and mask ventilation and reintubate",
+      "C": "Sedate and reintubate",
+      "D": "Make him sit and do physiotherapy"
+    },
+    "answer": "A",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": "Ans. a. Assess the patient, give bag and mask ventilation and look for spontaneous breathingIn self-extubation, assess the patient, give bag and mask ventilation and look for spontaneous breathing.Unplanned ExtubationUnplanned extubation of mechanically ventilated patients is relatively commonSelf-extubation refers to the patient's action, who deliberately removes the endotracheal tube (MC type of unplanned extubation, typically occur at night)Accidental extubation is attributed either to personnel's inappropriate manipulation of the tube during patient care or to a non-purposeful patient's action, e.g. coughing (mostly occur in the morning) Risk Factors for Unplanned ExtubationPatient factorsStaff factorsMaleDeliriumLight sedationDifficulty in securing tube (e g. facial swelling, facial burns)Previous unplanned extubationJunior staffNurse-to-patient ratioInadequately secured endotracheal tubeand/or checks",
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0017",
+    "question": "In a\t6-month-old child, thick curd like white\tpatch\nappears on the buccal mucosa. On rubbing it leaves an\nerythematous patch. Most likely diagnosis is:",
+    "options": {
+      "A": "Tuberculosis",
+      "B": "Lichen planus",
+      "C": "Lupus erythematous",
+      "D": "Candidiasis"
+    },
+    "answer": "D",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0018",
+    "question": "Characteristic of venous blood flow of lower limb in duplex Doppler is?",
+    "options": {
+      "A": "Monophasic",
+      "B": "Biphasic",
+      "C": "Triphasic",
+      "D": "Non phasic"
+    },
+    "answer": "A",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": "* Doppler is based on frequency shift and color coding depends on the direction of blood flow* Direction of blood flow:- Flow towards the probe- Red- Flow away from probe- Blue Intensity of color depends on velocity of flow Doppler effect: change in frequency because of relative motion between moving source of sound and observer. Direction of flow Color doppler showing CCA bifurcation Spectral doppler: Cursor is placed into the area of blood vessel we want to trace and its velocity is measured.An angle has to be maintained to obtain a proper image- Ideal angle = 0o (practically not possible)- Optimal angle = 45o-60o (never 90o) Spectral doppler of aeries Low resistance High resistance Example:* Brain aeries* ICA* CCA* VA- Renal aeries| Monophasic with pattern pulsatility Example: - Extremity aeries* ECA | Triphasic pattern Normal Peripheral Aerial Waveform Triphasic waveform Initial high velocity forward flow component Early diastolic reverse flow component Late diastolic forward flow component Narrow systolic window * Venous doppler:- It is Monophasic- during free breathing variations in amplitude due to cardiac and respiratory phasicity- In breath hold- pressure changes of . Atrium are reflected back in the major veins",
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0019",
+    "question": "The source of calcium ions of a calcific bridge in a\ntooth in which calcium hydroxide pulpotomy has been\nperformed is:",
+    "options": {
+      "A": "Blood vessel borne",
+      "B": "Derided cells",
+      "C": "Dentin",
+      "D": "From the calcium hydroxide"
+    },
+    "answer": "A",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0020",
+    "question": "2, 3-BPG binds to sites of haemoglobin and the affinity for oxygen",
+    "options": {
+      "A": "4, decreases",
+      "B": "1, decreases",
+      "C": "4, increases",
+      "D": "1, increases"
+    },
+    "answer": "B",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": "Answer- B. 1, decreases2,3-BPG binds to 1 site of haemoglobin and decreases the affinity for oxygen.2, 3 Bisphosphoglycerate (2,3- BPG) or 2,3 Diphosphoglycerate 2,3- DPG)It is most abundant organic phosphate in RBC.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0021",
+    "question": "Highest concentration of oxygen is delivered through?",
+    "options": {
+      "A": "Nasal cannula",
+      "B": "Venturi mask",
+      "C": "Bag and mask",
+      "D": "Mask with reservoir"
+    },
+    "answer": "C",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": "Bag and mask-100% O2 Venturi mask- 60% O2 Nasal cannula - 40% O2 Mask with reservoir- 80-90% O2",
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0022",
+    "question": "Sharpest cusp is seen in",
+    "options": {
+      "A": "Upper Canine",
+      "B": "Lower Canine",
+      "C": "Upper Premolar",
+      "D": "Lower premolar"
+    },
+    "answer": "A",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0023",
+    "question": "A mother is Hbs Ag positive and anti Hbe Ag positive. Risk of transmission of Hep. B in child is:",
+    "options": {
+      "A": "20%",
+      "B": "50%",
+      "C": "0%",
+      "D": "90%"
+    },
+    "answer": "A",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": "Before answering these questions lets first discuss hepatitis in brief.\nMaternal infection: The acute infection is manifested by flu like illness as malaise, anorexia, nausea and vomiting. In majority, it remains asymptomatic. Jaundice is rare and fever is uncommon.\nClinical course (HBV): Nearly 90–95% of patients clear the infection and have full recovery. 1% develop fulminant hepatitis resulting massive hepatic necrosis. 10-15% become chronic and 10% of these chronic cases suffer from chronic active hepatitis, cirrhosis and hepatocellular carcinoma.\nDiagnosis is confirmed by serological detection of HBsAg, HBeAg (denote high infectivity) and antibody to hepatitis B core antigen (HBcAg) and HBV DNA titer (107–1011).\nScreening: All pregnant women should be screened for HBV infection at first antenatal visit and it should be repeated during the third trimester for ‘high risk’ groups (intravenous drug abusers, sexual promiscuity, hemophilics, patients on hemodialysis or having multiple sex partners).\nHepatitis C (HCV):\nIt is recognized as the major cause of non-A, non-B hepatitis worldwide and is the leading cause of transfusion associated hepatitis. Transmission is mainly blood borne and to a lesser extent by faecal-oral route. It is responsible for chronic active hepatitis and hepatic failure.\nPerinatal transmission (10–40%) is high when coinfected with HIV and HBV.\nDetection is by antibody to HCV by EIA, which develops usually late in the infection.\nConfirmation is done by recombinant immunoblot assay (RIBA-3).\nChronic carrier state is present. Breastfeeding is not contraindicated.\nHepatitis D (HDV):\nIt is seen in patients infected with HBV either as a co-infection or super infection. Perinatal transmission is known.\nHepatitis E (HEV): Hepatitis E is the most important cause of non-A, non-B hepatitis in developing countries like India. Chronic carrier state is present. Perinatal transmission is uncommon.\nMaternal mortality is very high (15–20%).",
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0024",
+    "question": "In a patient with competent lips together at rest, the lip\nline is opposite the tips of the upper incisors. The lip line is then described as",
+    "options": {
+      "A": "Average",
+      "B": "High",
+      "C": "Incomplete",
+      "D": "Low"
+    },
+    "answer": "D",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0025",
+    "question": "A patient presented to emergency with overdose some drug. There were increased salivation and increased bronchial secretions. On examination, blood pressure was 88/60 mmHg. RBC esterase level is 50. What should be the treatment of this person?",
+    "options": {
+      "A": "Neostigmine",
+      "B": "Atropine",
+      "C": "Flumazenil",
+      "D": "Physostigmine"
+    },
+    "answer": "B",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": "Low esterase levels are suggestive of overdose of some drug which acts by inhibiting acetyl choline esterase like organophosphate poisoning. Inhibition of choline esterase results In increased amount of Ach at synapse, so poisoning or overdose results in cholinergic symptoms like salivation, lacrimation, urination, emesis, increased bronchial secretions, reduction in blood pressure.So treatment Of choice is Atropine. Atropine -It is highly effective in counter-acting the muscarinic symptoms, but higher doses are required to antagonize the central effects. It does not reverse peripheral muscular paralysis which is a nicotinic action. All cases of anti-ChE (carbamate or organophosphate) poisoning must be promptly given atropine2 mg i.v. repeated every 10 min till dryness of mouth or other signs of atropinization appear (upto 200 mg has been administered in a day). Continued treatment with maintenance doses may be required for 1-2 weeks. Neostigmine and physostigmine worsens the signs and symptoms as these also act by inhibiting choline esterase. Physostigmine and flumazenil are respectively used for Atropine and benzodiazepines poisoning.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0026",
+    "question": "The current bar clasp design used is:",
+    "options": {
+      "A": "Mesio-occlusal rest",
+      "B": "Disto-occlusal rest",
+      "C": "Mesial or distal depending on the situation",
+      "D": "Choice of the dentist"
+    },
+    "answer": "A",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0027",
+    "question": "All of the following are true regarding Class-II inlay gingival margins preparation except?",
+    "options": {
+      "A": "Removal of week enamel rods",
+      "B": "Increased metal burnishability",
+      "C": "Lap sliding fit of metal margin",
+      "D": "Margins of restoration in self-cleansable area"
+    },
+    "answer": "D",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0028",
+    "question": "Breakdown of periodontal fibres in periodontitis is due to bacterial enzyme: (OR) Which of the following bacterial products have been implicated in initiation of inflammatory periodontal disease?",
+    "options": {
+      "A": "Collagenase",
+      "B": "Hyaluronidase",
+      "C": "Coagulase",
+      "D": "None of the above"
+    },
+    "answer": "A",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0029",
+    "question": "In a study, two groups of newborns are checked for their weights based on whether their mothers received food supplements or not. The appropriate test which can be used for comparing the data is:",
+    "options": {
+      "A": "Chi square test",
+      "B": "Paired T-test",
+      "C": "Student's T-test",
+      "D": "Fischer exact test"
+    },
+    "answer": "C",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": "Ans: C. Student's T-test(Ref Park 22/e p795; Biostatistics by Mahajan 7/e p134)Here, comparing a parametric quantitative variable (weight) in two unrelated group of people.Hence, \"Student's t-test\" used.Student t-test:Used when outcome variable is normally distributed in population (for quantitative data).Ex: BP, blood glucose.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0030",
+    "question": "Which vitamin is required for glycogen Phosphorylase?",
+    "options": {
+      "A": "PLP",
+      "B": "TPP",
+      "C": "Riboflavin",
+      "D": "Lipoic acid"
+    },
+    "answer": "A",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": "Glycogen phosphorylase is the rate limiting enzyme of glycogenolysis. And it requires PLP. The active form of vitamin B6 is the coenzyme pyridoxal phosphate (PLP) PLP can be synthesized from the three compounds pyridoxine, pyridoxal and pyridoxamine. This PLP for this enzyme Glycogen phosphorylase is not required as co-enzyme, but it act as a phosphate donor. Enzyme glycogen phosphorylase will cut glycogen a (1-4) bond apa and the glucose released are transferred in Glucose-1-phosphate and that phosphate is taken from PLP.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0031",
+    "question": "A child's behaviour is traced to have dental difficulties\nfrom\this\tmother.\tThe\tmost\tsatisfactory\tmethod\tof\nhandling the situation is to:",
+    "options": {
+      "A": "Introduce another child as a good example",
+      "B": "Modify his fear by familiarization",
+      "C": "Use small amounts of barbiturates",
+      "D": "Use firmness"
+    },
+    "answer": "B",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0032",
+    "question": "Which of the following is the only complete cailage ring in the respiratory tree?",
+    "options": {
+      "A": "Cricoid cailage",
+      "B": "Thyroid cailage",
+      "C": "Cunieform cailage",
+      "D": "Epiglottis"
+    },
+    "answer": "A",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": "Answer- A (Cricoid cailage)(Ref: BDC 5/e Vol lII/p238)Complete cailage ring is seen in Cricoid cailage.Cricoid cailage is shaped like a ring. It encircles the larynx below the thyroid cailage. It is thicker and stronger than the thyroid cailage.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0033",
+    "question": "Steps of intubation - arrange in sequence:- a. Head extension and flexion of neck b. Introduction of laryngoscope c. Inflation of cuff d. Check breath sounds with stethoscope e. fixation of the tube to prevent dislodgement",
+    "options": {
+      "A": "ABCDE",
+      "B": "DBCEA",
+      "C": "ACBED",
+      "D": "CBAED"
+    },
+    "answer": "A",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": "For intubation: 1st step: Morning sniffing position: extension of atlanto-occipital joint and flexion of neck. 2nd step: Introduction of laryngoscope 3rd step: Push the tongue away, visualize the epiglottis, aryepiglottic fold, hinge the tip of laryngoscope with aryepiglottic fold and lift the laryngoscope to visualize the glottic opening. 4th step: Introduce ETT and inflate the cuff 5th check for bilateral breath sound FIXATION of the ETT.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0034",
+    "question": "In Erythroblastosis fetalis not involved is –",
+    "options": {
+      "A": "Anti C",
+      "B": "Anti D",
+      "C": "Anti E",
+      "D": "Anti Lewis"
+    },
+    "answer": "D",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": "Erythroblastosis fetalis is caused by the transplacental passage of maternal antibody active against paternal RBC antigens of the infant and is characterized by an increased rate of RBC destruction.\nAlthough more than 60 different RBC antigens are capable of eliciting an antibody response, significant disease is associated primarily D antigen of Rh group and with A 0 incompatibility.\nOther rare antigens involved are -\n\n\nC or E antigen of Rh group\nRBC antigens - Cw, Cx, Cu, K (kell), M, Duffy, S, P, MNS, Xg, Lutheran, Diego and Kidd.\n\n\nAnti-Lewis antibodies do not cause disease.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0035",
+    "question": "A dentist suffered from Hepatitis B infection 3 months back. His laboratory tests are normal, but he is not allowed by the medical board to do surgical practice. He is:",
+    "options": {
+      "A": "Inactive carrier",
+      "B": "Healthy carrier",
+      "C": "Convalescent carrier",
+      "D": "Paradoxical carrier"
+    },
+    "answer": "C",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": "Convalescent carrier is the host who continues to harbor the microorganism even after recovering from the clinical disease caused by the same pathogen.\nKey Points \nHBsAg:\n\nThe antigen appears in blood during incubation period and is detectable in most patients during the prodrome and acute phase of the disease.\nPersistent presence of HBsAg in blood for at least 6 months indicates the carrier state and also indicates the risk of chronic hepatitis and hepatic carcinoma. It is not detectable in the serum during convalescent stage. The presence of HBsAg alone does not necessarily indicate the replication of complete virion, and the patients may not have symptoms of liver damage. \n\nParija SC. Textbook of Microbiology & Immunology. Elsevier Health Sciences; 2014. Page:74,553",
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0036",
+    "question": "A pediatrician in a district hospital with specialization neonatal care unit calls an ophthalmologist for consultation for which of the following?",
+    "options": {
+      "A": "A newborn with respiratory distress",
+      "B": "A baby born at 28 weeks of gestation",
+      "C": "Newborn with jaundice",
+      "D": "A newborn with bih weight 2300 grams"
+    },
+    "answer": "B",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": "Answer- B. A baby born at 28 weeks of gestationPremature baby needs to be screenedfor Retinopathy of prematurity.All babies weighing <1500 gm or having a gestational period <32 weeks should be screened with indirect ophthalmoscopybetween 32-36 weeks postconception.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0037",
+    "question": "In a child with active liver failure, the most important prognosis factor for death is –",
+    "options": {
+      "A": "Increasing transaminases",
+      "B": "Increasing bilirubin",
+      "C": "Increasing prothrombin time",
+      "D": "Gram (–)ve sepsis"
+    },
+    "answer": "D",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": "Prognosis of hepatic failure in children \n\nChildren with hepatic failure have somewhat better prognosis.\nThe prognosis varies considerably with -\n\ni) Cause of liver failure\nii) Stage of hepatic encephalopathy\n\nPoor prognostic factors for mortality\n\n\nIf cause of liver failure is         —>       Wilson disease, idiopathic\nStage IV coma —> Most common cause of death is brain stem herniation\nAge < I year\nSepsis\nSevere hemorrhage\nRenal failure\n, Need for dialysis before transplantation\n\nFor option b & c -\n\"Pretransplant serum bilirubin concentration and the INR (prothrombin time) of coagulation are not predictive of post transplant survival\".",
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0038",
+    "question": "A patient went into shock immediately after normal delivery, likely cause:",
+    "options": {
+      "A": "Amniotic fluid embolism",
+      "B": "PPH",
+      "C": "Uterine inversion",
+      "D": "Eclampsia"
+    },
+    "answer": "C",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": "Friends this is one of those questions where we can derive the answer by excluding other options as very little information has been provided to us.\nSudden post partum collapse – may be seen in all the four cases viz – amniotic fluid embolism, PPH, uterine inversion and eclampsia.\nBut in case of PPH antecedent H/O excessive blood loss, in eclampsia – H/O antecedent convulsions and in amniotic fluid embolism – H/O abrupt onset of respiratory distress before collapse should be present, which is not given in the question so these options are being excluded.\nThe clinical picture of acute inversion occurring in the third stage of labour is characterised by shock and haemorrhage, the shock being out of proportion to the bleeding.\nSince this a problem which occurs due to mismanaged third stage of labour, patient doesnot have any complain in the antenatal period or during labour.\nUterine inversion – “It should be suspected whenever a woman has unexplained postpartum collapse.”\nTextbook of Obs, Sheila Balakrishnan, p 489",
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0039",
+    "question": "A patient presented with flat topped violaceous papules, thinning of nails and onycholysis. What is the microscopic finding observed in this patient?",
+    "options": {
+      "A": "Prominent necrotic cell",
+      "B": "Suprabasal split",
+      "C": "Basal cell degeneration",
+      "D": "Acantholysis"
+    },
+    "answer": "C",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": "Ans. c. Basal degeneration",
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0040",
+    "question": "Which of the following is not. true regarding myelopathy?",
+    "options": {
+      "A": "Sensory loss of facial area",
+      "B": "Brisk jaw jerk",
+      "C": "Brisk pectoral jerk",
+      "D": "Urgency and incontinence of micturition"
+    },
+    "answer": "B",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": "Ans. b. Brisk jaw jerk(Ref: De Jongs Neurological examination/ p194, 201, 474.'Jaw jerk is exaggerated in supranuclear lesions that are above the mid pons.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0041",
+    "question": "Which of the following committees has recommended a 3-year bachelor degree in medical education for rural health service?",
+    "options": {
+      "A": "High level expe group of universal health program for india",
+      "B": "Central bureau of health investigation",
+      "C": "Srivastava committee",
+      "D": "Sundar committee"
+    },
+    "answer": "A",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": "Answer- A. High level expe group of universal health program for indiaConcept of 3 years bachelor para-medical course for rural health service was proposed by Ministry of health and family welfare and received backing of Planning Commission of India's High level expe group of universal health program.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0042",
+    "question": "Sequential arrangement of fetal scans -",
+    "options": {
+      "A": "Growth scan",
+      "B": "Triple marker",
+      "C": "Anomalous Scan and NT scan",
+      "D": "All"
+    },
+    "answer": "D",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": "Ans: D. AllThe NT scan must be done between 11 and 14 weeks pregnant, because this is when the base of baby's neck is still transparent. (The last day for scan is 13 weeks and 6 days pregnant.)Triple marker test is performed in pregnant women at the end of first trimester and the beginning of the second trimester.The anomaly scan, also sometimes called the anatomy scan, 20 week ultrasound, or level 2 ultrasound, is a pregnancy ultrasound performed between 18-22 weeksA growth scan is an ultrasound scan that determines whether your baby's growth is normal. Doctors typically recommend it for women during the third trimester of pregnancy; one of the reasons it is also a fetal growth scan between 28 weeks and 32 weeks of pregnancy.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0043",
+    "question": "Which one of the following is a muscle splitting incision?",
+    "options": {
+      "A": "Kocher's incision",
+      "B": "Rutherford-Morrison incision",
+      "C": "Pfannenstiel incision",
+      "D": "Lanz incision"
+    },
+    "answer": "D",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": "Ans: D. Lanz incisionLanz incision:An oblique (transverse skin crease), muscle splitting incision used for an appendectomy.A modification of McBurney's (Grid Iron) incision.Advantages:Considered cosmetically better.Exposure is better.The extension is easier.Measurements:Incision, appropriate in length to size & obesity of patient - Approximately 2 cm below umbilicus centered on the midclavicular-mid inguinal line.It can be extended medially - With retraction or suitable division of rectus abdominis muscle.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0044",
+    "question": "Multiple canals in mandibular premolars are seen in?",
+    "options": {
+      "A": "Africas",
+      "B": "Caucians",
+      "C": "Not Recalled",
+      "D": "Not Recalled"
+    },
+    "answer": "A",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0045",
+    "question": "Which of the following blade angle is appropriate for scaling and root planing",
+    "options": {
+      "A": "A",
+      "B": "B",
+      "C": "C",
+      "D": "D"
+    },
+    "answer": "B",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": "Blade angulation.\n(A) 0 degrees: correct angulation for blade insertion.\n(B) 45 to 90 degrees: correct angulation for scaling and root planing.\n(C) less than 45 degrees: incorrect angulation for scaling and root planing.\n(d) More than 90 degrees: incorrect angulation for scaling and root planing, but correct angulation for gingival curettage.",
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0046",
+    "question": "Which pa of brachial plexus do not give branches",
+    "options": {
+      "A": "Root",
+      "B": "Division",
+      "C": "Cord",
+      "D": "Trunk"
+    },
+    "answer": "B",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": "Answer: B. DivisionDivision does not give branches",
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0047",
+    "question": "If the Rb gene phosphorylation is defective, which of the following will happen?",
+    "options": {
+      "A": "Cell cycle will stop at GI phase",
+      "B": "Cell cycle will stop at G2 phase",
+      "C": "The cell cycle will progress and the cell will divide",
+      "D": "There will be no effect on cell cycle as for Rb gene phosphorylation is not needed"
+    },
+    "answer": "A",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": "Answer- A. Cell cycle will stop at GI phaseRb is a tumor suppressor gene. It normally arrests cell division at G1-S phase. Phosphorylation of Rb gene allows the cell to divide, hence inhibition of phosphorylation (which is the constitutive scenario for Rb gene) arrests the cell in GI phase.RB (Retinoblastoma) geneLocated on chromosome on 13q14Tumor suppressive pocket protein that binds E2F transcription factors in hypophophorylated stateKey negative regulator of G1/S cell cycle transition . Tumors associated: Retinoblastoma, osteosarcoma, Glioblastoma, small cell carcinoma of lung, CA breast & CA bladderSequence: Go- G1- S- G2 - M",
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0048",
+    "question": "Cumulative index is:",
+    "options": {
+      "A": "Russet's periodontal index",
+      "B": "Ramjford's periodontal index",
+      "C": "PMA (Massler and Schlour)",
+      "D": "Gingival index (Loe and Silness)"
+    },
+    "answer": "C",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": null,
+    "metamap_phrases": null
+  },
+  {
+    "id": "medmcqa_0049",
+    "question": "The cells which will proliferate from top to bottom of villi are:",
+    "options": {
+      "A": "Chief cells",
+      "B": "Goblet cells",
+      "C": "Paneth cells",
+      "D": "Parietal cells"
+    },
+    "answer": "C",
+    "dataset": "medmcqa",
+    "context": null,
+    "explanation": "Paneth cells or zymogen cells are found only in the deeper parts of the intestinal crypts.\n They contain prominent eosinophilic secretory granules.\n They also contain high amount of zinc.\n They are known to produce lysozyme, defensins and TNF alpha that destroy bacteria.\n They exceptionally migrate towards the base of the crypts of Lieberkuhn instead of going toward the villi",
+    "metamap_phrases": null
+  }
+]

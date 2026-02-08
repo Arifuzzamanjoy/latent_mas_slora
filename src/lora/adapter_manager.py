@@ -194,6 +194,10 @@ class LoRAAdapterManager:
         info = QWEN25_LORA_REGISTRY[registry_name]
         return self.load_external_lora(info.name, info.hf_path)
     
+    def is_loaded(self, adapter_name: str) -> bool:
+        """Check if an adapter is currently loaded"""
+        return adapter_name in self._loaded_adapters
+    
     def _unload_least_used(self) -> None:
         """Unload the least recently used adapter"""
         if not self._adapter_usage:
@@ -271,6 +275,11 @@ class LoRAAdapterManager:
     def list_loaded(self) -> List[str]:
         """List all loaded adapter names"""
         return list(self._loaded_adapters.keys())
+    
+    @property
+    def loaded_adapters(self) -> Dict[str, Dict[str, Any]]:
+        """Access loaded adapters (read-only view)"""
+        return dict(self._loaded_adapters)
     
     def list_registry(self) -> Dict[str, ExternalLoRAInfo]:
         """List available adapters in registry"""

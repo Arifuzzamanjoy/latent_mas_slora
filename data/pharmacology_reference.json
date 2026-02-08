@@ -1,0 +1,8 @@
+{
+  "documents": [
+    {
+      "title": "Common Drug Classes and Mechanisms",
+      "content": "Comprehensive overview of major drug classes used in clinical practice.\n\nCardiovascular:\n- Beta-blockers (-olol): Block \u03b21/\u03b22 receptors, reduce HR, contractility, BP\n- ACE inhibitors (-pril): Block angiotensin-converting enzyme, reduce angiotensin II\n- ARBs (-sartan): Block angiotensin II receptors, similar effects to ACEi\n- CCBs: Dihydropyridine (amlodipine) - vasodilation; Non-DHP (diltiazem, verapamil) - rate control\n- Statins (-statin): HMG-CoA reductase inhibitors, lower LDL cholesterol\n- Diuretics: Thiazides (HCTZ), Loops (furosemide), K-sparing (spironolactone)\n\nAnticoagulants:\n- Heparin/LMWH: Activate antithrombin III\n- Warfarin: Vitamin K antagonist, inhibits II, VII, IX, X\n- DOACs: Direct thrombin or Factor Xa inhibitors\n\nAntimicrobials:\n- Beta-lactams: Inhibit cell wall synthesis (penicillins, cephalosporins, carbapenems)\n- Fluoroquinolones: Inhibit DNA gyrase and topoisomerase IV\n- Macrolides: Inhibit 50S ribosome, protein synthesis\n- Aminoglycosides: Inhibit 30S ribosome, bactericidal\n- Vancomycin: Cell wall synthesis inhibition, gram-positive coverage\n\nAnalgesics:\n- NSAIDs: COX-1/2 inhibition, anti-inflammatory, antipyretic, analgesic\n- Opioids: Mu receptor agonists, central analgesia\n- Acetaminophen: Central mechanism, antipyretic/analgesic without anti-inflammatory\n\nAntidiabetics:\n- Metformin: Decreases hepatic gluconeogenesis, first-line T2DM\n- Sulfonylureas: Stimulate insulin secretion\n- SGLT2 inhibitors (-gliflozin): Increase urinary glucose excretion\n- GLP-1 agonists (-tide): Incretin mimetics, weight loss benefit"
+    }
+  ]
+}

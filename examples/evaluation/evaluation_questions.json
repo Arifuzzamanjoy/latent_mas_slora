@@ -1,0 +1,133 @@
+{
+  "description": "Evaluation questions for comparing Baseline RAG vs LatentMAS-SLoRA",
+  "categories": {
+    "general": "General knowledge questions",
+    "data_specific": "Questions about loaded documents",
+    "reasoning": "Complex reasoning questions",
+    "math": "Mathematical calculations",
+    "code": "Programming questions",
+    "medical": "Medical domain questions"
+  },
+  "questions": [
+    {
+      "id": 1,
+      "category": "general",
+      "question": "What is Bitcoin and how does it work?",
+      "expected_domain": "general"
+    },
+    {
+      "id": 2,
+      "category": "general", 
+      "question": "Explain the concept of blockchain technology.",
+      "expected_domain": "general"
+    },
+    {
+      "id": 3,
+      "category": "data_specific",
+      "question": "What is the market cap of Ethereum?",
+      "expected_domain": "general"
+    },
+    {
+      "id": 4,
+      "category": "data_specific",
+      "question": "List the top 5 cryptocurrencies by market cap.",
+      "expected_domain": "general"
+    },
+    {
+      "id": 5,
+      "category": "data_specific",
+      "question": "What is the price of Cardano?",
+      "expected_domain": "general"
+    },
+    {
+      "id": 6,
+      "category": "reasoning",
+      "question": "Compare Bitcoin and Ethereum in terms of use cases.",
+      "expected_domain": "reasoning"
+    },
+    {
+      "id": 7,
+      "category": "reasoning",
+      "question": "What are the risks of investing in cryptocurrency?",
+      "expected_domain": "reasoning"
+    },
+    {
+      "id": 8,
+      "category": "reasoning",
+      "question": "Analyze the pros and cons of proof-of-stake vs proof-of-work.",
+      "expected_domain": "reasoning"
+    },
+    {
+      "id": 9,
+      "category": "math",
+      "question": "Calculate the percentage change if Bitcoin goes from $50000 to $60000.",
+      "expected_domain": "math"
+    },
+    {
+      "id": 10,
+      "category": "math",
+      "question": "If I invest $1000 in a coin with 20% annual return, what's my balance after 2 years?",
+      "expected_domain": "math"
+    },
+    {
+      "id": 11,
+      "category": "math",
+      "question": "Solve the equation: 3x + 7 = 22",
+      "expected_domain": "math"
+    },
+    {
+      "id": 12,
+      "category": "math",
+      "question": "What is the derivative of f(x) = x^3 + 2x^2 - 5x + 1?",
+      "expected_domain": "math"
+    },
+    {
+      "id": 13,
+      "category": "code",
+      "question": "Write a Python function to calculate moving average.",
+      "expected_domain": "code"
+    },
+    {
+      "id": 14,
+      "category": "code",
+      "question": "How would you implement a simple trading bot?",
+      "expected_domain": "code"
+    },
+    {
+      "id": 15,
+      "category": "code",
+      "question": "Write a function to check if a string is a palindrome in Python.",
+      "expected_domain": "code"
+    },
+    {
+      "id": 16,
+      "category": "code",
+      "question": "Implement binary search algorithm in JavaScript.",
+      "expected_domain": "code"
+    },
+    {
+      "id": 17,
+      "category": "medical",
+      "question": "What are symptoms of diabetes?",
+      "expected_domain": "medical"
+    },
+    {
+      "id": 18,
+      "category": "medical",
+      "question": "Explain how vaccines work.",
+      "expected_domain": "medical"
+    },
+    {
+      "id": 19,
+      "category": "medical",
+      "question": "What are the side effects of aspirin?",
+      "expected_domain": "medical"
+    },
+    {
+      "id": 20,
+      "category": "medical",
+      "question": "Describe the symptoms of hypertension.",
+      "expected_domain": "medical"
+    }
+  ]
+}

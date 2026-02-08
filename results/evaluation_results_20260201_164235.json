@@ -1,0 +1,165 @@
+{
+  "summary": {
+    "timestamp": "2026-02-01T16:42:35.177920",
+    "model_name": "Qwen/Qwen2.5-3B-Instruct",
+    "lora_adapter": "iimran/Qwen2.5-3B-R1-MedicalReasoner-lora-adapter",
+    "num_questions": 5,
+    "baseline_accuracy": 0.6,
+    "baseline_avg_time_ms": 4280.6,
+    "baseline_total_tokens": 5145,
+    "latentmas_accuracy": 0.0,
+    "latentmas_avg_time_ms": 0.0,
+    "latentmas_total_tokens": 0,
+    "latentmas_avg_latent_steps": 0.0,
+    "accuracy_improvement": -0.6,
+    "speedup_ratio": 4280.6,
+    "token_reduction_pct": 100.0,
+    "domain_distribution": {}
+  },
+  "questions": [
+    {
+      "id": "med_40626",
+      "question": "What is the name of the technique that involves combining reversible and irreversible hydrocolloids, specifically allowing the irreversible hydrocolloid to bond effectively?",
+      "ground_truth": "Laminate technique",
+      "reasoning": "****  \n\nThe patient describes several key symptoms:  \n1. **Denture instability** (slipping, poor fit)  \n2. **Sore spots and gum irritation** (likely due to friction or pressure points)  \n3. **Reduced effectiveness of denture adhesive** (suggesting structural changes in the dentures or oral tissues)  \n\n### Potential Causes:  \n1. **Bone Resorption (Most Likely):**  \n   - Over time, the alveolar ridge (jawbone supporting dentures) naturally shrinks due to lack of tooth roots, leading to looser dentures.  \n   - This is common in long-term denture wearers and explains the gradual loss of fit.  \n\n2. **Denture Wear or Damage:**  \n   - Worn-down denture teeth or a warped base can alter fit.  \n   - Acrylic may degrade over 5\u201310 years, requiring replacement.  \n\n3. **Poor Initial Fit or Fabrication:**  \n   - If the dentures were improperly molded (e.g., inaccurate impressions), they may never have fit optimally.  \n\n4. **Oral Mucosal Changes:**  \n   - Conditions like denture stomatitis (fungal infection) or gum inflammation could exacerbate discomfort.  \n\n5. **Adhesive Issues:**  \n   - Overuse or improper application of adhesive can interfere with fit rather than improve it.  \n\n### Why Bone Resorption is the Leading Cause:  \n- The patient mentions a *gradual* decline in fit, which aligns with bone loss.  \n- Sore spots arise from dentures moving unpredictably over a reshaped ridge.  \n- Adhesives compensate initially but become less effective as bone loss progresses.  \n\n**",
+      "context": "**  \n**Ill-fitting dentures due to alveolar bone resorption.**  \n\n### Recommended Actions:  \n1. **Denture Relining/Rebasing:** A temporary soft reline or permanent hard reline can adapt the denture base to the current ridge shape.  \n2. **New Dentures:** If the current set is >5\u20137 years old, a remake with updated impressions may be needed.  \n3. **Dental Implant Consultation:** For severe bone loss, implant-supported dentures provide superior stability.  \n4. **Oral Exam:** Rule out mucosal lesions or infections (e.g., candidiasis) contributing to discomfort.  \n\n*(The laminate technique mentioned by the patient refers to advanced fabrication methods but isn\u2019t a standalone solution without addressing the underlying fit issue.)*",
+      "options": null,
+      "dataset": "medical_intelligence_questions"
+    },
+    {
+      "id": "med_40630",
+      "question": "What is a condition not associated with Antiphospholipid syndrome?",
+      "ground_truth": "Thrombocytosis",
+      "reasoning": "****  \nThe patient presents with a constellation of symptoms suggestive of a hematologic disorder, particularly involving abnormal platelet function or count. Key findings include:  \n1. **Persistent headaches, dizziness, and lightheadedness** \u2013 These could indicate microvascular disturbances, possibly due to hyperviscosity or thrombotic complications from elevated platelets.  \n2. **Paresthesia (tingling/numbness) in extremities** \u2013 Suggests possible small vessel ischemia or neuropathy, which can occur in thrombocytosis.  \n3. **Fatigue, night sweats, and chest discomfort** \u2013 Systemic symptoms may point to an underlying myeloproliferative neoplasm (e.g., essential thrombocythemia), where cytokine release or hypermetabolism occurs.  \n4. **Easy bruising and petechiae (non-blanching red spots)** \u2013 Paradoxically, very high platelet counts can lead to acquired von Willebrand disease or platelet dysfunction, causing bleeding despite thrombocytosis.  \n5. **Family history of clotting issues (though not antiphospholipid syndrome)** \u2013 While not definitive, it raises suspicion for inherited or acquired hypercoagulable states.  \n6. **Ineffective ibuprofen use** \u2013 NSAIDs may not address the root cause (e.g., platelet-mediated symptoms) and could exacerbate bleeding risk.  \n\n**Differential Considerations:**  \n- **Essential thrombocythemia (ET)** (most likely): A myeloproliferative neoplasm causing elevated platelets, with symptoms of thrombosis/bleeding and systemic manifestations (fatigue, night sweats).  \n- **Secondary thrombocytosis:** Reactive causes (e.g., infection, inflammation, iron deficiency) are less likely given the absence of obvious triggers and the presence of systemic symptoms.  \n- **Other myeloproliferative disorders (e.g., polycythemia vera)** \u2013 Less likely without erythrocytosis, but JAK2 mutation testing would help differentiate.  \n- **Hyperviscosity syndromes** \u2013 Unlikely without other lab abnormalities (e.g., paraproteins).  \n\n**",
+      "context": "**  \n**Essential thrombocythemia (ET)** is the most likely diagnosis. Urgent evaluation with a **CBC (to confirm thrombocytosis), peripheral blood smear, JAK2/CALR/MPL mutation testing**, and assessment for thrombosis/bleeding risk is warranted.",
+      "options": null,
+      "dataset": "medical_intelligence_questions"
+    },
+    {
+      "id": "med_40631",
+      "question": "In a class III cavity preparation of an incisor tooth, where are the retentive points specifically placed to ensure proper retention and stability?",
+      "ground_truth": "Entirely in dentin",
+      "reasoning": "**  \n\nThe patient describes **lingering sensitivity to cold, sweets, and biting pressure** in a front tooth, which suggests **irritation of the dentin or pulp** (the inner layers of the tooth). Key clues include:  \n1. **Dentin Exposure**: The dentist previously noted a cavity \"entirely in the dentin,\" meaning enamel is compromised, exposing the sensitive dentin beneath. This aligns with cold/sweet sensitivity.  \n2. **Lingering Pain**: Brief sensitivity is typical of dentin exposure, but lingering pain (even for seconds) hints at **early pulp inflammation** (reversible pulpitis). Untreated, this could progress to irreversible pulpitis or infection.  \n3. **Grinding (Bruxism)**: This can worsen micro-fractures or enamel loss, exacerbating sensitivity.  \n4. **Failed Sensitivity Management**: Sensodyne helps block dentin tubules, but if decay is advancing or pulp irritation exists, it may not suffice.  \n\n**Differential Diagnoses**:  \n- **Dentin Hypersensitivity** (exposed dentin from decay, grinding, or gum recession).  \n- **Reversible Pulpitis** (early pulp inflammation; pain subsides after stimulus).  \n- **Deep Caries** (cavity nearing the pulp, risking infection).  \n- **Cracked Tooth Syndrome** (micro-fractures from grinding, though less common in front teeth).  \n\n**",
+      "context": "**:  \n**Reversible pulpitis secondary to dentin caries** (early pulp irritation from decay). Urgent dental evaluation is needed to:  \n1. Remove decay and place a filling/sealant to protect the dentin.  \n2. Assess pulp vitality\u2014if reversible, a filling may suffice; if irreversible, root canal therapy could be needed.  \n3. Address bruxism with a nightguard to prevent further damage.  \n\n*Delaying care risks progression to irreversible pulpitis or abscess.*",
+      "options": null,
+      "dataset": "medical_intelligence_questions"
+    },
+    {
+      "id": "med_40632",
+      "question": "What is the medical interpretation when a newborn has an APGAR score of 6 at 5 minutes after birth?",
+      "ground_truth": "Moderate asphyxia",
+      "reasoning": "****  \n\nThe patient's symptoms\u2014persistent cyanosis (especially acrocyanosis), weak cry, respiratory distress (slow and shallow breathing), hypotonia (floppiness), lethargy, and poor feeding\u2014are classic signs of **perinatal asphyxia**. The APGAR score of 6 at five minutes further supports this, as scores between 4\u20136 indicate moderate asphyxia. The history of a prolonged labor with fetal heart rate decelerations suggests an intrapartum hypoxic event (e.g., umbilical cord compression, placental insufficiency), which likely led to inadequate oxygen delivery (hypoxia) and poor perfusion (ischemia) to the baby\u2019s tissues, including the brain.  \n\nThe transient improvement with oxygen aligns with compensatory resuscitation, but the lingering hypotonia and lethargy raise concern for **hypoxic-ischemic encephalopathy (HIE)**, a potential complication of perinatal asphyxia. HIE can manifest in three stages:  \n- **Stage 1 (Mild):** Hyperalertness, normal tone, symptoms resolve in 24h.  \n- **Stage 2 (Moderate):** Lethargy, hypotonia, weak suck, seizures (likely this case).  \n- **Stage 3 (Severe):** Stupor, flaccidity, absent reflexes.  \n\nLong-term risks (e.g., cerebral palsy, developmental delay) depend on the severity and timeliness of intervention (e.g., therapeutic hypothermia if criteria are met).  \n\n**",
+      "context": "** **Moderate perinatal asphyxia with suspected hypoxic-ischemic encephalopathy (HIE).**  \n\n*Next steps:*  \n1. Continuous cardiorespiratory monitoring.  \n2. Blood gas (to assess acidosis) and neurologic exam (e.g., Sarnat staging).  \n3. Consider EEG if seizures are suspected.  \n4. Discuss eligibility for therapeutic hypothermia (if within 6h of birth).  \n5. Parental counseling about short-term monitoring and long-term neurodevelopmental follow-up.",
+      "options": null,
+      "dataset": "medical_intelligence_questions"
+    },
+    {
+      "id": "med_40638",
+      "question": "What is the preferred route of access for total parenteral nutrition in a patient who requires it for less than 14 days without any indication for the use of a central catheter?",
+      "ground_truth": "Peripheral vein",
+      "reasoning": "****  \n\nThe patient presents with a constellation of symptoms including persistent nausea, vomiting, weakness, unintentional weight loss, dehydration (dry mouth, dizziness upon standing), and failure of oral rehydration/anti-nausea measures. These findings strongly suggest **severe malnutrition and dehydration secondary to prolonged inadequate intake and/or malabsorption**. Key considerations:  \n\n1. **Gastrointestinal Causes**  \n   - **Gastroparesis** (delayed gastric emptying) could explain nausea/vomiting but typically occurs with diabetes or post-viral illness.  \n   - **Gastroenteritis/Infection** (e.g., viral, bacterial, or parasitic) is less likely given the chronicity (>2 weeks).  \n   - **Inflammatory Bowel Disease (IBD)** or **celiac disease** could cause malabsorption but often includes diarrhea (not mentioned here).  \n   - **Gastric outlet obstruction** (e.g., pyloric stenosis, tumor) may present with vomiting but usually involves projectile vomiting.  \n\n2. **Metabolic/Endocrine Causes**  \n   - **Hypercalcemia** or **adrenal insufficiency** can cause nausea/vomiting/weakness but would likely have additional lab abnormalities.  \n   - **Diabetic ketoacidosis (DKA)** is unlikely without hyperglycemia/polyuria.  \n\n3. **Neurologic/Psychiatric Causes**  \n   - **Cyclic vomiting syndrome** or **cannabinoid hyperemesis syndrome** (if applicable) could fit but often has episodic patterns.  \n   - **Eating disorders** (e.g., anorexia nervosa) should be considered given weight loss and food aversion.  \n\n4. **Medication/Toxin-Induced**  \n   - Certain drugs (e.g., opioids, chemotherapy) or toxins (e.g., heavy metals) may cause chronic nausea/vomiting.  \n\nGiven the severity of malnutrition/dehydration and failed oral interventions, **short-term peripheral parenteral nutrition (PPN)** is reasonable if:  \n- The patient has **adequate peripheral venous access** (avoids central line risks).  \n- The formulation is **low-osmolality** (to reduce thrombophlebitis risk).  \n- It\u2019s used as a **bridge** until the underlying cause is identified and treated.  \n\n**",
+      "context": "**  \n**Severe malnutrition and dehydration secondary to chronic nausea/vomiting (likely gastroparesis, functional GI disorder, or eating disorder).** Short-term peripheral IV nutrition (PPN) is appropriate while investigating the root cause.",
+      "options": null,
+      "dataset": "medical_intelligence_questions"
+    }
+  ],
+  "baseline_results": [
+    {
+      "question_id": "med_40626",
+      "correct": true,
+      "response": {
+        "answer": "The technique you are referring to is called a **bonding agent**. Specifically, in the context of dentures, a bonding agent is used to combine reversible and irreversible hydrocolloids. The irreversible hydrocolloid (like thermoplastic resin) bonds effectively to the denture base, while the reversible hydrocolloid (like alginate) provides a good initial impression.",
+        "time_ms": 4165,
+        "tokens_in": 833,
+        "tokens_out": 77,
+        "domain_detected": null,
+        "adapter_used": null,
+        "retrieved_chunks": 5,
+        "latent_steps": 0
+      }
+    },
+    {
+      "question_id": "med_40630",
+      "correct": false,
+      "response": {
+        "answer": "A condition not associated with Antiphospholipid syndrome is a secondary illness. Antiphospholipid syndrome is a specific autoimmune disorder characterized by blood clots and pregnancy complications, and it is not directly linked to secondary illnesses such as infections, inflammatory bowel disease, celiac disease, gastric outlet obstruction, metabolic/endocrine causes, neurologic/psychiatric causes, eating disorders, or medication/toxin-induced conditions. These conditions can present with similar symptoms but are not typically associated with Antiphospholipid syndrome.",
+        "time_ms": 3872,
+        "tokens_in": 916,
+        "tokens_out": 107,
+        "domain_detected": null,
+        "adapter_used": null,
+        "retrieved_chunks": 5,
+        "latent_steps": 0
+      }
+    },
+    {
+      "question_id": "med_40631",
+      "correct": false,
+      "response": {
+        "answer": "In a class III cavity preparation of an incisor tooth, the retentive points are typically placed on the buccal and lingual surfaces of the tooth. These points are designed to provide adequate retention and stability for the restoration. Specifically:\n\n- **Buccal Surface Retentive Points:** Located on the outer side of the tooth, near the midline.\n- **Lingual Surface Retentive Points:** Located on the inner side of the tooth, also near the midline.\n\nThese points are crucial because they help distribute the forces exerted during chewing evenly across the tooth structure, ensuring that the restoration remains stable and does not move. The buccal and lingual surfaces are chosen because they are the most prominent and accessible areas for creating these points, providing the best support for the restoration.",
+        "time_ms": 4292,
+        "tokens_in": 784,
+        "tokens_out": 164,
+        "domain_detected": null,
+        "adapter_used": null,
+        "retrieved_chunks": 5,
+        "latent_steps": 0
+      }
+    },
+    {
+      "question_id": "med_40632",
+      "correct": true,
+      "response": {
+        "answer": "When a newborn has an APGAR score of 6 at 5 minutes after birth, it indicates moderate asphyxia. This score suggests that the newborn is experiencing significant respiratory distress and other symptoms such as weak cry, hypotonia (floppiness), lethargy, and poor feeding. These signs are consistent with perinatal asphyxia, which is a condition where the baby experiences inadequate oxygen supply during or shortly after birth. The APGAR score of 6 at five minutes further supports this diagnosis, indicating that the baby is not receiving adequate oxygen and is at risk for complications such as hypoxic-ischemic encephalopathy (HIE). HIE can progress through different stages depending on its severity, and prompt intervention is crucial to minimize long-term neurological damage.",
+        "time_ms": 4188,
+        "tokens_in": 951,
+        "tokens_out": 161,
+        "domain_detected": null,
+        "adapter_used": null,
+        "retrieved_chunks": 5,
+        "latent_steps": 0
+      }
+    },
+    {
+      "question_id": "med_40638",
+      "correct": true,
+      "response": {
+        "answer": "The preferred route of access for total parenteral nutrition (TPN) in a patient who requires TPN for less than 14 days without any indication for the use of a central catheter is peripheral parenteral nutrition (PPN).\n\nKey points supporting this:\n\n1. **Short Duration**: The requirement is for less than 14 days, making central catheterization unnecessary.\n2. **Peripheral Venous Access**: Adequate peripheral venous access is needed, which is more common and easier to achieve compared to accessing a central vein.\n3. **Low-Osmolality Formulation**: This reduces the risk of thrombophlebitis, which is important for short-term use.\n4. **Bridge Therapy**: PPN can serve as a temporary solution until the underlying issue is identified and treated, acting as a bridge therapy.\n\nGiven these factors, PPN is the appropriate choice for the patient described in the context.",
+        "time_ms": 4886,
+        "tokens_in": 964,
+        "tokens_out": 188,
+        "domain_detected": null,
+        "adapter_used": null,
+        "retrieved_chunks": 5,
+        "latent_steps": 0
+      }
+    }
+  ],
+  "latentmas_results": [
+    {
+      "question_id": "med_40626",
+      "correct": false,
+      "response": null
+    },
+    {
+      "question_id": "med_40630",
+      "correct": false,
+      "response": null
+    },
+    {
+      "question_id": "med_40631",
+      "correct": false,
+      "response": null
+    },
+    {
+      "question_id": "med_40632",
+      "correct": false,
+      "response": null
+    },
+    {
+      "question_id": "med_40638",
+      "correct": false,
+      "response": null
+    }
+  ]
+}

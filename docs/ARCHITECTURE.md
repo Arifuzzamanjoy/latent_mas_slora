@@ -13,6 +13,11 @@
 7. [Memory Management](#memory-management)
 8. [Performance Characteristics](#performance-characteristics)
 9. [Mathematical Foundations](#mathematical-foundations)
+10. [Extended Features](#extended-features)
+    - [RAG for Document Intelligence](#rag-for-document-intelligence)
+    - [Custom LoRA Training Pipeline](#custom-lora-training-pipeline)
+    - [Basic Tool Use](#basic-tool-use)
+    - [Conversation Continuity](#conversation-continuity)
 
 ---
 
@@ -944,4 +949,399 @@ custom = AgentConfig(
     system_prompt="You are an expert in..."
 )
 system.add_agent(custom)
+```
+
+---
+
+## Extended Features
+
+### RAG for Document Intelligence
+
+The RAG (Retrieval-Augmented Generation) module enables document-grounded responses with citation tracking.
+
+#### Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                          RAG Pipeline Architecture                           │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   Documents          ┌──────────────────┐         Embeddings                │
+│   ─────────────────► │  DocumentStore   │ ────────────────────►             │
+│   (.txt, .pdf, .md)  │  - Chunking      │         ┌──────────────────┐      │
+│                      │  - Metadata      │         │   RAGRetriever   │      │
+│                      └──────────────────┘         │  - Embedding     │      │
+│                                                    │  - Similarity    │      │
+│                                                    │  - Hybrid Search │      │
+│   User Query                                       └────────┬─────────┘      │
+│       │                                                     │                │
+│       ▼                                                     ▼                │
+│   ┌─────────────────────────────────────────────────────────────────────┐   │
+│   │                        RAGPipeline                                   │   │
+│   │   1. Retrieve relevant chunks                                        │   │
+│   │   2. Build augmented context                                         │   │
+│   │   3. Pass to LatentMAS agents                                        │   │
+│   │   4. Return grounded response with citations                         │   │
+│   └─────────────────────────────────────────────────────────────────────┘   │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+#### Components
+
+| Component | File | Purpose |
+|-----------|------|---------|
+| `DocumentStore` | `src/rag/document_store.py` | Document loading, chunking, metadata management |
+| `RAGRetriever` | `src/rag/retriever.py` | Embedding-based retrieval with hybrid search |
+| `RAGPipeline` | `src/rag/rag_pipeline.py` | Integration with LatentMAS for grounded responses |
+
+#### Usage Example
+
+```python
+# Enable RAG
+system.enable_rag(
+    chunk_size=512,
+    embedding_model="all-MiniLM-L6-v2",
+    top_k=5
+)
+
+# Load documents
+system.load_documents("/path/to/docs")
+system.load_documents(["/file1.txt", "/file2.pdf"])
+
+# Query with RAG
+result = system.query_with_rag(
+    "What does the report say about Q3 earnings?",
+    include_citations=True
+)
+print(result.answer)
+print(result.retrieved_chunks)
+```
+
+#### Features
+
+- **Multiple formats**: TXT, MD, JSON, PDF support
+- **Intelligent chunking**: Paragraph-aware with overlap
+- **Hybrid search**: Semantic + keyword combination
+- **Context-aware retrieval**: Uses latent memory for better results
+- **Multi-hop reasoning**: Iterative retrieval for complex queries
+
+---
+
+### Custom LoRA Training Pipeline
+
+Train domain-specific LoRA adapters for specialized agents.
+
+#### Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                       LoRA Training Pipeline                                 │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   Training Data         ┌───────────────────┐                               │
+│   (JSON/JSONL/HF)  ───► │  TrainingDataset  │                               │
+│                         │  - Tokenization   │                               │
+│                         │  - Formatting     │                               │
+│                         └─────────┬─────────┘                               │
+│                                   │                                          │
+│                                   ▼                                          │
+│   TrainingConfig        ┌───────────────────┐         Adapter               │
+│   - lora_rank: 32  ───► │    LoRATrainer    │ ───► ./adapters/name/         │
+│   - learning_rate       │  - Gradient accum │                               │
+│   - num_epochs          │  - Mixed precision│                               │
+│   - batch_size          │  - Checkpointing  │                               │
+│                         └───────────────────┘                               │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+#### Components
+
+| Component | File | Purpose |
+|-----------|------|---------|
+| `LoRATrainer` | `src/training/trainer.py` | Main training loop with optimization |
+| `TrainingDataset` | `src/training/dataset.py` | Dataset loading and tokenization |
+| `TrainingConfig` | `src/training/trainer.py` | Training hyperparameters |
+
+#### Usage Example
+
+```python
+from src.training import LoRATrainer, TrainingConfig, TrainingDataset
+
+# Prepare dataset
+dataset = TrainingDataset.from_json(
+    "training_data.json",
+    tokenizer,
+    template="chatml"
+)
+
+# Or from HuggingFace
+dataset = TrainingDataset.from_huggingface(
+    "dataset_name",
+    tokenizer,
+    split="train"
+)
+
+# Configure training
+config = TrainingConfig(
+    lora_rank=32,
+    lora_alpha=64,
+    learning_rate=2e-4,
+    num_epochs=3,
+    batch_size=4,
+    gradient_accumulation_steps=4,
+    output_dir="./my_adapter"
+)
+
+# Train
+trainer = system.create_trainer()
+result = trainer.train(dataset, config)
+
+# Or use convenience method
+result = system.train_adapter(
+    train_data="data.json",
+    adapter_name="my_domain_expert",
+    num_epochs=3
+)
+```
+
+#### Data Format
+
+```json
+[
+    {
+        "instruction": "Explain the concept of...",
+        "input": "Optional context",
+        "output": "The concept of..."
+    }
+]
+```
+
+---
+
+### Basic Tool Use
+
+Enable agents to perform actions via tool calls.
+
+#### Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                           Tool Use Architecture                              │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   ┌─────────────────┐         ┌─────────────────┐                           │
+│   │  ToolRegistry   │ ◄─────► │  ToolExecutor   │                           │
+│   │  - calculator   │         │  - Parse calls  │                           │
+│   │  - python       │         │  - Execute      │                           │
+│   │  - search       │         │  - Format       │                           │
+│   │  - file_reader  │         └────────┬────────┘                           │
+│   │  - web_fetch    │                  │                                    │
+│   └─────────────────┘                  ▼                                    │
+│                              ┌─────────────────────┐                        │
+│                              │   ReAct Executor    │                        │
+│                              │   Thought → Action  │                        │
+│                              │   → Observation     │                        │
+│                              └─────────────────────┘                        │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+#### Built-in Tools
+
+| Tool | Description | Category |
+|------|-------------|----------|
+| `calculator` | Safe math expression evaluation | math |
+| `python_executor` | Execute Python code (sandboxed) | code |
+| `search` | Query search engines/knowledge bases | search |
+| `read_file` | Read local file content | file |
+| `web_fetch` | Fetch and extract web content | web |
+
+#### Usage Example
+
+```python
+# Enable tools
+system.enable_tools(register_defaults=True)
+
+# Register custom tool
+from src.tools import Tool, ToolParameter, ToolParameterType
+
+@Tool.create("my_tool", "Description of my tool")
+def my_custom_tool(param1: str, param2: int = 10) -> str:
+    return f"Result: {param1} x {param2}"
+
+system.register_tool(my_custom_tool)
+
+# Run with tools (ReAct-style)
+result = system.run_with_tools(
+    "Calculate the square root of 144 and tell me if it's even",
+    max_tool_calls=5
+)
+print(result["answer"])
+print(result["trace"])  # Thought/Action/Observation trace
+```
+
+#### Tool Call Formats
+
+The executor supports multiple formats:
+
+```python
+# JSON format
+{"tool": "calculator", "args": {"expression": "2 + 2"}}
+
+# XML-style format
+<tool>calculator</tool>
+<args>{"expression": "2 + 2"}</args>
+
+# Function-style format
+calculator(expression="2 + 2")
+```
+
+---
+
+### Conversation Continuity
+
+Maintain context across multiple turns for coherent dialogues.
+
+#### Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                     Conversation Continuity Architecture                     │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   ┌───────────────────┐       ┌───────────────────┐                         │
+│   │ ConversationManager│ ◄──► │    Conversation   │                         │
+│   │ - Create/Get      │       │    - Messages     │                         │
+│   │ - Chat interface  │       │    - System prompt│                         │
+│   │ - Search          │       │    - Metadata     │                         │
+│   └─────────┬─────────┘       └───────────────────┘                         │
+│             │                                                                │
+│             ▼                                                                │
+│   ┌───────────────────┐       ┌───────────────────┐                         │
+│   │   ContextWindow   │       │   SessionStore    │                         │
+│   │ - Token counting  │       │ - Persistence     │                         │
+│   │ - Truncation      │       │ - Multi-user      │                         │
+│   │ - Sliding window  │       │ - Export/Import   │                         │
+│   └───────────────────┘       └───────────────────┘                         │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+#### Components
+
+| Component | File | Purpose |
+|-----------|------|---------|
+| `ConversationManager` | `src/conversation/manager.py` | Multi-conversation handling |
+| `Conversation` | `src/conversation/manager.py` | Message history tracking |
+| `ContextWindow` | `src/conversation/context.py` | Token budgeting and truncation |
+| `SessionStore` | `src/conversation/session.py` | Persistent session storage |
+
+#### Usage Example
+
+```python
+# Enable conversations
+system.enable_conversations(
+    session_path="./sessions",
+    default_system_prompt="You are a helpful assistant."
+)
+
+# Simple chat interface
+response1 = system.chat("Hello! I'm working on a Python project.")
+response2 = system.chat("Can you help me with error handling?")
+response3 = system.chat("What was I working on again?")  # Remembers context
+
+# Manage conversations
+conv = system.new_conversation(system_prompt="You are a coding expert.")
+response = system.chat("How do I implement a binary tree?", conversation_id=conv.conversation_id)
+
+# Access conversation history
+conv = system.get_conversation(conv_id)
+for msg in conv.messages:
+    print(f"{msg.role.value}: {msg.content[:100]}...")
+
+# Export conversation
+manager = system.conversations
+manager.export_conversation(conv_id, "/path/to/export.md", format="markdown")
+```
+
+#### Context Window Strategies
+
+```python
+from src.conversation import ContextStrategy
+
+# Sliding window (default) - keep most recent
+window = ContextWindow(
+    max_tokens=4096,
+    strategy=ContextStrategy.SLIDING_WINDOW
+)
+
+# Truncate oldest messages
+window = ContextWindow(
+    max_tokens=4096,
+    strategy=ContextStrategy.TRUNCATE_OLDEST
+)
+
+# Keep first and last, remove middle
+window = ContextWindow(
+    max_tokens=4096,
+    strategy=ContextStrategy.TRUNCATE_MIDDLE
+)
+```
+
+#### Session Persistence
+
+```python
+from src.conversation import SessionStore, Session
+
+# Create store with file persistence
+store = SessionStore(storage_path="./sessions")
+
+# Create and save session
+session = store.create_session(user_id="user123")
+conv = Conversation(system_prompt="You are helpful.")
+conv.add_user_message("Hello!")
+session.add_conversation(conv)
+store.save_session(session)
+
+# Load session later
+session = store.load_session(session.session_id)
+```
+
+---
+
+## Combined Usage Example
+
+Using all extended features together:
+
+```python
+from src import LatentMASSystem, AgentConfig
+
+# Initialize system
+system = LatentMASSystem(model_name="Qwen/Qwen2.5-3B-Instruct")
+system.add_default_agents()
+
+# Enable all features
+system.enable_rag(top_k=5)
+system.enable_tools()
+system.enable_conversations(session_path="./sessions")
+
+# Load documents for RAG
+system.load_documents("./company_docs/")
+
+# Start a conversation with RAG and tool access
+response = system.chat("What were last quarter's sales figures?")
+# Uses RAG to find documents, tools if needed, maintains conversation
+
+# Follow-up (remembers context)
+response = system.chat("Calculate the growth rate compared to Q2")
+# May use calculator tool, references previous RAG context
+
+# Train a custom adapter for domain expertise
+result = system.train_adapter(
+    train_data="./domain_data.json",
+    adapter_name="sales_expert",
+    num_epochs=3
+)
 ```

@@ -239,3 +239,35 @@ class AgentExecutor:
                 )
         else:
             return f"{agent.system_prompt}\n\n{user_content}"
+    
+    # ========================
+    # Public Properties
+    # ========================
+    
+    @property
+    def agents(self) -> Dict[str, AgentConfig]:
+        """Access all registered agents (read-only view)"""
+        return dict(self._agents)
+    
+    @property
+    def active_agent(self) -> Optional[str]:
+        """Get currently active agent name"""
+        return self._active_agent
+    
+    @property
+    def num_agents(self) -> int:
+        """Number of registered agents"""
+        return len(self._agents)
+    
+    @property
+    def agent_names(self) -> List[str]:
+        """List of registered agent names"""
+        return list(self._agents.keys())
+    
+    def __len__(self) -> int:
+        """Return number of agents"""
+        return len(self._agents)
+    
+    def __contains__(self, name: str) -> bool:
+        """Check if agent is registered"""
+        return name in self._agents

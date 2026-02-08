@@ -14,6 +14,7 @@ class Domain(Enum):
     CODE = "code"
     MATH = "math"
     MEDICAL = "medical"
+    FINANCE = "finance"
     REASONING = "reasoning"
     GENERAL = "general"
 
@@ -107,19 +108,74 @@ DOMAIN_PROFILES = {
             "Explain the stages of wound healing",
             "What causes autoimmune diseases?",
             "Interpret these blood test results",
+            "Which cranial nerve is responsible for taste sensation?",
+            "What is the drug of choice for absence seizures?",
+            "A 45-year-old woman presents with fatigue and weight gain",
+            "Which protein is mutated in sickle cell disease?",
+            "What is the most likely diagnosis for elevated TSH?",
         ],
         keywords=[
             "patient", "diagnosis", "symptom", "treatment", "disease", "condition",
-            "medication", "drug", "dose", "prescription", "side effect",
+            "medication", "drug", "dose", "prescription", "side effect", "side effects",
             "anatomy", "physiology", "pathology", "pharmacology", "clinical",
             "blood", "heart", "lung", "liver", "kidney", "brain", "bone",
             "infection", "virus", "bacteria", "inflammation", "cancer", "tumor",
             "surgery", "therapy", "prognosis", "chronic", "acute",
             "mg", "ml", "iv", "oral", "injection",
+            # Medical exam terms
+            "cranial", "nerve", "tongue", "taste", "sensation", "artery", "vein",
+            "seizure", "hypertension", "diabetes", "thyroid", "TSH", "hemoglobin",
+            "mutation", "protein", "enzyme", "deficiency", "syndrome",
+            "presents with", "year-old", "history of", "most likely", "drug of choice",
+            "laboratory", "elevated", "decreased", "normal", "abnormal",
+            # Singular and plural drug names
+            "antibiotic", "antibiotics", "painkiller", "painkillers", "vaccine", "vaccines",
         ],
-        negative_keywords=["code", "algorithm", "function", "debug", "def "],
+        negative_keywords=["code", "algorithm", "function", "debug", "def ", "python", "javascript"],
+        weight=1.2,  # Boost medical domain weight
     ),
     
+    Domain.FINANCE: DomainProfile(
+        domain=Domain.FINANCE,
+        description="Finance, cryptocurrency, trading, investing, markets, blockchain",
+        exemplar_prompts=[
+            "What is the current price of Bitcoin?",
+            "Tell me about TRON TRX cryptocurrency",
+            "What is Ethereum and how does it work?",
+            "What is the market cap of BTC?",
+            "Explain blockchain technology",
+            "What are the top cryptocurrencies by market cap?",
+            "How does Bitcoin mining work?",
+            "What is the total supply of Dogecoin?",
+            "Compare Solana and Cardano",
+            "What is DeFi and yield farming?",
+            "How do I stake cryptocurrency?",
+            "What is a crypto wallet?",
+            "Explain NFTs and their use cases",
+            "What is the stock price of Apple?",
+            "How do trading bots work?",
+        ],
+        keywords=[
+            # Cryptocurrency terms
+            "bitcoin", "btc", "ethereum", "eth", "crypto", "cryptocurrency",
+            "blockchain", "coin", "token", "wallet", "mining", "staking",
+            "defi", "nft", "altcoin", "hodl", "airdrop", "ico", "ido",
+            # Popular cryptocurrencies
+            "tron", "trx", "solana", "sol", "cardano", "ada", "dogecoin", "doge",
+            "ripple", "xrp", "polkadot", "dot", "avalanche", "avax", "bnb",
+            "polygon", "matic", "chainlink", "link", "litecoin", "ltc",
+            "shiba", "pepe", "usdt", "usdc", "stablecoin",
+            # Finance terms
+            "stock", "trading", "invest", "market", "price", "exchange",
+            "portfolio", "dividend", "bull", "bear", "volume", "liquidity",
+            "market cap", "circulating supply", "total supply", "max supply",
+            # Platforms
+            "binance", "coinbase", "kraken", "uniswap", "opensea",
+        ],
+        negative_keywords=["patient", "diagnosis", "symptom", "medicine", "treatment", "disease"],
+        weight=1.3,  # High priority for finance/crypto queries
+    ),
+
     Domain.REASONING: DomainProfile(
         domain=Domain.REASONING,
         description="Logic, critical thinking, problem solving, analysis",
