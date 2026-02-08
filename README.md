@@ -198,7 +198,66 @@ latent_mas_slora/
 └── README.md
 ```
 
-## 📚 References
+## � CI/CD & Deployment
+
+### Automated Docker Builds
+
+This project includes GitHub Actions for CI/CD:
+
+[![CI](https://github.com/Arifuzzamanjoy/latent_mas_slora/actions/workflows/ci.yml/badge.svg)](https://github.com/Arifuzzamanjoy/latent_mas_slora/actions/workflows/ci.yml)
+[![Docker CD](https://github.com/Arifuzzamanjoy/latent_mas_slora/actions/workflows/cd-docker.yml/badge.svg)](https://github.com/Arifuzzamanjoy/latent_mas_slora/actions/workflows/cd-docker.yml)
+
+```bash
+# Docker image available at:
+docker.io/s1710374103/latent-mas-slora:latest
+```
+
+### Deploy to RunPod Serverless
+
+1. Go to [RunPod Serverless Console](https://www.runpod.io/console/serverless)
+2. Create new endpoint with image: `docker.io/s1710374103/latent-mas-slora:latest`
+3. Configure: **24GB+ VRAM**, **30GB disk**
+
+### API Usage
+
+```bash
+# Send request to RunPod
+curl -X POST "https://api.runpod.ai/v2/<ENDPOINT_ID>/runsync" \
+  -H "Authorization: Bearer <API_KEY>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "input": {
+        "prompt": "What is the treatment for hypertension?",
+        "max_tokens": 500
+    }
+  }'
+```
+
+### Chat CLI with External Arguments
+
+```bash
+# Interactive mode
+python examples/chat.py --model Qwen/Qwen2.5-3B-Instruct
+
+# Single prompt mode
+python examples/chat.py --prompt "What is AI?" --output-json
+
+# With external RAG data
+python examples/chat.py --prompt "Summarize the data" \
+  --rag-data-url "https://example.com/data.json"
+
+# With custom documents
+python examples/chat.py --prompt "What does doc say?" \
+  --rag-docs-json '[{"title":"doc1","content":"..."}]'
+
+# With custom system prompt
+python examples/chat.py --system-prompt "You are a medical expert" \
+  --enable-tools
+```
+
+See [.github/workflows/README.md](.github/workflows/README.md) for detailed CI/CD setup.
+
+## �📚 References
 
 - [LatentMAS Paper](https://arxiv.org/abs/2511.20639) - Latent Collaboration in Multi-Agent Systems
 - [S-LoRA Paper](https://arxiv.org/abs/2311.03285) - Scalable LoRA Serving

@@ -178,12 +178,15 @@ def initialize_system(args):
         auto_load_adapters=False,  # Don't preload to save memory
     )
     
-    # Load documents from data directory by default
-    data_dir = Path(__file__).parent.parent / "data"
-    if data_dir.exists():
-        print(f"Loading documents from data directory: {data_dir}")
-        doc_count = load_data_documents(system, data_dir)
-        print(f"✓ Loaded {doc_count} documents")
+    # Load documents from data directory by default (unless disabled)
+    if not getattr(args, 'no_default_data', False):
+        data_dir = Path(__file__).parent.parent / "data"
+        if data_dir.exists():
+            print(f"Loading documents from data directory: {data_dir}")
+            doc_count = load_data_documents(system, data_dir)
+            print(f"✓ Loaded {doc_count} documents")
+    else:
+        print("Skipping default data loading (--no-default-data)")
     
     # Load additional documents if provided
     if args.rag_docs:
@@ -297,11 +300,137 @@ def chat_loop(system, use_tools=False):
             traceback.print_exc()
 
 
+def run_single_prompt(system, args):
+    """Run a single prompt and exit (non-interactive mode)"""
+    prompt = args.prompt
+    
+    # Create conversation
+    conv = system.new_conversation()
+    conversation_id = conv.conversation_id
+    
+    print(f"\n[Prompt]: {prompt}\n")
+    print("[Response]:", end=" ", flush=True)
+    
+    if args.enable_tools:
+        result = system.run_with_tools(
+            prompt,
+            conversation_id=conversation_id,
+            max_tool_calls=5
+        )
+        response = result.get('answer', '') if isinstance(result, dict) else str(result)
+    else:
+        response = system.chat(prompt, conversation_id=conversation_id)
+    
+    print(response)
+    
+    # Output JSON if requested
+    if args.output_json:
+        import json
+        output = {
+            "prompt": prompt,
+            "response": response,
+            "conversation_id": conversation_id,
+            "model": args.model,
+        }
+        print(f"\n[JSON Output]:\n{json.dumps(output, indent=2)}")
+    
+    return response
+
+
+def load_external_rag_data(system, rag_data_url: str):
+    """Load RAG data from URL or base64"""
+    import requests
+    import base64
+    from io import StringIO
+    
+    try:
+        if rag_data_url.startswith(("http://", "https://")):
+            print(f"Downloading RAG data from: {rag_data_url[:50]}...")
+            response = requests.get(rag_data_url, timeout=30)
+            response.raise_for_status()
+            content = response.text
+        else:
+            print("Decoding base64 RAG data...")
+            content = base64.b64decode(rag_data_url).decode('utf-8')
+        
+        # Try JSON first
+        try:
+            data = json.loads(content)
+            doc_content = json.dumps(data, indent=2)
+            system.rag.store.add_document(
+                content=doc_content,
+                title="external_data",
+                source="external_url",
+                metadata={"type": "json"}
+            )
+            print("  ✓ Loaded external JSON data")
+        except json.JSONDecodeError:
+            # Load as text
+            system.rag.store.add_document(
+                content=content,
+                title="external_data",
+                source="external_url",
+                metadata={"type": "text"}
+            )
+            print("  ✓ Loaded external text data")
+        
+        system.rag.retriever.build_index(force=True)
+        system.rag._indexed = True
+        
+    except Exception as e:
+        print(f"  ✗ Failed to load external RAG data: {e}")
+
+
+def load_rag_documents_json(system, rag_docs_json: str):
+    """Load RAG documents from JSON array"""
+    try:
+        docs = json.loads(rag_docs_json)
+        if isinstance(docs, list):
+            for i, doc in enumerate(docs):
+                if isinstance(doc, dict):
+                    content = doc.get("content", json.dumps(doc))
+                    title = doc.get("title", f"doc_{i+1}")
+                else:
+                    content = str(doc)
+                    title = f"doc_{i+1}"
+                
+                system.rag.store.add_document(
+                    content=content,
+                    title=title,
+                    source="json_input",
+                    metadata={"type": "json_array"}
+                )
+            print(f"  ✓ Loaded {len(docs)} documents from JSON")
+        
+        system.rag.retriever.build_index(force=True)
+        system.rag._indexed = True
+        
+    except Exception as e:
+        print(f"  ✗ Failed to load RAG documents JSON: {e}")
+
+
 def main():
     """Main entry point"""
     parser = argparse.ArgumentParser(
         description="Interactive chat with LatentMAS system",
-        formatter_class=argparse.RawDescriptionHelpFormatter
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  # Interactive mode
+  python chat.py --model Qwen/Qwen2.5-3B-Instruct
+  
+  # Single prompt mode (non-interactive)
+  python chat.py --prompt "What is the treatment for hypertension?"
+  
+  # With external RAG data from URL
+  python chat.py --prompt "Summarize the data" --rag-data-url "https://example.com/data.json"
+  
+  # With RAG documents as JSON array
+  python chat.py --prompt "What does doc1 say?" --rag-docs-json '[{"title":"doc1","content":"..."}]'
+  
+  # With custom system prompt and tools
+  python chat.py --system-prompt "You are a medical expert" --enable-tools
+"""
     )
     
     # Model arguments
@@ -316,6 +445,20 @@ def main():
         type=str,
         default="cuda",
         help="Device to use (default: cuda)"
+    )
+    
+    # Inference parameters
+    parser.add_argument(
+        "--max-tokens",
+        type=int,
+        default=800,
+        help="Maximum tokens to generate (default: 800)"
+    )
+    parser.add_argument(
+        "--temperature",
+        type=float,
+        default=0.7,
+        help="Generation temperature (default: 0.7)"
     )
     
     # Feature arguments
@@ -336,22 +479,88 @@ def main():
         action="store_true",
         help="Enable tool use (calculator, search, etc.)"
     )
+    
+    # RAG arguments
     parser.add_argument(
         "--rag-docs",
         type=str,
-        help="Path to documents to load for RAG (RAG is always enabled)"
+        help="Path to documents directory or file for RAG"
+    )
+    parser.add_argument(
+        "--rag-data-url",
+        type=str,
+        help="URL to download RAG data from (JSON/CSV/text)"
+    )
+    parser.add_argument(
+        "--rag-docs-json",
+        type=str,
+        help="JSON array of documents: '[{\"title\":\"...\",\"content\":\"...\"}]'"
+    )
+    parser.add_argument(
+        "--no-default-data",
+        action="store_true",
+        help="Don't load default data from ./data directory"
+    )
+    
+    # Single prompt mode (non-interactive)
+    parser.add_argument(
+        "--prompt",
+        type=str,
+        help="Single prompt to run (non-interactive mode)"
+    )
+    parser.add_argument(
+        "--output-json",
+        action="store_true",
+        help="Output response as JSON (for --prompt mode)"
+    )
+    parser.add_argument(
+        "--conversation-id",
+        type=str,
+        help="Continue an existing conversation by ID"
+    )
+    
+    # Server mode
+    parser.add_argument(
+        "--serve-api",
+        action="store_true",
+        help="Start as local API server (for testing)"
+    )
+    parser.add_argument(
+        "--port",
+        type=int,
+        default=8000,
+        help="API server port (default: 8000)"
     )
     
     args = parser.parse_args()
     
-    # Print header
-    print_header()
+    # Print header (unless in single prompt mode with JSON output)
+    if not (args.prompt and args.output_json):
+        print_header()
     
     # Initialize system
     system = initialize_system(args)
     
-    # Start chat loop
-    chat_loop(system, use_tools=args.enable_tools)
+    # Load external RAG data if provided
+    if args.rag_data_url:
+        load_external_rag_data(system, args.rag_data_url)
+    
+    if args.rag_docs_json:
+        load_rag_documents_json(system, args.rag_docs_json)
+    
+    # Run mode
+    if args.serve_api:
+        # Start local API server
+        print(f"\nStarting local API server on port {args.port}...")
+        print(f"Test with: curl -X POST http://localhost:{args.port}/chat -d '{{\"prompt\": \"Hello\"}}'\n")
+        # This would need flask/fastapi - for now just print instructions
+        print("[API server mode not implemented yet - use --prompt for single queries]")
+    elif args.prompt:
+        # Single prompt mode
+        run_single_prompt(system, args)
+    else:
+        # Interactive chat loop
+        chat_loop(system, use_tools=args.enable_tools)
 
 
 if __name__ == "__main__":

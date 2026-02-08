@@ -1,0 +1,77 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Test files (keep test_input.json)
+test_*.py
+!test_input.json
+
+# Documentation
+*.md
+!README.md
+docs/
+
+# Results and logs
+results/
+*.log
+*.json
+!test_input.json
+!data/*.json
+
+# Large files
+*.pt
+*.bin
+*.safetensors
+*.ckpt
+
+# Chat sessions
+chat_sessions/
+
+# GitHub
+.github/
+
+# RunPod local files
+.runpod/
+
+# Evaluation data (large)
+examples/evaluation/eval_data/
+examples/evaluation/results/
+
+# Cache
+.cache/
+*.cache
+__pycache__/

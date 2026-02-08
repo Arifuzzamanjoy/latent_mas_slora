@@ -1,0 +1,29 @@
+[
+    {
+        "input": {
+            "prompt": "What is the capital of France?"
+        },
+        "expected_output_keys": ["response", "conversation_id", "domain"]
+    },
+    {
+        "input": {
+            "prompt": "What is the treatment for hypertension?",
+            "max_tokens": 500
+        },
+        "expected_output_keys": ["response", "domain"]
+    },
+    {
+        "input": {
+            "prompt": "Write a Python function to calculate factorial",
+            "enable_tools": false
+        },
+        "expected_output_keys": ["response"]
+    },
+    {
+        "input": {
+            "prompt": "Solve x^2 + 5x + 6 = 0",
+            "temperature": 0.5
+        },
+        "expected_output_keys": ["response", "domain"]
+    }
+]
