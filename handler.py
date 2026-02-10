@@ -580,15 +580,21 @@ def handler(job):
 
         if rag_documents:
             for i, doc in enumerate(rag_documents):
+                # Extract content and metadata from document dict
+                doc_content = doc.get("content", "") if isinstance(doc, dict) else str(doc)
+                doc_metadata = doc.get("metadata", {}) if isinstance(doc, dict) else {}
+                doc_metadata["source"] = doc_metadata.get("source", "api_input")
+                doc_metadata["index"] = i + 1
+                
                 system.rag.store.add_document(
-                    content=doc,
+                    content=doc_content,
                     title=f"input_doc_{i+1}",
-                    source="api_input",
-                    metadata={"type": "text", "source": "api_input"}
+                    source=doc_metadata.get("source", "api_input"),
+                    metadata=doc_metadata
                 )
             system.rag.retriever.build_index(force=True)
             system.rag._indexed = True
-            print(f"[INFO] Loaded {len(rag_documents)} external documents")
+            print(f"[INFO] Loaded {len(rag_documents)} external documents from client")
 
         # --- System prompt override ---
         if system_prompt and system._conversation_manager:
