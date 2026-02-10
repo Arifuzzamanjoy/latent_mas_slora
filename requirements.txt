@@ -1,5 +1,6 @@
 # Core Dependencies
 torch>=2.1.0
+torchvision>=0.16.0
 transformers>=4.40.0
 peft>=0.10.0
 accelerate>=0.27.0
@@ -19,6 +20,9 @@ datasets>=2.18.0
 
 # RAG Dependencies
 sentence-transformers>=2.2.0  # For embeddings
+
+# VLM (Vision-Language Model) Dependencies
+qwen-vl-utils[decord]  # For Qwen2.5-VL image/video processing
 # pypdf>=4.0.0  # Optional: PDF support
 # PyPDF2>=3.0.0  # Alternative PDF support
 

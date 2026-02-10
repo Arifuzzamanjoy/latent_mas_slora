@@ -32,14 +32,13 @@ COPY requirements.txt /app/requirements.txt
 # Install Python dependencies
 # hadolint ignore=DL3013
 RUN python3.11 -m pip install --no-cache-dir -r /app/requirements.txt && \
-    python3.11 -m pip install --no-cache-dir runpod==1.7.0 requests==2.31.0
+    python3.11 -m pip install --no-cache-dir runpod==1.7.0 requests==2.31.0 "qwen-vl-utils[decord]"
 
 # Copy source code
 COPY src/ /app/src/
 COPY examples/ /app/examples/
 COPY data/ /app/data/
 COPY handler.py /app/handler.py
-COPY test_input.json /app/test_input.json
 
 # Create cache directories
 RUN mkdir -p /home/caches/huggingface/hub /home/caches/torch /home/caches/sentence_transformers

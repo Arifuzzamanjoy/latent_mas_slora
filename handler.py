@@ -14,6 +14,8 @@ API Input Schema:
 {
     "input": {
         "prompt": "Your question here",
+        "image_url": "Optional: URL of an image for VLM analysis",
+        "image_base64": "Optional: base64-encoded image data",
         "rag_data": "Optional: URL or base64 JSON/CSV data for RAG",
         "rag_documents": ["doc1.txt content", "doc2.txt content"],
         "system_prompt": "Optional custom system prompt",
@@ -27,7 +29,7 @@ API Input Schema:
         "no_default_data": false,
         "list_loras": false,
         "list_conversations": false,
-        "model": "Qwen/Qwen2.5-3B-Instruct"
+        "model": "Qwen/Qwen2.5-VL-7B-Instruct"
     }
 }
 """
@@ -161,7 +163,7 @@ def get_session_store() -> SessionStore:
 # ================================================================
 
 
-def load_system(model_name: str = "Qwen/Qwen2.5-3B-Instruct"):
+def load_system(model_name: str = "Qwen/Qwen2.5-VL-7B-Instruct"):
     """Load and configure the LatentMAS system"""
     global SYSTEM
     
@@ -544,7 +546,7 @@ def handler(job):
         return {"error": "Missing required parameter: 'prompt'"}
 
     # --- Optional parameters ---
-    model_name = job_input.get("model", "Qwen/Qwen2.5-3B-Instruct")
+    model_name = job_input.get("model", "Qwen/Qwen2.5-VL-7B-Instruct")
     max_tokens = job_input.get("max_tokens", 800)
     temperature = job_input.get("temperature", 0.7)
     system_prompt = job_input.get("system_prompt")
@@ -556,6 +558,8 @@ def handler(job):
     no_default_data = job_input.get("no_default_data", False)
     lora_adapter = job_input.get("lora_adapter")
     lora_hf_path = job_input.get("lora_hf_path")
+    image_url = job_input.get("image_url")
+    image_base64 = job_input.get("image_base64")
 
     try:
         # Load or reuse system
@@ -620,7 +624,20 @@ def handler(job):
             system._rag_pipeline = None
 
         try:
-            if enable_tools:
+            # VLM image inference path (bypasses multi-agent pipeline)
+            if (image_url or image_base64) and system._is_vlm:
+                print(f"[INFO] VLM image inference mode")
+                response_text = system.vlm_inference(
+                    prompt=prompt,
+                    image_url=image_url,
+                    image_base64=image_base64,
+                    max_tokens=max_tokens,
+                    temperature=temperature,
+                )
+                # Still save to conversation for continuity
+                conv.add_message("user", prompt)
+                conv.add_message("assistant", response_text)
+            elif enable_tools:
                 result = system.run_with_tools(
                     prompt,
                     conversation_id=conversation_id,
@@ -667,6 +684,8 @@ def handler(job):
             "domain": domain_info.get("domain", "general"),
             "domain_confidence": domain_info.get("confidence", 0.0),
             "model": model_name,
+            "vlm": getattr(system, '_is_vlm', False),
+            "image_provided": bool(image_url or image_base64),
             "rag_enabled": system._rag_pipeline is not None,
             "tools_enabled": enable_tools,
             "lora": lora_info,

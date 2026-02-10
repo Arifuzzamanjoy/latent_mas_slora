@@ -24,61 +24,47 @@ class ExternalLoRAInfo:
     hf_path: str
     description: str = ""
     domain: str = "general"
-    base_model: str = "Qwen/Qwen2.5-3B"
+    base_model: str = "Qwen/Qwen2.5-VL-7B-Instruct"
     rank: Optional[int] = None
     verified: bool = False
 
 
-# Registry of known open-source LoRAs for Qwen2.5
+# Registry of known open-source LoRAs for Qwen2.5-VL-7B
 QWEN25_LORA_REGISTRY = {
-    # Medical Domain
-    "medical_reasoner": ExternalLoRAInfo(
-        name="medical_reasoner",
-        hf_path="iimran/Qwen2.5-3B-R1-MedicalReasoner-lora-adapter",
-        description="Medical reasoning and diagnosis",
+    # Medical Domain (VL-7B)
+    "medical_vl": ExternalLoRAInfo(
+        name="medical_vl",
+        hf_path="sarathi-balakrishnan/Qwen2.5-VL-7B-Medical-LoRA",
+        description="Medical visual reasoning and diagnosis",
         domain="medical",
-        base_model="Qwen/Qwen2.5-3B",
+        base_model="Qwen/Qwen2.5-VL-7B-Instruct",
     ),
-    "medical_instruct": ExternalLoRAInfo(
-        name="medical_instruct",
-        hf_path="zjudai/flowertune-medical-lora-qwen2.5-7b-instruct",
-        description="Medical instruction following",
-        domain="medical",
-        base_model="Qwen/Qwen2.5-7B-Instruct",
+
+    # Visual Understanding
+    "reward_vl": ExternalLoRAInfo(
+        name="reward_vl",
+        hf_path="DJ-Kim/Qwen2.5_VL_7B_Reward_LoRA_VLFeedBack_144000step",
+        description="Vision-language reward model for improved responses",
+        domain="general",
+        base_model="Qwen/Qwen2.5-VL-7B-Instruct",
     ),
-    
-    # Math Domain
-    "math_instruct": ExternalLoRAInfo(
-        name="math_instruct",
-        hf_path="SKNahin/Qwen2.5-Math-7B-Instruct-bnb-4bit-lora",
-        description="Mathematical reasoning",
-        domain="math",
-        base_model="Qwen/Qwen2.5-Math-7B-Instruct",
+
+    # Document / OCR
+    "comics_vl": ExternalLoRAInfo(
+        name="comics_vl",
+        hf_path="VLR-CVC/Qwen2.5-VL-7B-Instruct-lora-ComicsPAP",
+        description="Comics panel analysis and understanding",
+        domain="general",
+        base_model="Qwen/Qwen2.5-VL-7B-Instruct",
     ),
-    "math_basic": ExternalLoRAInfo(
-        name="math_basic",
-        hf_path="xue10/qwen2.5-0.5B-MathInstruct-lora",
-        description="Basic math instruction",
-        domain="math",
-        base_model="Qwen/Qwen2.5-0.5B",
-    ),
-    
-    # Coding Domain
-    "coder_7b": ExternalLoRAInfo(
-        name="coder_7b",
-        hf_path="Alexis-Az/Qwen-2.5-Coder-7B-Instruct-LoRA",
-        description="Code generation and understanding",
-        domain="code",
-        base_model="Qwen/Qwen2.5-Coder-7B-Instruct",
-    ),
-    
-    # Reasoning Domain  
-    "reasoning_lora": ExternalLoRAInfo(
-        name="reasoning_lora",
-        hf_path="PandurangMopgar/qwen-2.5-7b-reasoning-lora",
-        description="General reasoning enhancement",
-        domain="reasoning",
-        base_model="Qwen/Qwen2.5-7B",
+
+    # Point Detection & Counting
+    "point_detect_vl": ExternalLoRAInfo(
+        name="point_detect_vl",
+        hf_path="SimulaMet/PointDetectCount-Qwen2.5-VL-7B-LoRA",
+        description="Point detection and counting in images",
+        domain="general",
+        base_model="Qwen/Qwen2.5-VL-7B-Instruct",
     ),
 }
 
@@ -94,7 +80,7 @@ class LoRAAdapterManager:
     - Memory tracking and optimization
     
     Memory Budget (48GB VRAM):
-    - Base model (Qwen2.5-3B BF16): ~6GB
+    - Base model (Qwen2.5-VL-7B BF16): ~16GB
     - Per adapter (rank 32): ~50MB
     - Can load 20+ adapters with room to spare
     """

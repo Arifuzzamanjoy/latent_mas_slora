@@ -53,7 +53,7 @@ class EndpointClient:
         self,
         endpoint_url: str,
         api_key: str,
-        model: str = "Qwen/Qwen2.5-3B-Instruct",
+        model: str = "Qwen/Qwen2.5-VL-7B-Instruct",
         max_tokens: int = 800,
         temperature: float = 0.7,
         system_prompt: Optional[str] = None,
@@ -965,7 +965,7 @@ Examples:
 
   # ===== LOCAL MODE (requires GPU) =====
   # Interactive mode (loads model locally)
-  python chat.py --model Qwen/Qwen2.5-3B-Instruct
+  python chat.py --model Qwen/Qwen2.5-VL-7B-Instruct
   
   # Single prompt mode (non-interactive)
   python chat.py --prompt "What is the treatment for hypertension?"
@@ -1014,8 +1014,8 @@ Examples:
     parser.add_argument(
         "--model",
         type=str,
-        default="Qwen/Qwen2.5-3B-Instruct",
-        help="Model name or path (default: Qwen/Qwen2.5-3B-Instruct)"
+        default="Qwen/Qwen2.5-VL-7B-Instruct",
+        help="Model name or path (default: Qwen/Qwen2.5-VL-7B-Instruct)"
     )
     parser.add_argument(
         "--device",

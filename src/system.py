@@ -16,7 +16,7 @@ import torch
 from typing import Dict, List, Optional, Any, Union
 from dataclasses import dataclass
 
-from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
+from transformers import AutoModelForCausalLM, AutoTokenizer, AutoProcessor, BitsAndBytesConfig
 from peft import get_peft_model
 
 from .core.latent_memory import LatentMemory, KVCacheManager
@@ -55,7 +55,7 @@ DOMAIN_AGENTS = {
 @dataclass 
 class SystemConfig:
     """Configuration for LatentMAS system"""
-    model_name: str = "Qwen/Qwen2.5-3B-Instruct"
+    model_name: str = "Qwen/Qwen2.5-VL-7B-Instruct"
     device: str = "cuda"
     cache_dir: str = "/home/caches"
     
@@ -89,7 +89,7 @@ class LatentMASSystem:
     - Up to 15 latent reasoning steps
     
     Example:
-        system = LatentMASSystem(model_name="Qwen/Qwen2.5-3B-Instruct")
+        system = LatentMASSystem(model_name="Qwen/Qwen2.5-VL-7B-Instruct")
         system.add_agent(AgentConfig.planner())
         system.add_agent(AgentConfig.critic())
         system.add_agent(AgentConfig.judger())
@@ -100,7 +100,7 @@ class LatentMASSystem:
     
     def __init__(
         self,
-        model_name: str = "Qwen/Qwen2.5-3B-Instruct",
+        model_name: str = "Qwen/Qwen2.5-VL-7B-Instruct",
         device: str = "cuda",
         cache_dir: str = "/home/caches",
         dtype: str = "bfloat16",
@@ -127,14 +127,23 @@ class LatentMASSystem:
         
         os.makedirs(cache_dir, exist_ok=True)
         
+        # Detect if model is a VLM (vision-language model)
+        self._is_vlm = self._detect_vlm(model_name)
+        
         print(f"[INFO] Initializing LatentMAS System")
         print(f"[INFO] Model: {model_name}")
+        print(f"[INFO] VLM: {self._is_vlm}")
         print(f"[INFO] Device: {self.device}")
         print(f"[INFO] Dtype: {dtype}")
         print(f"[INFO] Latent Steps: {latent_steps}")
         
-        # Load model and tokenizer
-        self.tokenizer = self._load_tokenizer()
+        # Load model and tokenizer/processor
+        if self._is_vlm:
+            self.processor = self._load_processor()
+            self.tokenizer = self.processor.tokenizer
+        else:
+            self.processor = None
+            self.tokenizer = self._load_tokenizer()
         self.model = self._load_model()
         
         # Initialize components (lazy - after first agent added)
@@ -165,8 +174,26 @@ class LatentMASSystem:
         
         print(f"[INFO] Base model loaded successfully")
     
+    @staticmethod
+    def _detect_vlm(model_name: str) -> bool:
+        """Detect if the model is a vision-language model."""
+        vlm_indicators = ["-VL-", "-VL/", "_VL_", "_VL/", "vision", "vlm"]
+        return any(ind.lower() in model_name.lower() for ind in vlm_indicators)
+
+    def _load_processor(self) -> AutoProcessor:
+        """Load processor for VLM models (includes tokenizer + image processor)."""
+        processor = AutoProcessor.from_pretrained(
+            self.config.model_name,
+            cache_dir=self.config.cache_dir,
+            trust_remote_code=True,
+        )
+        # Ensure pad token is set on the underlying tokenizer
+        if processor.tokenizer.pad_token is None:
+            processor.tokenizer.pad_token = processor.tokenizer.eos_token
+        return processor
+
     def _load_tokenizer(self) -> AutoTokenizer:
-        """Load tokenizer"""
+        """Load tokenizer (for non-VLM models)."""
         tokenizer = AutoTokenizer.from_pretrained(
             self.config.model_name,
             cache_dir=self.config.cache_dir,
@@ -178,8 +205,12 @@ class LatentMASSystem:
         
         return tokenizer
     
-    def _load_model(self) -> AutoModelForCausalLM:
-        """Load base model with appropriate precision"""
+    def _load_model(self):
+        """Load base model with appropriate precision.
+        
+        Uses Qwen2_5_VLForConditionalGeneration for VLM models,
+        AutoModelForCausalLM for standard text models.
+        """
         kwargs = {
             "cache_dir": self.config.cache_dir,
             "trust_remote_code": True,
@@ -198,10 +229,17 @@ class LatentMASSystem:
         else:
             kwargs["torch_dtype"] = torch.float32
         
-        model = AutoModelForCausalLM.from_pretrained(
-            self.config.model_name,
-            **kwargs,
-        )
+        if self._is_vlm:
+            from transformers import Qwen2_5_VLForConditionalGeneration
+            model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
+                self.config.model_name,
+                **kwargs,
+            )
+        else:
+            model = AutoModelForCausalLM.from_pretrained(
+                self.config.model_name,
+                **kwargs,
+            )
         
         # Move to device if not quantized
         if self.config.dtype != "4bit":
@@ -894,6 +932,97 @@ class LatentMASSystem:
             self.enable_conversations()
         
         return self._conversation_manager.chat(message, conversation_id, **kwargs)
+
+    def vlm_inference(
+        self,
+        prompt: str,
+        image_url: Optional[str] = None,
+        image_base64: Optional[str] = None,
+        max_tokens: int = 800,
+        temperature: float = 0.7,
+    ) -> str:
+        """
+        Run VLM (Vision-Language Model) inference with optional image input.
+
+        This method handles the full VLM pipeline including image processing
+        via qwen_vl_utils. Falls back to text-only if no image provided.
+
+        Args:
+            prompt: Text prompt / question
+            image_url: URL of an image (http/https or local file path)
+            image_base64: Base64-encoded image data
+            max_tokens: Maximum tokens to generate
+            temperature: Sampling temperature
+
+        Returns:
+            Generated text response
+        """
+        if not self._is_vlm:
+            raise RuntimeError("vlm_inference requires a VLM model (e.g. Qwen2.5-VL)")
+
+        # Build message content
+        content = []
+
+        # Add image if provided
+        if image_url:
+            content.append({"type": "image", "image": image_url})
+        elif image_base64:
+            content.append({
+                "type": "image",
+                "image": f"data:image;base64,{image_base64}",
+            })
+
+        # Add text prompt
+        content.append({"type": "text", "text": prompt})
+
+        messages = [{"role": "user", "content": content}]
+
+        # Apply chat template
+        text = self.processor.apply_chat_template(
+            messages, tokenize=False, add_generation_prompt=True
+        )
+
+        # Process vision inputs
+        image_inputs = None
+        video_inputs = None
+        if image_url or image_base64:
+            try:
+                from qwen_vl_utils import process_vision_info
+                image_inputs, video_inputs = process_vision_info(messages)
+            except ImportError:
+                print("[WARN] qwen_vl_utils not installed, skipping image processing")
+
+        # Tokenize with processor
+        inputs = self.processor(
+            text=[text],
+            images=image_inputs,
+            videos=video_inputs,
+            padding=True,
+            return_tensors="pt",
+        ).to(self.device)
+
+        # Generate
+        gen_kwargs = {
+            "max_new_tokens": max_tokens,
+        }
+        if temperature > 0:
+            gen_kwargs["do_sample"] = True
+            gen_kwargs["temperature"] = temperature
+            gen_kwargs["top_p"] = 0.9
+        else:
+            gen_kwargs["do_sample"] = False
+
+        with torch.no_grad():
+            output_ids = self.model.generate(**inputs, **gen_kwargs)
+
+        # Trim input tokens from output
+        generated_ids = [
+            out[len(inp):] for inp, out in zip(inputs.input_ids, output_ids)
+        ]
+        result = self.processor.batch_decode(
+            generated_ids, skip_special_tokens=True, clean_up_tokenization_spaces=False
+        )
+        return result[0].strip() if result else ""
     
     def get_conversation(self, conversation_id: str) -> Optional[Conversation]:
         """Get a conversation by ID"""
