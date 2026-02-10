@@ -555,7 +555,7 @@ def handler(job):
     enable_tools = job_input.get("enable_tools", False)
     rag_data = job_input.get("rag_data")
     rag_documents = job_input.get("rag_documents", [])
-    no_default_data = job_input.get("no_default_data", False)
+    no_default_data = job_input.get("no_default_data", True)
     lora_adapter = job_input.get("lora_adapter")
     lora_hf_path = job_input.get("lora_hf_path")
     image_url = job_input.get("image_url")
