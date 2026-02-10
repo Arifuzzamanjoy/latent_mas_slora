@@ -5,8 +5,10 @@ LatentMAS RunPod Serverless Handler
 Multi-agent reasoning with:
 - Domain-specific LoRA routing (medical/math/code)
 - RAG document intelligence
-- Conversation continuity
+- Conversation continuity with persistent session memory
 - TRUE LatentMAS latent-space collaboration
+- External LoRA adapter selection via API
+- Updatable LoRA registry (data/lora_registry.json)
 
 API Input Schema:
 {
@@ -16,9 +18,15 @@ API Input Schema:
         "rag_documents": ["doc1.txt content", "doc2.txt content"],
         "system_prompt": "Optional custom system prompt",
         "conversation_id": "Optional: continue existing conversation",
+        "session_id": "Optional: group conversations into a session",
         "max_tokens": 800,
         "temperature": 0.7,
         "enable_tools": false,
+        "lora_adapter": "Optional: name from registry (e.g. 'medical_reasoner')",
+        "lora_hf_path": "Optional: direct HuggingFace LoRA path",
+        "no_default_data": false,
+        "list_loras": false,
+        "list_conversations": false,
         "model": "Qwen/Qwen2.5-3B-Instruct"
     }
 }
@@ -50,10 +58,21 @@ for cache_dir in ["/home/caches/huggingface/hub", "/home/caches/torch", "/home/c
 
 from src import LatentMASSystem
 from src.agents.configs import AgentConfig
+from src.conversation.session import SessionStore
 
 # Global system instance (loaded once on cold start)
 SYSTEM = None
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
+
+# Persistent session store (survives across requests within same worker)
+SESSION_STORE = None
+
+# External LoRA registry (loaded from JSON file, can be updated)
+LORA_REGISTRY = {}
+LORA_REGISTRY_PATH = Path("/app/data/lora_registry.json")
+
+# Track default data state
+_DEFAULT_DATA_LOADED = False
 
 print(f"[INFO] LatentMAS Serverless Worker starting...")
 print(f"[INFO] Device: {DEVICE}")
@@ -61,6 +80,85 @@ print(f"[INFO] CUDA Available: {torch.cuda.is_available()}")
 if torch.cuda.is_available():
     print(f"[INFO] GPU: {torch.cuda.get_device_name(0)}")
     print(f"[INFO] VRAM: {torch.cuda.get_device_properties(0).total_memory / 1024**3:.1f} GB")
+
+
+# ================================================================
+# LoRA Registry Management
+# ================================================================
+
+def load_lora_registry() -> dict:
+    """Load the external LoRA registry from JSON file."""
+    global LORA_REGISTRY
+    registry_path = LORA_REGISTRY_PATH
+
+    if not registry_path.exists():
+        # Also check local dev path
+        alt = Path(__file__).parent / "data" / "lora_registry.json"
+        if alt.exists():
+            registry_path = alt
+
+    if registry_path.exists():
+        try:
+            with open(registry_path, "r") as f:
+                data = json.load(f)
+            LORA_REGISTRY = data.get("adapters", {})
+            print(f"[INFO] Loaded LoRA registry: {len(LORA_REGISTRY)} adapters from {registry_path}")
+        except Exception as e:
+            print(f"[WARN] Failed to load LoRA registry: {e}")
+    else:
+        print("[INFO] No external lora_registry.json found, using built-in registry only")
+
+    return LORA_REGISTRY
+
+
+def get_available_loras() -> dict:
+    """Get combined LoRA info from external registry + built-in registry."""
+    from src.lora.adapter_manager import QWEN25_LORA_REGISTRY
+
+    combined = {}
+    # Built-in entries
+    for name, info in QWEN25_LORA_REGISTRY.items():
+        combined[name] = {
+            "hf_path": info.hf_path,
+            "description": info.description,
+            "domain": info.domain,
+            "base_model": info.base_model,
+            "source": "builtin",
+        }
+    # External JSON entries (override built-in if same name)
+    for name, info in LORA_REGISTRY.items():
+        combined[name] = {
+            "hf_path": info.get("hf_path", ""),
+            "description": info.get("description", ""),
+            "domain": info.get("domain", "general"),
+            "base_model": info.get("base_model", ""),
+            "tags": info.get("tags", []),
+            "source": "registry_json",
+        }
+    return combined
+
+
+# ================================================================
+# Session-persistent Conversation Memory
+# ================================================================
+
+def get_session_store() -> SessionStore:
+    """Get or create the persistent session store."""
+    global SESSION_STORE
+    if SESSION_STORE is None:
+        session_path = os.environ.get("SESSION_PATH", "/tmp/chat_sessions")
+        SESSION_STORE = SessionStore(
+            storage_path=session_path,
+            auto_save=True,
+            max_sessions=500,
+        )
+        print(f"[INFO] Session store initialized at {session_path}")
+    return SESSION_STORE
+
+
+# ================================================================
+# System Loading
+# ================================================================
 
 
 def load_system(model_name: str = "Qwen/Qwen2.5-3B-Instruct"):
@@ -103,18 +201,23 @@ def load_system(model_name: str = "Qwen/Qwen2.5-3B-Instruct"):
         auto_load_adapters=False,
     )
     
-    # Enable conversations
+    # Enable conversations with persistent session store
     print("[INFO] Enabling conversation continuity...")
     SYSTEM.enable_conversations(
         session_path="/tmp/chat_sessions",
         default_system_prompt="You are a helpful AI assistant with multi-agent reasoning capabilities.",
     )
+    # Wire the session store so conversations persist across requests
+    SYSTEM._session_store = get_session_store()
     
     # Load default data documents
+    global _DEFAULT_DATA_LOADED
     data_dir = Path("/app/data")
     if data_dir.exists():
         print(f"[INFO] Loading default documents from {data_dir}")
-        load_data_documents(SYSTEM, data_dir)
+        count = load_data_documents(SYSTEM, data_dir)
+        if count > 0:
+            _DEFAULT_DATA_LOADED = True
     
     print("[INFO] System loaded successfully!")
     return SYSTEM
@@ -176,6 +279,39 @@ def load_data_documents(system, data_dir: Path) -> int:
         system.rag._indexed = True
     
     return doc_count
+
+
+def _cleanup_external_rag(system) -> None:
+    """Remove external (per-request) RAG documents, keeping default data."""
+    if system._rag_pipeline is None:
+        return
+    
+    store = system.rag.store
+    # Find doc_ids that came from api_input / external sources
+    docs_to_remove = []
+    for doc_id, doc in store._documents.items():
+        if (doc.metadata.get("source") == "api_input"
+                or doc.source in ("external", "api_input")):
+            docs_to_remove.append(doc_id)
+    
+    if not docs_to_remove:
+        return
+    
+    # Remove documents and their chunks
+    for doc_id in docs_to_remove:
+        doc = store._documents.pop(doc_id, None)
+        if doc:
+            for chunk in doc.chunks:
+                store._chunks.pop(chunk.chunk_id, None)
+    
+    # Rebuild index with remaining docs
+    if store._documents:
+        system.rag.retriever.build_index(force=True)
+        system.rag._indexed = True
+    else:
+        system.rag._indexed = False
+    
+    print(f"[INFO] Cleaned up {len(docs_to_remove)} external RAG document(s)")
 
 
 def load_external_rag_data(system, rag_data: str) -> int:
@@ -243,61 +379,205 @@ def load_external_rag_data(system, rag_data: str) -> int:
     return doc_count
 
 
+# ================================================================
+# LoRA Adapter Loading
+# ================================================================
+
+def load_lora_for_request(system, adapter_name: str = None, hf_path: str = None) -> dict:
+    """
+    Load a LoRA adapter for the current request.
+
+    Args:
+        adapter_name: Name from the registry (lora_registry.json or built-in)
+        hf_path: Direct HuggingFace path (overrides registry lookup)
+
+    Returns:
+        dict with status info
+    """
+    if not adapter_name and not hf_path:
+        return {"loaded": False, "reason": "no adapter specified"}
+
+    # Resolve hf_path from registry if only name given
+    if adapter_name and not hf_path:
+        available = get_available_loras()
+        if adapter_name not in available:
+            return {
+                "loaded": False,
+                "error": f"Unknown adapter '{adapter_name}'",
+                "available": list(available.keys()),
+            }
+        hf_path = available[adapter_name]["hf_path"]
+
+    resolved_name = adapter_name or hf_path.split("/")[-1]
+
+    # Check if already loaded
+    if system._adapter_manager and system._adapter_manager.is_loaded(resolved_name):
+        try:
+            system.model.set_adapter(resolved_name)
+            print(f"[INFO] Switched to already-loaded adapter: {resolved_name}")
+            return {"loaded": True, "adapter": resolved_name, "cached": True}
+        except Exception:
+            pass
+
+    # Load from HuggingFace
+    try:
+        success = system.load_external_lora(resolved_name, hf_path)
+        if success:
+            system.model.set_adapter(resolved_name)
+            print(f"[INFO] Loaded & activated LoRA: {resolved_name} ({hf_path})")
+            return {"loaded": True, "adapter": resolved_name, "hf_path": hf_path}
+        else:
+            return {"loaded": False, "error": f"Failed to load {hf_path}"}
+    except Exception as e:
+        print(f"[WARN] LoRA load failed for {hf_path}: {e}")
+        return {"loaded": False, "error": str(e)}
+
+
+# ================================================================
+# Session-aware Conversation Helpers
+# ================================================================
+
+def get_or_create_conversation(system, conversation_id=None, session_id=None):
+    """
+    Get or create a conversation with session persistence.
+
+    If conversation_id is provided, tries to restore it from:
+      1. In-memory ConversationManager
+      2. Persistent SessionStore (disk)
+    If session_id is provided, conversations are grouped under that session.
+
+    Returns:
+        (conversation, conversation_id, session_id)
+    """
+    store = get_session_store()
+
+    # Try to find existing conversation
+    if conversation_id:
+        # Check in-memory first
+        conv = system.get_conversation(conversation_id)
+        if conv:
+            return conv, conversation_id, session_id
+
+        # Check persistent session store
+        if session_id:
+            session = store.get_session(session_id)
+            if session:
+                stored_conv = session.get_conversation(conversation_id)
+                if stored_conv:
+                    # Restore into ConversationManager
+                    system._conversation_manager._conversations[conversation_id] = stored_conv
+                    system._conversation_manager._active_conversation_id = conversation_id
+                    print(f"[INFO] Restored conversation {conversation_id[:8]} from session {session_id[:8]}")
+                    return stored_conv, conversation_id, session_id
+
+        # Search all sessions for this conversation
+        for sess in store.list_sessions():
+            stored_conv = sess.get_conversation(conversation_id)
+            if stored_conv:
+                system._conversation_manager._conversations[conversation_id] = stored_conv
+                system._conversation_manager._active_conversation_id = conversation_id
+                session_id = sess.session_id
+                print(f"[INFO] Restored conversation {conversation_id[:8]} from session {session_id[:8]}")
+                return stored_conv, conversation_id, session_id
+
+    # Create new conversation
+    conv = system.new_conversation()
+    conversation_id = conv.conversation_id
+
+    # Create or get session
+    if not session_id:
+        import uuid
+        session_id = str(uuid.uuid4())
+
+    session = store.get_or_create_session(session_id)
+    session.add_conversation(conv)
+    store.save_session(session)
+
+    return conv, conversation_id, session_id
+
+
+def save_conversation_to_session(system, conversation_id, session_id):
+    """Persist the current conversation state to disk."""
+    store = get_session_store()
+    conv = system.get_conversation(conversation_id)
+    if not conv:
+        return
+
+    session = store.get_or_create_session(session_id)
+    session.conversations[conversation_id] = conv
+    store.save_session(session)
+
+
+# ================================================================
+# RunPod Serverless Handler
+# ================================================================
+
 def handler(job):
     """
-    RunPod Serverless Handler for LatentMAS
-    
-    Input Schema:
-    {
-        "input": {
-            "prompt": "Your question here (required)",
-            "rag_data": "URL or base64 JSON/CSV data (optional)",
-            "rag_documents": ["doc1 content", "doc2 content"] (optional),
-            "system_prompt": "Custom system prompt (optional)",
-            "conversation_id": "Continue conversation (optional)",
-            "max_tokens": 800 (optional),
-            "temperature": 0.7 (optional),
-            "enable_tools": false (optional),
-            "model": "Qwen/Qwen2.5-3B-Instruct" (optional)
-        }
-    }
-    
-    Output Schema:
-    {
-        "response": "AI response text",
-        "conversation_id": "conversation_uuid",
-        "domain": "detected domain (medical/math/code/general)",
-        "domain_confidence": 0.85,
-        "tokens_used": 150,
-        "rag_chunks_used": 3
-    }
+    RunPod Serverless Handler for LatentMAS.
+
+    Handles chat inference, LoRA selection, RAG injection,
+    and session-persistent conversations.
     """
     job_input = job.get("input", {})
-    
-    # Required parameters
+
+    # --- Metadata-only requests (no prompt required) ---
+    if job_input.get("list_loras"):
+        return {
+            "loras": get_available_loras(),
+            "registry_path": str(LORA_REGISTRY_PATH),
+        }
+
+    if job_input.get("list_conversations"):
+        store = get_session_store()
+        sessions = {}
+        for sess in store.list_sessions():
+            sessions[sess.session_id] = {
+                "created": str(getattr(sess, 'created_at', '')),
+                "conversations": list(sess.conversations.keys()),
+            }
+        return {"sessions": sessions}
+
+    # --- Required parameter ---
     prompt = job_input.get("prompt")
     if not prompt:
         return {"error": "Missing required parameter: 'prompt'"}
-    
-    # Optional parameters
+
+    # --- Optional parameters ---
     model_name = job_input.get("model", "Qwen/Qwen2.5-3B-Instruct")
     max_tokens = job_input.get("max_tokens", 800)
     temperature = job_input.get("temperature", 0.7)
     system_prompt = job_input.get("system_prompt")
     conversation_id = job_input.get("conversation_id")
+    session_id = job_input.get("session_id")
     enable_tools = job_input.get("enable_tools", False)
     rag_data = job_input.get("rag_data")
     rag_documents = job_input.get("rag_documents", [])
-    
+    no_default_data = job_input.get("no_default_data", False)
+    lora_adapter = job_input.get("lora_adapter")
+    lora_hf_path = job_input.get("lora_hf_path")
+
     try:
         # Load or reuse system
         system = load_system(model_name)
-        
-        # Load external RAG data if provided
+
+        # Clean up external docs from previous requests
+        _cleanup_external_rag(system)
+
+        # --- LoRA adapter selection ---
+        lora_info = {"loaded": False}
+        if lora_adapter or lora_hf_path:
+            lora_info = load_lora_for_request(system, lora_adapter, lora_hf_path)
+            if lora_info.get("error"):
+                print(f"[WARN] LoRA: {lora_info['error']}")
+
+        # --- RAG handling ---
+        # If no_default_data and no external RAG provided, skip RAG retrieval
+        skip_rag = no_default_data and not rag_data and not rag_documents
+
         if rag_data:
             load_external_rag_data(system, rag_data)
-        
-        # Load document list if provided
+
         if rag_documents:
             for i, doc in enumerate(rag_documents):
                 system.rag.store.add_document(
@@ -306,47 +586,54 @@ def handler(job):
                     source="api_input",
                     metadata={"type": "text", "source": "api_input"}
                 )
-            if rag_documents:
-                system.rag.retriever.build_index(force=True)
-                system.rag._indexed = True
-                print(f"[INFO] Loaded {len(rag_documents)} external documents")
-        
-        # Update system prompt if provided
+            system.rag.retriever.build_index(force=True)
+            system.rag._indexed = True
+            print(f"[INFO] Loaded {len(rag_documents)} external documents")
+
+        # --- System prompt override ---
         if system_prompt and system._conversation_manager:
             system._conversation_manager.default_system_prompt = system_prompt
-        
-        # Enable tools if requested
+
+        # --- Tools ---
         if enable_tools and system._tool_registry is None:
             system.enable_tools(register_defaults=True)
-        
-        # Process the request
-        print(f"[INFO] Processing prompt: '{prompt[:100]}...'")
-        
-        # Get or create conversation
-        if conversation_id:
-            conv = system.get_conversation(conversation_id)
-            if conv is None:
-                conv = system.new_conversation()
-                conversation_id = conv.conversation_id
-        else:
-            conv = system.new_conversation()
-            conversation_id = conv.conversation_id
-        
-        # Run inference
-        if enable_tools:
-            result = system.run_with_tools(
-                prompt,
-                conversation_id=conversation_id,
-                max_tool_calls=5,
-            )
-            response_text = result.get('answer', '') if isinstance(result, dict) else str(result)
-        else:
-            response_text = system.chat(
-                prompt,
-                conversation_id=conversation_id,
-            )
-        
-        # Get domain routing info
+
+        # --- Conversation with session persistence ---
+        print(f"[INFO] Processing: '{prompt[:100]}...'")
+
+        conv, conversation_id, session_id = get_or_create_conversation(
+            system,
+            conversation_id=conversation_id,
+            session_id=session_id,
+        )
+
+        # --- Inference ---
+        _saved_rag = None
+        if skip_rag and system._rag_pipeline is not None:
+            _saved_rag = system._rag_pipeline
+            system._rag_pipeline = None
+
+        try:
+            if enable_tools:
+                result = system.run_with_tools(
+                    prompt,
+                    conversation_id=conversation_id,
+                    max_tool_calls=5,
+                )
+                response_text = result.get('answer', '') if isinstance(result, dict) else str(result)
+            else:
+                response_text = system.chat(
+                    prompt,
+                    conversation_id=conversation_id,
+                )
+        finally:
+            if _saved_rag is not None:
+                system._rag_pipeline = _saved_rag
+
+        # --- Persist conversation ---
+        save_conversation_to_session(system, conversation_id, session_id)
+
+        # --- Domain routing info ---
         domain_info = {"domain": "general", "confidence": 0.0}
         if system._domain_routing_enabled:
             try:
@@ -359,21 +646,26 @@ def handler(job):
                     domain, confidence = system._semantic_router.get_best_domain(prompt)
                 else:
                     domain, confidence = "general", 0.0
-                domain_info = {"domain": domain.value if hasattr(domain, 'value') else str(domain), "confidence": confidence}
+                domain_info = {
+                    "domain": domain.value if hasattr(domain, 'value') else str(domain),
+                    "confidence": confidence,
+                }
             except Exception:
                 pass
-        
-        # Build response
+
+        # --- Build response ---
         return {
             "response": response_text,
             "conversation_id": conversation_id,
+            "session_id": session_id,
             "domain": domain_info.get("domain", "general"),
             "domain_confidence": domain_info.get("confidence", 0.0),
             "model": model_name,
             "rag_enabled": system._rag_pipeline is not None,
             "tools_enabled": enable_tools,
+            "lora": lora_info,
         }
-        
+
     except Exception as e:
         import traceback
         error_trace = traceback.format_exc()
@@ -387,6 +679,7 @@ def handler(job):
 
 # Load system on cold start (outside handler for efficiency)
 print("[INFO] Pre-loading system on cold start...")
+load_lora_registry()
 try:
     load_system()
 except Exception as e:

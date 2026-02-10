@@ -1,0 +1,54 @@
+{
+  "_description": "LoRA adapter registry for LatentMAS serverless inference. Add/update entries here to make new LoRAs available via the API. The handler loads this file on startup and clients can request specific adapters via the 'lora_adapter' input parameter.",
+  "_updated": "2026-02-10",
+  "adapters": {
+    "medical_reasoner": {
+      "hf_path": "iimran/Qwen2.5-3B-R1-MedicalReasoner-lora-adapter",
+      "description": "Medical reasoning and diagnosis",
+      "domain": "medical",
+      "base_model": "Qwen/Qwen2.5-3B",
+      "tags": ["medical", "diagnosis", "clinical"],
+      "verified": true
+    },
+    "medical_instruct": {
+      "hf_path": "zjudai/flowertune-medical-lora-qwen2.5-7b-instruct",
+      "description": "Medical instruction following (7B)",
+      "domain": "medical",
+      "base_model": "Qwen/Qwen2.5-7B-Instruct",
+      "tags": ["medical", "instruction"],
+      "verified": true
+    },
+    "math_instruct": {
+      "hf_path": "SKNahin/Qwen2.5-Math-7B-Instruct-bnb-4bit-lora",
+      "description": "Mathematical reasoning (7B)",
+      "domain": "math",
+      "base_model": "Qwen/Qwen2.5-Math-7B-Instruct",
+      "tags": ["math", "reasoning"],
+      "verified": true
+    },
+    "math_basic": {
+      "hf_path": "xue10/qwen2.5-0.5B-MathInstruct-lora",
+      "description": "Basic math instruction",
+      "domain": "math",
+      "base_model": "Qwen/Qwen2.5-0.5B",
+      "tags": ["math", "basic"],
+      "verified": true
+    },
+    "coder_7b": {
+      "hf_path": "Alexis-Az/Qwen-2.5-Coder-7B-Instruct-LoRA",
+      "description": "Code generation and understanding (7B)",
+      "domain": "code",
+      "base_model": "Qwen/Qwen2.5-Coder-7B-Instruct",
+      "tags": ["code", "programming"],
+      "verified": true
+    },
+    "reasoning_lora": {
+      "hf_path": "PandurangMopgar/qwen-2.5-7b-reasoning-lora",
+      "description": "General reasoning enhancement (7B)",
+      "domain": "reasoning",
+      "base_model": "Qwen/Qwen2.5-7B",
+      "tags": ["reasoning", "logic"],
+      "verified": true
+    }
+  }
+}
