@@ -447,13 +447,17 @@ def get_or_create_conversation(system, conversation_id=None, session_id=None):
       1. In-memory ConversationManager
       2. Persistent SessionStore (disk)
     If session_id is provided, conversations are grouped under that session.
+    
+    If both conversation_id and session_id are None, creates a new conversation.
+    If only session_id is provided (no conversation_id), uses the active conversation
+    from that session or creates a new one.
 
     Returns:
         (conversation, conversation_id, session_id)
     """
     store = get_session_store()
 
-    # Try to find existing conversation
+    # Try to find existing conversation by conversation_id
     if conversation_id:
         # Check in-memory first
         conv = system.get_conversation(conversation_id)
@@ -482,6 +486,19 @@ def get_or_create_conversation(system, conversation_id=None, session_id=None):
                 print(f"[INFO] Restored conversation {conversation_id[:8]} from session {session_id[:8]}")
                 return stored_conv, conversation_id, session_id
 
+    # If session_id provided but no conversation_id, check for active conversation in session
+    if session_id and not conversation_id:
+        session = store.get_session(session_id)
+        if session:
+            active_conv = session.get_active_conversation()
+            if active_conv:
+                # Restore into ConversationManager
+                conversation_id = active_conv.conversation_id
+                system._conversation_manager._conversations[conversation_id] = active_conv
+                system._conversation_manager._active_conversation_id = conversation_id
+                print(f"[INFO] Restored active conversation {conversation_id[:8]} from session {session_id[:8]}")
+                return active_conv, conversation_id, session_id
+
     # Create new conversation
     conv = system.new_conversation()
     conversation_id = conv.conversation_id
@@ -494,6 +511,8 @@ def get_or_create_conversation(system, conversation_id=None, session_id=None):
     session = store.get_or_create_session(session_id)
     session.add_conversation(conv)
     store.save_session(session)
+    
+    print(f"[INFO] Created new conversation {conversation_id[:8]} in session {session_id[:8]}")
 
     return conv, conversation_id, session_id
 
@@ -633,10 +652,12 @@ def handler(job):
                     image_base64=image_base64,
                     max_tokens=max_tokens,
                     temperature=temperature,
+                    conversation_id=conversation_id,  # Pass conversation ID for context
                 )
-                # Still save to conversation for continuity
-                conv.add_message("user", prompt)
-                conv.add_message("assistant", response_text)
+                # Save to conversation for continuity
+                from src.conversation.manager import MessageRole
+                conv.add_message(MessageRole.USER, prompt)
+                conv.add_message(MessageRole.ASSISTANT, response_text)
             elif enable_tools:
                 result = system.run_with_tools(
                     prompt,

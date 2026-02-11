@@ -933,6 +933,38 @@ class LatentMASSystem:
         
         return self._conversation_manager.chat(message, conversation_id, **kwargs)
 
+    def _fetch_image_with_headers(self, image_url: str) -> str:
+        """
+        Fetch image from URL and convert to base64 with proper User-Agent header.
+        
+        Args:
+            image_url: URL of the image
+            
+        Returns:
+            Base64-encoded image data URL
+        """
+        import requests
+        import base64
+        from io import BytesIO
+        
+        try:
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+            }
+            response = requests.get(image_url, headers=headers, timeout=10)
+            response.raise_for_status()
+            
+            # Convert to base64
+            image_data = base64.b64encode(response.content).decode('utf-8')
+            
+            # Detect mime type
+            content_type = response.headers.get('content-type', 'image/jpeg')
+            return f"data:{content_type};base64,{image_data}"
+            
+        except Exception as e:
+            print(f"[ERROR] Failed to fetch image from {image_url}: {e}")
+            raise RuntimeError(f"Image fetch failed: {e}. Please use base64-encoded images or ensure the URL is accessible.")
+
     def vlm_inference(
         self,
         prompt: str,
@@ -940,6 +972,7 @@ class LatentMASSystem:
         image_base64: Optional[str] = None,
         max_tokens: int = 800,
         temperature: float = 0.7,
+        conversation_id: Optional[str] = None,
     ) -> str:
         """
         Run VLM (Vision-Language Model) inference with optional image input.
@@ -953,6 +986,7 @@ class LatentMASSystem:
             image_base64: Base64-encoded image data
             max_tokens: Maximum tokens to generate
             temperature: Sampling temperature
+            conversation_id: Optional conversation ID for context
 
         Returns:
             Generated text response
@@ -960,12 +994,46 @@ class LatentMASSystem:
         if not self._is_vlm:
             raise RuntimeError("vlm_inference requires a VLM model (e.g. Qwen2.5-VL)")
 
+        # Get conversation history if available
+        conversation_context = ""
+        if conversation_id and self._conversation_manager:
+            conv = self._conversation_manager.get_conversation(conversation_id)
+            if conv and len(conv.messages) > 0:
+                # Build context from previous messages
+                context_parts = []
+                for msg in conv.messages:
+                    if msg.role.value == "user":
+                        context_parts.append(f"User: {msg.content}")
+                    elif msg.role.value in ["assistant", "agent"]:
+                        context_parts.append(f"Assistant: {msg.content}")
+                if context_parts:
+                    conversation_context = "\n\n".join(context_parts) + "\n\n"
+        
+        # Build full prompt with conversation context
+        full_prompt = prompt
+        if conversation_context:
+            full_prompt = f"Previous conversation:\n{conversation_context}Current question:\n{prompt}"
+
         # Build message content
         content = []
 
-        # Add image if provided
+        # Handle image URL with proper headers to avoid 403 errors
+        image_data_url = None
         if image_url:
-            content.append({"type": "image", "image": image_url})
+            # Check if it's a URL that needs fetching
+            if image_url.startswith('http://') or image_url.startswith('https://'):
+                try:
+                    # Fetch with proper headers and convert to base64
+                    image_data_url = self._fetch_image_with_headers(image_url)
+                    content.append({"type": "image", "image": image_data_url})
+                except Exception as e:
+                    # If fetch fails, provide helpful error message
+                    error_msg = f"Failed to fetch image from URL: {str(e)}"
+                    print(f"[ERROR] {error_msg}")
+                    return f"Error: {error_msg}"
+            else:
+                # Local file path
+                content.append({"type": "image", "image": image_url})
         elif image_base64:
             content.append({
                 "type": "image",
@@ -973,7 +1041,7 @@ class LatentMASSystem:
             })
 
         # Add text prompt
-        content.append({"type": "text", "text": prompt})
+        content.append({"type": "text", "text": full_prompt})
 
         messages = [{"role": "user", "content": content}]
 
@@ -985,12 +1053,15 @@ class LatentMASSystem:
         # Process vision inputs
         image_inputs = None
         video_inputs = None
-        if image_url or image_base64:
+        if image_url or image_base64 or image_data_url:
             try:
                 from qwen_vl_utils import process_vision_info
                 image_inputs, video_inputs = process_vision_info(messages)
             except ImportError:
                 print("[WARN] qwen_vl_utils not installed, skipping image processing")
+            except Exception as e:
+                print(f"[ERROR] Failed to process vision inputs: {e}")
+                return f"Error processing image: {str(e)}"
 
         # Tokenize with processor
         inputs = self.processor(
