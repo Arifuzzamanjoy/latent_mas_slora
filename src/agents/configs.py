@@ -80,24 +80,24 @@ class AgentConfig:
         """Get default system prompt based on role"""
         prompts = {
             AgentRole.PLANNER: (
-                "You are a Planning Agent specialized in problem decomposition. "
-                "Break down complex problems into clear, logical steps. "
-                "Identify key concepts, constraints, and relationships."
+                "You are a Planning and Solving Agent. "
+                "Break down problems into clear steps and solve them completely. "
+                "Always show your work and state the final answer explicitly."
             ),
             AgentRole.CRITIC: (
-                "You are a Critic Agent specialized in evaluation and error detection. "
-                "Analyze reasoning for logical flaws, missing information, and incorrect assumptions. "
-                "Provide constructive feedback with specific suggestions."
+                "You are a Critic Agent specialized in verification and error detection. "
+                "Carefully check all calculations, logic, and reasoning for errors. "
+                "If you find mistakes, provide the corrected solution."
             ),
             AgentRole.REFINER: (
-                "You are a Refiner Agent specialized in synthesis and improvement. "
-                "Integrate feedback to produce refined, accurate solutions. "
-                "Balance multiple perspectives and resolve conflicts."
+                "You are a Refiner Agent specialized in producing accurate final solutions. "
+                "Integrate all feedback, fix any errors, and produce a correct answer. "
+                "Always state the final answer clearly."
             ),
             AgentRole.JUDGER: (
-                "You are a Judger Agent responsible for final decisions. "
-                "Evaluate all evidence and reasoning to select the best answer. "
-                "Be decisive and provide clear justification."
+                "You are a Judger Agent responsible for determining the correct final answer. "
+                "Review all reasoning carefully and provide the definitive answer. "
+                "Always state your answer in the format: The answer is [ANSWER]"
             ),
             AgentRole.CODER: (
                 "You are a Coding Agent specialized in software development. "
@@ -132,36 +132,37 @@ class AgentConfig:
         """Get default user prompt template based on role"""
         templates = {
             AgentRole.PLANNER: (
-                "Analyze this problem and create a step-by-step plan:\n\n"
+                "Analyze and solve this problem step by step:\n\n"
                 "{question}\n\n"
-                "Provide:\n"
-                "1. Key concepts identified\n"
-                "2. Step-by-step approach\n"
-                "3. Preliminary answer direction"
+                "Show your complete work:\n"
+                "1. Identify what is being asked\n"
+                "2. Work through the solution step by step\n"
+                "3. State the final answer clearly as: The answer is [ANSWER]"
             ),
             AgentRole.CRITIC: (
-                "Evaluate this reasoning:\n\n"
+                "Evaluate this reasoning and check for errors:\n\n"
                 "Question: {question}\n\n"
                 "Previous Analysis (via latent context)\n\n"
-                "Identify:\n"
-                "1. Strengths of the approach\n"
-                "2. Potential errors or gaps\n"
-                "3. Suggested corrections"
+                "Check carefully:\n"
+                "1. Are the calculations correct?\n"
+                "2. Is the logic sound?\n"
+                "3. Provide corrections if any errors are found"
             ),
             AgentRole.REFINER: (
                 "Refine the solution based on feedback:\n\n"
                 "Question: {question}\n\n"
                 "Provide:\n"
-                "1. Integrated analysis\n"
-                "2. Resolved issues\n"
-                "3. Improved answer"
+                "1. Corrected solution with all errors fixed\n"
+                "2. Complete step-by-step work\n"
+                "3. Final answer as: The answer is [ANSWER]"
             ),
             AgentRole.JUDGER: (
-                "Make the final decision:\n\n"
+                "Provide the final answer:\n\n"
                 "Question: {question}\n\n"
-                "Based on all analysis, select the best answer.\n"
-                "For multiple choice, format as: \\boxed{{LETTER}}\n\n"
-                "Provide clear reasoning and your final answer."
+                "Based on all analysis, determine the correct answer.\n"
+                "For multiple choice questions: state 'The answer is [LETTER]'\n"
+                "For math/numerical questions: solve completely and state 'The answer is [NUMBER]'\n\n"
+                "Show your reasoning and give the final answer."
             ),
             AgentRole.MEDICAL: (
                 "Apply medical reasoning:\n\n"

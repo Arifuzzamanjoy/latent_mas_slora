@@ -1,0 +1,38 @@
+{
+  "wall_time_s": 351.231244802475,
+  "metadata": {
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "benchmarks": [
+      "gsm8k"
+    ],
+    "max_samples": 5,
+    "seed": 42,
+    "configs_run": [
+      "D_latentmas_speclora"
+    ]
+  },
+  "configs": {
+    "D_latentmas_speclora": {
+      "gsm8k": {
+        "config_name": "D_latentmas_speclora",
+        "dataset_name": "gsm8k",
+        "accuracy": 0.8,
+        "num_correct": 4,
+        "num_total": 5,
+        "avg_tokens": 58.8,
+        "avg_latency_ms": 50651.6,
+        "ci_lower": 0.4,
+        "ci_upper": 1.0,
+        "correctness_vector": [
+          1,
+          1,
+          1,
+          0,
+          1
+        ],
+        "metadata": {}
+      }
+    }
+  },
+  "significance": {}
+}

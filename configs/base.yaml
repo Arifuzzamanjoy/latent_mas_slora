@@ -1,0 +1,21 @@
+model:
+  name: "Qwen/Qwen2.5-7B-Instruct"
+  dtype: "bfloat16"
+  device: "cuda"
+  cache_dir: "./model_cache"
+
+latent:
+  steps: 15
+  realign: true
+  early_exit_threshold: 0.02
+  adaptive_steps: true
+  min_steps: 3
+  max_steps: 20
+
+lora:
+  max_loaded_adapters: 8
+  forbidden_target_modules: ["embed_tokens", "lm_head"]
+
+pipeline:
+  type: "hierarchical"  # or "sequential"
+  agents: ["planner", "critic", "refiner", "judger"]

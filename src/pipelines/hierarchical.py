@@ -30,13 +30,19 @@ text anchor in the chain (Planner summary).
 import torch
 import time
 import re
-from typing import Dict, List, Optional, Any, Tuple
+import logging
+from typing import Dict, List, Optional, Any, Tuple, TYPE_CHECKING
 from dataclasses import dataclass, field
 
 from ..core.latent_memory import LatentMemory
 from ..core.latent_reasoner import LatentReasoner
 from ..agents.configs import AgentConfig, HIERARCHICAL_AGENTS
 from ..agents.agent_pool import AgentPool, AgentExecutor
+
+if TYPE_CHECKING:
+    from ..observability.metrics import MetricsCollector
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -99,6 +105,7 @@ class HierarchicalPipeline:
         max_new_tokens: Optional[int] = None,
         temperature: Optional[float] = None,
         return_hidden_states: bool = False,
+        metrics_collector: Optional["MetricsCollector"] = None,
     ) -> PipelineResult:
         """
         Run the hierarchical pipeline.
@@ -124,15 +131,25 @@ class HierarchicalPipeline:
         total_tokens = 0
         start_time = time.time()
         
+        # Detect question type for optimized generation
+        is_mcq = bool(re.search(r'[A-D][:.\)]\s*\w', question))
+        
         for i, agent_name in enumerate(agents):
             is_final = (i == len(agents) - 1)
             
             # Get agent config
             config = self.pool.activate(agent_name)
             
+            # --- Observability hook: start agent ---
+            if metrics_collector is not None:
+                metrics_collector.start_agent(
+                    agent_name,
+                    latent_steps_max=self.latent_steps if self.use_latent_transfer else 0,
+                )
+            
             # Build prompt
             context = self.memory.get_agent_output(agents[i-1]) if i > 0 else ""
-            prompt = self.executor.build_prompt(config, question, context[:500])
+            prompt = self.executor.build_prompt(config, question, context[:1500])
             
             # Tokenize
             encoded = self.tokenizer(
@@ -148,6 +165,7 @@ class HierarchicalPipeline:
             agent_start = time.time()
             
             # Step 1: Latent reasoning (core LatentMAS)
+            latent_kv = None
             if self.use_latent_transfer:
                 latent_result = self.reasoner.reason(
                     input_ids=input_ids,
@@ -155,11 +173,20 @@ class HierarchicalPipeline:
                     num_steps=self.latent_steps,
                     past_key_values=self.memory.get_kv_cache() if i > 0 else None,
                     question=question,  # For adaptive steps
+                    return_all_hidden=metrics_collector is not None,
                 )
+                
+                # --- Observability hook: latent result ---
+                if metrics_collector is not None:
+                    metrics_collector.record_latent_result(latent_result)
                 
                 # Store in memory
                 self.memory.store_hidden_state(agent_name, latent_result.final_hidden)
                 self.memory.update_kv_cache(latent_result.kv_cache)
+                
+                # Carry latent KV cache into text generation so the
+                # generated tokens are conditioned on the latent reasoning.
+                latent_kv = latent_result.kv_cache
             
             # Step 2: Text generation (for traceability)
             gen_temp = temperature if temperature is not None else config.temperature
@@ -171,7 +198,10 @@ class HierarchicalPipeline:
                 "eos_token_id": self.tokenizer.eos_token_id,
             }
             
-            if gen_temp > 0:
+            # Use greedy decoding for final agent (Judger) for consistency
+            if is_final or gen_temp <= 0:
+                gen_kwargs["do_sample"] = False
+            elif gen_temp > 0:
                 gen_kwargs.update({
                     "do_sample": True,
                     "temperature": gen_temp,
@@ -180,14 +210,39 @@ class HierarchicalPipeline:
             else:
                 gen_kwargs["do_sample"] = False
             
-            outputs = self.model.generate(
-                input_ids=input_ids,
-                attention_mask=attention_mask,
-                **gen_kwargs,
-            )
+            # Build generation inputs: if we have latent KV cache, use
+            # manual autoregressive decoding conditioned on the latent
+            # reasoning. Transformers v5 generate() doesn't easily accept
+            # external KV caches, so we decode token-by-token.
+            if latent_kv is not None:
+                from ..core.latent_reasoner import get_cache_length
+                cache_len = get_cache_length(latent_kv)
+                if cache_len > 0:
+                    generated_ids = self._generate_from_kv_cache(
+                        input_ids=input_ids,
+                        attention_mask=attention_mask,
+                        kv_cache=latent_kv,
+                        **gen_kwargs,
+                    )
+                    gen_input_ids = input_ids  # for offset calc
+                    outputs_tensor = generated_ids
+                else:
+                    gen_input_ids = input_ids
+                    outputs_tensor = self.model.generate(
+                        input_ids=gen_input_ids,
+                        attention_mask=attention_mask,
+                        **gen_kwargs,
+                    )
+            else:
+                gen_input_ids = input_ids
+                outputs_tensor = self.model.generate(
+                    input_ids=gen_input_ids,
+                    attention_mask=attention_mask,
+                    **gen_kwargs,
+                )
             
-            # Decode output
-            new_tokens = outputs[0][input_ids.shape[1]:]
+            # Decode output — strip the input tokens we fed to generate()
+            new_tokens = outputs_tensor[0][gen_input_ids.shape[1]:]
             generated_text = self.tokenizer.decode(new_tokens, skip_special_tokens=True).strip()
             
             # Store text output
@@ -212,9 +267,21 @@ class HierarchicalPipeline:
             agent_outputs.append(output_entry)
             total_tokens += output_entry["input_tokens"] + output_entry["output_tokens"]
             
+            # --- Observability hook: end agent ---
+            if metrics_collector is not None:
+                metrics_collector.end_agent(
+                    kv_cache=latent_result.kv_cache if self.use_latent_transfer else None,
+                    mode="latent+text" if self.use_latent_transfer else "text_only",
+                )
+            
             print(f"[{agent_name.upper()}] Generated {output_entry['output_tokens']} tokens in {agent_latency}ms")
         
         total_latency = int((time.time() - start_time) * 1000)
+        
+        # --- Observability hook: finalize ---
+        pipeline_metrics = None
+        if metrics_collector is not None:
+            pipeline_metrics = metrics_collector.finalize()
         
         return PipelineResult(
             question=question,
@@ -227,6 +294,8 @@ class HierarchicalPipeline:
                 "num_agents": len(agents),
                 "latent_transfer": self.use_latent_transfer,
                 "memory_summary": self.memory.get_context_summary(),
+                **({"observability": pipeline_metrics.to_dict()}
+                   if pipeline_metrics is not None else {}),
             },
         )
     
@@ -239,6 +308,7 @@ class HierarchicalPipeline:
         temperature: Optional[float] = None,
         return_hidden_states: bool = False,
         turbo_mode: bool = False,  # Disabled by default - accuracy first
+        metrics_collector: Optional["MetricsCollector"] = None,
     ) -> PipelineResult:
         """
         HYBRID LatentMAS: Planner generates summary, others use latent, Judger finalizes.
@@ -308,6 +378,15 @@ class HierarchicalPipeline:
             config = self.pool.activate(agent_name)
             agent_start = time.time()
             
+            # --- Observability hook: start agent ---
+            if metrics_collector is not None:
+                steps_max = (
+                    planner_latent_steps if is_first
+                    else judger_latent_steps if is_final
+                    else intermediate_latent_steps
+                )
+                metrics_collector.start_agent(agent_name, latent_steps_max=steps_max)
+            
             if is_first:
                 # ============================================================
                 # PLANNER: Latent reasoning + SHORT text summary (anchor)
@@ -348,7 +427,12 @@ Analyze this question and provide a brief reasoning plan (2-3 sentences):"""
                     past_key_values=None,
                     question=None,  # Skip adaptive for speed
                     early_exit_threshold=0,  # No early exit for Planner
+                    return_all_hidden=metrics_collector is not None,
                 )
+                
+                # --- Observability hook: latent result ---
+                if metrics_collector is not None:
+                    metrics_collector.record_latent_result(latent_result)
                 
                 # Store hidden state for next agents
                 self.memory.store_hidden_state(agent_name, latent_result.final_hidden)
@@ -389,6 +473,12 @@ Analyze this question and provide a brief reasoning plan (2-3 sentences):"""
                     "mode": "latent+text",
                 }
                 total_tokens += output_entry["input_tokens"] + output_entry["output_tokens"]
+                
+                # --- Observability hook: end Planner ---
+                if metrics_collector is not None:
+                    metrics_collector.end_agent(
+                        kv_cache=latent_result.kv_cache, mode="latent+text",
+                    )
                 
                 print(f"[{agent_name.upper()}] {len(new_tokens)} tokens in {agent_latency}ms (latent+text)")
                 
@@ -438,6 +528,10 @@ Based on this analysis, provide a complete answer:"""
                     kv_cache=None,  # Fresh generation with explicit prompt
                     early_exit_threshold=0,  # No early exit for Judger
                 )
+                
+                # --- Observability hook: Judger latent result ---
+                if metrics_collector is not None:
+                    metrics_collector.record_latent_result(latent_result)
                 
                 # Store final hidden state
                 self.memory.store_hidden_state(agent_name, latent_result.final_hidden)
@@ -494,6 +588,12 @@ Based on this analysis, provide a complete answer:"""
                 }
                 total_tokens += output_entry["input_tokens"] + output_entry["output_tokens"]
                 
+                # --- Observability hook: end Judger ---
+                if metrics_collector is not None:
+                    metrics_collector.end_agent(
+                        kv_cache=latent_result.kv_cache, mode="latent+text",
+                    )
+                
                 print(f"[{agent_name.upper()}] {len(new_tokens)} tokens in {agent_latency}ms (final answer)")
                 
             else:
@@ -511,6 +611,10 @@ Based on this analysis, provide a complete answer:"""
                     kv_cache=self.memory.get_kv_cache(),
                     early_exit_threshold=0.02 if turbo_mode else 0,  # Conservative early exit
                 )
+                
+                # --- Observability hook: intermediate latent result ---
+                if metrics_collector is not None:
+                    metrics_collector.record_latent_result(latent_result)
                 
                 # Store for next agent
                 self.memory.store_hidden_state(agent_name, latent_result.final_hidden)
@@ -530,6 +634,12 @@ Based on this analysis, provide a complete answer:"""
                     "mode": "latent_only",
                 }
                 
+                # --- Observability hook: end intermediate ---
+                if metrics_collector is not None:
+                    metrics_collector.end_agent(
+                        kv_cache=latent_result.kv_cache, mode="latent_only",
+                    )
+                
                 print(f"[{agent_name.upper()}] Latent: {latent_result.num_steps} steps in {agent_latency}ms")
             
             if return_hidden_states and hasattr(latent_result, 'final_hidden'):
@@ -538,6 +648,11 @@ Based on this analysis, provide a complete answer:"""
             agent_outputs.append(output_entry)
         
         total_latency = int((time.time() - start_time) * 1000)
+        
+        # --- Observability hook: finalize ---
+        pipeline_metrics = None
+        if metrics_collector is not None:
+            pipeline_metrics = metrics_collector.finalize()
         
         return PipelineResult(
             question=question,
@@ -555,9 +670,80 @@ Based on this analysis, provide a complete answer:"""
                 "is_mcq": is_mcq,
                 "planner_summary_length": len(planner_summary),
                 "memory_summary": self.memory.get_context_summary(),
+                **({"observability": pipeline_metrics.to_dict()}
+                   if pipeline_metrics is not None else {}),
             },
         )
     
+    @torch.no_grad()
+    def _generate_from_kv_cache(
+        self,
+        input_ids: torch.Tensor,
+        attention_mask: torch.Tensor,
+        kv_cache,
+        max_new_tokens: int = 512,
+        do_sample: bool = False,
+        temperature: float = 1.0,
+        top_p: float = 0.9,
+        **kwargs,
+    ) -> torch.Tensor:
+        """Generate tokens conditioned on a latent KV cache.
+
+        Uses manual autoregressive decoding so the generation is truly
+        conditioned on the latent reasoning steps stored in *kv_cache*.
+        """
+        from ..core.latent_reasoner import get_cache_length
+
+        pad_id = kwargs.get("pad_token_id", self.tokenizer.pad_token_id)
+        eos_id = kwargs.get("eos_token_id", self.tokenizer.eos_token_id)
+
+        cache_len = get_cache_length(kv_cache)
+        # We need to "re-encode" the prompt through the existing cache.
+        # The cache already saw the prompt + latent steps.  We start
+        # generating from the last input token.
+        cur_token = input_ids[:, -1:]  # [B, 1]
+        generated = list(input_ids[0].tolist())
+
+        cur_kv = kv_cache
+        for _ in range(max_new_tokens):
+            past_len = get_cache_length(cur_kv)
+            step_mask = torch.ones(
+                (1, past_len + 1), dtype=torch.long, device=self.device,
+            )
+            out = self.model(
+                input_ids=cur_token,
+                attention_mask=step_mask,
+                past_key_values=cur_kv,
+                use_cache=True,
+                return_dict=True,
+            )
+            cur_kv = out.past_key_values
+            logits = out.logits[:, -1, :]  # [B, V]
+
+            if do_sample and temperature > 0:
+                logits = logits / temperature
+                probs = torch.softmax(logits, dim=-1)
+                if top_p < 1.0:
+                    sorted_probs, sorted_idx = torch.sort(probs, descending=True)
+                    cum = torch.cumsum(sorted_probs, dim=-1)
+                    mask = cum - sorted_probs > top_p
+                    sorted_probs[mask] = 0.0
+                    sorted_probs /= sorted_probs.sum(dim=-1, keepdim=True)
+                    ix = torch.multinomial(sorted_probs, 1)
+                    next_token = sorted_idx.gather(-1, ix)
+                else:
+                    next_token = torch.multinomial(probs, 1)
+            else:
+                next_token = logits.argmax(dim=-1, keepdim=True)
+
+            tok_id = next_token.item()
+            generated.append(tok_id)
+            if tok_id == eos_id:
+                break
+            cur_token = next_token
+
+        return torch.tensor([generated], device=self.device)
+
     def run_with_self_consistency(
         self,
         question: str,

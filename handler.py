@@ -58,7 +58,7 @@ os.environ["SENTENCE_TRANSFORMERS_HOME"] = os.environ.get("SENTENCE_TRANSFORMERS
 for cache_dir in ["/home/caches/huggingface/hub", "/home/caches/torch", "/home/caches/sentence_transformers"]:
     os.makedirs(cache_dir, exist_ok=True)
 
-from src import LatentMASSystem
+from src.system_legacy import LatentMASSystem
 from src.agents.configs import AgentConfig
 from src.conversation.session import SessionStore
 

@@ -192,16 +192,17 @@ class LatentReasoner:
         W_align = (W_out^T W_out + λI)^(-1) W_out^T W_in
         """
         try:
-            # Get embedding layers
-            base_model = self._get_base_model()
-            input_embed = base_model.get_input_embeddings()
-            output_embed = base_model.get_output_embeddings()
+            # Use self.model directly — get_input/output_embeddings
+            # work on both PeftModel and CausalLM without manual
+            # unwrapping (base_model goes too deep for output head).
+            input_embed = self.model.get_input_embeddings()
+            output_embed = self.model.get_output_embeddings()
             
             if output_embed is None:
-                output_embed = getattr(base_model, "lm_head", None)
+                output_embed = getattr(self.model, "lm_head", None)
             
             if input_embed is None or output_embed is None:
-                print("[WARN] Cannot build realignment matrix - missing embeddings")
+                logger.warning("Cannot build realignment matrix - missing embeddings")
                 return
             
             with torch.no_grad():
@@ -221,10 +222,10 @@ class LatentReasoner:
                 # Target norm for output scaling
                 self._target_norm = W_in.norm(dim=1).mean()
                 
-                print(f"[INFO] Realignment matrix built: {self._realign_matrix.shape}")
+                logger.info("Realignment matrix built: %s", self._realign_matrix.shape)
                 
         except Exception as e:
-            print(f"[ERROR] Failed to build realignment matrix: {e}")
+            logger.error("Failed to build realignment matrix: %s", e)
             self._realign_matrix = None
     
     def _get_base_model(self):

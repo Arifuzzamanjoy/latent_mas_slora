@@ -9,12 +9,17 @@ Implements S-LoRA patterns for efficient adapter management:
 Optimized for 24-48GB VRAM with 10-20+ concurrent adapters.
 """
 
+import logging
 import os
 import torch
 from typing import Dict, List, Optional, Any, Tuple
 from dataclasses import dataclass
 from pathlib import Path
 import threading
+
+from src.core.embedding_guard import EmbeddingGuard
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -105,6 +110,9 @@ class LoRAAdapterManager:
         
         # Track memory
         self._initial_memory = self._get_gpu_memory()
+        
+        # Embedding safety guard
+        self._guard = EmbeddingGuard(model)
     
     def _get_gpu_memory(self) -> int:
         """Get current GPU memory usage in bytes"""
@@ -135,7 +143,7 @@ class LoRAAdapterManager:
         
         with self._lock:
             if adapter_name in self._loaded_adapters:
-                print(f"[INFO] Adapter '{adapter_name}' already loaded")
+                logger.info("Adapter '%s' already loaded", adapter_name)
                 return True
             
             # Check if we need to unload adapters
@@ -145,7 +153,7 @@ class LoRAAdapterManager:
             try:
                 from peft import PeftModel
                 
-                print(f"[INFO] Loading LoRA from {hf_path}...")
+                logger.info("Loading LoRA from %s...", hf_path)
                 
                 # Load adapter
                 self.model.load_adapter(
@@ -164,17 +172,21 @@ class LoRAAdapterManager:
                 }
                 self._adapter_usage[adapter_name] = 0
                 
-                print(f"[INFO] Loaded '{adapter_name}' ({memory_used/1024/1024:.1f} MB)")
+                logger.info("Loaded '%s' (%.1f MB)", adapter_name, memory_used / 1024 / 1024)
+                
+                # Verify embeddings were not modified
+                self._guard.assert_frozen()
+                
                 return True
                 
             except Exception as e:
-                print(f"[ERROR] Failed to load adapter from {hf_path}: {e}")
+                logger.error("Failed to load adapter from %s: %s", hf_path, e)
                 return False
     
     def load_from_registry(self, registry_name: str) -> bool:
         """Load adapter from the built-in registry"""
         if registry_name not in QWEN25_LORA_REGISTRY:
-            print(f"[ERROR] '{registry_name}' not in registry. Available: {list(QWEN25_LORA_REGISTRY.keys())}")
+            logger.error("'%s' not in registry. Available: %s", registry_name, list(QWEN25_LORA_REGISTRY.keys()))
             return False
         
         info = QWEN25_LORA_REGISTRY[registry_name]
@@ -210,7 +222,7 @@ class LoRAAdapterManager:
             # Force garbage collection
             torch.cuda.empty_cache()
             
-            print(f"[INFO] Unloaded adapter: {adapter_name}")
+            logger.info("Unloaded adapter: %s", adapter_name)
     
     def switch_adapter(self, adapter_name: str) -> None:
         """Switch to a specific adapter"""
@@ -256,7 +268,7 @@ class LoRAAdapterManager:
         }
         self._adapter_usage[new_adapter_name] = 0
         
-        print(f"[INFO] Created merged adapter '{new_adapter_name}' from {adapter_names}")
+        logger.info("Created merged adapter '%s' from %s", new_adapter_name, adapter_names)
     
     def list_loaded(self) -> List[str]:
         """List all loaded adapter names"""
@@ -285,6 +297,44 @@ class LoRAAdapterManager:
                 for name, info in self._loaded_adapters.items()
             },
         }
+
+    # Forbidden modules that should never be LoRA targets
+    FORBIDDEN_TARGET_MODULES = {"embed_tokens", "lm_head"}
+
+    def get_adapter_target_modules(self, name: str) -> List[str]:
+        """
+        Check what target_modules an external adapter uses.
+
+        Inspects the loaded PEFT config for the given adapter and
+        logs a WARNING if it includes 'embed_tokens' or 'lm_head'.
+
+        Args:
+            name: Adapter name (must already be loaded).
+
+        Returns:
+            List of target module names, or empty list if unavailable.
+        """
+        try:
+            if hasattr(self.model, "peft_config") and name in self.model.peft_config:
+                cfg = self.model.peft_config[name]
+                modules = list(getattr(cfg, "target_modules", []) or [])
+            else:
+                logger.warning("No PEFT config found for adapter '%s'", name)
+                return []
+
+            dangerous = self.FORBIDDEN_TARGET_MODULES.intersection(modules)
+            if dangerous:
+                logger.warning(
+                    "Adapter '%s' targets FORBIDDEN modules %s — "
+                    "this can corrupt shared embeddings!",
+                    name,
+                    sorted(dangerous),
+                )
+            return modules
+
+        except Exception as e:
+            logger.error("Failed to inspect target_modules for '%s': %s", name, e)
+            return []
 
 
 class AdapterRouter:

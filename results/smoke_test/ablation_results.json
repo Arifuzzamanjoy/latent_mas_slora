@@ -1,0 +1,133 @@
+{
+  "wall_time_s": 2140.1175906658173,
+  "metadata": {
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "benchmarks": [
+      "gsm8k"
+    ],
+    "max_samples": 10,
+    "seed": 42,
+    "configs_run": [
+      "A_single_model",
+      "B_latentmas_nolora",
+      "C_latentmas_samelora",
+      "D_latentmas_speclora"
+    ]
+  },
+  "configs": {
+    "A_single_model": {
+      "gsm8k": {
+        "config_name": "A_single_model",
+        "dataset_name": "gsm8k",
+        "accuracy": 1.0,
+        "num_correct": 10,
+        "num_total": 10,
+        "avg_tokens": 240.3,
+        "avg_latency_ms": 15565.3,
+        "ci_lower": 1.0,
+        "ci_upper": 1.0,
+        "correctness_vector": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "metadata": {}
+      }
+    },
+    "B_latentmas_nolora": {
+      "gsm8k": {
+        "config_name": "B_latentmas_nolora",
+        "dataset_name": "gsm8k",
+        "accuracy": 0.6,
+        "num_correct": 6,
+        "num_total": 10,
+        "avg_tokens": 257.7,
+        "avg_latency_ms": 54801.7,
+        "ci_lower": 0.3,
+        "ci_upper": 0.9,
+        "correctness_vector": [
+          0,
+          1,
+          1,
+          0,
+          0,
+          1,
+          1,
+          0,
+          1,
+          1
+        ],
+        "metadata": {}
+      }
+    },
+    "C_latentmas_samelora": {
+      "gsm8k": {
+        "config_name": "C_latentmas_samelora",
+        "dataset_name": "gsm8k",
+        "accuracy": 0.6,
+        "num_correct": 6,
+        "num_total": 10,
+        "avg_tokens": 271.6,
+        "avg_latency_ms": 63639.8,
+        "ci_lower": 0.3,
+        "ci_upper": 0.9,
+        "correctness_vector": [
+          0,
+          1,
+          1,
+          0,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1
+        ],
+        "metadata": {}
+      }
+    },
+    "D_latentmas_speclora": {
+      "gsm8k": {
+        "config_name": "D_latentmas_speclora",
+        "dataset_name": "gsm8k",
+        "accuracy": 0.3,
+        "num_correct": 3,
+        "num_total": 10,
+        "avg_tokens": 263.2,
+        "avg_latency_ms": 61941.4,
+        "ci_lower": 0.0,
+        "ci_upper": 0.6,
+        "correctness_vector": [
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        "metadata": {}
+      }
+    }
+  },
+  "significance": {
+    "gsm8k": {
+      "delta": -0.3,
+      "p_value": 0.5595,
+      "significant": false,
+      "ci_lower": -0.7,
+      "ci_upper": 0.09999999999999998,
+      "summary": "D_latentmas_speclora vs B_latentmas_nolora: \u0394acc = -0.3000  p = 0.5595  (not significant at \u03b1=0.05)"
+    }
+  }
+}
