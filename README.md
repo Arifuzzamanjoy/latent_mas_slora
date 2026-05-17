@@ -15,15 +15,39 @@ Multi-agent reasoning system with VLM support, latent-space collaboration, and d
 - Planner decomposes the problem, Judger produces the final answer
 - Domain routing auto-selects the best LoRA adapter per query
 
+### Latent Reasoning
+
+The core engine implements the LatentMAS realignment equation (W_align from the paper's Eq. 3) to map output hidden states back to input embedding space, enabling multi-step reasoning without token decoding. Features include adaptive step counts based on query complexity, early exit when hidden states converge (cosine similarity threshold), and multiple fusion strategies (mean, weighted, attention, concat-project) for combining agent outputs.
+
+### LoRA Serving — PEFT, not S-LoRA
+
+> **Important**: This project uses [HuggingFace PEFT](https://github.com/huggingface/peft) (`peft>=0.10.0`) for all LoRA operations — loading, switching, merging, and training. The original [S-LoRA](https://arxiv.org/abs/2311.03285) system requires custom CUDA kernels for its unified paging and heterogeneous batching, which are **not** used here.
+>
+> What this project implements via PEFT:
+> - **Dynamic loading** from HuggingFace Hub (`model.load_adapter()`)
+> - **Hot-swapping** between adapters (`model.set_adapter()`)
+> - **Weighted merging** of multiple adapters (`model.add_weighted_adapter()`)
+> - **LRU eviction** when loaded adapters exceed the cap (default: 20)
+> - **Custom training** pipeline with `LoraConfig` + `get_peft_model`
+>
+> What's missing vs. true S-LoRA:
+> - No custom CUDA kernels for unified paging
+> - No heterogeneous batching (different adapters in the same forward pass)
+> - No unified memory pool across base weights + adapter weights + KV cache
+>
+> Building toward a full S-LoRA-grade serving backend is the long-term vision. See [Contributing](#contributing) if you want to help get there.
+
 ## Features
 
-- **Text + Vision**: Process text queries and image+text queries (VLM)
-- **Multi-Agent Pipeline**: 4 specialized agents with LoRA adapters
-- **RAG**: Inject documents via URL, base64, JSON, or inline
-- **Domain Routing**: Auto-classifies queries (medical, math, code, reasoning, general)
-- **LoRA Adapters**: 4 VL-7B adapters, hot-swappable via registry
-- **Session Persistence**: Conversations saved across requests
-- **RunPod Serverless**: Production-ready Docker deployment
+- **Text + Vision**: Process text queries and image+text queries via Qwen2.5-VL
+- **Multi-Agent Pipeline**: 4 specialized agents (Planner, Critic, Refiner, Judger) with per-agent LoRA adapters
+- **Latent-Space Collaboration**: Agents communicate via hidden states, not generated text — 50–80% fewer tokens, 3–7× faster
+- **RAG**: Inject documents via URL, base64, JSON, or inline with domain-aware retrieval
+- **Domain Routing**: Auto-classifies queries (medical, math, code, reasoning, general) using keyword, semantic, or hybrid routing
+- **LoRA Adapters**: 4 VL-7B adapters in registry, hot-swappable via PEFT, with weighted merging support
+- **Custom LoRA Training**: Built-in `LoRATrainer` with gradient checkpointing, mixed precision, and cosine scheduling
+- **Session Persistence**: Conversations saved across requests with session grouping
+- **RunPod Serverless**: Production-ready Docker deployment on 24–48GB VRAM
 
 ## Setup
 
@@ -31,6 +55,18 @@ Multi-agent reasoning system with VLM support, latent-space collaboration, and d
 git clone https://github.com/Arifuzzamanjoy/latent_mas_slora.git
 cd latent_mas_slora
 pip install -r requirements.txt
+```
+
+### Key Dependencies
+
+```
+torch>=2.1.0
+transformers>=4.40.0
+peft>=0.10.0          # All LoRA operations
+accelerate>=0.27.0
+bitsandbytes>=0.43.0  # 4-bit quantization support
+sentence-transformers>=2.2.0  # RAG embeddings
+qwen-vl-utils[decord]         # VLM image/video processing
 ```
 
 ## Deployment
@@ -81,6 +117,7 @@ docker.io/s1710374103/latent-mas-slora:latest
 | `session_id` | string | auto | Session ID for persistence |
 | `conversation_id` | string | auto | Conversation ID for context |
 | `lora_adapter` | string | null | LoRA adapter name from registry |
+| `lora_hf_path` | string | null | Direct HuggingFace LoRA path |
 | `no_default_data` | bool | false | Skip built-in RAG data |
 | `rag_data` | string | null | External RAG data URL |
 | `rag_documents` | array | [] | Inline documents for RAG |
@@ -141,6 +178,8 @@ Available in `data/lora_registry.json`:
 | comics_vl | VLR-CVC/Qwen2.5-VL-7B-Comics-LoRA | Comics |
 | point_detect_vl | SimulaMet/Qwen2.5-VL-7B-PointDetection-LoRA | Detection |
 
+Adapters are loaded on-demand from HuggingFace Hub, cached locally, and evicted via LRU when the loaded count exceeds `max_loaded_adapters` (default 20). You can also pass any HuggingFace LoRA path directly via the `lora_hf_path` API parameter without adding it to the registry.
+
 ## Project Structure
 
 ```
@@ -152,23 +191,43 @@ Available in `data/lora_registry.json`:
 ├── src/
 │   ├── system.py           # Core LatentMAS system
 │   ├── agents/             # Agent configs and pool
-│   ├── core/               # Latent memory and reasoner
-│   ├── lora/               # LoRA adapter manager
+│   ├── core/
+│   │   ├── latent_memory.py   # KV cache manager
+│   │   └── latent_reasoner.py # Realignment, continuous thought, fusion
+│   ├── lora/
+│   │   └── adapter_manager.py # PEFT-based load/switch/merge/evict
 │   ├── pipelines/          # Hierarchical and sequential pipelines
-│   ├── rag/                # RAG document store and retriever
-│   ├── routing/            # Domain routing (semantic, fast, advanced)
+│   ├── rag/                # Document store and retriever
+│   ├── routing/            # Domain routing (keyword, semantic, hybrid)
 │   ├── conversation/       # Session and conversation manager
-│   └── tools/              # Tool registry
+│   ├── tools/              # Tool registry
+│   └── training/           # LoRA trainer (LoraConfig + get_peft_model)
 ├── examples/
 │   └── chat.py             # CLI client
 └── .github/workflows/      # CI/CD pipelines
 ```
+
+## Contributing
+
+This project is open for contributions — especially toward closing the gap between the current PEFT-based LoRA serving and a true S-LoRA-grade backend.
+
+**High-impact areas:**
+
+- **Custom CUDA kernels** — Implement unified paging and heterogeneous batching for multi-adapter serving (the core S-LoRA contribution that's missing today)
+- **Multi-adapter batching** — Serve requests targeting different LoRA adapters in a single forward pass, replacing the current one-adapter-at-a-time `set_adapter()` approach
+- **Unified memory pool** — Manage base model weights, adapter weights, and KV cache in a single memory pool with dynamic allocation, instead of relying on PEFT's per-adapter memory model
+- **Benchmarks** — Throughput and latency benchmarks comparing current PEFT implementation vs. vLLM S-LoRA vs. custom kernel targets
+- **New LoRA adapters** — Train and contribute domain-specific VL-7B adapters to the registry
+- **Latent-space agents** — Improve fusion strategies, add new agent roles, or optimize the realignment matrix computation
+
+If you're interested, open an issue to discuss your approach before submitting a PR. All contributions welcome — from CUDA veterans to first-time contributors adding adapters or writing tests.
 
 ## References
 
 - [LatentMAS](https://arxiv.org/abs/2511.20639) — Latent Multi-Agent Collaboration
 - [S-LoRA](https://arxiv.org/abs/2311.03285) — Scalable LoRA Serving
 - [Coconut](https://arxiv.org/abs/2412.06769) — Chain of Continuous Thought
+- [PEFT](https://github.com/huggingface/peft) — Parameter-Efficient Fine-Tuning
 
 ## License
 
