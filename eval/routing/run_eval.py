@@ -75,12 +75,32 @@ class StagedAdapter:
         return res.domain, float(res.confidence), res.method
 
 
+class _NeuralNotLoaded(RuntimeError):
+    """Raised when a neural router silently degraded to keyword-only scoring."""
+
+
 class SemanticAdapter:
     """Existing SemanticRouter (unmodified). Requires torch + embedding model download."""
     name = "semantic"
     def __init__(self):
         from src.routing.semantic_router import SemanticRouter
         self._r = SemanticRouter()
+        # Force lazy init, then REFUSE to run if the embedding model did not load.
+        # SemanticRouter catches ImportError and falls back to keyword-only scoring
+        # (self._model = None -> _semantic_score returns 0.0 for every domain). Without
+        # this guard the harness would happily emit keyword-only numbers labelled
+        # 'semantic'. That would be a fabricated result, so we hard-fail instead.
+        self._r._lazy_init()
+        if getattr(self._r, "_model", None) is None:
+            raise _NeuralNotLoaded(
+                "SemanticRouter fell back to keyword-only scoring: the embedding model "
+                "did not load (sentence-transformers missing, or the model could not be "
+                "downloaded). Refusing to report keyword-only numbers as 'semantic'.")
+        if not getattr(self._r, "_domain_embeddings", None):
+            raise _NeuralNotLoaded(
+                "SemanticRouter has no domain centroids; embeddings were not computed. "
+                "Refusing to report a degraded run as 'semantic'.")
+
     def predict(self, q):
         domain, conf = self._r.get_best_domain(q)
         return domain.value, float(conf), "semantic"
@@ -92,6 +112,18 @@ class AdvancedAdapter:
     def __init__(self):
         from src.routing.advanced_router import AdvancedHybridRouter
         self._r = AdvancedHybridRouter()
+        # Same guard as SemanticAdapter: AdvancedHybridRouter also catches ImportError
+        # and continues with self._encoder = None, scoring on keyword+meta signals only.
+        self._r._lazy_init()
+        if getattr(self._r, "_encoder", None) is None:
+            raise _NeuralNotLoaded(
+                "AdvancedHybridRouter fell back to keyword+meta scoring: the embedding "
+                "model did not load. Refusing to report a degraded run as 'advanced'.")
+        if not getattr(self._r, "_domain_centroids", None):
+            raise _NeuralNotLoaded(
+                "AdvancedHybridRouter has no domain centroids; embeddings were not "
+                "computed. Refusing to report a degraded run as 'advanced'.")
+
     def predict(self, q):
         res = self._r.route(q)
         return res.domain.value, float(res.confidence), res.method
@@ -123,7 +155,7 @@ def build_router(name):
 # ----------------------------------------------------------------------------
 # Data
 # ----------------------------------------------------------------------------
-def load_queries(path):
+def load_queries(path, split="all", split_path=None):
     rows = []
     with open(path) as f:
         for line in f:
@@ -131,6 +163,18 @@ def load_queries(path):
             if line:
                 rows.append(json.loads(line))
     rows.sort(key=lambda r: r["id"])   # deterministic order
+
+    if split != "all":
+        sp = Path(split_path) if split_path else (HERE / "split.json")
+        if not sp.exists():
+            raise SystemExit(f"[FATAL] --split {split} requested but {sp} not found.")
+        spec = json.loads(sp.read_text())
+        key = {"train": "train_ids", "holdout": "holdout_ids"}[split]
+        keep = set(spec[key])
+        rows = [r for r in rows if r["id"] in keep]
+        if len(rows) != len(keep):
+            raise SystemExit(f"[FATAL] split '{split}' lists {len(keep)} ids but matched "
+                             f"{len(rows)} queries.")
     return rows
 
 
@@ -320,17 +364,22 @@ def main():
     ap.add_argument("--router", required=True, choices=sorted(ADAPTERS),
                     help="which router to evaluate")
     ap.add_argument("--queries", default=str(HERE / "queries.jsonl"))
+    ap.add_argument("--split", default="all", choices=["all", "train", "holdout"],
+                    help="evaluate on the full set (default), or the train/holdout "
+                         "partition recorded in split.json")
+    ap.add_argument("--split-file", default=None, help="override path to split.json")
     ap.add_argument("--out", default=None,
-                    help="output dir (default: eval/routing/results/<router>)")
+                    help="output dir (default: eval/routing/results/<router>[_<split>])")
     args = ap.parse_args()
 
     random.seed(SEED)
     np.random.seed(SEED)
 
-    out_dir = Path(args.out) if args.out else (HERE / "results" / args.router)
+    default_name = args.router if args.split == "all" else f"{args.router}_{args.split}"
+    out_dir = Path(args.out) if args.out else (HERE / "results" / default_name)
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    queries = load_queries(args.queries)
+    queries = load_queries(args.queries, args.split, args.split_file)
     router = build_router(args.router)
 
     # warm-up (exclude cold-start cost like lazy init from timed latency)
@@ -356,6 +405,7 @@ def main():
     results = {
         "router": args.router,
         "queries_path": str(args.queries),
+        "split": args.split,
         "seed": SEED,
         "n": metrics["n"],
         "metrics": metrics,
@@ -369,7 +419,7 @@ def main():
     write_report_md(args.router, metrics, out_dir / "report.md", n_err, args.queries)
 
     # console summary
-    print(f"\n=== router='{args.router}'  n={metrics['n']} ===")
+    print(f"\n=== router='{args.router}'  split='{args.split}'  n={metrics['n']} ===")
     print(f"top-1 accuracy (overall)   : {metrics['overall_accuracy']:.1%} "
           f"({metrics['correct']}/{metrics['n']})")
     for b, v in metrics["bucket_accuracy"].items():

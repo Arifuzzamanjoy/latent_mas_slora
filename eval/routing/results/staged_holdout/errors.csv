@@ -1,0 +1,14 @@
+id,bucket,expected,predicted,confidence,abstained,confident_and_wrong,method,query,note
+q011,single_signal,code,math,0.3765,0,1,staged:stage2,bash one liner to find and delete all pyc files,"single/code, shell scripting"
+q014,single_signal,code,general,0.0000,1,0,staged:unsure,segfault in my c program when I free the same pointer twice,"single/code, memory bug"
+q017,single_signal,code,general,0.1079,1,0,staged:unsure,regex to match a valid email address,"single/code, regex authoring"
+q046,single_signal,math,general,0.0000,1,0,staged:unsure,area of a circle with radius 5,"single/math, geometry"
+q059,single_signal,medical,general,0.0998,1,0,staged:unsure,what causes iron deficiency anemia,"single/medical, pathophysiology"
+q076,single_signal,finance,general,0.0000,1,0,staged:unsure,difference between a roth ira and a traditional ira,"single/finance, retirement accounts"
+q107,single_signal,reasoning,general,0.1526,1,0,staged:unsure,what are the hidden assumptions behind the claim that cutting taxes boosts the economy,"single/reasoning; asks to surface assumptions, not to do finance math"
+q114,single_signal,reasoning,general,0.0000,1,0,staged:unsure,steelman the opposing view in this debate,"single/reasoning, argumentation"
+q126,dual_signal,code,general,0.1231,1,0,staged:unsure,build a machine learning model in python to predict stock prices,the deliverable is an ML program; stocks are the data
+q134,dual_signal,code,reasoning,1.0000,0,1,staged:stage1,compare the time complexity of merge sort and bubble sort,complexity analysis is a core CS/algorithms topic
+q146,dual_signal,math,general,0.1079,1,0,staged:unsure,explain the mathematical reason why you cannot divide by zero,asks for a mathematics explanation of a math concept
+q155,dual_signal,reasoning,general,0.0870,1,0,staged:unsure,explain the reasoning error in using past fund returns to predict future returns,identifying an inductive fallacy; a reasoning task
+q165,dual_signal,math,general,0.0871,1,0,staged:unsure,what discount rate should I use and compute the npv of these cash flows,an NPV computation; the discount-rate choice is subordinate to the math

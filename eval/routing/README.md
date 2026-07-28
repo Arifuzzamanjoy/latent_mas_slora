@@ -107,6 +107,28 @@ This is deliberately kept straight, in plain language:
   adapter *hot-swap mechanics* across all four; it does not claim a specialist per
   domain.
 
+## A note on `general`: abstain is not a seventh label
+
+`ABSTAIN` deliberately **reuses the existing `general` enum member** rather than adding a
+seventh label. The routers already return `Domain.GENERAL` as their below-threshold fallback,
+so introducing a separate `"none"` would have meant either editing the baseline routers (which
+would break the before/after comparison) or mapping their fallback onto a label they can never
+emit. Two consequences follow directly, and both are artifacts of that choice rather than
+findings:
+
+- **`general` precision reads 22.4%** (15 true positives against
+  52 false positives). The `general` column absorbs every abstention
+  from every domain, so most predictions in it are queries that genuinely belonged to a
+  specialist and were declined. Low precision here is the *expected* shape of an abstain
+  bucket, not a routing failure — it is the price of not forcing a pick.
+- **`out_of_domain` accuracy is 100% (15/15) partly by construction.**
+  For an out-of-domain query the correct label *is* `general`, and abstaining also produces
+  `general`. A router that abstained on everything would score 100% on this bucket too. Read
+  it together with the abstention rate and the specialist buckets, never on its own.
+
+This is also why **confident-and-wrong** is defined as *predicted a specialist, did not abstain,
+and was wrong* — that definition is unaffected by the double duty `general` is doing.
+
 ## LIMITATIONS
 
 Read this before trusting any number above.
@@ -123,15 +145,26 @@ Read this before trusting any number above.
 - **Set size is small: 180 queries** (120/45/15). Per-domain and per-bucket cells
   are small enough that a few flips move the percentages by whole points. Treat
   these as directional, not precise.
-- **The staged thresholds were chosen in-sample.** `stage1_accept=0.70`,
-  `stage2_accept=0.18` were picked by a sweep over *this same* 180-query set
-  (recorded in `results/staged/threshold_sweep.json`). They are **not held out**.
-  Reported staged numbers are in-sample; a real deployment must recalibrate on a
-  separate validation split, and out-of-sample performance will be somewhat worse.
-- **Neural embedding routers were not evaluated in this environment.** The
-  `SemanticRouter`/`AdvancedHybridRouter` need `torch` and download
-  `all-MiniLM-L6-v2` from Hugging Face, which is unreachable in the offline
-  CI/eval environment used here. The harness supports `--router semantic/advanced`
+- **Threshold tuning: fixed, but only partly.** The thresholds were originally chosen
+  in-sample over all 180 queries. That is now addressed: `split.json` records a fixed
+  140/40 stratified train/holdout split, the sweep was re-run on **train only**
+  (`results/staged/threshold_sweep_train.json`), and the resulting config is reported on
+  the untouched holdout in `results/HELDOUT.md`. The train-tuned pick turned out to be the
+  **same** config already shipped (0.70 / 0.18), so nothing changed. On the holdout, staged
+  beats the baseline by +12.5 pp accuracy and
+  -10.0 pp confident-and-wrong.
+  **What remains unfixed:** the holdout is only 40 queries, so its confident-and-wrong figure
+  is 2/40 and a single flip moves it by 2.5 pp; the grid was swept once with no
+  repeated cross-validation; and the split is still drawn from the same hand-written,
+  single-labeller pool, so a clean split of a biased sample is still a biased sample.
+- **Neural embedding routers are still unevaluated — the comparison is incomplete.**
+  `SemanticRouter`/`AdvancedHybridRouter` need `torch` and `all-MiniLM-L6-v2`. Every
+  Hugging Face endpoint required (hub metadata, `config.json`, weights) returns
+  `403 Forbidden` here, so they were attempted and **could not be run**; see
+  `results/COMPARISON.md` §5 and `results/cost_profile.json` for the exact URLs and errors.
+  It is entirely possible the semantic router is more accurate than the staged router.
+  Nothing in these results rules that out, and the staged-vs-fast result should not be
+  presented as "staged is the best router". The harness supports `--router semantic/advanced`
   and will report a clean failure (never a fabricated number) if the model cannot
   load. Consequently the **stage-2 "semantic" pass is lexical TF-IDF, not neural
   embeddings** — a genuine but weaker signal. The staging/abstain *logic* is
@@ -160,7 +193,12 @@ is the real thing rather than a lexical stand-in.
 | `compare.py` | baseline vs staged → `results/COMPARISON.md` |
 | `ci_gate.py` | pass/fail gate used by CI |
 | `results/<router>/` | `results.json`, `report.md`, `confusion_matrix.png`, `errors.csv` |
-| `results/staged/threshold_sweep.json` | the in-sample threshold sweep |
+| `split.json` | fixed 140/40 stratified train/holdout split |
+| `results/staged/threshold_sweep.json` | the original in-sample sweep (superseded) |
+| `results/staged/threshold_sweep_train.json` | train-only sweep used to pick the shipped config |
+| `results/HELDOUT.md` | train vs holdout numbers and the generalisation gap |
+| `results/cost_profile.json` | measured latency/cold-start + why neural routers are unmeasured |
+| `GENERALIZING.md` | how this method transfers to other LLM apps |
 | `runpod_validate.sh`, `runpod_driver.py`, `RUNPOD.md` | GPU full-stack validation |
 | `../../src/routing/staged_router.py` | the staged router (new) |
 | `../../tests/test_staged_router.py` | unit tests |

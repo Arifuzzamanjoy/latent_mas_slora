@@ -43,7 +43,7 @@ See `confusion_matrix.png` for the screen-share-friendly version.
 
 ## Latency (per query, wall clock)
 
-- mean: 0.079 ms | median: 0.072 ms | p95: 0.127 ms | max: 0.187 ms
+- mean: 0.075 ms | median: 0.066 ms | p95: 0.126 ms | max: 0.385 ms
 
 ## Errors
 

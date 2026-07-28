@@ -1,0 +1,55 @@
+id,bucket,expected,predicted,confidence,abstained,confident_and_wrong,method,query,note
+q009,single_signal,code,general,0.0870,1,0,staged:unsure,convert a list of dicts to a pandas dataframe,"single/code, data-wrangling in code"
+q015,single_signal,code,general,0.0000,1,0,staged:unsure,how do I set up a virtual environment and install dependencies,"single/code, tooling"
+q022,single_signal,code,general,0.0000,1,0,staged:unsure,how to read a csv file line by line in go,"single/code, Go IO"
+q027,single_signal,math,general,0.0000,1,0,staged:unsure,integrate x times e to the x dx,"single/math, integration by parts"
+q033,single_signal,math,general,0.1002,1,0,staged:unsure,simplify (x squared minus 9) over (x minus 3),"single/math, algebraic simplification"
+q035,single_signal,math,general,0.0000,1,0,staged:unsure,how many ways to arrange the letters in mississippi,"single/math, permutations with repetition"
+q037,single_signal,math,general,0.0000,1,0,staged:unsure,what is the 10th term of the fibonacci sequence,"single/math, sequence value asked as a math fact"
+q038,single_signal,math,general,0.0000,1,0,staged:unsure,factor x cubed minus 8,"single/math, difference of cubes"
+q039,single_signal,math,general,0.0000,1,0,staged:unsure,convert 0.75 to a fraction in lowest terms,"single/math, rational number"
+q041,single_signal,math,general,0.1002,1,0,staged:unsure,compute the standard deviation of 2 4 4 4 5 5 7 9,"single/math, descriptive statistics"
+q050,single_signal,medical,general,0.0705,1,0,staged:unsure,metformin how it works,"single/medical, terse pharmacology"
+q061,single_signal,medical,general,0.1222,1,0,staged:unsure,explain the stages of wound healing,"single/medical, physiology"
+q062,single_signal,medical,general,0.0000,1,0,staged:unsure,what is the glasgow coma scale and how is it scored,"single/medical, clinical tool"
+q063,single_signal,medical,general,0.0000,1,0,staged:unsure,contraindications for prescribing nsaids,"single/medical, prescribing safety"
+q066,single_signal,medical,general,0.0000,1,0,staged:unsure,what is the pathophysiology of asthma,"single/medical, disease mechanism"
+q069,single_signal,medical,general,0.0000,1,0,staged:unsure,what are the warning signs of a stroke,"single/medical, clinical red flags"
+q075,single_signal,finance,math,1.0000,0,1,staged:stage1,what is a good low cost index fund to invest in,"single/finance, investing (info, not advice)"
+q077,single_signal,finance,math,1.0000,0,1,staged:stage1,how does dollar cost averaging work,"single/finance, investing strategy concept"
+q080,single_signal,finance,general,0.1011,1,0,staged:unsure,how do stablecoins like usdc maintain their peg,"single/finance, crypto mechanism"
+q082,single_signal,finance,general,0.0000,1,0,staged:unsure,explain what an etf is,"single/finance, instrument definition"
+q084,single_signal,finance,general,0.0000,1,0,staged:unsure,what is a pe ratio and what does it tell you,"single/finance, equity valuation metric"
+q093,single_signal,finance,general,0.0000,1,0,staged:unsure,what is inflation and how does it affect savings,"single/finance, macro/personal finance"
+q097,single_signal,reasoning,general,0.0614,1,0,staged:unsure,if all bloops are razzies and all razzies are lazzies are all bloops lazzies,"single/reasoning, syllogism with nonsense terms (no domain content)"
+q100,single_signal,reasoning,general,0.1645,1,0,staged:unsure,is this valid all men are mortal socrates is mortal therefore socrates is a man,"single/reasoning, validity of a syllogism"
+q102,single_signal,reasoning,general,0.1526,1,0,staged:unsure,what assumptions is this statement making,"single/reasoning, assumption surfacing"
+q103,single_signal,reasoning,general,0.0000,1,0,staged:unsure,a farmer must cross a river with a fox a chicken and grain how,"single/reasoning, river-crossing puzzle"
+q104,single_signal,reasoning,general,0.0000,1,0,staged:unsure,correlation vs causation whats the difference,"single/reasoning, terse critical-thinking concept"
+q111,single_signal,reasoning,general,0.0763,1,0,staged:unsure,whats a good framework for making a difficult decision under uncertainty,"single/reasoning, decision theory (general)"
+q113,single_signal,reasoning,general,0.0000,1,0,staged:unsure,what is occams razor and when does it apply,"single/reasoning, heuristic"
+q118,single_signal,reasoning,general,0.0000,1,0,staged:unsure,explain survivorship bias with an example,"single/reasoning, bias concept"
+q119,single_signal,reasoning,medical,1.0000,0,1,staged:stage1,whats the difference between necessary and sufficient conditions,"single/reasoning, logic"
+q124,dual_signal,math,medical,1.0000,0,1,staged:stage1,what does a p value of 0.03 mean statistically in a drug trial,core ask is interpreting a statistic; trial is context
+q125,dual_signal,medical,general,0.1503,1,0,staged:unsure,calculate the insulin dose for an 80 kg patient at 0.5 units per kg,clinical dosing decision dominates; the arithmetic is trivial
+q127,dual_signal,reasoning,general,0.1430,1,0,staged:unsure,is it logically sound to buy a stock just because it went up yesterday,"evaluating the validity of an inference, not giving market info"
+q128,dual_signal,code,math,0.2004,0,1,staged:stage2,write a sql query to find patients over 65 with diabetes,task is to author a query; medical terms are filter values
+q129,dual_signal,finance,reasoning,0.2492,0,1,staged:stage2,what are the pros and cons of investing in bitcoin versus gold,requires asset-class domain knowledge; pros/cons is only framing
+q130,dual_signal,math,reasoning,1.0000,0,1,staged:stage1,prove that this coin flip betting strategy has positive expected value,a proof of expected value is a math task
+q135,dual_signal,reasoning,general,0.1231,1,0,staged:unsure,whats the logical flaw in claiming a medicine works because people feel better after taking it,identifies a post-hoc/placebo fallacy; a reasoning task
+q137,dual_signal,reasoning,general,0.0000,1,0,staged:unsure,should a central bank raise rates to fight inflation argue both sides,"asks for structured two-sided argumentation, not a market figure"
+q138,dual_signal,code,math,0.2629,0,1,staged:stage2,write pseudocode for the newton raphson method to find a root,deliverable is an implementation of the method
+q139,dual_signal,math,general,0.1411,1,0,staged:unsure,whats the probability a patient has the disease given a positive test with 95 percent sensitivity,a conditional-probability / Bayes problem
+q142,dual_signal,math,finance,1.0000,0,1,staged:stage1,if bitcoin went from 30k to 45k what was the percentage return,a percent-change computation; crypto is context
+q143,dual_signal,code,general,0.1416,1,0,staged:unsure,how do I use pandas to analyze historical stock prices,tooling/data-analysis code task
+q148,dual_signal,reasoning,general,0.0000,1,0,staged:unsure,what are the strongest arguments for and against a universal basic income,open argumentation/ethics dominates the economics
+q149,dual_signal,math,code,1.0000,0,1,staged:stage1,how many test runs do I need to be 95 percent confident my code is bug free,fundamentally a statistics/confidence question
+q150,dual_signal,code,math,1.0000,0,1,staged:stage1,explain recursion using the factorial as an example,recursion is a programming concept; factorial only illustrates it
+q151,dual_signal,math,general,0.1227,1,0,staged:unsure,what statistical test should I use to compare two treatment groups,choosing a statistical test is a statistics-methodology question
+q153,dual_signal,code,general,0.0870,1,0,staged:unsure,design a database schema for a hospital patient records system,data-modeling/engineering task; hospital is the domain
+q154,dual_signal,math,finance,1.0000,0,1,staged:stage1,if my win rate is 60 percent but my average loss exceeds my average win am I profitable,an expectancy calculation; trading is the framing
+q158,dual_signal,code,general,0.1444,1,0,staged:unsure,compare react and vue for building a trading dashboard,a frontend framework choice; trading is only the use case
+q159,dual_signal,math,general,0.0763,1,0,staged:unsure,is there a logical gap in the induction step of this proof,verifying a mathematical induction proof requires math
+q162,dual_signal,math,finance,1.0000,0,1,staged:stage1,explain mathematically why diversification reduces portfolio risk,asks for the math (variance of a sum) behind the finance idea
+q163,dual_signal,code,general,0.1508,1,0,staged:unsure,debug why my sql query returns duplicate patient rows,a SQL/debugging task; patients are the data
+q164,dual_signal,reasoning,general,0.0000,1,0,staged:unsure,make the case for and against ai replacing software engineers,"open-ended argumentation, not a coding task"

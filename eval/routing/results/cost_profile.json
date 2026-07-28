@@ -1,0 +1,36 @@
+{
+  "fast": {
+    "cold_start_ms_import_construct_first_predict": 31.85,
+    "mean_latency_ms": 0.0571,
+    "p95_latency_ms": 0.0963,
+    "offline_capable": true,
+    "needs_network_at_inference": false,
+    "third_party_runtime_deps": []
+  },
+  "staged": {
+    "cold_start_ms_import_construct_first_predict": 41.41,
+    "mean_latency_ms": 0.0695,
+    "p95_latency_ms": 0.113,
+    "offline_capable": true,
+    "needs_network_at_inference": false,
+    "third_party_runtime_deps": []
+  },
+  "semantic": {
+    "status": "NOT MEASURED",
+    "reason": "torch not installable and huggingface.co returns 403 for the model"
+  },
+  "advanced": {
+    "status": "NOT MEASURED",
+    "reason": "torch not installable and huggingface.co returns 403 for the model"
+  },
+  "_measured_facts": {
+    "torch_wheel_size_mb": 526.6,
+    "torch_wheel_source": "pip download of torch-2.13.0-cp310-cp310-manylinux_2_28_x86_64.whl",
+    "pypi_throughput_mb_s": 1.1,
+    "hf_endpoints_403": [
+      "https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2",
+      "https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json",
+      "https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/model.safetensors"
+    ]
+  }
+}

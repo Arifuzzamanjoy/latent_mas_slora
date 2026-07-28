@@ -1,0 +1,408 @@
+{
+  "note": "Sweep on TRAIN ONLY (140 ids from split.json). Selection rule (same as originally documented): lowest confident-and-wrong among configs whose accuracy is >= the fast baseline on the SAME train split.",
+  "train_baseline_fast": {
+    "accuracy": 0.5571428571428572,
+    "confident_and_wrong": 0.15714285714285714,
+    "n": 140
+  },
+  "grid": {
+    "stage1_accept": [
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7,
+      1.01
+    ],
+    "stage2_accept": [
+      0.1,
+      0.14,
+      0.18,
+      0.22,
+      0.26,
+      0.3
+    ]
+  },
+  "rows": [
+    {
+      "stage1_accept": 0.5,
+      "stage2_accept": 0.1,
+      "n": 140,
+      "accuracy": 0.6714,
+      "confident_and_wrong": 0.1643,
+      "abstention": 0.2357,
+      "correct": 94,
+      "cw": 23
+    },
+    {
+      "stage1_accept": 0.5,
+      "stage2_accept": 0.14,
+      "n": 140,
+      "accuracy": 0.65,
+      "confident_and_wrong": 0.15,
+      "abstention": 0.2786,
+      "correct": 91,
+      "cw": 21
+    },
+    {
+      "stage1_accept": 0.5,
+      "stage2_accept": 0.18,
+      "n": 140,
+      "accuracy": 0.6357,
+      "confident_and_wrong": 0.1357,
+      "abstention": 0.3071,
+      "correct": 89,
+      "cw": 19
+    },
+    {
+      "stage1_accept": 0.5,
+      "stage2_accept": 0.22,
+      "n": 140,
+      "accuracy": 0.5786,
+      "confident_and_wrong": 0.1357,
+      "abstention": 0.3643,
+      "correct": 81,
+      "cw": 19
+    },
+    {
+      "stage1_accept": 0.5,
+      "stage2_accept": 0.26,
+      "n": 140,
+      "accuracy": 0.5714,
+      "confident_and_wrong": 0.1357,
+      "abstention": 0.3714,
+      "correct": 80,
+      "cw": 19
+    },
+    {
+      "stage1_accept": 0.5,
+      "stage2_accept": 0.3,
+      "n": 140,
+      "accuracy": 0.5714,
+      "confident_and_wrong": 0.1286,
+      "abstention": 0.3786,
+      "correct": 80,
+      "cw": 18
+    },
+    {
+      "stage1_accept": 0.55,
+      "stage2_accept": 0.1,
+      "n": 140,
+      "accuracy": 0.6643,
+      "confident_and_wrong": 0.1571,
+      "abstention": 0.25,
+      "correct": 93,
+      "cw": 22
+    },
+    {
+      "stage1_accept": 0.55,
+      "stage2_accept": 0.14,
+      "n": 140,
+      "accuracy": 0.6429,
+      "confident_and_wrong": 0.1357,
+      "abstention": 0.3,
+      "correct": 90,
+      "cw": 19
+    },
+    {
+      "stage1_accept": 0.55,
+      "stage2_accept": 0.18,
+      "n": 140,
+      "accuracy": 0.6286,
+      "confident_and_wrong": 0.1143,
+      "abstention": 0.3357,
+      "correct": 88,
+      "cw": 16
+    },
+    {
+      "stage1_accept": 0.55,
+      "stage2_accept": 0.22,
+      "n": 140,
+      "accuracy": 0.5714,
+      "confident_and_wrong": 0.1143,
+      "abstention": 0.3929,
+      "correct": 80,
+      "cw": 16
+    },
+    {
+      "stage1_accept": 0.55,
+      "stage2_accept": 0.26,
+      "n": 140,
+      "accuracy": 0.55,
+      "confident_and_wrong": 0.1071,
+      "abstention": 0.4214,
+      "correct": 77,
+      "cw": 15
+    },
+    {
+      "stage1_accept": 0.55,
+      "stage2_accept": 0.3,
+      "n": 140,
+      "accuracy": 0.55,
+      "confident_and_wrong": 0.1,
+      "abstention": 0.4286,
+      "correct": 77,
+      "cw": 14
+    },
+    {
+      "stage1_accept": 0.6,
+      "stage2_accept": 0.1,
+      "n": 140,
+      "accuracy": 0.6643,
+      "confident_and_wrong": 0.1571,
+      "abstention": 0.25,
+      "correct": 93,
+      "cw": 22
+    },
+    {
+      "stage1_accept": 0.6,
+      "stage2_accept": 0.14,
+      "n": 140,
+      "accuracy": 0.6429,
+      "confident_and_wrong": 0.1357,
+      "abstention": 0.3,
+      "correct": 90,
+      "cw": 19
+    },
+    {
+      "stage1_accept": 0.6,
+      "stage2_accept": 0.18,
+      "n": 140,
+      "accuracy": 0.6286,
+      "confident_and_wrong": 0.1143,
+      "abstention": 0.3357,
+      "correct": 88,
+      "cw": 16
+    },
+    {
+      "stage1_accept": 0.6,
+      "stage2_accept": 0.22,
+      "n": 140,
+      "accuracy": 0.5714,
+      "confident_and_wrong": 0.1143,
+      "abstention": 0.3929,
+      "correct": 80,
+      "cw": 16
+    },
+    {
+      "stage1_accept": 0.6,
+      "stage2_accept": 0.26,
+      "n": 140,
+      "accuracy": 0.55,
+      "confident_and_wrong": 0.1071,
+      "abstention": 0.4214,
+      "correct": 77,
+      "cw": 15
+    },
+    {
+      "stage1_accept": 0.6,
+      "stage2_accept": 0.3,
+      "n": 140,
+      "accuracy": 0.55,
+      "confident_and_wrong": 0.1,
+      "abstention": 0.4286,
+      "correct": 77,
+      "cw": 14
+    },
+    {
+      "stage1_accept": 0.65,
+      "stage2_accept": 0.1,
+      "n": 140,
+      "accuracy": 0.6643,
+      "confident_and_wrong": 0.1571,
+      "abstention": 0.25,
+      "correct": 93,
+      "cw": 22
+    },
+    {
+      "stage1_accept": 0.65,
+      "stage2_accept": 0.14,
+      "n": 140,
+      "accuracy": 0.6429,
+      "confident_and_wrong": 0.1357,
+      "abstention": 0.3,
+      "correct": 90,
+      "cw": 19
+    },
+    {
+      "stage1_accept": 0.65,
+      "stage2_accept": 0.18,
+      "n": 140,
+      "accuracy": 0.6286,
+      "confident_and_wrong": 0.1143,
+      "abstention": 0.3357,
+      "correct": 88,
+      "cw": 16
+    },
+    {
+      "stage1_accept": 0.65,
+      "stage2_accept": 0.22,
+      "n": 140,
+      "accuracy": 0.5714,
+      "confident_and_wrong": 0.1143,
+      "abstention": 0.3929,
+      "correct": 80,
+      "cw": 16
+    },
+    {
+      "stage1_accept": 0.65,
+      "stage2_accept": 0.26,
+      "n": 140,
+      "accuracy": 0.55,
+      "confident_and_wrong": 0.1071,
+      "abstention": 0.4214,
+      "correct": 77,
+      "cw": 15
+    },
+    {
+      "stage1_accept": 0.65,
+      "stage2_accept": 0.3,
+      "n": 140,
+      "accuracy": 0.55,
+      "confident_and_wrong": 0.1,
+      "abstention": 0.4286,
+      "correct": 77,
+      "cw": 14
+    },
+    {
+      "stage1_accept": 0.7,
+      "stage2_accept": 0.1,
+      "n": 140,
+      "accuracy": 0.6571,
+      "confident_and_wrong": 0.15,
+      "abstention": 0.2643,
+      "correct": 92,
+      "cw": 21
+    },
+    {
+      "stage1_accept": 0.7,
+      "stage2_accept": 0.14,
+      "n": 140,
+      "accuracy": 0.6357,
+      "confident_and_wrong": 0.1286,
+      "abstention": 0.3143,
+      "correct": 89,
+      "cw": 18
+    },
+    {
+      "stage1_accept": 0.7,
+      "stage2_accept": 0.18,
+      "n": 140,
+      "accuracy": 0.6143,
+      "confident_and_wrong": 0.0929,
+      "abstention": 0.3714,
+      "correct": 86,
+      "cw": 13
+    },
+    {
+      "stage1_accept": 0.7,
+      "stage2_accept": 0.22,
+      "n": 140,
+      "accuracy": 0.5571,
+      "confident_and_wrong": 0.0857,
+      "abstention": 0.4357,
+      "correct": 78,
+      "cw": 12
+    },
+    {
+      "stage1_accept": 0.7,
+      "stage2_accept": 0.26,
+      "n": 140,
+      "accuracy": 0.5286,
+      "confident_and_wrong": 0.0786,
+      "abstention": 0.4714,
+      "correct": 74,
+      "cw": 11
+    },
+    {
+      "stage1_accept": 0.7,
+      "stage2_accept": 0.3,
+      "n": 140,
+      "accuracy": 0.5286,
+      "confident_and_wrong": 0.0714,
+      "abstention": 0.4786,
+      "correct": 74,
+      "cw": 10
+    },
+    {
+      "stage1_accept": 1.01,
+      "stage2_accept": 0.1,
+      "n": 140,
+      "accuracy": 0.5714,
+      "confident_and_wrong": 0.1214,
+      "abstention": 0.3786,
+      "correct": 80,
+      "cw": 17
+    },
+    {
+      "stage1_accept": 1.01,
+      "stage2_accept": 0.14,
+      "n": 140,
+      "accuracy": 0.5143,
+      "confident_and_wrong": 0.0786,
+      "abstention": 0.4857,
+      "correct": 72,
+      "cw": 11
+    },
+    {
+      "stage1_accept": 1.01,
+      "stage2_accept": 0.18,
+      "n": 140,
+      "accuracy": 0.4143,
+      "confident_and_wrong": 0.0357,
+      "abstention": 0.6286,
+      "correct": 58,
+      "cw": 5
+    },
+    {
+      "stage1_accept": 1.01,
+      "stage2_accept": 0.22,
+      "n": 140,
+      "accuracy": 0.2786,
+      "confident_and_wrong": 0.0214,
+      "abstention": 0.7786,
+      "correct": 39,
+      "cw": 3
+    },
+    {
+      "stage1_accept": 1.01,
+      "stage2_accept": 0.26,
+      "n": 140,
+      "accuracy": 0.1786,
+      "confident_and_wrong": 0.0143,
+      "abstention": 0.8857,
+      "correct": 25,
+      "cw": 2
+    },
+    {
+      "stage1_accept": 1.01,
+      "stage2_accept": 0.3,
+      "n": 140,
+      "accuracy": 0.1429,
+      "confident_and_wrong": 0.0071,
+      "abstention": 0.9286,
+      "correct": 20,
+      "cw": 1
+    }
+  ],
+  "train_tuned_pick": {
+    "stage1_accept": 0.7,
+    "stage2_accept": 0.18,
+    "n": 140,
+    "accuracy": 0.6143,
+    "confident_and_wrong": 0.0929,
+    "abstention": 0.3714,
+    "correct": 86,
+    "cw": 13
+  },
+  "shipped_default_on_train": {
+    "stage1_accept": 0.7,
+    "stage2_accept": 0.18,
+    "n": 140,
+    "accuracy": 0.6143,
+    "confident_and_wrong": 0.0929,
+    "abstention": 0.3714,
+    "correct": 86,
+    "cw": 13
+  }
+}

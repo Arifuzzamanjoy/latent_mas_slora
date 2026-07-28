@@ -1,82 +1,82 @@
 {
   "router": "staged",
   "queries_path": "/sessions/jolly-busy-dijkstra/mnt/latent_mas_slora/eval/routing/queries.jsonl",
-  "split": "all",
+  "split": "train",
   "seed": 1234,
-  "n": 180,
+  "n": 140,
   "metrics": {
-    "n": 180,
-    "overall_accuracy": 0.6277777777777778,
-    "correct": 113,
+    "n": 140,
+    "overall_accuracy": 0.6142857142857143,
+    "correct": 86,
     "bucket_accuracy": {
       "dual_signal": {
-        "n": 45,
-        "correct": 17,
-        "accuracy": 0.37777777777777777
+        "n": 35,
+        "correct": 12,
+        "accuracy": 0.34285714285714286
       },
       "out_of_domain": {
-        "n": 15,
-        "correct": 15,
+        "n": 11,
+        "correct": 11,
         "accuracy": 1.0
       },
       "single_signal": {
-        "n": 120,
-        "correct": 81,
-        "accuracy": 0.675
+        "n": 94,
+        "correct": 63,
+        "accuracy": 0.6702127659574468
       }
     },
-    "abstentions": 67,
-    "abstention_rate": 0.37222222222222223,
-    "confident_and_wrong": 15,
-    "confident_and_wrong_rate": 0.08333333333333333,
+    "abstentions": 52,
+    "abstention_rate": 0.37142857142857144,
+    "confident_and_wrong": 13,
+    "confident_and_wrong_rate": 0.09285714285714286,
     "per_domain": {
       "code": {
-        "precision": 0.9642857142857143,
-        "recall": 0.6428571428571429,
-        "tp": 27,
+        "precision": 0.9565217391304348,
+        "recall": 0.6875,
+        "tp": 22,
         "fp": 1,
-        "fn": 15,
-        "support": 42
+        "fn": 10,
+        "support": 32
       },
       "math": {
-        "precision": 0.76,
-        "recall": 0.5,
-        "tp": 19,
-        "fp": 6,
-        "fn": 19,
-        "support": 38
+        "precision": 0.7368421052631579,
+        "recall": 0.4666666666666667,
+        "tp": 14,
+        "fp": 5,
+        "fn": 16,
+        "support": 30
       },
       "medical": {
-        "precision": 0.9130434782608695,
-        "recall": 0.7241379310344828,
-        "tp": 21,
+        "precision": 0.8888888888888888,
+        "recall": 0.6956521739130435,
+        "tp": 16,
         "fp": 2,
-        "fn": 8,
-        "support": 29
+        "fn": 7,
+        "support": 23
       },
       "finance": {
-        "precision": 0.85,
-        "recall": 0.68,
-        "tp": 17,
+        "precision": 0.8125,
+        "recall": 0.65,
+        "tp": 13,
         "fp": 3,
-        "fn": 8,
-        "support": 25
+        "fn": 7,
+        "support": 20
       },
       "reasoning": {
-        "precision": 0.8235294117647058,
-        "recall": 0.45161290322580644,
-        "tp": 14,
-        "fp": 3,
-        "fn": 17,
-        "support": 31
+        "precision": 0.8333333333333334,
+        "recall": 0.4166666666666667,
+        "tp": 10,
+        "fp": 2,
+        "fn": 14,
+        "support": 24
       },
       "general": {
-        "precision": 0.22388059701492538,
+        "precision": 0.21153846153846154,
         "recall": 1.0,
-        "tp": 15,
-        "fp": 52,
+        "tp": 11,
+        "fp": 41,
         "fn": 0,
-        "support": 15
+        "support": 11
       }
     },
     "confusion_matrix": {
@@ -90,44 +90,44 @@
       ],
       "rows_expected_cols_predicted": [
         [
-          27,
-          4,
+          22,
+          3,
           0,
           0,
+          0,
+          7
+        ],
+        [
+          1,
+          14,
+          1,
+          3,
           1,
           10
         ],
         [
-          1,
-          19,
-          1,
-          3,
-          1,
-          13
-        ],
-        [
           0,
           0,
-          21,
+          16,
           0,
           0,
-          8
+          7
         ],
         [
           0,
           2,
           0,
-          17,
+          13,
           1,
-          5
+          4
         ],
         [
           0,
           0,
           1,
           0,
-          14,
-          16
+          10,
+          13
         ],
         [
           0,
@@ -135,15 +135,15 @@
           0,
           0,
           0,
-          15
+          11
         ]
       ]
     },
     "latency_ms": {
-      "mean": 0.07475972226731958,
-      "median": 0.06646600013482384,
-      "p95": 0.12622725098481155,
-      "max": 0.3848889991786564
+      "mean": 0.07472101425654339,
+      "median": 0.07240749891934684,
+      "p95": 0.11841910036309852,
+      "max": 0.15357200027210638
     }
   },
   "predictions": [
@@ -155,7 +155,7 @@
       "predicted": "code",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.05509499897016212,
+      "latency_ms": 0.06012499943608418,
       "note": "single/code, straightforward programming how-to"
     },
     {
@@ -166,7 +166,7 @@
       "predicted": "code",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.06505399869638495,
+      "latency_ms": 0.07496299986087251,
       "note": "single/code, terse debugging ask, purely programming"
     },
     {
@@ -177,19 +177,8 @@
       "predicted": "code",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.06003399903420359,
+      "latency_ms": 0.06470300104410853,
       "note": "single/code; asks to WRITE code, deliverable is a program (not a math proof)"
-    },
-    {
-      "id": "q004",
-      "query": "whats the difference between let and const in javascript",
-      "bucket": "single_signal",
-      "expected": "code",
-      "predicted": "code",
-      "confidence": 1.0,
-      "method": "staged:stage1",
-      "latency_ms": 0.05480399886437226,
-      "note": "single/code, JS language semantics"
     },
     {
       "id": "q005",
@@ -199,7 +188,7 @@
       "predicted": "code",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.06053499964764342,
+      "latency_ms": 0.06483300057880115,
       "note": "single/code, DevOps/build tooling"
     },
     {
@@ -210,7 +199,7 @@
       "predicted": "code",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.027262000003247522,
+      "latency_ms": 0.029545999495894648,
       "note": "single/code, implement an algorithm in a language"
     },
     {
@@ -221,7 +210,7 @@
       "predicted": "code",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.06283899892878253,
+      "latency_ms": 0.09381800009578001,
       "note": "single/code, library usage"
     },
     {
@@ -232,7 +221,7 @@
       "predicted": "code",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.04700899989984464,
+      "latency_ms": 0.05847099964739755,
       "note": "single/code, version control workflow"
     },
     {
@@ -243,41 +232,8 @@
       "predicted": "general",
       "confidence": 0.08704793302664786,
       "method": "staged:unsure",
-      "latency_ms": 0.08464100028504618,
+      "latency_ms": 0.10449799992784392,
       "note": "single/code, data-wrangling in code"
-    },
-    {
-      "id": "q010",
-      "query": "why is my react component re-rendering infinitely",
-      "bucket": "single_signal",
-      "expected": "code",
-      "predicted": "code",
-      "confidence": 1.0,
-      "method": "staged:stage1",
-      "latency_ms": 0.051548000556067564,
-      "note": "single/code, frontend debugging"
-    },
-    {
-      "id": "q011",
-      "query": "bash one liner to find and delete all pyc files",
-      "bucket": "single_signal",
-      "expected": "code",
-      "predicted": "math",
-      "confidence": 0.37654683467726613,
-      "method": "staged:stage2",
-      "latency_ms": 0.07679600093979388,
-      "note": "single/code, shell scripting"
-    },
-    {
-      "id": "q012",
-      "query": "explain what a decorator does in python",
-      "bucket": "single_signal",
-      "expected": "code",
-      "predicted": "code",
-      "confidence": 1.0,
-      "method": "staged:stage1",
-      "latency_ms": 0.08216599962906912,
-      "note": "single/code, language concept"
     },
     {
       "id": "q013",
@@ -287,19 +243,8 @@
       "predicted": "code",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.07853900024201721,
+      "latency_ms": 0.08611299926997162,
       "note": "single/code; the task is to write SQL, spend is incidental"
-    },
-    {
-      "id": "q014",
-      "query": "segfault in my c program when I free the same pointer twice",
-      "bucket": "single_signal",
-      "expected": "code",
-      "predicted": "general",
-      "confidence": 0.0,
-      "method": "staged:unsure",
-      "latency_ms": 0.0874659999681171,
-      "note": "single/code, memory bug"
     },
     {
       "id": "q015",
@@ -309,7 +254,7 @@
       "predicted": "general",
       "confidence": 0.0,
       "method": "staged:unsure",
-      "latency_ms": 0.0810229994385736,
+      "latency_ms": 0.08604299910075497,
       "note": "single/code, tooling"
     },
     {
@@ -320,19 +265,8 @@
       "predicted": "code",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.0436529990111012,
+      "latency_ms": 0.04368299960333388,
       "note": "single/code, JS concurrency concept"
-    },
-    {
-      "id": "q017",
-      "query": "regex to match a valid email address",
-      "bucket": "single_signal",
-      "expected": "code",
-      "predicted": "general",
-      "confidence": 0.10790208480216688,
-      "method": "staged:unsure",
-      "latency_ms": 0.06286999996518716,
-      "note": "single/code, regex authoring"
     },
     {
       "id": "q018",
@@ -342,7 +276,7 @@
       "predicted": "code",
       "confidence": 0.30466776559326747,
       "method": "staged:stage2",
-      "latency_ms": 0.06355999903462362,
+      "latency_ms": 0.06511300125566777,
       "note": "single/code, testing task"
     },
     {
@@ -353,7 +287,7 @@
       "predicted": "code",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.050986000132979825,
+      "latency_ms": 0.05213899930822663,
       "note": "single/code, deployment"
     },
     {
@@ -364,7 +298,7 @@
       "predicted": "code",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.056285998653038405,
+      "latency_ms": 0.09039200085680932,
       "note": "single/code, type system"
     },
     {
@@ -375,7 +309,7 @@
       "predicted": "code",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.054894000641070306,
+      "latency_ms": 0.06141700032458175,
       "note": "single/code, performance of code"
     },
     {
@@ -386,7 +320,7 @@
       "predicted": "general",
       "confidence": 0.0,
       "method": "staged:unsure",
-      "latency_ms": 0.08665499990456738,
+      "latency_ms": 0.08399999933317304,
       "note": "single/code, Go IO"
     },
     {
@@ -397,7 +331,7 @@
       "predicted": "code",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.04224999975122046,
+      "latency_ms": 0.047610001274733804,
       "note": "single/code, containerization"
     },
     {
@@ -408,19 +342,8 @@
       "predicted": "code",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.06268900142458733,
+      "latency_ms": 0.06646599831583444,
       "note": "single/code, terse debugging"
-    },
-    {
-      "id": "q025",
-      "query": "solve x squared minus 5x plus 6 equals 0",
-      "bucket": "single_signal",
-      "expected": "math",
-      "predicted": "math",
-      "confidence": 1.0,
-      "method": "staged:stage1",
-      "latency_ms": 0.053992998800822534,
-      "note": "single/math, quadratic"
     },
     {
       "id": "q026",
@@ -430,7 +353,7 @@
       "predicted": "math",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.030047000109334476,
+      "latency_ms": 0.032963000194285996,
       "note": "single/math, terse calculus"
     },
     {
@@ -441,7 +364,7 @@
       "predicted": "general",
       "confidence": 0.0,
       "method": "staged:unsure",
-      "latency_ms": 0.2626689984026598,
+      "latency_ms": 0.06477299939433578,
       "note": "single/math, integration by parts"
     },
     {
@@ -452,7 +375,7 @@
       "predicted": "math",
       "confidence": 0.21256500956173247,
       "method": "staged:stage2",
-      "latency_ms": 0.07680599992454518,
+      "latency_ms": 0.10253399887005799,
       "note": "single/math, classic proof (math reasoning, not a program)"
     },
     {
@@ -463,7 +386,7 @@
       "predicted": "math",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.11155200081702787,
+      "latency_ms": 0.07032400026218966,
       "note": "single/math, linear algebra"
     },
     {
@@ -474,7 +397,7 @@
       "predicted": "math",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.06403199950000271,
+      "latency_ms": 0.08137500117300078,
       "note": "single/math, basic probability"
     },
     {
@@ -485,19 +408,8 @@
       "predicted": "math",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.08250700011558365,
+      "latency_ms": 0.09520099956716876,
       "note": "single/math, limits"
-    },
-    {
-      "id": "q032",
-      "query": "sum of the first 100 natural numbers",
-      "bucket": "single_signal",
-      "expected": "math",
-      "predicted": "math",
-      "confidence": 1.0,
-      "method": "staged:stage1",
-      "latency_ms": 0.0417200008087093,
-      "note": "single/math, arithmetic series"
     },
     {
       "id": "q033",
@@ -507,7 +419,7 @@
       "predicted": "general",
       "confidence": 0.10020410646938954,
       "method": "staged:unsure",
-      "latency_ms": 0.07021400051598903,
+      "latency_ms": 0.07835900032659993,
       "note": "single/math, algebraic simplification"
     },
     {
@@ -518,7 +430,7 @@
       "predicted": "math",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.08170499859261326,
+      "latency_ms": 0.08802699994703289,
       "note": "single/math, linear system"
     },
     {
@@ -529,19 +441,8 @@
       "predicted": "general",
       "confidence": 0.0,
       "method": "staged:unsure",
-      "latency_ms": 0.07542300045315642,
+      "latency_ms": 0.0722579989087535,
       "note": "single/math, permutations with repetition"
-    },
-    {
-      "id": "q036",
-      "query": "find the area under y equals x squared from 0 to 3",
-      "bucket": "single_signal",
-      "expected": "math",
-      "predicted": "math",
-      "confidence": 0.40081642587755817,
-      "method": "staged:stage2",
-      "latency_ms": 0.10857599954761099,
-      "note": "single/math, definite integral"
     },
     {
       "id": "q037",
@@ -551,7 +452,7 @@
       "predicted": "general",
       "confidence": 0.0,
       "method": "staged:unsure",
-      "latency_ms": 0.17592500080354512,
+      "latency_ms": 0.09954900087905116,
       "note": "single/math, sequence value asked as a math fact"
     },
     {
@@ -562,7 +463,7 @@
       "predicted": "general",
       "confidence": 0.0,
       "method": "staged:unsure",
-      "latency_ms": 0.04302199886296876,
+      "latency_ms": 0.04886299939244054,
       "note": "single/math, difference of cubes"
     },
     {
@@ -573,7 +474,7 @@
       "predicted": "general",
       "confidence": 0.0,
       "method": "staged:unsure",
-      "latency_ms": 0.06643599954259116,
+      "latency_ms": 0.07310900036827661,
       "note": "single/math, rational number"
     },
     {
@@ -584,7 +485,7 @@
       "predicted": "math",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.05728900032409001,
+      "latency_ms": 0.06295899947872385,
       "note": "single/math, linear algebra fact"
     },
     {
@@ -595,19 +496,8 @@
       "predicted": "general",
       "confidence": 0.10020410646938954,
       "method": "staged:unsure",
-      "latency_ms": 0.08967999929154757,
+      "latency_ms": 0.09779599895409774,
       "note": "single/math, descriptive statistics"
-    },
-    {
-      "id": "q042",
-      "query": "solve for x if log base 2 of x equals 5",
-      "bucket": "single_signal",
-      "expected": "math",
-      "predicted": "math",
-      "confidence": 1.0,
-      "method": "staged:stage1",
-      "latency_ms": 0.06596500134037342,
-      "note": "single/math, logarithms"
     },
     {
       "id": "q043",
@@ -617,7 +507,7 @@
       "predicted": "math",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.04495499888435006,
+      "latency_ms": 0.06681699960608967,
       "note": "single/math, factorial value"
     },
     {
@@ -628,7 +518,7 @@
       "predicted": "math",
       "confidence": 0.40081642587755817,
       "method": "staged:stage2",
-      "latency_ms": 0.07083400123519823,
+      "latency_ms": 0.08607299969298765,
       "note": "single/math, number theory"
     },
     {
@@ -639,19 +529,8 @@
       "predicted": "math",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.06359100007102825,
+      "latency_ms": 0.08364899986190721,
       "note": "single/math, series expansion"
-    },
-    {
-      "id": "q046",
-      "query": "area of a circle with radius 5",
-      "bucket": "single_signal",
-      "expected": "math",
-      "predicted": "general",
-      "confidence": 0.0,
-      "method": "staged:unsure",
-      "latency_ms": 0.04814199928659946,
-      "note": "single/math, geometry"
     },
     {
       "id": "q047",
@@ -661,7 +540,7 @@
       "predicted": "math",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.08462100049655419,
+      "latency_ms": 0.08528199941792991,
       "note": "single/math, quadratic formula"
     },
     {
@@ -672,19 +551,8 @@
       "predicted": "math",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.1640619993850123,
+      "latency_ms": 0.06679699981759768,
       "note": "single/math, discrete probability"
-    },
-    {
-      "id": "q049",
-      "query": "what are the symptoms of appendicitis",
-      "bucket": "single_signal",
-      "expected": "medical",
-      "predicted": "medical",
-      "confidence": 1.0,
-      "method": "staged:stage1",
-      "latency_ms": 0.1438529998267768,
-      "note": "single/medical, clinical presentation"
     },
     {
       "id": "q050",
@@ -694,7 +562,7 @@
       "predicted": "general",
       "confidence": 0.07053456158585979,
       "method": "staged:unsure",
-      "latency_ms": 0.04820200047106482,
+      "latency_ms": 0.045245998990139924,
       "note": "single/medical, terse pharmacology"
     },
     {
@@ -705,7 +573,7 @@
       "predicted": "medical",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.09028100066643674,
+      "latency_ms": 0.09761500041349791,
       "note": "single/medical, clinical vignette"
     },
     {
@@ -716,7 +584,7 @@
       "predicted": "medical",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.05750000127591193,
+      "latency_ms": 0.06089600174163934,
       "note": "single/medical, therapeutics"
     },
     {
@@ -727,7 +595,7 @@
       "predicted": "medical",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.05657799920300022,
+      "latency_ms": 0.07931999971333425,
       "note": "single/medical, physiology"
     },
     {
@@ -738,7 +606,7 @@
       "predicted": "medical",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.043903000914724544,
+      "latency_ms": 0.05006500032322947,
       "note": "single/medical, drug adverse effects"
     },
     {
@@ -749,7 +617,7 @@
       "predicted": "medical",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.056958000641316175,
+      "latency_ms": 0.059341999076423235,
       "note": "single/medical, anatomy"
     },
     {
@@ -760,19 +628,8 @@
       "predicted": "medical",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.044364000132190995,
+      "latency_ms": 0.045606000639963895,
       "note": "single/medical, lab reference"
-    },
-    {
-      "id": "q057",
-      "query": "how does insulin lower blood glucose",
-      "bucket": "single_signal",
-      "expected": "medical",
-      "predicted": "medical",
-      "confidence": 1.0,
-      "method": "staged:stage1",
-      "latency_ms": 0.03901499985659029,
-      "note": "single/medical, physiology"
     },
     {
       "id": "q058",
@@ -782,19 +639,8 @@
       "predicted": "medical",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.03928400110453367,
+      "latency_ms": 0.04076799996255431,
       "note": "single/medical, clinical reasoning within medicine"
-    },
-    {
-      "id": "q059",
-      "query": "what causes iron deficiency anemia",
-      "bucket": "single_signal",
-      "expected": "medical",
-      "predicted": "general",
-      "confidence": 0.09975093361076325,
-      "method": "staged:unsure",
-      "latency_ms": 0.05091700040793512,
-      "note": "single/medical, pathophysiology"
     },
     {
       "id": "q060",
@@ -804,7 +650,7 @@
       "predicted": "medical",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.039806000131648034,
+      "latency_ms": 0.04007600000477396,
       "note": "single/medical, pharmacology"
     },
     {
@@ -815,7 +661,7 @@
       "predicted": "general",
       "confidence": 0.12216944435630515,
       "method": "staged:unsure",
-      "latency_ms": 0.05918199894949794,
+      "latency_ms": 0.06301999928837176,
       "note": "single/medical, physiology"
     },
     {
@@ -826,7 +672,7 @@
       "predicted": "general",
       "confidence": 0.0,
       "method": "staged:unsure",
-      "latency_ms": 0.07624400132044684,
+      "latency_ms": 0.10740400102804415,
       "note": "single/medical, clinical tool"
     },
     {
@@ -837,19 +683,8 @@
       "predicted": "general",
       "confidence": 0.0,
       "method": "staged:unsure",
-      "latency_ms": 0.03732100049091969,
+      "latency_ms": 0.043321999328327365,
       "note": "single/medical, prescribing safety"
-    },
-    {
-      "id": "q064",
-      "query": "a child presents with fever rash and strawberry tongue",
-      "bucket": "single_signal",
-      "expected": "medical",
-      "predicted": "medical",
-      "confidence": 1.0,
-      "method": "staged:stage1",
-      "latency_ms": 0.056536999181844294,
-      "note": "single/medical, Kawasaki vignette"
     },
     {
       "id": "q065",
@@ -859,7 +694,7 @@
       "predicted": "medical",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.04536599954008125,
+      "latency_ms": 0.05144799979461823,
       "note": "single/medical, pharmacology"
     },
     {
@@ -870,7 +705,7 @@
       "predicted": "general",
       "confidence": 0.0,
       "method": "staged:unsure",
-      "latency_ms": 0.04608699964592233,
+      "latency_ms": 0.06586599920410663,
       "note": "single/medical, disease mechanism"
     },
     {
@@ -881,7 +716,7 @@
       "predicted": "medical",
       "confidence": 0.2036157405938419,
       "method": "staged:stage2",
-      "latency_ms": 0.06707800093863625,
+      "latency_ms": 0.06713699985994026,
       "note": "single/medical, lab interpretation"
     },
     {
@@ -892,7 +727,7 @@
       "predicted": "medical",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.06969200148887467,
+      "latency_ms": 0.05087599856778979,
       "note": "single/medical, therapeutics"
     },
     {
@@ -903,19 +738,8 @@
       "predicted": "general",
       "confidence": 0.0,
       "method": "staged:unsure",
-      "latency_ms": 0.06321999899228103,
+      "latency_ms": 0.06378100079018623,
       "note": "single/medical, clinical red flags"
-    },
-    {
-      "id": "q070",
-      "query": "how does chemotherapy kill cancer cells",
-      "bucket": "single_signal",
-      "expected": "medical",
-      "predicted": "medical",
-      "confidence": 1.0,
-      "method": "staged:stage1",
-      "latency_ms": 0.044104001062805764,
-      "note": "single/medical, oncology mechanism"
     },
     {
       "id": "q071",
@@ -925,7 +749,7 @@
       "predicted": "medical",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.06251800004974939,
+      "latency_ms": 0.06807000136177521,
       "note": "single/medical, disease comparison"
     },
     {
@@ -936,7 +760,7 @@
       "predicted": "medical",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.05980300011287909,
+      "latency_ms": 0.06546500117110554,
       "note": "single/medical, preventive care"
     },
     {
@@ -947,7 +771,7 @@
       "predicted": "finance",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.02326499998162035,
+      "latency_ms": 0.02458600101817865,
       "note": "single/finance, terse crypto price ask"
     },
     {
@@ -958,7 +782,7 @@
       "predicted": "finance",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.0389239994547097,
+      "latency_ms": 0.04195900146442,
       "note": "single/finance, crypto mechanics"
     },
     {
@@ -969,19 +793,8 @@
       "predicted": "math",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.07413099956465885,
+      "latency_ms": 0.07057399852783419,
       "note": "single/finance, investing (info, not advice)"
-    },
-    {
-      "id": "q076",
-      "query": "difference between a roth ira and a traditional ira",
-      "bucket": "single_signal",
-      "expected": "finance",
-      "predicted": "general",
-      "confidence": 0.0,
-      "method": "staged:unsure",
-      "latency_ms": 0.0695529997756239,
-      "note": "single/finance, retirement accounts"
     },
     {
       "id": "q077",
@@ -991,7 +804,7 @@
       "predicted": "math",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.043252000978100114,
+      "latency_ms": 0.04317200000514276,
       "note": "single/finance, investing strategy concept"
     },
     {
@@ -1002,19 +815,8 @@
       "predicted": "finance",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.04666899985750206,
+      "latency_ms": 0.047740999434608966,
       "note": "single/finance, crypto metric"
-    },
-    {
-      "id": "q079",
-      "query": "explain yield farming in defi",
-      "bucket": "single_signal",
-      "expected": "finance",
-      "predicted": "finance",
-      "confidence": 1.0,
-      "method": "staged:stage1",
-      "latency_ms": 0.03529700006765779,
-      "note": "single/finance, DeFi"
     },
     {
       "id": "q080",
@@ -1024,19 +826,8 @@
       "predicted": "general",
       "confidence": 0.10110601763356308,
       "method": "staged:unsure",
-      "latency_ms": 0.06873100028315093,
+      "latency_ms": 0.07696600005147047,
       "note": "single/finance, crypto mechanism"
-    },
-    {
-      "id": "q081",
-      "query": "whats the difference between a stock and a bond",
-      "bucket": "single_signal",
-      "expected": "finance",
-      "predicted": "finance",
-      "confidence": 1.0,
-      "method": "staged:stage1",
-      "latency_ms": 0.058401001297170296,
-      "note": "single/finance, securities basics"
     },
     {
       "id": "q082",
@@ -1046,19 +837,8 @@
       "predicted": "general",
       "confidence": 0.0,
       "method": "staged:unsure",
-      "latency_ms": 0.040126999010681175,
+      "latency_ms": 0.04370300121081527,
       "note": "single/finance, instrument definition"
-    },
-    {
-      "id": "q083",
-      "query": "how does staking crypto generate rewards",
-      "bucket": "single_signal",
-      "expected": "finance",
-      "predicted": "finance",
-      "confidence": 1.0,
-      "method": "staged:stage1",
-      "latency_ms": 0.041960000089602545,
-      "note": "single/finance, crypto"
     },
     {
       "id": "q084",
@@ -1068,7 +848,7 @@
       "predicted": "general",
       "confidence": 0.0,
       "method": "staged:unsure",
-      "latency_ms": 0.07426100091834087,
+      "latency_ms": 0.0800219986558659,
       "note": "single/finance, equity valuation metric"
     },
     {
@@ -1079,7 +859,7 @@
       "predicted": "finance",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.03008699968631845,
+      "latency_ms": 0.04423400059749838,
       "note": "single/finance, terse crypto metric"
     },
     {
@@ -1090,7 +870,7 @@
       "predicted": "finance",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.05369200152927078,
+      "latency_ms": 0.044565000280272216,
       "note": "single/finance, market structure"
     },
     {
@@ -1101,7 +881,7 @@
       "predicted": "finance",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.02958599907287862,
+      "latency_ms": 0.031200001103570685,
       "note": "single/finance, core finance concept (intro-level)"
     },
     {
@@ -1112,7 +892,7 @@
       "predicted": "finance",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.03319300049042795,
+      "latency_ms": 0.030528000934282318,
       "note": "single/finance, trading mechanic"
     },
     {
@@ -1123,7 +903,7 @@
       "predicted": "finance",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.039755999750923365,
+      "latency_ms": 0.04633800017472822,
       "note": "single/finance, commodities"
     },
     {
@@ -1134,7 +914,7 @@
       "predicted": "finance",
       "confidence": 0.21447825206237733,
       "method": "staged:stage2",
-      "latency_ms": 0.058690999139798805,
+      "latency_ms": 0.07116500091797207,
       "note": "single/finance, personal finance"
     },
     {
@@ -1145,19 +925,8 @@
       "predicted": "finance",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.04556699968816247,
+      "latency_ms": 0.04925299981550779,
       "note": "single/finance, market concept"
-    },
-    {
-      "id": "q092",
-      "query": "difference between a market order and a limit order",
-      "bucket": "single_signal",
-      "expected": "finance",
-      "predicted": "finance",
-      "confidence": 0.2022120352671262,
-      "method": "staged:stage2",
-      "latency_ms": 0.07150599958549719,
-      "note": "single/finance, trading mechanics"
     },
     {
       "id": "q093",
@@ -1167,7 +936,7 @@
       "predicted": "general",
       "confidence": 0.0,
       "method": "staged:unsure",
-      "latency_ms": 0.06514300002891105,
+      "latency_ms": 0.06961200051591732,
       "note": "single/finance, macro/personal finance"
     },
     {
@@ -1178,7 +947,7 @@
       "predicted": "finance",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.047700001232442446,
+      "latency_ms": 0.06000400026096031,
       "note": "single/finance, equities"
     },
     {
@@ -1189,7 +958,7 @@
       "predicted": "finance",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.053982001190888695,
+      "latency_ms": 0.061656999605474994,
       "note": "single/finance, market terminology"
     },
     {
@@ -1200,7 +969,7 @@
       "predicted": "finance",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.03431599907344207,
+      "latency_ms": 0.04097800047020428,
       "note": "single/finance, lending"
     },
     {
@@ -1211,19 +980,8 @@
       "predicted": "general",
       "confidence": 0.06143118631062628,
       "method": "staged:unsure",
-      "latency_ms": 0.09621300159778912,
+      "latency_ms": 0.13712100007978734,
       "note": "single/reasoning, syllogism with nonsense terms (no domain content)"
-    },
-    {
-      "id": "q098",
-      "query": "what logical fallacy is appeal to popularity (everyone believes it so it is true)",
-      "bucket": "single_signal",
-      "expected": "reasoning",
-      "predicted": "reasoning",
-      "confidence": 0.22889488760333435,
-      "method": "staged:stage2",
-      "latency_ms": 0.10181399920838885,
-      "note": "single/reasoning, fallacy identification"
     },
     {
       "id": "q099",
@@ -1233,7 +991,7 @@
       "predicted": "reasoning",
       "confidence": 0.21580416960433377,
       "method": "staged:stage2",
-      "latency_ms": 0.08142499973473605,
+      "latency_ms": 0.09184500049741473,
       "note": "single/reasoning, classic logic puzzle (dollar is incidental, not finance)"
     },
     {
@@ -1244,7 +1002,7 @@
       "predicted": "general",
       "confidence": 0.16449775214524637,
       "method": "staged:unsure",
-      "latency_ms": 0.10874600047827698,
+      "latency_ms": 0.11489799908304121,
       "note": "single/reasoning, validity of a syllogism"
     },
     {
@@ -1255,7 +1013,7 @@
       "predicted": "reasoning",
       "confidence": 0.21793396543401808,
       "method": "staged:stage2",
-      "latency_ms": 0.07015300070634112,
+      "latency_ms": 0.0793210001575062,
       "note": "single/reasoning, decision framework, no specialist domain"
     },
     {
@@ -1266,7 +1024,7 @@
       "predicted": "general",
       "confidence": 0.1525965917355562,
       "method": "staged:unsure",
-      "latency_ms": 0.060925000070710666,
+      "latency_ms": 0.07413099956465885,
       "note": "single/reasoning, assumption surfacing"
     },
     {
@@ -1277,7 +1035,7 @@
       "predicted": "general",
       "confidence": 0.0,
       "method": "staged:unsure",
-      "latency_ms": 0.10016099986387417,
+      "latency_ms": 0.1039180006046081,
       "note": "single/reasoning, river-crossing puzzle"
     },
     {
@@ -1288,7 +1046,7 @@
       "predicted": "general",
       "confidence": 0.0,
       "method": "staged:unsure",
-      "latency_ms": 0.05193900142330676,
+      "latency_ms": 0.05425299968919717,
       "note": "single/reasoning, terse critical-thinking concept"
     },
     {
@@ -1299,7 +1057,7 @@
       "predicted": "reasoning",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.05388200042943936,
+      "latency_ms": 0.06042499990144279,
       "note": "single/reasoning, logic concept"
     },
     {
@@ -1310,19 +1068,8 @@
       "predicted": "reasoning",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.0581600015721051,
+      "latency_ms": 0.06570500045199879,
       "note": "single/reasoning, structured pros/cons, general topic"
-    },
-    {
-      "id": "q107",
-      "query": "what are the hidden assumptions behind the claim that cutting taxes boosts the economy",
-      "bucket": "single_signal",
-      "expected": "reasoning",
-      "predicted": "general",
-      "confidence": 0.15259659173555623,
-      "method": "staged:unsure",
-      "latency_ms": 0.10296499931428116,
-      "note": "single/reasoning; asks to surface assumptions, not to do finance math"
     },
     {
       "id": "q108",
@@ -1332,7 +1079,7 @@
       "predicted": "reasoning",
       "confidence": 0.21580416960433377,
       "method": "staged:stage2",
-      "latency_ms": 0.08030299977690447,
+      "latency_ms": 0.09184500049741473,
       "note": "single/reasoning, argument quality"
     },
     {
@@ -1343,7 +1090,7 @@
       "predicted": "reasoning",
       "confidence": 0.21580416960433377,
       "method": "staged:stage2",
-      "latency_ms": 0.05569600034505129,
+      "latency_ms": 0.06270000085351057,
       "note": "single/reasoning, informal logic"
     },
     {
@@ -1354,7 +1101,7 @@
       "predicted": "reasoning",
       "confidence": 0.32370625440650064,
       "method": "staged:stage2",
-      "latency_ms": 0.07417099914164282,
+      "latency_ms": 0.08774600064498372,
       "note": "single/reasoning, decomposition"
     },
     {
@@ -1365,7 +1112,7 @@
       "predicted": "general",
       "confidence": 0.0762982958677781,
       "method": "staged:unsure",
-      "latency_ms": 0.08447100117336959,
+      "latency_ms": 0.08916900151234586,
       "note": "single/reasoning, decision theory (general)"
     },
     {
@@ -1376,7 +1123,7 @@
       "predicted": "reasoning",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.054412999816122465,
+      "latency_ms": 0.08566300130041782,
       "note": "single/reasoning, validity check"
     },
     {
@@ -1387,19 +1134,8 @@
       "predicted": "general",
       "confidence": 0.0,
       "method": "staged:unsure",
-      "latency_ms": 0.0638310011709109,
+      "latency_ms": 0.08361799882550258,
       "note": "single/reasoning, heuristic"
-    },
-    {
-      "id": "q114",
-      "query": "steelman the opposing view in this debate",
-      "bucket": "single_signal",
-      "expected": "reasoning",
-      "predicted": "general",
-      "confidence": 0.0,
-      "method": "staged:unsure",
-      "latency_ms": 0.062197999795898795,
-      "note": "single/reasoning, argumentation"
     },
     {
       "id": "q115",
@@ -1409,19 +1145,8 @@
       "predicted": "reasoning",
       "confidence": 0.22889488760333435,
       "method": "staged:stage2",
-      "latency_ms": 0.07396100045298226,
+      "latency_ms": 0.09103299998969305,
       "note": "single/reasoning, fallacy detection"
-    },
-    {
-      "id": "q116",
-      "query": "what is the base rate fallacy",
-      "bucket": "single_signal",
-      "expected": "reasoning",
-      "predicted": "reasoning",
-      "confidence": 0.21580416960433377,
-      "method": "staged:stage2",
-      "latency_ms": 0.06408199988072738,
-      "note": "single/reasoning, cognitive bias (asked as a concept, not a Bayes calc)"
     },
     {
       "id": "q117",
@@ -1431,7 +1156,7 @@
       "predicted": "reasoning",
       "confidence": 0.22889488760333435,
       "method": "staged:stage2",
-      "latency_ms": 0.08341800094058271,
+      "latency_ms": 0.10490000022400636,
       "note": "single/reasoning, deduction puzzle"
     },
     {
@@ -1442,7 +1167,7 @@
       "predicted": "general",
       "confidence": 0.0,
       "method": "staged:unsure",
-      "latency_ms": 0.053702000514022075,
+      "latency_ms": 0.05465399954118766,
       "note": "single/reasoning, bias concept"
     },
     {
@@ -1453,19 +1178,8 @@
       "predicted": "medical",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.05370199869503267,
+      "latency_ms": 0.06576499981747475,
       "note": "single/reasoning, logic"
-    },
-    {
-      "id": "q120",
-      "query": "how do you spot a circular argument",
-      "bucket": "single_signal",
-      "expected": "reasoning",
-      "predicted": "reasoning",
-      "confidence": 0.21580416960433377,
-      "method": "staged:stage2",
-      "latency_ms": 0.05748900002799928,
-      "note": "single/reasoning, fallacy detection"
     },
     {
       "id": "q121",
@@ -1475,7 +1189,7 @@
       "predicted": "code",
       "confidence": 0.20102859026134265,
       "method": "staged:stage2",
-      "latency_ms": 0.08945000081439503,
+      "latency_ms": 0.10808499973791186,
       "note": "deliverable is a working program; finance is only the topic"
     },
     {
@@ -1486,7 +1200,7 @@
       "predicted": "math",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.06328999916149769,
+      "latency_ms": 0.09371799933433067,
       "note": "asks to explain the mathematics, not to trade or value a position"
     },
     {
@@ -1497,7 +1211,7 @@
       "predicted": "code",
       "confidence": 0.75,
       "method": "staged:stage1",
-      "latency_ms": 0.0783989999035839,
+      "latency_ms": 0.09166399831883609,
       "note": "the ask is to fix code; the matrix math is the subject not the task"
     },
     {
@@ -1508,7 +1222,7 @@
       "predicted": "medical",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.10912699872278608,
+      "latency_ms": 0.09668299935583491,
       "note": "core ask is interpreting a statistic; trial is context"
     },
     {
@@ -1519,19 +1233,8 @@
       "predicted": "general",
       "confidence": 0.15030615970408429,
       "method": "staged:unsure",
-      "latency_ms": 0.10727399967436213,
+      "latency_ms": 0.15357200027210638,
       "note": "clinical dosing decision dominates; the arithmetic is trivial"
-    },
-    {
-      "id": "q126",
-      "query": "build a machine learning model in python to predict stock prices",
-      "bucket": "dual_signal",
-      "expected": "code",
-      "predicted": "general",
-      "confidence": 0.12310436746283027,
-      "method": "staged:unsure",
-      "latency_ms": 0.08534199878340587,
-      "note": "the deliverable is an ML program; stocks are the data"
     },
     {
       "id": "q127",
@@ -1541,7 +1244,7 @@
       "predicted": "general",
       "confidence": 0.14298550137491822,
       "method": "staged:unsure",
-      "latency_ms": 0.09571200098434929,
+      "latency_ms": 0.12018899906252045,
       "note": "evaluating the validity of an inference, not giving market info"
     },
     {
@@ -1552,7 +1255,7 @@
       "predicted": "math",
       "confidence": 0.20040821293877908,
       "method": "staged:stage2",
-      "latency_ms": 0.10284599920851178,
+      "latency_ms": 0.1119030002882937,
       "note": "task is to author a query; medical terms are filter values"
     },
     {
@@ -1563,7 +1266,7 @@
       "predicted": "reasoning",
       "confidence": 0.2491891908266115,
       "method": "staged:stage2",
-      "latency_ms": 0.3848889991786564,
+      "latency_ms": 0.12170199988759123,
       "note": "requires asset-class domain knowledge; pros/cons is only framing"
     },
     {
@@ -1574,30 +1277,8 @@
       "predicted": "reasoning",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.13341399971977808,
+      "latency_ms": 0.07858900062274188,
       "note": "a proof of expected value is a math task"
-    },
-    {
-      "id": "q131",
-      "query": "explain the pharmacology of warfarin then compute its half life from the elimination constant",
-      "bucket": "dual_signal",
-      "expected": "medical",
-      "predicted": "medical",
-      "confidence": 1.0,
-      "method": "staged:stage1",
-      "latency_ms": 0.10166399988520425,
-      "note": "primary framing is pharmacology; the calc is subordinate"
-    },
-    {
-      "id": "q132",
-      "query": "what algorithm should I use to detect arrhythmias in ecg data",
-      "bucket": "dual_signal",
-      "expected": "code",
-      "predicted": "code",
-      "confidence": 1.0,
-      "method": "staged:stage1",
-      "latency_ms": 0.07933000051707495,
-      "note": "asks for an algorithmic/technical approach; ECG is the domain data"
     },
     {
       "id": "q133",
@@ -1607,19 +1288,8 @@
       "predicted": "code",
       "confidence": 0.2512857378266783,
       "method": "staged:stage2",
-      "latency_ms": 0.11617100062721875,
+      "latency_ms": 0.097154999821214,
       "note": "OOP design task; bank account is the example domain"
-    },
-    {
-      "id": "q134",
-      "query": "compare the time complexity of merge sort and bubble sort",
-      "bucket": "dual_signal",
-      "expected": "code",
-      "predicted": "reasoning",
-      "confidence": 1.0,
-      "method": "staged:stage1",
-      "latency_ms": 0.0828970005386509,
-      "note": "complexity analysis is a core CS/algorithms topic"
     },
     {
       "id": "q135",
@@ -1629,7 +1299,7 @@
       "predicted": "general",
       "confidence": 0.12310436746283027,
       "method": "staged:unsure",
-      "latency_ms": 0.16095600039989222,
+      "latency_ms": 0.11982700016233139,
       "note": "identifies a post-hoc/placebo fallacy; a reasoning task"
     },
     {
@@ -1640,7 +1310,7 @@
       "predicted": "code",
       "confidence": 0.2512857378266783,
       "method": "staged:stage2",
-      "latency_ms": 0.09198499901685864,
+      "latency_ms": 0.11743299910449423,
       "note": "the ask is to improve code; numerics is the concern"
     },
     {
@@ -1651,7 +1321,7 @@
       "predicted": "general",
       "confidence": 0.0,
       "method": "staged:unsure",
-      "latency_ms": 0.14636000014434103,
+      "latency_ms": 0.09984900134440977,
       "note": "asks for structured two-sided argumentation, not a market figure"
     },
     {
@@ -1662,7 +1332,7 @@
       "predicted": "math",
       "confidence": 0.262915008935528,
       "method": "staged:stage2",
-      "latency_ms": 0.09069299994735047,
+      "latency_ms": 0.09485999908065423,
       "note": "deliverable is an implementation of the method"
     },
     {
@@ -1673,7 +1343,7 @@
       "predicted": "general",
       "confidence": 0.14106912317171957,
       "method": "staged:unsure",
-      "latency_ms": 0.10915700113400817,
+      "latency_ms": 0.12632000107259955,
       "note": "a conditional-probability / Bayes problem"
     },
     {
@@ -1684,19 +1354,8 @@
       "predicted": "code",
       "confidence": 0.3046677655932675,
       "method": "staged:stage2",
-      "latency_ms": 0.0885580011527054,
+      "latency_ms": 0.11834500037366524,
       "note": "the concrete deliverable is code; blockchain is the motivation"
-    },
-    {
-      "id": "q141",
-      "query": "is this medical studys conclusion valid given its small sample size",
-      "bucket": "dual_signal",
-      "expected": "reasoning",
-      "predicted": "reasoning",
-      "confidence": 0.22889488760333435,
-      "method": "staged:stage2",
-      "latency_ms": 0.08709599933354184,
-      "note": "evaluating the validity of a conclusion; a reasoning task"
     },
     {
       "id": "q142",
@@ -1706,7 +1365,7 @@
       "predicted": "finance",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.07083499986038078,
+      "latency_ms": 0.094600000011269,
       "note": "a percent-change computation; crypto is context"
     },
     {
@@ -1717,7 +1376,7 @@
       "predicted": "general",
       "confidence": 0.14155646205273045,
       "method": "staged:unsure",
-      "latency_ms": 0.07449199983966537,
+      "latency_ms": 0.08757700015848968,
       "note": "tooling/data-analysis code task"
     },
     {
@@ -1728,30 +1387,8 @@
       "predicted": "medical",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.05470399992191233,
+      "latency_ms": 0.06308000047283713,
       "note": "clinical reasoning that requires medical knowledge to execute"
-    },
-    {
-      "id": "q145",
-      "query": "derive the formula for the future value of an ordinary annuity",
-      "bucket": "dual_signal",
-      "expected": "math",
-      "predicted": "math",
-      "confidence": 1.0,
-      "method": "staged:stage1",
-      "latency_ms": 0.33780100056901574,
-      "note": "a derivation is a math task"
-    },
-    {
-      "id": "q146",
-      "query": "explain the mathematical reason why you cannot divide by zero",
-      "bucket": "dual_signal",
-      "expected": "math",
-      "predicted": "general",
-      "confidence": 0.10790208480216688,
-      "method": "staged:unsure",
-      "latency_ms": 0.0926669999898877,
-      "note": "asks for a mathematics explanation of a math concept"
     },
     {
       "id": "q147",
@@ -1761,7 +1398,7 @@
       "predicted": "code",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.08143499871948734,
+      "latency_ms": 0.07877899952291045,
       "note": "deliverable is a function; BMI is the formula"
     },
     {
@@ -1772,7 +1409,7 @@
       "predicted": "general",
       "confidence": 0.0,
       "method": "staged:unsure",
-      "latency_ms": 0.08063400127866771,
+      "latency_ms": 0.09705399861559272,
       "note": "open argumentation/ethics dominates the economics"
     },
     {
@@ -1783,7 +1420,7 @@
       "predicted": "code",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.10200399992754683,
+      "latency_ms": 0.10865699914575089,
       "note": "fundamentally a statistics/confidence question"
     },
     {
@@ -1794,7 +1431,7 @@
       "predicted": "math",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.052008999773534015,
+      "latency_ms": 0.05473400051414501,
       "note": "recursion is a programming concept; factorial only illustrates it"
     },
     {
@@ -1805,7 +1442,7 @@
       "predicted": "general",
       "confidence": 0.12273558858179937,
       "method": "staged:unsure",
-      "latency_ms": 0.08952000098361168,
+      "latency_ms": 0.11669199921016116,
       "note": "choosing a statistical test is a statistics-methodology question"
     },
     {
@@ -1816,7 +1453,7 @@
       "predicted": "math",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.07905999882495962,
+      "latency_ms": 0.08818700007395819,
       "note": "expected-value computation"
     },
     {
@@ -1827,7 +1464,7 @@
       "predicted": "general",
       "confidence": 0.08704793302664786,
       "method": "staged:unsure",
-      "latency_ms": 0.07772800017846748,
+      "latency_ms": 0.08651499956613407,
       "note": "data-modeling/engineering task; hospital is the domain"
     },
     {
@@ -1838,19 +1475,8 @@
       "predicted": "finance",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.1258490010513924,
+      "latency_ms": 0.1246169995283708,
       "note": "an expectancy calculation; trading is the framing"
-    },
-    {
-      "id": "q155",
-      "query": "explain the reasoning error in using past fund returns to predict future returns",
-      "bucket": "dual_signal",
-      "expected": "reasoning",
-      "predicted": "general",
-      "confidence": 0.08704793302664786,
-      "method": "staged:unsure",
-      "latency_ms": 0.09859800047706813,
-      "note": "identifying an inductive fallacy; a reasoning task"
     },
     {
       "id": "q156",
@@ -1860,7 +1486,7 @@
       "predicted": "code",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.06642599873885047,
+      "latency_ms": 0.09339700045529753,
       "note": "deliverable is a simulation program; probability is the subject"
     },
     {
@@ -1871,7 +1497,7 @@
       "predicted": "medical",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.07750700024189427,
+      "latency_ms": 0.08292699931189418,
       "note": "a clinical dosing decision; the calc is secondary"
     },
     {
@@ -1882,7 +1508,7 @@
       "predicted": "general",
       "confidence": 0.1443966415076226,
       "method": "staged:unsure",
-      "latency_ms": 0.07077400005073287,
+      "latency_ms": 0.07897999967099167,
       "note": "a frontend framework choice; trading is only the use case"
     },
     {
@@ -1893,7 +1519,7 @@
       "predicted": "general",
       "confidence": 0.0762982958677781,
       "method": "staged:unsure",
-      "latency_ms": 0.08791700020083226,
+      "latency_ms": 0.09522099935566075,
       "note": "verifying a mathematical induction proof requires math"
     },
     {
@@ -1904,19 +1530,8 @@
       "predicted": "medical",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.08897900079318788,
+      "latency_ms": 0.09721499918668997,
       "note": "a health-triage question needing medical judgment"
-    },
-    {
-      "id": "q161",
-      "query": "write code to calculate a 20 day moving average of a stock price series",
-      "bucket": "dual_signal",
-      "expected": "code",
-      "predicted": "code",
-      "confidence": 0.21322301907925098,
-      "method": "staged:stage2",
-      "latency_ms": 0.10250500054098666,
-      "note": "coding task; the moving average is over financial data"
     },
     {
       "id": "q162",
@@ -1926,7 +1541,7 @@
       "predicted": "finance",
       "confidence": 1.0,
       "method": "staged:stage1",
-      "latency_ms": 0.046599001507274806,
+      "latency_ms": 0.051187000281061046,
       "note": "asks for the math (variance of a sum) behind the finance idea"
     },
     {
@@ -1937,7 +1552,7 @@
       "predicted": "general",
       "confidence": 0.15077144269600695,
       "method": "staged:unsure",
-      "latency_ms": 0.07038399962766562,
+      "latency_ms": 0.0847609990159981,
       "note": "a SQL/debugging task; patients are the data"
     },
     {
@@ -1948,19 +1563,8 @@
       "predicted": "general",
       "confidence": 0.0,
       "method": "staged:unsure",
-      "latency_ms": 0.07266800093930215,
+      "latency_ms": 0.08020200039027259,
       "note": "open-ended argumentation, not a coding task"
-    },
-    {
-      "id": "q165",
-      "query": "what discount rate should I use and compute the npv of these cash flows",
-      "bucket": "dual_signal",
-      "expected": "math",
-      "predicted": "general",
-      "confidence": 0.08708038517579175,
-      "method": "staged:unsure",
-      "latency_ms": 0.09741500070958864,
-      "note": "an NPV computation; the discount-rate choice is subordinate to the math"
     },
     {
       "id": "q166",
@@ -1970,7 +1574,7 @@
       "predicted": "general",
       "confidence": 0.0,
       "method": "staged:unsure",
-      "latency_ms": 0.03993599966634065,
+      "latency_ms": 0.04534700019576121,
       "note": "OOD, geography trivia; no specialist domain"
     },
     {
@@ -1981,7 +1585,7 @@
       "predicted": "general",
       "confidence": 0.0,
       "method": "staged:unsure",
-      "latency_ms": 0.05352199877961539,
+      "latency_ms": 0.04266099858796224,
       "note": "OOD, literature trivia"
     },
     {
@@ -1992,7 +1596,7 @@
       "predicted": "general",
       "confidence": 0.0,
       "method": "staged:unsure",
-      "latency_ms": 0.05244999920250848,
+      "latency_ms": 0.056225999287562445,
       "note": "OOD, general-science curiosity, not an engineering task"
     },
     {
@@ -2003,7 +1607,7 @@
       "predicted": "general",
       "confidence": 0.0,
       "method": "staged:unsure",
-      "latency_ms": 0.10725399988587014,
+      "latency_ms": 0.05493400021805428,
       "note": "OOD, cooking"
     },
     {
@@ -2014,30 +1618,8 @@
       "predicted": "general",
       "confidence": 0.0,
       "method": "staged:unsure",
-      "latency_ms": 0.07473200093954802,
+      "latency_ms": 0.04998499935027212,
       "note": "OOD, geography"
-    },
-    {
-      "id": "q171",
-      "query": "what year did world war 2 end",
-      "bucket": "out_of_domain",
-      "expected": "general",
-      "predicted": "general",
-      "confidence": 0.14106912317171957,
-      "method": "staged:unsure",
-      "latency_ms": 0.06306000068434514,
-      "note": "OOD, history"
-    },
-    {
-      "id": "q172",
-      "query": "recommend a good sci fi movie to watch tonight",
-      "bucket": "out_of_domain",
-      "expected": "general",
-      "predicted": "general",
-      "confidence": 0.0,
-      "method": "staged:unsure",
-      "latency_ms": 0.06649600072705653,
-      "note": "OOD, entertainment recommendation"
     },
     {
       "id": "q173",
@@ -2047,7 +1629,7 @@
       "predicted": "general",
       "confidence": 0.0,
       "method": "staged:unsure",
-      "latency_ms": 0.07102499876054935,
+      "latency_ms": 0.080032001278596,
       "note": "OOD, travel logistics"
     },
     {
@@ -2058,7 +1640,7 @@
       "predicted": "general",
       "confidence": 0.0,
       "method": "staged:unsure",
-      "latency_ms": 0.05295099981594831,
+      "latency_ms": 0.05411300116975326,
       "note": "OOD, geography trivia"
     },
     {
@@ -2069,7 +1651,7 @@
       "predicted": "general",
       "confidence": 0.0,
       "method": "staged:unsure",
-      "latency_ms": 0.0504850013385294,
+      "latency_ms": 0.06640600076934788,
       "note": "OOD, general trivia"
     },
     {
@@ -2080,19 +1662,8 @@
       "predicted": "general",
       "confidence": 0.0,
       "method": "staged:unsure",
-      "latency_ms": 0.07749799988232553,
+      "latency_ms": 0.04852299935009796,
       "note": "OOD, everyday how-to"
-    },
-    {
-      "id": "q177",
-      "query": "whats the weather like in tokyo in spring",
-      "bucket": "out_of_domain",
-      "expected": "general",
-      "predicted": "general",
-      "confidence": 0.0,
-      "method": "staged:unsure",
-      "latency_ms": 0.06214799941517413,
-      "note": "OOD, general knowledge"
     },
     {
       "id": "q178",
@@ -2102,7 +1673,7 @@
       "predicted": "general",
       "confidence": 0.0,
       "method": "staged:unsure",
-      "latency_ms": 0.0811139998404542,
+      "latency_ms": 0.042951000068569556,
       "note": "OOD, art trivia"
     },
     {
@@ -2113,19 +1684,8 @@
       "predicted": "general",
       "confidence": 0.10790208480216688,
       "method": "staged:unsure",
-      "latency_ms": 0.07163600093917921,
+      "latency_ms": 0.07255699892994016,
       "note": "OOD, gardening"
-    },
-    {
-      "id": "q180",
-      "query": "how long does it take to boil an egg",
-      "bucket": "out_of_domain",
-      "expected": "general",
-      "predicted": "general",
-      "confidence": 0.0,
-      "method": "staged:unsure",
-      "latency_ms": 0.07347999962803442,
-      "note": "OOD, cooking"
     }
   ]
 }

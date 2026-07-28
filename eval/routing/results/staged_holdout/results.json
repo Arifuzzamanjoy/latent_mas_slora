@@ -1,0 +1,591 @@
+{
+  "router": "staged",
+  "queries_path": "/sessions/jolly-busy-dijkstra/mnt/latent_mas_slora/eval/routing/queries.jsonl",
+  "split": "holdout",
+  "seed": 1234,
+  "n": 40,
+  "metrics": {
+    "n": 40,
+    "overall_accuracy": 0.675,
+    "correct": 27,
+    "bucket_accuracy": {
+      "dual_signal": {
+        "n": 10,
+        "correct": 5,
+        "accuracy": 0.5
+      },
+      "out_of_domain": {
+        "n": 4,
+        "correct": 4,
+        "accuracy": 1.0
+      },
+      "single_signal": {
+        "n": 26,
+        "correct": 18,
+        "accuracy": 0.6923076923076923
+      }
+    },
+    "abstentions": 15,
+    "abstention_rate": 0.375,
+    "confident_and_wrong": 2,
+    "confident_and_wrong_rate": 0.05,
+    "per_domain": {
+      "code": {
+        "precision": 1.0,
+        "recall": 0.5,
+        "tp": 5,
+        "fp": 0,
+        "fn": 5,
+        "support": 10
+      },
+      "math": {
+        "precision": 0.8333333333333334,
+        "recall": 0.625,
+        "tp": 5,
+        "fp": 1,
+        "fn": 3,
+        "support": 8
+      },
+      "medical": {
+        "precision": 1.0,
+        "recall": 0.8333333333333334,
+        "tp": 5,
+        "fp": 0,
+        "fn": 1,
+        "support": 6
+      },
+      "finance": {
+        "precision": 1.0,
+        "recall": 0.8,
+        "tp": 4,
+        "fp": 0,
+        "fn": 1,
+        "support": 5
+      },
+      "reasoning": {
+        "precision": 0.8,
+        "recall": 0.5714285714285714,
+        "tp": 4,
+        "fp": 1,
+        "fn": 3,
+        "support": 7
+      },
+      "general": {
+        "precision": 0.26666666666666666,
+        "recall": 1.0,
+        "tp": 4,
+        "fp": 11,
+        "fn": 0,
+        "support": 4
+      }
+    },
+    "confusion_matrix": {
+      "labels": [
+        "code",
+        "math",
+        "medical",
+        "finance",
+        "reasoning",
+        "general"
+      ],
+      "rows_expected_cols_predicted": [
+        [
+          5,
+          1,
+          0,
+          0,
+          1,
+          3
+        ],
+        [
+          0,
+          5,
+          0,
+          0,
+          0,
+          3
+        ],
+        [
+          0,
+          0,
+          5,
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          4,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          4,
+          3
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          4
+        ]
+      ]
+    },
+    "latency_ms": {
+      "mean": 0.07343627507907513,
+      "median": 0.06642599964834517,
+      "p95": 0.11007920038537118,
+      "max": 0.14171899965731427
+    }
+  },
+  "predictions": [
+    {
+      "id": "q004",
+      "query": "whats the difference between let and const in javascript",
+      "bucket": "single_signal",
+      "expected": "code",
+      "predicted": "code",
+      "confidence": 1.0,
+      "method": "staged:stage1",
+      "latency_ms": 0.06347099952108692,
+      "note": "single/code, JS language semantics"
+    },
+    {
+      "id": "q010",
+      "query": "why is my react component re-rendering infinitely",
+      "bucket": "single_signal",
+      "expected": "code",
+      "predicted": "code",
+      "confidence": 1.0,
+      "method": "staged:stage1",
+      "latency_ms": 0.053450999985216185,
+      "note": "single/code, frontend debugging"
+    },
+    {
+      "id": "q011",
+      "query": "bash one liner to find and delete all pyc files",
+      "bucket": "single_signal",
+      "expected": "code",
+      "predicted": "math",
+      "confidence": 0.37654683467726613,
+      "method": "staged:stage2",
+      "latency_ms": 0.10143300096387975,
+      "note": "single/code, shell scripting"
+    },
+    {
+      "id": "q012",
+      "query": "explain what a decorator does in python",
+      "bucket": "single_signal",
+      "expected": "code",
+      "predicted": "code",
+      "confidence": 1.0,
+      "method": "staged:stage1",
+      "latency_ms": 0.054162999731488526,
+      "note": "single/code, language concept"
+    },
+    {
+      "id": "q014",
+      "query": "segfault in my c program when I free the same pointer twice",
+      "bucket": "single_signal",
+      "expected": "code",
+      "predicted": "general",
+      "confidence": 0.0,
+      "method": "staged:unsure",
+      "latency_ms": 0.09494000005361158,
+      "note": "single/code, memory bug"
+    },
+    {
+      "id": "q017",
+      "query": "regex to match a valid email address",
+      "bucket": "single_signal",
+      "expected": "code",
+      "predicted": "general",
+      "confidence": 0.10790208480216688,
+      "method": "staged:unsure",
+      "latency_ms": 0.06544500138261355,
+      "note": "single/code, regex authoring"
+    },
+    {
+      "id": "q025",
+      "query": "solve x squared minus 5x plus 6 equals 0",
+      "bucket": "single_signal",
+      "expected": "math",
+      "predicted": "math",
+      "confidence": 1.0,
+      "method": "staged:stage1",
+      "latency_ms": 0.05831099952047225,
+      "note": "single/math, quadratic"
+    },
+    {
+      "id": "q032",
+      "query": "sum of the first 100 natural numbers",
+      "bucket": "single_signal",
+      "expected": "math",
+      "predicted": "math",
+      "confidence": 1.0,
+      "method": "staged:stage1",
+      "latency_ms": 0.047851000999799,
+      "note": "single/math, arithmetic series"
+    },
+    {
+      "id": "q036",
+      "query": "find the area under y equals x squared from 0 to 3",
+      "bucket": "single_signal",
+      "expected": "math",
+      "predicted": "math",
+      "confidence": 0.40081642587755817,
+      "method": "staged:stage2",
+      "latency_ms": 0.10047000068880152,
+      "note": "single/math, definite integral"
+    },
+    {
+      "id": "q042",
+      "query": "solve for x if log base 2 of x equals 5",
+      "bucket": "single_signal",
+      "expected": "math",
+      "predicted": "math",
+      "confidence": 1.0,
+      "method": "staged:stage1",
+      "latency_ms": 0.06935199962754268,
+      "note": "single/math, logarithms"
+    },
+    {
+      "id": "q046",
+      "query": "area of a circle with radius 5",
+      "bucket": "single_signal",
+      "expected": "math",
+      "predicted": "general",
+      "confidence": 0.0,
+      "method": "staged:unsure",
+      "latency_ms": 0.05274099930829834,
+      "note": "single/math, geometry"
+    },
+    {
+      "id": "q049",
+      "query": "what are the symptoms of appendicitis",
+      "bucket": "single_signal",
+      "expected": "medical",
+      "predicted": "medical",
+      "confidence": 1.0,
+      "method": "staged:stage1",
+      "latency_ms": 0.042551000660751015,
+      "note": "single/medical, clinical presentation"
+    },
+    {
+      "id": "q057",
+      "query": "how does insulin lower blood glucose",
+      "bucket": "single_signal",
+      "expected": "medical",
+      "predicted": "medical",
+      "confidence": 1.0,
+      "method": "staged:stage1",
+      "latency_ms": 0.042981999285984784,
+      "note": "single/medical, physiology"
+    },
+    {
+      "id": "q059",
+      "query": "what causes iron deficiency anemia",
+      "bucket": "single_signal",
+      "expected": "medical",
+      "predicted": "general",
+      "confidence": 0.09975093361076325,
+      "method": "staged:unsure",
+      "latency_ms": 0.051958999392809346,
+      "note": "single/medical, pathophysiology"
+    },
+    {
+      "id": "q064",
+      "query": "a child presents with fever rash and strawberry tongue",
+      "bucket": "single_signal",
+      "expected": "medical",
+      "predicted": "medical",
+      "confidence": 1.0,
+      "method": "staged:stage1",
+      "latency_ms": 0.05991400030325167,
+      "note": "single/medical, Kawasaki vignette"
+    },
+    {
+      "id": "q070",
+      "query": "how does chemotherapy kill cancer cells",
+      "bucket": "single_signal",
+      "expected": "medical",
+      "predicted": "medical",
+      "confidence": 1.0,
+      "method": "staged:stage1",
+      "latency_ms": 0.04228000034345314,
+      "note": "single/medical, oncology mechanism"
+    },
+    {
+      "id": "q076",
+      "query": "difference between a roth ira and a traditional ira",
+      "bucket": "single_signal",
+      "expected": "finance",
+      "predicted": "general",
+      "confidence": 0.0,
+      "method": "staged:unsure",
+      "latency_ms": 0.0684000006003771,
+      "note": "single/finance, retirement accounts"
+    },
+    {
+      "id": "q079",
+      "query": "explain yield farming in defi",
+      "bucket": "single_signal",
+      "expected": "finance",
+      "predicted": "finance",
+      "confidence": 1.0,
+      "method": "staged:stage1",
+      "latency_ms": 0.03705100061779376,
+      "note": "single/finance, DeFi"
+    },
+    {
+      "id": "q081",
+      "query": "whats the difference between a stock and a bond",
+      "bucket": "single_signal",
+      "expected": "finance",
+      "predicted": "finance",
+      "confidence": 1.0,
+      "method": "staged:stage1",
+      "latency_ms": 0.059423000493552536,
+      "note": "single/finance, securities basics"
+    },
+    {
+      "id": "q083",
+      "query": "how does staking crypto generate rewards",
+      "bucket": "single_signal",
+      "expected": "finance",
+      "predicted": "finance",
+      "confidence": 1.0,
+      "method": "staged:stage1",
+      "latency_ms": 0.05363100171962287,
+      "note": "single/finance, crypto"
+    },
+    {
+      "id": "q092",
+      "query": "difference between a market order and a limit order",
+      "bucket": "single_signal",
+      "expected": "finance",
+      "predicted": "finance",
+      "confidence": 0.2022120352671262,
+      "method": "staged:stage2",
+      "latency_ms": 0.07662600000912789,
+      "note": "single/finance, trading mechanics"
+    },
+    {
+      "id": "q098",
+      "query": "what logical fallacy is appeal to popularity (everyone believes it so it is true)",
+      "bucket": "single_signal",
+      "expected": "reasoning",
+      "predicted": "reasoning",
+      "confidence": 0.22889488760333435,
+      "method": "staged:stage2",
+      "latency_ms": 0.10943800043605734,
+      "note": "single/reasoning, fallacy identification"
+    },
+    {
+      "id": "q107",
+      "query": "what are the hidden assumptions behind the claim that cutting taxes boosts the economy",
+      "bucket": "single_signal",
+      "expected": "reasoning",
+      "predicted": "general",
+      "confidence": 0.15259659173555623,
+      "method": "staged:unsure",
+      "latency_ms": 0.14171899965731427,
+      "note": "single/reasoning; asks to surface assumptions, not to do finance math"
+    },
+    {
+      "id": "q114",
+      "query": "steelman the opposing view in this debate",
+      "bucket": "single_signal",
+      "expected": "reasoning",
+      "predicted": "general",
+      "confidence": 0.0,
+      "method": "staged:unsure",
+      "latency_ms": 0.07873899994592648,
+      "note": "single/reasoning, argumentation"
+    },
+    {
+      "id": "q116",
+      "query": "what is the base rate fallacy",
+      "bucket": "single_signal",
+      "expected": "reasoning",
+      "predicted": "reasoning",
+      "confidence": 0.21580416960433377,
+      "method": "staged:stage2",
+      "latency_ms": 0.057670000387588516,
+      "note": "single/reasoning, cognitive bias (asked as a concept, not a Bayes calc)"
+    },
+    {
+      "id": "q120",
+      "query": "how do you spot a circular argument",
+      "bucket": "single_signal",
+      "expected": "reasoning",
+      "predicted": "reasoning",
+      "confidence": 0.21580416960433377,
+      "method": "staged:stage2",
+      "latency_ms": 0.06442300036724191,
+      "note": "single/reasoning, fallacy detection"
+    },
+    {
+      "id": "q126",
+      "query": "build a machine learning model in python to predict stock prices",
+      "bucket": "dual_signal",
+      "expected": "code",
+      "predicted": "general",
+      "confidence": 0.12310436746283027,
+      "method": "staged:unsure",
+      "latency_ms": 0.09241599946108181,
+      "note": "the deliverable is an ML program; stocks are the data"
+    },
+    {
+      "id": "q131",
+      "query": "explain the pharmacology of warfarin then compute its half life from the elimination constant",
+      "bucket": "dual_signal",
+      "expected": "medical",
+      "predicted": "medical",
+      "confidence": 1.0,
+      "method": "staged:stage1",
+      "latency_ms": 0.09161399975710083,
+      "note": "primary framing is pharmacology; the calc is subordinate"
+    },
+    {
+      "id": "q132",
+      "query": "what algorithm should I use to detect arrhythmias in ecg data",
+      "bucket": "dual_signal",
+      "expected": "code",
+      "predicted": "code",
+      "confidence": 1.0,
+      "method": "staged:stage1",
+      "latency_ms": 0.09454000064579304,
+      "note": "asks for an algorithmic/technical approach; ECG is the domain data"
+    },
+    {
+      "id": "q134",
+      "query": "compare the time complexity of merge sort and bubble sort",
+      "bucket": "dual_signal",
+      "expected": "code",
+      "predicted": "reasoning",
+      "confidence": 1.0,
+      "method": "staged:stage1",
+      "latency_ms": 0.06651600051554851,
+      "note": "complexity analysis is a core CS/algorithms topic"
+    },
+    {
+      "id": "q141",
+      "query": "is this medical studys conclusion valid given its small sample size",
+      "bucket": "dual_signal",
+      "expected": "reasoning",
+      "predicted": "reasoning",
+      "confidence": 0.22889488760333435,
+      "method": "staged:stage2",
+      "latency_ms": 0.10075200043502264,
+      "note": "evaluating the validity of a conclusion; a reasoning task"
+    },
+    {
+      "id": "q145",
+      "query": "derive the formula for the future value of an ordinary annuity",
+      "bucket": "dual_signal",
+      "expected": "math",
+      "predicted": "math",
+      "confidence": 1.0,
+      "method": "staged:stage1",
+      "latency_ms": 0.07286800064321142,
+      "note": "a derivation is a math task"
+    },
+    {
+      "id": "q146",
+      "query": "explain the mathematical reason why you cannot divide by zero",
+      "bucket": "dual_signal",
+      "expected": "math",
+      "predicted": "general",
+      "confidence": 0.10790208480216688,
+      "method": "staged:unsure",
+      "latency_ms": 0.08281699956569355,
+      "note": "asks for a mathematics explanation of a math concept"
+    },
+    {
+      "id": "q155",
+      "query": "explain the reasoning error in using past fund returns to predict future returns",
+      "bucket": "dual_signal",
+      "expected": "reasoning",
+      "predicted": "general",
+      "confidence": 0.08704793302664786,
+      "method": "staged:unsure",
+      "latency_ms": 0.09906799823511392,
+      "note": "identifying an inductive fallacy; a reasoning task"
+    },
+    {
+      "id": "q161",
+      "query": "write code to calculate a 20 day moving average of a stock price series",
+      "bucket": "dual_signal",
+      "expected": "code",
+      "predicted": "code",
+      "confidence": 0.21322301907925098,
+      "method": "staged:stage2",
+      "latency_ms": 0.10859599933610298,
+      "note": "coding task; the moving average is over financial data"
+    },
+    {
+      "id": "q165",
+      "query": "what discount rate should I use and compute the npv of these cash flows",
+      "bucket": "dual_signal",
+      "expected": "math",
+      "predicted": "general",
+      "confidence": 0.08708038517579175,
+      "method": "staged:unsure",
+      "latency_ms": 0.12226199942233507,
+      "note": "an NPV computation; the discount-rate choice is subordinate to the math"
+    },
+    {
+      "id": "q171",
+      "query": "what year did world war 2 end",
+      "bucket": "out_of_domain",
+      "expected": "general",
+      "predicted": "general",
+      "confidence": 0.14106912317171957,
+      "method": "staged:unsure",
+      "latency_ms": 0.060243999541853555,
+      "note": "OOD, history"
+    },
+    {
+      "id": "q172",
+      "query": "recommend a good sci fi movie to watch tonight",
+      "bucket": "out_of_domain",
+      "expected": "general",
+      "predicted": "general",
+      "confidence": 0.0,
+      "method": "staged:unsure",
+      "latency_ms": 0.06983200000831857,
+      "note": "OOD, entertainment recommendation"
+    },
+    {
+      "id": "q177",
+      "query": "whats the weather like in tokyo in spring",
+      "bucket": "out_of_domain",
+      "expected": "general",
+      "predicted": "general",
+      "confidence": 0.0,
+      "method": "staged:unsure",
+      "latency_ms": 0.06115600081102457,
+      "note": "OOD, general knowledge"
+    },
+    {
+      "id": "q180",
+      "query": "how long does it take to boil an egg",
+      "bucket": "out_of_domain",
+      "expected": "general",
+      "predicted": "general",
+      "confidence": 0.0,
+      "method": "staged:unsure",
+      "latency_ms": 0.06633599878114183,
+      "note": "OOD, cooking"
+    }
+  ]
+}
