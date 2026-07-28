@@ -1,0 +1,81 @@
+id,bucket,expected,predicted,confidence,abstained,confident_and_wrong,method,query,note
+q009,single_signal,code,general,0.5000,1,0,keyword_fast,convert a list of dicts to a pandas dataframe,"single/code, data-wrangling in code"
+q011,single_signal,code,general,0.5000,1,0,keyword_fast,bash one liner to find and delete all pyc files,"single/code, shell scripting"
+q014,single_signal,code,general,0.5000,1,0,keyword_fast,segfault in my c program when I free the same pointer twice,"single/code, memory bug"
+q015,single_signal,code,general,0.5000,1,0,keyword_fast,how do I set up a virtual environment and install dependencies,"single/code, tooling"
+q017,single_signal,code,general,0.5000,1,0,keyword_fast,regex to match a valid email address,"single/code, regex authoring"
+q022,single_signal,code,general,0.5000,1,0,keyword_fast,how to read a csv file line by line in go,"single/code, Go IO"
+q027,single_signal,math,general,0.5000,1,0,keyword_fast,integrate x times e to the x dx,"single/math, integration by parts"
+q028,single_signal,math,general,0.5000,1,0,keyword_fast,prove that the square root of 2 is irrational,"single/math, classic proof (math reasoning, not a program)"
+q033,single_signal,math,general,0.5000,1,0,keyword_fast,simplify (x squared minus 9) over (x minus 3),"single/math, algebraic simplification"
+q035,single_signal,math,general,0.5000,1,0,keyword_fast,how many ways to arrange the letters in mississippi,"single/math, permutations with repetition"
+q036,single_signal,math,general,0.5000,1,0,keyword_fast,find the area under y equals x squared from 0 to 3,"single/math, definite integral"
+q037,single_signal,math,general,0.5000,1,0,keyword_fast,what is the 10th term of the fibonacci sequence,"single/math, sequence value asked as a math fact"
+q038,single_signal,math,general,0.5000,1,0,keyword_fast,factor x cubed minus 8,"single/math, difference of cubes"
+q039,single_signal,math,general,0.5000,1,0,keyword_fast,convert 0.75 to a fraction in lowest terms,"single/math, rational number"
+q041,single_signal,math,general,0.5000,1,0,keyword_fast,compute the standard deviation of 2 4 4 4 5 5 7 9,"single/math, descriptive statistics"
+q044,single_signal,math,general,0.5000,1,0,keyword_fast,find the greatest common divisor of 48 and 180,"single/math, number theory"
+q046,single_signal,math,general,0.5000,1,0,keyword_fast,area of a circle with radius 5,"single/math, geometry"
+q050,single_signal,medical,general,0.5000,1,0,keyword_fast,metformin how it works,"single/medical, terse pharmacology"
+q061,single_signal,medical,general,0.5000,1,0,keyword_fast,explain the stages of wound healing,"single/medical, physiology"
+q062,single_signal,medical,general,0.5000,1,0,keyword_fast,what is the glasgow coma scale and how is it scored,"single/medical, clinical tool"
+q063,single_signal,medical,general,0.5000,1,0,keyword_fast,contraindications for prescribing nsaids,"single/medical, prescribing safety"
+q066,single_signal,medical,general,0.5000,1,0,keyword_fast,what is the pathophysiology of asthma,"single/medical, disease mechanism"
+q067,single_signal,medical,general,0.5000,1,0,keyword_fast,interpret elevated tsh with low free t4,"single/medical, lab interpretation"
+q069,single_signal,medical,general,0.5000,1,0,keyword_fast,what are the warning signs of a stroke,"single/medical, clinical red flags"
+q075,single_signal,finance,math,1.0000,0,1,keyword_fast,what is a good low cost index fund to invest in,"single/finance, investing (info, not advice)"
+q076,single_signal,finance,general,0.5000,1,0,keyword_fast,difference between a roth ira and a traditional ira,"single/finance, retirement accounts"
+q077,single_signal,finance,math,1.0000,0,1,keyword_fast,how does dollar cost averaging work,"single/finance, investing strategy concept"
+q080,single_signal,finance,general,0.5000,1,0,keyword_fast,how do stablecoins like usdc maintain their peg,"single/finance, crypto mechanism"
+q082,single_signal,finance,general,0.5000,1,0,keyword_fast,explain what an etf is,"single/finance, instrument definition"
+q084,single_signal,finance,general,0.5000,1,0,keyword_fast,what is a pe ratio and what does it tell you,"single/finance, equity valuation metric"
+q090,single_signal,finance,general,0.5000,1,0,keyword_fast,how does a 401k employer match work,"single/finance, personal finance"
+q093,single_signal,finance,general,0.5000,1,0,keyword_fast,what is inflation and how does it affect savings,"single/finance, macro/personal finance"
+q097,single_signal,reasoning,general,0.5000,1,0,keyword_fast,if all bloops are razzies and all razzies are lazzies are all bloops lazzies,"single/reasoning, syllogism with nonsense terms (no domain content)"
+q098,single_signal,reasoning,math,0.5000,0,1,keyword_fast,what logical fallacy is appeal to popularity (everyone believes it so it is true),"single/reasoning, fallacy identification"
+q099,single_signal,reasoning,general,0.5000,1,0,keyword_fast,in the missing dollar hotel puzzle where did the dollar go,"single/reasoning, classic logic puzzle (dollar is incidental, not finance)"
+q100,single_signal,reasoning,general,0.5000,1,0,keyword_fast,is this valid all men are mortal socrates is mortal therefore socrates is a man,"single/reasoning, validity of a syllogism"
+q101,single_signal,reasoning,general,0.5000,1,0,keyword_fast,how would you approach deciding between two job offers,"single/reasoning, decision framework, no specialist domain"
+q102,single_signal,reasoning,general,0.5000,1,0,keyword_fast,what assumptions is this statement making,"single/reasoning, assumption surfacing"
+q103,single_signal,reasoning,general,0.5000,1,0,keyword_fast,a farmer must cross a river with a fox a chicken and grain how,"single/reasoning, river-crossing puzzle"
+q104,single_signal,reasoning,general,0.5000,1,0,keyword_fast,correlation vs causation whats the difference,"single/reasoning, terse critical-thinking concept"
+q107,single_signal,reasoning,general,0.5000,1,0,keyword_fast,what are the hidden assumptions behind the claim that cutting taxes boosts the economy,"single/reasoning; asks to surface assumptions, not to do finance math"
+q108,single_signal,reasoning,general,0.5000,1,0,keyword_fast,how do you tell a strong argument from a weak one,"single/reasoning, argument quality"
+q109,single_signal,reasoning,general,0.5000,1,0,keyword_fast,is a slippery slope always a fallacy,"single/reasoning, informal logic"
+q110,single_signal,reasoning,general,0.5000,1,0,keyword_fast,break this complex problem into smaller steps for me,"single/reasoning, decomposition"
+q111,single_signal,reasoning,code,0.5000,0,1,keyword_fast,whats a good framework for making a difficult decision under uncertainty,"single/reasoning, decision theory (general)"
+q113,single_signal,reasoning,general,0.5000,1,0,keyword_fast,what is occams razor and when does it apply,"single/reasoning, heuristic"
+q114,single_signal,reasoning,general,0.5000,1,0,keyword_fast,steelman the opposing view in this debate,"single/reasoning, argumentation"
+q115,single_signal,reasoning,general,0.5000,1,0,keyword_fast,how would you identify a false dilemma in an argument,"single/reasoning, fallacy detection"
+q116,single_signal,reasoning,general,0.5000,1,0,keyword_fast,what is the base rate fallacy,"single/reasoning, cognitive bias (asked as a concept, not a Bayes calc)"
+q117,single_signal,reasoning,math,0.5000,0,1,keyword_fast,given these clues who is telling the truth logic grid puzzle,"single/reasoning, deduction puzzle"
+q118,single_signal,reasoning,general,0.5000,1,0,keyword_fast,explain survivorship bias with an example,"single/reasoning, bias concept"
+q119,single_signal,reasoning,medical,1.0000,0,1,keyword_fast,whats the difference between necessary and sufficient conditions,"single/reasoning, logic"
+q120,single_signal,reasoning,general,0.5000,1,0,keyword_fast,how do you spot a circular argument,"single/reasoning, fallacy detection"
+q121,dual_signal,code,finance,0.3333,0,1,keyword_fast,write a python script to calculate compound interest on a savings account,deliverable is a working program; finance is only the topic
+q124,dual_signal,math,medical,1.0000,0,1,keyword_fast,what does a p value of 0.03 mean statistically in a drug trial,core ask is interpreting a statistic; trial is context
+q126,dual_signal,code,finance,0.6667,0,1,keyword_fast,build a machine learning model in python to predict stock prices,the deliverable is an ML program; stocks are the data
+q127,dual_signal,reasoning,finance,0.3333,0,1,keyword_fast,is it logically sound to buy a stock just because it went up yesterday,"evaluating the validity of an inference, not giving market info"
+q128,dual_signal,code,medical,0.6667,0,1,keyword_fast,write a sql query to find patients over 65 with diabetes,task is to author a query; medical terms are filter values
+q130,dual_signal,math,reasoning,1.0000,0,1,keyword_fast,prove that this coin flip betting strategy has positive expected value,a proof of expected value is a math task
+q134,dual_signal,code,reasoning,1.0000,0,1,keyword_fast,compare the time complexity of merge sort and bubble sort,complexity analysis is a core CS/algorithms topic
+q135,dual_signal,reasoning,medical,0.3333,0,1,keyword_fast,whats the logical flaw in claiming a medicine works because people feel better after taking it,identifies a post-hoc/placebo fallacy; a reasoning task
+q137,dual_signal,reasoning,finance,0.5000,0,1,keyword_fast,should a central bank raise rates to fight inflation argue both sides,"asks for structured two-sided argumentation, not a market figure"
+q138,dual_signal,code,general,0.5000,1,0,keyword_fast,write pseudocode for the newton raphson method to find a root,deliverable is an implementation of the method
+q139,dual_signal,math,medical,0.6667,0,1,keyword_fast,whats the probability a patient has the disease given a positive test with 95 percent sensitivity,a conditional-probability / Bayes problem
+q141,dual_signal,reasoning,medical,0.5000,0,1,keyword_fast,is this medical studys conclusion valid given its small sample size,evaluating the validity of a conclusion; a reasoning task
+q142,dual_signal,math,finance,1.0000,0,1,keyword_fast,if bitcoin went from 30k to 45k what was the percentage return,a percent-change computation; crypto is context
+q143,dual_signal,code,finance,0.6667,0,1,keyword_fast,how do I use pandas to analyze historical stock prices,tooling/data-analysis code task
+q146,dual_signal,math,general,0.5000,1,0,keyword_fast,explain the mathematical reason why you cannot divide by zero,asks for a mathematics explanation of a math concept
+q148,dual_signal,reasoning,general,0.5000,1,0,keyword_fast,what are the strongest arguments for and against a universal basic income,open argumentation/ethics dominates the economics
+q149,dual_signal,math,code,1.0000,0,1,keyword_fast,how many test runs do I need to be 95 percent confident my code is bug free,fundamentally a statistics/confidence question
+q150,dual_signal,code,math,1.0000,0,1,keyword_fast,explain recursion using the factorial as an example,recursion is a programming concept; factorial only illustrates it
+q151,dual_signal,math,medical,0.5000,0,1,keyword_fast,what statistical test should I use to compare two treatment groups,choosing a statistical test is a statistics-methodology question
+q153,dual_signal,code,medical,0.6667,0,1,keyword_fast,design a database schema for a hospital patient records system,data-modeling/engineering task; hospital is the domain
+q154,dual_signal,math,finance,1.0000,0,1,keyword_fast,if my win rate is 60 percent but my average loss exceeds my average win am I profitable,an expectancy calculation; trading is the framing
+q155,dual_signal,reasoning,code,0.5000,0,1,keyword_fast,explain the reasoning error in using past fund returns to predict future returns,identifying an inductive fallacy; a reasoning task
+q158,dual_signal,code,finance,0.3333,0,1,keyword_fast,compare react and vue for building a trading dashboard,a frontend framework choice; trading is only the use case
+q161,dual_signal,code,finance,0.4000,0,1,keyword_fast,write code to calculate a 20 day moving average of a stock price series,coding task; the moving average is over financial data
+q162,dual_signal,math,finance,1.0000,0,1,keyword_fast,explain mathematically why diversification reduces portfolio risk,asks for the math (variance of a sum) behind the finance idea
+q164,dual_signal,reasoning,general,0.5000,1,0,keyword_fast,make the case for and against ai replacing software engineers,"open-ended argumentation, not a coding task"
+q165,dual_signal,math,general,0.5000,1,0,keyword_fast,what discount rate should I use and compute the npv of these cash flows,an NPV computation; the discount-rate choice is subordinate to the math

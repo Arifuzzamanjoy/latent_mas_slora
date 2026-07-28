@@ -1,0 +1,53 @@
+name: Routing Eval Gate
+
+# Proves ROUTING quality only. CPU-only: no GPU, no 7B base-model download,
+# no torch / transformers / sentence-transformers. The 'staged' router and the
+# eval harness run offline on the fixed labelled set (eval/routing/queries.jsonl).
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  routing-eval:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install minimal deps (CPU-only; NO torch / transformers / 7B model)
+        run: |
+          python -m pip install --upgrade pip
+          pip install numpy matplotlib
+
+      - name: Unit tests (staged router threshold / escalation / unsure logic)
+        run: python tests/test_staged_router.py
+
+      - name: Run routing eval against the staged router
+        run: python eval/routing/run_eval.py --router staged
+
+      # Thresholds below were set from the measured STAGED run on
+      # eval/routing/queries.jsonl (n=180, seed=1234):
+      #     top-1 accuracy      = 0.628
+      #     confident-and-wrong = 0.083
+      # Gates use a small margin so noise-free reruns pass but real regressions fail:
+      #     min-accuracy        = 0.58   (measured 0.628; ~4.8 pp headroom)
+      #     max-confident-wrong = 0.11   (measured 0.083; ~2.7 pp headroom)
+      - name: Quality gate (fail on accuracy drop or confident-and-wrong rise)
+        run: |
+          python eval/routing/ci_gate.py \
+            --results eval/routing/results/staged/results.json \
+            --min-accuracy 0.58 \
+            --max-confident-wrong 0.11
+
+      - name: Upload results as build artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: routing-eval-results
+          path: eval/routing/results/
