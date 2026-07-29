@@ -129,6 +129,17 @@ findings:
 This is also why **confident-and-wrong** is defined as *predicted a specialist, did not abstain,
 and was wrong* — that definition is unaffected by the double duty `general` is doing.
 
+## What the eval found in the existing code
+
+Building this harness surfaced four defects in the routing code it measures: a duplicate
+`Domain` enum whose cross-module equality is silently `False`, a `SemanticRouter` abstain
+threshold whose default sits below the score distribution, a `reasoning` profile that the
+keyword router can almost never reach (9.7% recall), and the `general`/abstain label
+collision described above. **None are fixed in this branch** — each one edits code the
+comparison measures, which would invalidate the baseline, the held-out split, and the CI
+gate thresholds together. They are written up with evidence, blast radius, the fix, and a
+shipping order in [`FINDINGS.md`](FINDINGS.md).
+
 ## LIMITATIONS
 
 Read this before trusting any number above.
@@ -199,6 +210,7 @@ is the real thing rather than a lexical stand-in.
 | `results/HELDOUT.md` | train vs holdout numbers and the generalisation gap |
 | `results/cost_profile.json` | measured latency/cold-start + why neural routers are unmeasured |
 | `GENERALIZING.md` | how this method transfers to other LLM apps |
+| `FINDINGS.md` | defects in the existing routing code that this eval surfaced |
 | `runpod_validate.sh`, `runpod_driver.py`, `RUNPOD.md` | GPU full-stack validation |
 | `../../src/routing/staged_router.py` | the staged router (new) |
 | `../../tests/test_staged_router.py` | unit tests |
