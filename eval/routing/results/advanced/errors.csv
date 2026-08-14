@@ -1,0 +1,85 @@
+id,bucket,expected,predicted,confidence,abstained,confident_and_wrong,method,query,note
+q001,single_signal,code,general,0.2131,1,0,hybrid,how do I reverse a string in python,"single/code, straightforward programming how-to"
+q005,single_signal,code,general,0.2079,1,0,hybrid,my docker build keeps failing at the pip install step,"single/code, DevOps/build tooling"
+q007,single_signal,code,general,0.2052,1,0,hybrid,how to make an http get request in python using requests,"single/code, library usage"
+q008,single_signal,code,general,0.2205,1,0,hybrid,git merge conflict how do I resolve it,"single/code, version control workflow"
+q009,single_signal,code,general,0.2295,1,0,hybrid,convert a list of dicts to a pandas dataframe,"single/code, data-wrangling in code"
+q010,single_signal,code,general,0.2110,1,0,hybrid,why is my react component re-rendering infinitely,"single/code, frontend debugging"
+q011,single_signal,code,general,0.2168,1,0,hybrid,bash one liner to find and delete all pyc files,"single/code, shell scripting"
+q012,single_signal,code,general,0.2070,1,0,hybrid,explain what a decorator does in python,"single/code, language concept"
+q013,single_signal,code,general,0.2248,1,0,hybrid,write a sql query to get the top 5 customers by total spend,"single/code; the task is to write SQL, spend is incidental"
+q014,single_signal,code,general,0.2103,1,0,hybrid,segfault in my c program when I free the same pointer twice,"single/code, memory bug"
+q015,single_signal,code,general,0.2042,1,0,hybrid,how do I set up a virtual environment and install dependencies,"single/code, tooling"
+q017,single_signal,code,general,0.2019,1,0,hybrid,regex to match a valid email address,"single/code, regex authoring"
+q019,single_signal,code,general,0.2337,1,0,hybrid,how to deploy a flask app to aws,"single/code, deployment"
+q020,single_signal,code,general,0.2172,1,0,hybrid,what does this typescript generic T extends object mean,"single/code, type system"
+q022,single_signal,code,general,0.2086,1,0,hybrid,how to read a csv file line by line in go,"single/code, Go IO"
+q023,single_signal,code,general,0.2237,1,0,hybrid,dockerfile to containerize a node app,"single/code, containerization"
+q027,single_signal,math,general,0.2154,1,0,hybrid,integrate x times e to the x dx,"single/math, integration by parts"
+q030,single_signal,math,finance,0.3255,0,1,hybrid,probability of getting exactly two heads in three coin flips,"single/math, basic probability"
+q032,single_signal,math,general,0.2269,1,0,hybrid,sum of the first 100 natural numbers,"single/math, arithmetic series"
+q035,single_signal,math,general,0.2030,1,0,hybrid,how many ways to arrange the letters in mississippi,"single/math, permutations with repetition"
+q037,single_signal,math,general,0.2424,1,0,hybrid,what is the 10th term of the fibonacci sequence,"single/math, sequence value asked as a math fact"
+q038,single_signal,math,general,0.2155,1,0,hybrid,factor x cubed minus 8,"single/math, difference of cubes"
+q039,single_signal,math,general,0.2363,1,0,hybrid,convert 0.75 to a fraction in lowest terms,"single/math, rational number"
+q043,single_signal,math,general,0.2240,1,0,hybrid,what is the value of 7 factorial,"single/math, factorial value"
+q044,single_signal,math,general,0.2222,1,0,hybrid,find the greatest common divisor of 48 and 180,"single/math, number theory"
+q046,single_signal,math,general,0.2172,1,0,hybrid,area of a circle with radius 5,"single/math, geometry"
+q050,single_signal,medical,general,0.2307,1,0,hybrid,metformin how it works,"single/medical, terse pharmacology"
+q061,single_signal,medical,general,0.2463,1,0,hybrid,explain the stages of wound healing,"single/medical, physiology"
+q062,single_signal,medical,general,0.2298,1,0,hybrid,what is the glasgow coma scale and how is it scored,"single/medical, clinical tool"
+q063,single_signal,medical,general,0.2399,1,0,hybrid,contraindications for prescribing nsaids,"single/medical, prescribing safety"
+q068,single_signal,medical,general,0.2464,1,0,hybrid,antibiotic of choice for an uncomplicated uti,"single/medical, therapeutics"
+q077,single_signal,finance,general,0.2485,1,0,hybrid,how does dollar cost averaging work,"single/finance, investing strategy concept"
+q090,single_signal,finance,general,0.2466,1,0,hybrid,how does a 401k employer match work,"single/finance, personal finance"
+q096,single_signal,finance,reasoning,0.2116,0,1,hybrid,explain how mortgage amortization works,"single/finance, lending"
+q097,single_signal,reasoning,code,0.2478,0,1,hybrid,if all bloops are razzies and all razzies are lazzies are all bloops lazzies,"single/reasoning, syllogism with nonsense terms (no domain content)"
+q099,single_signal,reasoning,general,0.2195,1,0,hybrid,in the missing dollar hotel puzzle where did the dollar go,"single/reasoning, classic logic puzzle (dollar is incidental, not finance)"
+q102,single_signal,reasoning,general,0.2049,1,0,hybrid,what assumptions is this statement making,"single/reasoning, assumption surfacing"
+q103,single_signal,reasoning,general,0.2212,1,0,hybrid,a farmer must cross a river with a fox a chicken and grain how,"single/reasoning, river-crossing puzzle"
+q104,single_signal,reasoning,general,0.2251,1,0,hybrid,correlation vs causation whats the difference,"single/reasoning, terse critical-thinking concept"
+q105,single_signal,reasoning,general,0.2352,1,0,hybrid,whats the difference between deductive and inductive reasoning,"single/reasoning, logic concept"
+q107,single_signal,reasoning,general,0.2230,1,0,hybrid,what are the hidden assumptions behind the claim that cutting taxes boosts the economy,"single/reasoning; asks to surface assumptions, not to do finance math"
+q108,single_signal,reasoning,general,0.2375,1,0,hybrid,how do you tell a strong argument from a weak one,"single/reasoning, argument quality"
+q109,single_signal,reasoning,general,0.2104,1,0,hybrid,is a slippery slope always a fallacy,"single/reasoning, informal logic"
+q110,single_signal,reasoning,general,0.2091,1,0,hybrid,break this complex problem into smaller steps for me,"single/reasoning, decomposition"
+q111,single_signal,reasoning,code,0.2465,0,1,hybrid,whats a good framework for making a difficult decision under uncertainty,"single/reasoning, decision theory (general)"
+q113,single_signal,reasoning,general,0.2464,1,0,hybrid,what is occams razor and when does it apply,"single/reasoning, heuristic"
+q114,single_signal,reasoning,general,0.2283,1,0,hybrid,steelman the opposing view in this debate,"single/reasoning, argumentation"
+q116,single_signal,reasoning,general,0.2265,1,0,hybrid,what is the base rate fallacy,"single/reasoning, cognitive bias (asked as a concept, not a Bayes calc)"
+q117,single_signal,reasoning,general,0.2115,1,0,hybrid,given these clues who is telling the truth logic grid puzzle,"single/reasoning, deduction puzzle"
+q118,single_signal,reasoning,general,0.2384,1,0,hybrid,explain survivorship bias with an example,"single/reasoning, bias concept"
+q119,single_signal,reasoning,medical,0.2568,0,1,hybrid,whats the difference between necessary and sufficient conditions,"single/reasoning, logic"
+q121,dual_signal,code,math,0.2302,0,1,hybrid,write a python script to calculate compound interest on a savings account,deliverable is a working program; finance is only the topic
+q122,dual_signal,math,general,0.2288,1,0,hybrid,explain the math behind the black scholes option pricing formula,"asks to explain the mathematics, not to trade or value a position"
+q124,dual_signal,math,medical,0.2617,0,1,hybrid,what does a p value of 0.03 mean statistically in a drug trial,core ask is interpreting a statistic; trial is context
+q126,dual_signal,code,finance,0.3170,0,1,hybrid,build a machine learning model in python to predict stock prices,the deliverable is an ML program; stocks are the data
+q127,dual_signal,reasoning,finance,0.2741,0,1,hybrid,is it logically sound to buy a stock just because it went up yesterday,"evaluating the validity of an inference, not giving market info"
+q128,dual_signal,code,medical,0.3001,0,1,hybrid,write a sql query to find patients over 65 with diabetes,task is to author a query; medical terms are filter values
+q130,dual_signal,math,finance,0.3143,0,1,hybrid,prove that this coin flip betting strategy has positive expected value,a proof of expected value is a math task
+q131,dual_signal,medical,math,0.2517,0,1,hybrid,explain the pharmacology of warfarin then compute its half life from the elimination constant,primary framing is pharmacology; the calc is subordinate
+q132,dual_signal,code,general,0.2231,1,0,hybrid,what algorithm should I use to detect arrhythmias in ecg data,asks for an algorithmic/technical approach; ECG is the domain data
+q134,dual_signal,code,reasoning,0.2144,0,1,hybrid,compare the time complexity of merge sort and bubble sort,complexity analysis is a core CS/algorithms topic
+q135,dual_signal,reasoning,general,0.2215,1,0,hybrid,whats the logical flaw in claiming a medicine works because people feel better after taking it,identifies a post-hoc/placebo fallacy; a reasoning task
+q137,dual_signal,reasoning,general,0.2464,1,0,hybrid,should a central bank raise rates to fight inflation argue both sides,"asks for structured two-sided argumentation, not a market figure"
+q139,dual_signal,math,medical,0.3804,0,1,hybrid,whats the probability a patient has the disease given a positive test with 95 percent sensitivity,a conditional-probability / Bayes problem
+q140,dual_signal,code,finance,0.3052,0,1,hybrid,explain how blockchain hashing works and write a simple hash function in python,the concrete deliverable is code; blockchain is the motivation
+q141,dual_signal,reasoning,general,0.2455,1,0,hybrid,is this medical studys conclusion valid given its small sample size,evaluating the validity of a conclusion; a reasoning task
+q142,dual_signal,math,finance,0.3710,0,1,hybrid,if bitcoin went from 30k to 45k what was the percentage return,a percent-change computation; crypto is context
+q143,dual_signal,code,finance,0.3085,0,1,hybrid,how do I use pandas to analyze historical stock prices,tooling/data-analysis code task
+q146,dual_signal,math,reasoning,0.2422,0,1,hybrid,explain the mathematical reason why you cannot divide by zero,asks for a mathematics explanation of a math concept
+q148,dual_signal,reasoning,finance,0.2536,0,1,hybrid,what are the strongest arguments for and against a universal basic income,open argumentation/ethics dominates the economics
+q149,dual_signal,math,code,0.2517,0,1,hybrid,how many test runs do I need to be 95 percent confident my code is bug free,fundamentally a statistics/confidence question
+q150,dual_signal,code,general,0.2196,1,0,hybrid,explain recursion using the factorial as an example,recursion is a programming concept; factorial only illustrates it
+q151,dual_signal,math,medical,0.3076,0,1,hybrid,what statistical test should I use to compare two treatment groups,choosing a statistical test is a statistics-methodology question
+q152,dual_signal,math,general,0.2350,1,0,hybrid,what is the expected value of a lottery ticket that costs 2 dollars,expected-value computation
+q153,dual_signal,code,medical,0.3044,0,1,hybrid,design a database schema for a hospital patient records system,data-modeling/engineering task; hospital is the domain
+q154,dual_signal,math,general,0.2372,1,0,hybrid,if my win rate is 60 percent but my average loss exceeds my average win am I profitable,an expectancy calculation; trading is the framing
+q155,dual_signal,reasoning,general,0.2156,1,0,hybrid,explain the reasoning error in using past fund returns to predict future returns,identifying an inductive fallacy; a reasoning task
+q158,dual_signal,code,finance,0.2565,0,1,hybrid,compare react and vue for building a trading dashboard,a frontend framework choice; trading is only the use case
+q160,dual_signal,medical,general,0.2163,1,0,hybrid,how should I reason about whether to see a doctor for a mild persistent cough,a health-triage question needing medical judgment
+q161,dual_signal,code,finance,0.2612,0,1,hybrid,write code to calculate a 20 day moving average of a stock price series,coding task; the moving average is over financial data
+q162,dual_signal,math,finance,0.2727,0,1,hybrid,explain mathematically why diversification reduces portfolio risk,asks for the math (variance of a sum) behind the finance idea
+q163,dual_signal,code,medical,0.2600,0,1,hybrid,debug why my sql query returns duplicate patient rows,a SQL/debugging task; patients are the data
+q164,dual_signal,reasoning,general,0.2147,1,0,hybrid,make the case for and against ai replacing software engineers,"open-ended argumentation, not a coding task"
+q165,dual_signal,math,general,0.2377,1,0,hybrid,what discount rate should I use and compute the npv of these cash flows,an NPV computation; the discount-rate choice is subordinate to the math

@@ -2,8 +2,6 @@
 
 Query set: `queries.jsonl` (n = 180). Every value is read from each router's `results.json` or from `cost_profile.json`; nothing is hand-entered.
 
-> **semantic, advanced could not be run in this environment.** They are reported as NOT MEASURED below, with the exact reason. No values were substituted or estimated for them.
-
 ## 1. Confident-and-wrong (headline)
 
 Committed to a *specialist* domain (no abstention) and was wrong — a **silent** failure, since the routed domain selects which adapter/pipeline runs.
@@ -12,8 +10,8 @@ Committed to a *specialist* domain (no abstention) and was wrong — a **silent*
 |---|---:|---:|
 | `fast` | 15.6% (28/180) | — |
 | `staged` | 8.3% (15/180) | -7.2 pp |
-| `semantic` | NOT MEASURED | — |
-| `advanced` | NOT MEASURED | — |
+| `semantic` | 56.7% (102/180) | +41.1 pp |
+| `advanced` | 14.4% (26/180) | -1.1 pp |
 
 ## 2. Top-1 accuracy
 
@@ -21,8 +19,8 @@ Committed to a *specialist* domain (no abstention) and was wrong — a **silent*
 |---|---:|---:|---:|---:|
 | `fast` | **55.6%** | 40.0% | 100.0% | 55.8% |
 | `staged` | **62.8%** | 37.8% | 100.0% | 67.5% |
-| `semantic` | NOT MEASURED | — | — | — |
-| `advanced` | NOT MEASURED | — | — | — |
+| `semantic` | **42.8%** | 24.4% | 0.0% | 55.0% |
+| `advanced` | **53.3%** | 26.7% | 100.0% | 57.5% |
 
 ## 3. Abstention rate
 
@@ -30,19 +28,19 @@ Committed to a *specialist* domain (no abstention) and was wrong — a **silent*
 |---|---:|
 | `fast` | 37.2% (67/180) |
 | `staged` | 37.2% (67/180) |
-| `semantic` | NOT MEASURED |
-| `advanced` | NOT MEASURED |
+| `semantic` | 0.6% (1/180) |
+| `advanced` | 40.6% (73/180) |
 
 ## 4. Per-domain precision / recall
 
-| domain | support | P fast | R fast | P staged | R staged |
-|---|---:|---:|---:|---:|---:|
-| code | 42 | 89.7% | 61.9% | 96.4% | 64.3% |
-| math | 38 | 77.3% | 44.7% | 76.0% | 50.0% |
-| medical | 29 | 73.3% | 75.9% | 91.3% | 72.4% |
-| finance | 25 | 63.0% | 68.0% | 85.0% | 68.0% |
-| reasoning | 31 | 60.0% | 9.7% | 82.4% | 45.2% |
-| general | 15 | 22.4% | 100.0% | 22.4% | 100.0% |
+| domain | support | P fast | R fast | P staged | R staged | P semantic | R semantic | P advanced | R advanced |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| code | 42 | 89.7% | 61.9% | 96.4% | 64.3% | 80.0% | 28.6% | 82.4% | 33.3% |
+| math | 38 | 77.3% | 44.7% | 76.0% | 50.0% | 90.9% | 26.3% | 88.9% | 42.1% |
+| medical | 29 | 73.3% | 75.9% | 91.3% | 72.4% | 63.6% | 96.6% | 75.9% | 75.9% |
+| finance | 25 | 63.0% | 68.0% | 85.0% | 68.0% | 23.4% | 100.0% | 66.7% | 88.0% |
+| reasoning | 31 | 60.0% | 9.7% | 82.4% | 45.2% | 100.0% | 6.5% | 70.0% | 22.6% |
+| general | 15 | 22.4% | 100.0% | 22.4% | 100.0% | 0.0% | 0.0% | 20.5% | 100.0% |
 
 ## 5. Cost
 
@@ -50,19 +48,8 @@ Committed to a *specialist* domain (no abstention) and was wrong — a **silent*
 |---|---:|---:|---|:--:|
 | `fast` | 0.0571 ms | 31.9 ms | stdlib only (no third-party runtime deps) | yes |
 | `staged` | 0.0695 ms | 41.4 ms | stdlib only (no third-party runtime deps) | yes |
-| `semantic` | NOT MEASURED | NOT MEASURED | torch wheel 526.6 MB + sentence-transformers + transformers | **no** (downloads model on first init) |
-| `advanced` | NOT MEASURED | NOT MEASURED | torch wheel 526.6 MB + sentence-transformers + transformers | **no** (downloads model on first init) |
-
-`semantic`, `advanced` could not be measured here. Measured facts behind that:
-
-- torch wheel is **526.6 MB** (`pip download of torch-2.13.0-cp310-cp310-manylinux_2_28_x86_64.whl`), and observed pypi throughput was ~1.1 MB/s.
-- `403 Forbidden` — https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2
-- `403 Forbidden` — https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json
-- `403 Forbidden` — https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/model.safetensors
-
-Because the model weights, `config.json`, **and** the hub metadata endpoint are all blocked, `SentenceTransformer('all-MiniLM-L6-v2')` cannot initialise, so neither neural router can produce a prediction here. Their accuracy is **unknown**, not zero and not assumed.
-
-`run_eval.py` also refuses to *silently* degrade: both `SemanticRouter` and `AdvancedHybridRouter` catch `ImportError` internally and fall back to keyword-only scoring, which would otherwise be reported as a 'semantic' result. The harness now asserts the encoder and domain centroids actually loaded and raises `_NeuralNotLoaded` if not.
+| `semantic` | 4.5319 ms | — | — | — |
+| `advanced` | 44.3693 ms | — | — | — |
 
 ## What actually changed
 
@@ -90,6 +77,4 @@ Top-1 accuracy treats every error the same. In this system a routing error is no
 
 ## Why staged, given semantic exists
 
-**This is the honest answer: I do not know, because I could not run them here.** The embedding routers were never benchmarked — `huggingface.co` is blocked in this environment, so the model cannot be fetched (§5). It is entirely possible the semantic router beats the staged router on accuracy; a fair reading is that this comparison is **incomplete**, and the staged-vs-fast result should not be presented as "staged is the best router".
-
-What can be defended without those numbers is narrower and is about **cost and gateability**, not quality: the staged router has no third-party runtime dependency, starts in tens of milliseconds, routes in well under a millisecond, and runs fully offline — so it can gate every pull request on a standard CPU runner in seconds. The neural routers need a ~527 MB torch wheel plus a model download, which is a different class of CI dependency. That is an argument about what is cheap to *gate on*, not an argument that staging produces better routing. Running `--router semantic` and `--router advanced` on a networked machine is the obvious next step and would settle it.
+Measured: semantic top-1 42.8% vs staged 62.8%; confident-and-wrong 56.7% vs 8.3%.

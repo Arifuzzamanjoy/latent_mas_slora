@@ -1,0 +1,104 @@
+id,bucket,expected,predicted,confidence,abstained,confident_and_wrong,method,query,note
+q001,single_signal,code,finance,0.2166,0,1,semantic,how do I reverse a string in python,"single/code, straightforward programming how-to"
+q004,single_signal,code,finance,0.2273,0,1,semantic,whats the difference between let and const in javascript,"single/code, JS language semantics"
+q005,single_signal,code,finance,0.2149,0,1,semantic,my docker build keeps failing at the pip install step,"single/code, DevOps/build tooling"
+q007,single_signal,code,finance,0.2090,0,1,semantic,how to make an http get request in python using requests,"single/code, library usage"
+q008,single_signal,code,finance,0.2157,0,1,semantic,git merge conflict how do I resolve it,"single/code, version control workflow"
+q009,single_signal,code,finance,0.2295,0,1,semantic,convert a list of dicts to a pandas dataframe,"single/code, data-wrangling in code"
+q010,single_signal,code,finance,0.2175,0,1,semantic,why is my react component re-rendering infinitely,"single/code, frontend debugging"
+q011,single_signal,code,finance,0.2090,0,1,semantic,bash one liner to find and delete all pyc files,"single/code, shell scripting"
+q012,single_signal,code,finance,0.2188,0,1,semantic,explain what a decorator does in python,"single/code, language concept"
+q013,single_signal,code,finance,0.2296,0,1,semantic,write a sql query to get the top 5 customers by total spend,"single/code; the task is to write SQL, spend is incidental"
+q014,single_signal,code,finance,0.2103,0,1,semantic,segfault in my c program when I free the same pointer twice,"single/code, memory bug"
+q015,single_signal,code,finance,0.2087,0,1,semantic,how do I set up a virtual environment and install dependencies,"single/code, tooling"
+q017,single_signal,code,finance,0.2061,0,1,semantic,regex to match a valid email address,"single/code, regex authoring"
+q019,single_signal,code,finance,0.2390,0,1,semantic,how to deploy a flask app to aws,"single/code, deployment"
+q020,single_signal,code,finance,0.2203,0,1,semantic,what does this typescript generic T extends object mean,"single/code, type system"
+q022,single_signal,code,finance,0.2132,0,1,semantic,how to read a csv file line by line in go,"single/code, Go IO"
+q023,single_signal,code,finance,0.2289,0,1,semantic,dockerfile to containerize a node app,"single/code, containerization"
+q027,single_signal,math,finance,0.2154,0,1,semantic,integrate x times e to the x dx,"single/math, integration by parts"
+q030,single_signal,math,finance,0.2406,0,1,semantic,probability of getting exactly two heads in three coin flips,"single/math, basic probability"
+q031,single_signal,math,finance,0.2213,0,1,semantic,what is the limit of (1 + 1/n) to the n as n approaches infinity,"single/math, limits"
+q032,single_signal,math,finance,0.2341,0,1,semantic,sum of the first 100 natural numbers,"single/math, arithmetic series"
+q034,single_signal,math,finance,0.2250,0,1,semantic,solve the system 2x plus y equals 5 and x minus y equals 1,"single/math, linear system"
+q035,single_signal,math,medical,0.2076,0,1,semantic,how many ways to arrange the letters in mississippi,"single/math, permutations with repetition"
+q037,single_signal,math,finance,0.2424,0,1,semantic,what is the 10th term of the fibonacci sequence,"single/math, sequence value asked as a math fact"
+q038,single_signal,math,finance,0.2155,0,1,semantic,factor x cubed minus 8,"single/math, difference of cubes"
+q039,single_signal,math,finance,0.2363,0,1,semantic,convert 0.75 to a fraction in lowest terms,"single/math, rational number"
+q040,single_signal,math,finance,0.2154,0,1,semantic,what is the determinant of a 3x3 identity matrix,"single/math, linear algebra fact"
+q043,single_signal,math,finance,0.2288,0,1,semantic,what is the value of 7 factorial,"single/math, factorial value"
+q044,single_signal,math,medical,0.2113,0,1,semantic,find the greatest common divisor of 48 and 180,"single/math, number theory"
+q045,single_signal,math,finance,0.2242,0,1,semantic,what is the taylor series expansion of e to the x,"single/math, series expansion"
+q046,single_signal,math,finance,0.2172,0,1,semantic,area of a circle with radius 5,"single/math, geometry"
+q050,single_signal,medical,finance,0.2352,0,1,semantic,metformin how it works,"single/medical, terse pharmacology"
+q097,single_signal,reasoning,code,0.2157,0,1,semantic,if all bloops are razzies and all razzies are lazzies are all bloops lazzies,"single/reasoning, syllogism with nonsense terms (no domain content)"
+q098,single_signal,reasoning,finance,0.2180,0,1,semantic,what logical fallacy is appeal to popularity (everyone believes it so it is true),"single/reasoning, fallacy identification"
+q099,single_signal,reasoning,finance,0.2288,0,1,semantic,in the missing dollar hotel puzzle where did the dollar go,"single/reasoning, classic logic puzzle (dollar is incidental, not finance)"
+q100,single_signal,reasoning,general,0.1963,1,0,semantic,is this valid all men are mortal socrates is mortal therefore socrates is a man,"single/reasoning, validity of a syllogism"
+q101,single_signal,reasoning,finance,0.2071,0,1,semantic,how would you approach deciding between two job offers,"single/reasoning, decision framework, no specialist domain"
+q102,single_signal,reasoning,finance,0.2093,0,1,semantic,what assumptions is this statement making,"single/reasoning, assumption surfacing"
+q103,single_signal,reasoning,finance,0.2258,0,1,semantic,a farmer must cross a river with a fox a chicken and grain how,"single/reasoning, river-crossing puzzle"
+q104,single_signal,reasoning,finance,0.2251,0,1,semantic,correlation vs causation whats the difference,"single/reasoning, terse critical-thinking concept"
+q105,single_signal,reasoning,medical,0.2235,0,1,semantic,whats the difference between deductive and inductive reasoning,"single/reasoning, logic concept"
+q106,single_signal,reasoning,finance,0.2177,0,1,semantic,weigh the pros and cons of working from home,"single/reasoning, structured pros/cons, general topic"
+q107,single_signal,reasoning,finance,0.2280,0,1,semantic,what are the hidden assumptions behind the claim that cutting taxes boosts the economy,"single/reasoning; asks to surface assumptions, not to do finance math"
+q108,single_signal,reasoning,finance,0.2291,0,1,semantic,how do you tell a strong argument from a weak one,"single/reasoning, argument quality"
+q109,single_signal,reasoning,finance,0.2150,0,1,semantic,is a slippery slope always a fallacy,"single/reasoning, informal logic"
+q110,single_signal,reasoning,math,0.2014,0,1,semantic,break this complex problem into smaller steps for me,"single/reasoning, decomposition"
+q111,single_signal,reasoning,code,0.2140,0,1,semantic,whats a good framework for making a difficult decision under uncertainty,"single/reasoning, decision theory (general)"
+q113,single_signal,reasoning,finance,0.2464,0,1,semantic,what is occams razor and when does it apply,"single/reasoning, heuristic"
+q114,single_signal,reasoning,finance,0.2335,0,1,semantic,steelman the opposing view in this debate,"single/reasoning, argumentation"
+q116,single_signal,reasoning,finance,0.2313,0,1,semantic,what is the base rate fallacy,"single/reasoning, cognitive bias (asked as a concept, not a Bayes calc)"
+q117,single_signal,reasoning,medical,0.2083,0,1,semantic,given these clues who is telling the truth logic grid puzzle,"single/reasoning, deduction puzzle"
+q118,single_signal,reasoning,medical,0.2171,0,1,semantic,explain survivorship bias with an example,"single/reasoning, bias concept"
+q119,single_signal,reasoning,medical,0.2398,0,1,semantic,whats the difference between necessary and sufficient conditions,"single/reasoning, logic"
+q120,single_signal,reasoning,finance,0.2090,0,1,semantic,how do you spot a circular argument,"single/reasoning, fallacy detection"
+q121,dual_signal,code,finance,0.2337,0,1,semantic,write a python script to calculate compound interest on a savings account,deliverable is a working program; finance is only the topic
+q122,dual_signal,math,finance,0.2481,0,1,semantic,explain the math behind the black scholes option pricing formula,"asks to explain the mathematics, not to trade or value a position"
+q124,dual_signal,math,medical,0.2456,0,1,semantic,what does a p value of 0.03 mean statistically in a drug trial,core ask is interpreting a statistic; trial is context
+q126,dual_signal,code,finance,0.2924,0,1,semantic,build a machine learning model in python to predict stock prices,the deliverable is an ML program; stocks are the data
+q127,dual_signal,reasoning,finance,0.2682,0,1,semantic,is it logically sound to buy a stock just because it went up yesterday,"evaluating the validity of an inference, not giving market info"
+q128,dual_signal,code,medical,0.2784,0,1,semantic,write a sql query to find patients over 65 with diabetes,task is to author a query; medical terms are filter values
+q130,dual_signal,math,finance,0.2477,0,1,semantic,prove that this coin flip betting strategy has positive expected value,a proof of expected value is a math task
+q132,dual_signal,code,medical,0.2280,0,1,semantic,what algorithm should I use to detect arrhythmias in ecg data,asks for an algorithmic/technical approach; ECG is the domain data
+q134,dual_signal,code,finance,0.2222,0,1,semantic,compare the time complexity of merge sort and bubble sort,complexity analysis is a core CS/algorithms topic
+q135,dual_signal,reasoning,medical,0.2328,0,1,semantic,whats the logical flaw in claiming a medicine works because people feel better after taking it,identifies a post-hoc/placebo fallacy; a reasoning task
+q137,dual_signal,reasoning,finance,0.2464,0,1,semantic,should a central bank raise rates to fight inflation argue both sides,"asks for structured two-sided argumentation, not a market figure"
+q139,dual_signal,math,medical,0.2905,0,1,semantic,whats the probability a patient has the disease given a positive test with 95 percent sensitivity,a conditional-probability / Bayes problem
+q140,dual_signal,code,finance,0.2589,0,1,semantic,explain how blockchain hashing works and write a simple hash function in python,the concrete deliverable is code; blockchain is the motivation
+q141,dual_signal,reasoning,medical,0.2396,0,1,semantic,is this medical studys conclusion valid given its small sample size,evaluating the validity of a conclusion; a reasoning task
+q142,dual_signal,math,finance,0.2961,0,1,semantic,if bitcoin went from 30k to 45k what was the percentage return,a percent-change computation; crypto is context
+q143,dual_signal,code,finance,0.2890,0,1,semantic,how do I use pandas to analyze historical stock prices,tooling/data-analysis code task
+q145,dual_signal,math,finance,0.2158,0,1,semantic,derive the formula for the future value of an ordinary annuity,a derivation is a math task
+q146,dual_signal,math,finance,0.2353,0,1,semantic,explain the mathematical reason why you cannot divide by zero,asks for a mathematics explanation of a math concept
+q148,dual_signal,reasoning,finance,0.2517,0,1,semantic,what are the strongest arguments for and against a universal basic income,open argumentation/ethics dominates the economics
+q149,dual_signal,math,code,0.2246,0,1,semantic,how many test runs do I need to be 95 percent confident my code is bug free,fundamentally a statistics/confidence question
+q150,dual_signal,code,finance,0.2147,0,1,semantic,explain recursion using the factorial as an example,recursion is a programming concept; factorial only illustrates it
+q151,dual_signal,math,medical,0.2447,0,1,semantic,what statistical test should I use to compare two treatment groups,choosing a statistical test is a statistics-methodology question
+q152,dual_signal,math,finance,0.2404,0,1,semantic,what is the expected value of a lottery ticket that costs 2 dollars,expected-value computation
+q153,dual_signal,code,medical,0.2326,0,1,semantic,design a database schema for a hospital patient records system,data-modeling/engineering task; hospital is the domain
+q154,dual_signal,math,finance,0.2425,0,1,semantic,if my win rate is 60 percent but my average loss exceeds my average win am I profitable,an expectancy calculation; trading is the framing
+q155,dual_signal,reasoning,finance,0.2163,0,1,semantic,explain the reasoning error in using past fund returns to predict future returns,identifying an inductive fallacy; a reasoning task
+q156,dual_signal,code,finance,0.2174,0,1,semantic,write a python simulation that rolls two dice ten thousand times,deliverable is a simulation program; probability is the subject
+q158,dual_signal,code,finance,0.2596,0,1,semantic,compare react and vue for building a trading dashboard,a frontend framework choice; trading is only the use case
+q159,dual_signal,math,finance,0.2012,0,1,semantic,is there a logical gap in the induction step of this proof,verifying a mathematical induction proof requires math
+q161,dual_signal,code,finance,0.2683,0,1,semantic,write code to calculate a 20 day moving average of a stock price series,coding task; the moving average is over financial data
+q162,dual_signal,math,finance,0.2745,0,1,semantic,explain mathematically why diversification reduces portfolio risk,asks for the math (variance of a sum) behind the finance idea
+q163,dual_signal,code,medical,0.2164,0,1,semantic,debug why my sql query returns duplicate patient rows,a SQL/debugging task; patients are the data
+q164,dual_signal,reasoning,finance,0.2105,0,1,semantic,make the case for and against ai replacing software engineers,"open-ended argumentation, not a coding task"
+q165,dual_signal,math,finance,0.2429,0,1,semantic,what discount rate should I use and compute the npv of these cash flows,an NPV computation; the discount-rate choice is subordinate to the math
+q166,out_of_domain,general,finance,0.2210,0,1,semantic,whats the capital of france,"OOD, geography trivia; no specialist domain"
+q167,out_of_domain,general,medical,0.2119,0,1,semantic,who wrote romeo and juliet,"OOD, literature trivia"
+q168,out_of_domain,general,finance,0.2172,0,1,semantic,how do airplanes stay in the air,"OOD, general-science curiosity, not an engineering task"
+q169,out_of_domain,general,finance,0.2255,0,1,semantic,whats a good recipe for banana bread,"OOD, cooking"
+q170,out_of_domain,general,finance,0.2219,0,1,semantic,how many continents are there,"OOD, geography"
+q171,out_of_domain,general,finance,0.2079,0,1,semantic,what year did world war 2 end,"OOD, history"
+q172,out_of_domain,general,finance,0.2242,0,1,semantic,recommend a good sci fi movie to watch tonight,"OOD, entertainment recommendation"
+q173,out_of_domain,general,finance,0.2127,0,1,semantic,how do I get from paris to london by train,"OOD, travel logistics"
+q174,out_of_domain,general,finance,0.2280,0,1,semantic,whats the tallest mountain in the world,"OOD, geography trivia"
+q175,out_of_domain,general,finance,0.2266,0,1,semantic,tell me a fun fact about octopuses,"OOD, general trivia"
+q176,out_of_domain,general,finance,0.2211,0,1,semantic,how do I tie a tie,"OOD, everyday how-to"
+q177,out_of_domain,general,finance,0.2232,0,1,semantic,whats the weather like in tokyo in spring,"OOD, general knowledge"
+q178,out_of_domain,general,finance,0.2213,0,1,semantic,who painted the mona lisa,"OOD, art trivia"
+q179,out_of_domain,general,finance,0.2266,0,1,semantic,what are some good houseplants for low light,"OOD, gardening"
+q180,out_of_domain,general,finance,0.2239,0,1,semantic,how long does it take to boil an egg,"OOD, cooking"

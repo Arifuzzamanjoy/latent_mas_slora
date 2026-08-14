@@ -1,3 +1,11 @@
+# Build, Setup & Plotting Utilities
+pip
+setuptools
+wheel
+packaging
+ninja
+matplotlib
+
 # Core Dependencies
 torch>=2.1.0
 torchvision>=0.16.0

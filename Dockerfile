@@ -24,7 +24,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Upgrade pip for Python 3.11
 # hadolint ignore=DL3013,DL3042
-RUN python3.11 -m pip install --no-cache-dir --upgrade pip==24.0 setuptools==69.0.3 wheel==0.42.0
+RUN python3.11 -m pip install --no-cache-dir --upgrade pip==24.0 setuptools==69.0.3 wheel==0.42.0 packaging ninja
 
 # Copy requirements first for caching
 COPY requirements.txt /app/requirements.txt
