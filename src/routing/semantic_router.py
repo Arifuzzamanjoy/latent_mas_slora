@@ -139,19 +139,43 @@ class SemanticRouter:
     def get_best_domain(
         self,
         prompt: str,
-        confidence_threshold: float = 0.25,
+        confidence_threshold: float = 0.15,
     ) -> Tuple[Domain, float]:
         """
         Get single best domain for prompt.
         
-        Returns GENERAL if confidence is below threshold.
+        Uses keyword re-ranking as tiebreaker when confidence is low.
+        Returns GENERAL only if confidence is very low.
         """
-        results = self.route(prompt, top_k=1)
+        results = self.route(prompt, top_k=5)
         
         if not results:
             return Domain.GENERAL, 0.0
         
         domain, confidence = results[0]
+        
+        # If top confidence is low, use keyword scoring as tiebreaker
+        if confidence < 0.30:
+            keyword_scores = {}
+            for d, profile in DOMAIN_PROFILES.items():
+                kw_score = self._keyword_score(prompt, profile)
+                keyword_scores[d] = kw_score
+            
+            # Find domain with highest keyword score
+            best_kw_domain = max(keyword_scores, key=keyword_scores.get)
+            best_kw_score = keyword_scores[best_kw_domain]
+            
+            # If keyword scoring strongly favors a different domain, use it
+            if best_kw_score > 0.1 and best_kw_domain != domain:
+                # Check that it's also in the top-3 semantic results
+                top3_domains = [d for d, _ in results[:3]]
+                if best_kw_domain in top3_domains:
+                    domain = best_kw_domain
+                    # Recalculate confidence from the route results
+                    for d, c in results:
+                        if d == domain:
+                            confidence = c
+                            break
         
         if confidence < confidence_threshold:
             return Domain.GENERAL, confidence

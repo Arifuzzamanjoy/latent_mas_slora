@@ -97,7 +97,9 @@ class AgentConfig:
             AgentRole.JUDGER: (
                 "You are a Judger Agent responsible for final decisions. "
                 "Evaluate all evidence and reasoning to select the best answer. "
-                "Be decisive and provide clear justification."
+                "Be decisive and provide clear justification. "
+                "You MUST always end your response with \\boxed{LETTER} where LETTER is A, B, C, or D. "
+                "State your final answer early in your reasoning, then justify it."
             ),
             AgentRole.CODER: (
                 "You are a Coding Agent specialized in software development. "
@@ -112,7 +114,10 @@ class AgentConfig:
             AgentRole.MEDICAL: (
                 "You are a Medical Reasoning Agent with clinical expertise. "
                 "Apply medical knowledge systematically to diagnose and recommend. "
-                "Consider differential diagnoses and evidence-based medicine."
+                "ALWAYS consider: 1) Presenting complaint and key clinical features, "
+                "2) Occupational and environmental exposure history, "
+                "3) Differential diagnoses ranked by likelihood, "
+                "4) Evidence-based medicine to select the best answer."
             ),
             AgentRole.RESEARCHER: (
                 "You are a Research Agent specialized in information gathering. "
@@ -160,16 +165,18 @@ class AgentConfig:
                 "Make the final decision:\n\n"
                 "Question: {question}\n\n"
                 "Based on all analysis, select the best answer.\n"
-                "For multiple choice, format as: \\boxed{{LETTER}}\n\n"
-                "Provide clear reasoning and your final answer."
+                "For multiple choice, you MUST format your final answer as: \\boxed{{LETTER}}\n"
+                "State your chosen answer letter FIRST, then provide reasoning.\n\n"
+                "Final Answer:"
             ),
             AgentRole.MEDICAL: (
                 "Apply medical reasoning:\n\n"
                 "{question}\n\n"
-                "Consider:\n"
-                "1. Key clinical features\n"
-                "2. Differential diagnoses\n"
-                "3. Most likely diagnosis/answer"
+                "Systematically consider:\n"
+                "1. PRESENTING COMPLAINT and KEY CLINICAL FEATURES\n"
+                "2. OCCUPATIONAL/ENVIRONMENTAL context (workplace, exposures, toxins)\n"
+                "3. DIFFERENTIAL DIAGNOSIS ranked by likelihood\n"
+                "4. Most likely diagnosis/answer with justification"
             ),
         }
         default = "Question: {question}\n\nProvide your analysis and answer."

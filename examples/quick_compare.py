@@ -23,7 +23,7 @@ def run_comparison():
     
     # Create ONE system and reuse it
     system = LatentMASSystem(
-        model_name="Qwen/Qwen2.5-3B-Instruct",
+        model_name="Qwen/Qwen2.5-7B-Instruct",
         dtype="bfloat16",
     )
     

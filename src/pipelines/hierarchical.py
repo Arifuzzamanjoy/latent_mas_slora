@@ -356,6 +356,51 @@ class HierarchicalPipeline:
             },
         )
     
+    def run_true_latent_with_self_consistency(
+        self,
+        question: str,
+        num_samples: int = 3,
+        **kwargs,
+    ) -> PipelineResult:
+        """
+        Run TRUE LatentMAS multiple times and vote on final answer.
+        
+        Combines latent efficiency with self-consistency for higher accuracy.
+        """
+        from collections import Counter
+        
+        all_answers = []
+        all_results = []
+        
+        for i in range(num_samples):
+            result = self.run_true_latent(
+                question,
+                temperature=kwargs.get("temperature", 0.5),
+                **{k: v for k, v in kwargs.items() if k != "temperature"}
+            )
+            
+            all_results.append(result)
+            answer = self._extract_answer(result.final_answer)
+            all_answers.append(answer)
+            print(f"  [SC {i+1}/{num_samples}] Answer: {answer}")
+        
+        # Vote
+        answer_counts = Counter(all_answers)
+        final_answer = answer_counts.most_common(1)[0][0]
+        
+        # Return best result with voted answer
+        best_result = all_results[0]
+        best_result.final_answer = f"[Self-Consistency Vote: {final_answer}]\n\n{best_result.final_answer}"
+        best_result.metadata["self_consistency"] = {
+            "num_samples": num_samples,
+            "all_answers": all_answers,
+            "vote_counts": dict(answer_counts),
+            "final_answer": final_answer,
+        }
+        best_result.total_tokens = sum(r.total_tokens for r in all_results)
+        
+        return best_result
+    
     def run_with_self_consistency(
         self,
         question: str,

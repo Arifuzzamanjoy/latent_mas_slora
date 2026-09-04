@@ -54,7 +54,7 @@ def create_system_for_mode(mode: str) -> LatentMASSystem:
     }.get(mode, 10)
     
     system = LatentMASSystem(
-        model_name="Qwen/Qwen2.5-3B-Instruct",
+        model_name="Qwen/Qwen2.5-7B-Instruct",
         dtype="bfloat16",
         latent_steps=latent_steps,
     )
@@ -98,7 +98,7 @@ def run_benchmark():
     results = {
         "meta": {
             "timestamp": datetime.now().isoformat(),
-            "model": "Qwen/Qwen2.5-3B-Instruct",
+            "model": "Qwen/Qwen2.5-7B-Instruct",
             "questions": len(BENCHMARK_QUESTIONS)
         },
         "questions": []

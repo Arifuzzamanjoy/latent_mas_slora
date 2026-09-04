@@ -102,7 +102,7 @@ class SmartInference:
     
     def __init__(
         self,
-        model_name: str = "Qwen/Qwen2.5-3B-Instruct",
+        model_name: str = "Qwen/Qwen2.5-7B-Instruct",
         dtype: str = "bfloat16",
         mode: str = "true_latent",
     ):

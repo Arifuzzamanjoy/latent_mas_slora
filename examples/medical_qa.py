@@ -76,7 +76,7 @@ def main():
     # Initialize system
     print("\n[1] Initializing system...")
     system = LatentMASSystem(
-        model_name="Qwen/Qwen2.5-3B-Instruct",
+        model_name="Qwen/Qwen2.5-7B-Instruct",
         device="cuda",
         dtype="bfloat16",
         latent_steps=15,
@@ -128,7 +128,7 @@ def main():
     try:
         success = system.load_external_lora(
             name="medical_ext",
-            hf_path="iimran/Qwen2.5-3B-R1-MedicalReasoner-lora-adapter",
+            hf_path="zjudai/flowertune-medical-lora-qwen2.5-7b-instruct",
         )
         if success:
             print("    ✓ External medical LoRA loaded!")

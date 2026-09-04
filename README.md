@@ -68,11 +68,11 @@ pip install -r requirements.txt
 ```python
 from latent_mas_slora import LatentMASSystem, AgentConfig
 
-# Initialize system with Qwen 3B
+# Initialize system with Qwen 7B
 system = LatentMASSystem(
-    model_name="Qwen/Qwen2.5-3B-Instruct",
+    model_name="Qwen/Qwen2.5-7B-Instruct",
     device="cuda",
-    quantization="4bit"  # Uses ~3GB VRAM
+    dtype="bfloat16"  # Uses ~14GB VRAM in BF16
 )
 
 # Add specialized agents with LoRA adapters
@@ -96,7 +96,7 @@ print(result.final_answer)
 # Load open-source LoRAs from HuggingFace
 system.load_external_lora(
     name="medical_expert",
-    hf_path="iimran/Qwen2.5-3B-R1-MedicalReasoner-lora-adapter"
+    hf_path="zjudai/flowertune-medical-lora-qwen2.5-7b-instruct"
 )
 
 system.load_external_lora(
@@ -123,7 +123,7 @@ system.load_external_lora(
 
 ```python
 system = LatentMASSystem(
-    model_name="Qwen/Qwen2.5-3B-Instruct",
+    model_name="Qwen/Qwen2.5-7B-Instruct",
     dtype="bfloat16",           # Full precision for 48GB VRAM
     latent_steps=15,            # Number of latent reasoning iterations
     latent_realign=True,        # Enable latent space realignment
@@ -137,7 +137,7 @@ Pre-registered LoRAs that can be loaded from HuggingFace:
 
 | Name | HF Path | Domain |
 |------|---------|--------|
-| medical_reasoner | `iimran/Qwen2.5-3B-R1-MedicalReasoner-lora-adapter` | Medical |
+| medical_reasoner | `zjudai/flowertune-medical-lora-qwen2.5-7b-instruct` | Medical |
 | medical_instruct | `zjudai/flowertune-medical-lora-qwen2.5-7b-instruct` | Medical |
 | math_instruct | `SKNahin/Qwen2.5-Math-7B-Instruct-bnb-4bit-lora` | Math |
 | coder_7b | `Alexis-Az/Qwen-2.5-Coder-7B-Instruct-LoRA` | Code |

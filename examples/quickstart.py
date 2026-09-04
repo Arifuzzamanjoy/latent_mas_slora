@@ -17,12 +17,12 @@ def main():
     print("LatentMAS + S-LoRA Quick Start Demo")
     print("=" * 60)
     
-    # Initialize system with Qwen2.5-3B
+    # Initialize system with Qwen2.5-7B
     print("\n[1] Initializing system...")
     system = LatentMASSystem(
-        model_name="Qwen/Qwen2.5-3B-Instruct",
+        model_name="Qwen/Qwen2.5-7B-Instruct",
         device="cuda",
-        dtype="bfloat16",  # Full precision for 48GB
+        dtype="bfloat16",  # Full precision for 24-48GB
         latent_steps=15,
         cache_dir="/home/caches",
     )

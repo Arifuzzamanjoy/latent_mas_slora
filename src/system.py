@@ -39,7 +39,7 @@ DOMAIN_AGENTS = {
 @dataclass 
 class SystemConfig:
     """Configuration for LatentMAS system"""
-    model_name: str = "Qwen/Qwen2.5-3B-Instruct"
+    model_name: str = "Qwen/Qwen2.5-7B-Instruct"
     device: str = "cuda"
     cache_dir: str = "/home/caches"
     
@@ -73,7 +73,7 @@ class LatentMASSystem:
     - Up to 15 latent reasoning steps
     
     Example:
-        system = LatentMASSystem(model_name="Qwen/Qwen2.5-3B-Instruct")
+        system = LatentMASSystem(model_name="Qwen/Qwen2.5-7B-Instruct")
         system.add_agent(AgentConfig.planner())
         system.add_agent(AgentConfig.critic())
         system.add_agent(AgentConfig.judger())
@@ -84,7 +84,7 @@ class LatentMASSystem:
     
     def __init__(
         self,
-        model_name: str = "Qwen/Qwen2.5-3B-Instruct",
+        model_name: str = "Qwen/Qwen2.5-7B-Instruct",
         device: str = "cuda",
         cache_dir: str = "/home/caches",
         dtype: str = "bfloat16",
@@ -327,6 +327,15 @@ class LatentMASSystem:
         
         # TRUE LatentMAS mode
         if true_latent or pipeline == "true_latent":
+            if self_consistency > 1:
+                return self._pipeline.run_true_latent_with_self_consistency(
+                    question,
+                    num_samples=self_consistency,
+                    agents=agents,
+                    max_new_tokens=max_new_tokens,
+                    temperature=temperature,
+                    **kwargs,
+                )
             return self._pipeline.run_true_latent(
                 question,
                 agents=agents,
@@ -398,7 +407,7 @@ class LatentMASSystem:
 
 # Convenience function
 def create_system(
-    model_name: str = "Qwen/Qwen2.5-3B-Instruct",
+    model_name: str = "Qwen/Qwen2.5-7B-Instruct",
     with_default_agents: bool = True,
     **kwargs,
 ) -> LatentMASSystem:

@@ -23,7 +23,7 @@ def create_coding_pipeline():
     print("=" * 60)
     
     system = LatentMASSystem(
-        model_name="Qwen/Qwen2.5-3B-Instruct",
+        model_name="Qwen/Qwen2.5-7B-Instruct",
         dtype="bfloat16",
         latent_steps=15,
     )
@@ -100,7 +100,7 @@ def create_math_pipeline():
     print("=" * 60)
     
     system = LatentMASSystem(
-        model_name="Qwen/Qwen2.5-3B-Instruct",
+        model_name="Qwen/Qwen2.5-7B-Instruct",
         dtype="bfloat16",
         latent_steps=15,
     )
