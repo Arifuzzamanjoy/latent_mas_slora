@@ -49,3 +49,6 @@ logs/
 # OS
 .DS_Store
 Thumbs.db
+
+# Evaluation runs
+eval_runs/
