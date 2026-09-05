@@ -103,6 +103,17 @@ def build_parser() -> argparse.ArgumentParser:
     g.add_argument("--no-adaptive-steps", action="store_true",
                    help="do not vary latent steps by routed domain")
     g.add_argument("--loras", default="", help="comma list of registry LoRAs to load")
+    g.add_argument("--kv-handoff", dest="kv_handoff", action="store_true", default=None,
+                   help="hand the latent KV cache to the final decoder (reference behaviour)")
+    g.add_argument("--no-kv-handoff", dest="kv_handoff", action="store_false",
+                   help="discard the cache before decoding (legacy behaviour)")
+    g.add_argument("--prompt-style", default=None, choices=["reason_first", "answer_first"],
+                   help="judger prompt order; reason_first matches the reference")
+    g.add_argument("--adapter-policy", default=None,
+                   choices=["logo", "merge", "same", "none"],
+                   help="how multi-lora composes adapters (default logo: probe, top-k, merge)")
+    g.add_argument("--top-k", type=int, default=None,
+                   help="adapters merged per instance by multi-lora (default 3)")
 
     g = p.add_argument_group("protocol")
     g.add_argument("--scoring", default="generate", choices=["generate", "loglikelihood"])
@@ -171,6 +182,14 @@ def config_from_args(a: argparse.Namespace) -> EvalConfig:
     cfg.use_router = not a.no_router
     cfg.adaptive_latent_steps = not a.no_adaptive_steps
     cfg.loras = [x.strip() for x in a.loras.split(",") if x.strip()]
+    if a.kv_handoff is not None:
+        cfg.kv_handoff = a.kv_handoff
+    if a.prompt_style is not None:
+        cfg.prompt_style = a.prompt_style
+    if a.adapter_policy is not None:
+        cfg.adapter_policy = a.adapter_policy
+    if a.top_k is not None:
+        cfg.top_k = a.top_k
 
     cfg.scoring = a.scoring
     cfg.permute_options = a.permute_options
