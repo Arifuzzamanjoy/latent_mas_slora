@@ -176,7 +176,7 @@ class Runner:
         return summary
 
     def _run_method(self, name: str, backend, items: List[EvalItem]) -> None:
-        print(f"\n{'=' * 72}\n[method] {name}   args={self.cfg.args_for(name)}\n{'=' * 72}")
+        print(f"\n{'=' * 72}\n[method] {name}\n{'=' * 72}")
         n_variants = len(permutations_for(items[0], self.cfg.permute_options)) if items else 1
         planned = len(items) * n_variants * len(self.cfg.seeds)
         done = correct = 0
@@ -187,6 +187,10 @@ class Runner:
             print(f"[method] {name} failed to build: {e}")
             traceback.print_exc()
             return
+        # print the RESOLVED arguments: class defaults and --set overrides are
+        # applied in build_method, so cfg.args_for() alone would misreport the
+        # condition this method actually ran under
+        print(f"          args={method.info()['args']}")
 
         for seed in self.cfg.seeds:
             for idx, item in enumerate(items):

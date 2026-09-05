@@ -11,6 +11,7 @@ from typing import Dict, List, Optional, Any, Tuple
 from dataclasses import dataclass, field
 
 from ..core.latent_memory import LatentMemory
+from ..core.latent_reasoner import get_cache_length
 from ..core.latent_reasoner import LatentReasoner
 from ..agents.configs import AgentConfig, HIERARCHICAL_AGENTS
 from ..agents.agent_pool import AgentPool, AgentExecutor
@@ -56,6 +57,7 @@ class HierarchicalPipeline:
         device: str = "cuda",
         latent_steps: int = 15,  # Increased for 48GB
         use_latent_transfer: bool = True,
+        kv_handoff: bool = True,
     ):
         self.model = model
         self.tokenizer = tokenizer
@@ -65,6 +67,11 @@ class HierarchicalPipeline:
         self.device = device
         self.latent_steps = latent_steps
         self.use_latent_transfer = use_latent_transfer
+        # When True (the LatentMAS reference behaviour) the final agent decodes
+        # conditioned on the shared latent working memory. When False the cache is
+        # built and then discarded, which is what this file did before - kept so
+        # the two can be compared rather than silently swapped.
+        self.kv_handoff = kv_handoff
         
         self.executor = AgentExecutor(pool, tokenizer, device)
     
@@ -207,6 +214,57 @@ class HierarchicalPipeline:
         )
     
     @torch.no_grad()
+    def _decode_with_cache(self, input_ids, cache, temperature: float, top_p: float,
+                           max_new_tokens: int):
+        """
+        Decode continuing from an accumulated latent KV cache.
+
+        Hand-rolled rather than model.generate(past_key_values=...) because
+        passing an external cache through generate() has version-dependent
+        semantics; here the attention mask and cache growth are explicit.
+        """
+        from ..core.latent_reasoner import get_cache_length
+
+        tok = self.tokenizer
+        eos_ids = {tok.eos_token_id}
+        extra_eos = tok.convert_tokens_to_ids("<|im_end|>")
+        if isinstance(extra_eos, int) and extra_eos >= 0:
+            eos_ids.add(extra_eos)
+
+        generated: List[int] = []
+        cur = input_ids
+        seen = get_cache_length(cache)
+
+        for _ in range(max_new_tokens):
+            seen += int(cur.shape[1])
+            mask = torch.ones((1, seen), dtype=torch.long, device=self.device)
+            out = self.model(input_ids=cur, attention_mask=mask,
+                             past_key_values=cache, use_cache=True, return_dict=True)
+            cache = out.past_key_values
+            logits = out.logits[:, -1, :].float()
+
+            if temperature and temperature > 0:
+                probs = torch.softmax(logits / max(temperature, 1e-5), dim=-1)
+                if top_p and 0 < top_p < 1.0:
+                    sp, si = torch.sort(probs, descending=True, dim=-1)
+                    cut = (torch.cumsum(sp, dim=-1) - sp) > top_p
+                    sp[cut] = 0.0
+                    sp = sp / sp.sum(dim=-1, keepdim=True)
+                    nxt = si.gather(-1, torch.multinomial(sp, 1))
+                else:
+                    nxt = torch.multinomial(probs, 1)
+            else:
+                nxt = logits.argmax(dim=-1, keepdim=True)
+
+            tid = int(nxt.item())
+            if tid in eos_ids:
+                break
+            generated.append(tid)
+            cur = nxt
+
+        return tok.decode(generated, skip_special_tokens=True).strip(), len(generated)
+
+    @torch.no_grad()
     def run_true_latent(
         self,
         question: str,
@@ -256,18 +314,20 @@ class HierarchicalPipeline:
             attention_mask = encoded["attention_mask"].to(self.device)
             
             agent_start = time.time()
-            
-            # Latent reasoning (all agents)
-            latent_result = self.reasoner.reason(
-                input_ids=input_ids,
-                attention_mask=attention_mask,
-                num_steps=self.latent_steps,
-                past_key_values=self.memory.get_kv_cache() if i > 0 else None,
-            )
-            
-            # Store latent state for next agent
-            self.memory.store_hidden_state(agent_name, latent_result.final_hidden)
-            self.memory.update_kv_cache(latent_result.kv_cache)
+            pre_cache = self.memory.get_kv_cache() if i > 0 else None
+            latent_result = None
+
+            # The final agent skips its own latent pass when the cache is handed
+            # to the decoder: the accumulated working memory is what it reads.
+            if not (is_final and self.kv_handoff):
+                latent_result = self.reasoner.reason(
+                    input_ids=input_ids,
+                    attention_mask=attention_mask,
+                    num_steps=self.latent_steps,
+                    past_key_values=pre_cache,
+                )
+                self.memory.store_hidden_state(agent_name, latent_result.final_hidden)
+                self.memory.update_kv_cache(latent_result.kv_cache)
             
             agent_latency = int((time.time() - agent_start) * 1000)
             
@@ -291,14 +351,20 @@ class HierarchicalPipeline:
                 else:
                     gen_kwargs["do_sample"] = False
                 
-                outputs = self.model.generate(
-                    input_ids=input_ids,
-                    attention_mask=attention_mask,
-                    **gen_kwargs,
-                )
-                
-                new_tokens = outputs[0][input_ids.shape[1]:]
-                generated_text = self.tokenizer.decode(new_tokens, skip_special_tokens=True).strip()
+                if self.kv_handoff:
+                    generated_text, n_new = self._decode_with_cache(
+                        input_ids, pre_cache, gen_temp, config.top_p, gen_max,
+                    )
+                else:
+                    outputs = self.model.generate(
+                        input_ids=input_ids,
+                        attention_mask=attention_mask,
+                        **gen_kwargs,
+                    )
+                    new_tokens = outputs[0][input_ids.shape[1]:]
+                    generated_text = self.tokenizer.decode(
+                        new_tokens, skip_special_tokens=True).strip()
+                    n_new = len(new_tokens)
                 
                 gen_latency = int((time.time() - agent_start) * 1000)
                 
@@ -308,14 +374,16 @@ class HierarchicalPipeline:
                     "adapter": config.adapter_name,
                     "output": generated_text,
                     "input_tokens": input_ids.shape[1],
-                    "output_tokens": len(new_tokens),
-                    "latent_steps": self.latent_steps,
+                    "output_tokens": n_new,
+                    "latent_steps": 0 if self.kv_handoff else self.latent_steps,
                     "latency_ms": gen_latency,
-                    "mode": "latent+text",
+                    "mode": "latent+text(kv)" if self.kv_handoff else "latent+text",
+                    "latent_prefix_len": get_cache_length(pre_cache),
                 }
                 total_tokens += output_entry["input_tokens"] + output_entry["output_tokens"]
                 
-                print(f"[{agent_name.upper()}] Generated {len(new_tokens)} tokens in {gen_latency}ms (latent+text)")
+                print(f"[{agent_name.upper()}] Generated {n_new} tokens in {gen_latency}ms "
+                      f"({'latent+text(kv)' if self.kv_handoff else 'latent+text'})")
             else:
                 # Intermediate agents: latent only, NO text generation
                 output_entry = {
@@ -333,12 +401,13 @@ class HierarchicalPipeline:
                 
                 print(f"[{agent_name.upper()}] Latent reasoning in {agent_latency}ms (no text)")
             
-            if return_hidden_states:
+            if return_hidden_states and latent_result is not None:
                 output_entry["hidden_state_norm"] = float(latent_result.final_hidden.norm().item())
             
             agent_outputs.append(output_entry)
         
         total_latency = int((time.time() - start_time) * 1000)
+        n_latent_agents = len(agents) - 1 if self.kv_handoff else len(agents)
         
         return PipelineResult(
             question=question,
@@ -346,10 +415,11 @@ class HierarchicalPipeline:
             agent_outputs=agent_outputs,
             total_tokens=total_tokens,
             total_latency_ms=total_latency,
-            latent_steps_total=self.latent_steps * len(agents),
+            latent_steps_total=self.latent_steps * n_latent_agents,
             metadata={
                 "num_agents": len(agents),
                 "mode": "true_latent",
+                "kv_handoff": self.kv_handoff,
                 "latent_agents": len(agents) - 1,
                 "text_agents": 1,
                 "memory_summary": self.memory.get_context_summary(),

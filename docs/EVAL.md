@@ -66,8 +66,10 @@ Select with `--methods a,b,c`. Each is fully independent; run one or all.
 | `baseline-judger` | hf | Bare model with the repo's Judger prompt | Isolates the prompt from the pipeline |
 | `baseline-loglik` | hf | Option log-likelihood scoring, no generation | Extraction-free; no parse failures possible |
 | `text-mas` | system | `pipeline="hierarchical"`, every agent decodes text | Classic multi-agent control |
-| `latent-mas` | system | `pipeline="true_latent"` exactly as `src/` implements it | The system as shipped |
-| `latent-mas-kv` | system | true_latent **with the latent KV cache fed to the final decoder** | The mechanism ablation (see §11) |
+| `latent-mas` | system | true_latent **as originally shipped**: cache discarded, answer-first judger prompt | The system as it was |
+| `latent-mas-kv` | system | KV handoff only, legacy prompt | Isolates the cache fix |
+| `latent-mas-paper` | system | KV handoff **+ reason-first judger prompt** | The LatentMAS reference configuration |
+| `multi-lora` | system | Probe every resident adapter, merge top-k for this instance, one prompt + latent steps | The recommended architecture (see §7a) |
 | `sequential-mas` | system | `pipeline="sequential"` chain-of-agents | Alternative topology |
 | `router-only` | none | Semantic router domain classification, no generation | Router quality, measured separately and cheaply |
 
@@ -78,7 +80,9 @@ Select with `--methods a,b,c`. Each is fully independent; run one or all.
 | `all` | every method |
 | `baselines` | direct, cot, judger, loglik |
 | `mas` | text-mas, latent-mas, latent-mas-kv, sequential-mas |
-| `latent` | latent-mas, latent-mas-kv |
+| `latent` | latent-mas, latent-mas-kv, latent-mas-paper |
+| `ladder` | baseline-cot, baseline-judger, latent-mas, latent-mas-kv, latent-mas-paper |
+| `recommended` | baseline-cot, latent-mas-paper, multi-lora |
 | `core` | baseline-cot, baseline-judger, text-mas, latent-mas, latent-mas-kv |
 
 `baseline-loglik` skips non-multiple-choice items (they are recorded as
@@ -235,6 +239,10 @@ the CLI warns. Use `--temperature 0.7`.
 | `--no-router` | off | Disable semantic routing (use the general pipeline) |
 | `--no-adaptive-steps` | off | Do not vary latent steps by routed domain |
 | `--loras a,b` | none | Registry LoRAs to load into the system backend |
+| `--kv-handoff` / `--no-kv-handoff` | per method | Hand the latent cache to the decoder, or discard it |
+| `--prompt-style` | `reason_first` | Judger prompt order; `reason_first` matches the reference |
+| `--adapter-policy` | `logo` | How `multi-lora` composes adapters: `logo`, `merge`, `same`, `none` |
+| `--top-k N` | `3` | Adapters merged per instance by `multi-lora` |
 
 Default per-domain pipelines and latent steps:
 
@@ -362,6 +370,49 @@ python run_eval.py --scaling-from eval_runs
 
 Plot failures never abort a run: the figures are derived from
 `records.jsonl`, and `--report-only` regenerates them.
+
+---
+
+## 7a. The ablation ladder and the composed method
+
+**The ladder.** Each rung changes exactly one thing from the rung below, so a
+paired McNemar test attributes the difference to that one change:
+
+| rung | `kv_handoff` | `prompt_style` |
+|---|---|---|
+| `latent-mas` | ✗ | answer_first |
+| `latent-mas-kv` | ✓ | answer_first |
+| `latent-mas-paper` | ✓ | reason_first |
+
+```bash
+python run_eval.py --methods ladder --dataset medqa --fraction 0.1 --max-new-tokens 2048
+```
+
+Both knobs also exist in `src/` (`HierarchicalPipeline(kv_handoff=...)`,
+`AgentConfig.judger(prompt_style=...)`), defaulting to the reference behaviour,
+with the legacy behaviour reachable rather than deleted.
+
+**`multi-lora`** composes adapters instead of moving state between them:
+
+```
+probe every resident adapter -> score (activation norm or entropy)
+-> top-k -> weighted merge -> ONE weight set -> latent steps -> decode
+```
+
+One prompt, one weight set, one KV cache. This matters because a cache computed
+under adapter A is not valid input for adapter B — LoRA modifies the Q/K/V
+projections from the first token — so the sequential design's cache handoff
+becomes unsound the moment adapters are real. Composition sidesteps it entirely.
+Selection follows LoGo (arXiv 2511.07129) and is training-free. It shares
+`baseline-cot`'s prompt on purpose, so `multi-lora` vs `baseline-cot` isolates
+exactly one thing: adapter composition plus latent depth.
+
+**It reports when it is a no-op.** Zero-initialised LoRA adapters are identity
+functions: every adapter produces identical activations, selection degenerates
+to a uniform merge, and the run measures the base model while looking like it
+measured a mixture. When that happens the probe prints a warning and sets
+`degenerate_probe: true` on every record. Until adapters are actually trained,
+treat any `multi-lora` result as a base-model result.
 
 ---
 

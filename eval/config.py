@@ -60,7 +60,10 @@ class EvalConfig:
     agents: Optional[List[str]] = None
     use_router: bool = True
     adaptive_latent_steps: bool = True
-    kv_handoff: bool = False
+    kv_handoff: bool = True
+    prompt_style: str = "reason_first"
+    adapter_policy: str = "logo"
+    top_k: int = 3
     loras: List[str] = field(default_factory=list)
 
     # ── protocol ──
@@ -97,6 +100,9 @@ class EvalConfig:
             "use_router": self.use_router,
             "adaptive_latent_steps": self.adaptive_latent_steps,
             "kv_handoff": self.kv_handoff,
+            "prompt_style": self.prompt_style,
+            "adapter_policy": self.adapter_policy,
+            "top_k": self.top_k,
             "loras": self.loras,
             "scoring": self.scoring,
         }

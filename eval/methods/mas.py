@@ -45,6 +45,32 @@ class _MASMethod(Method):
         if args.get("use_router", True) and not self.mock:
             from src.routing import SemanticRouter
             self._router = SemanticRouter()
+        if not self.mock:
+            self._apply_policy()
+
+    def _apply_policy(self) -> None:
+        """
+        Push this method's configuration onto the shared system.
+
+        The system backend is shared by every method in its group, so each
+        method sets the knobs it owns immediately before it runs. That is what
+        lets kv_handoff and prompt_style be per-method conditions rather than
+        one global setting.
+        """
+        from src.agents.configs import AgentConfig
+
+        self.system._pipeline.kv_handoff = bool(self.args.get("kv_handoff", True))
+        self.system.kv_handoff = self.system._pipeline.kv_handoff
+
+        style = self.args.get("prompt_style", "reason_first")
+        judger = self.system._pool.get("Judger")
+        if judger is not None and judger.prompt_style != style:
+            self.system._pool.register(
+                AgentConfig.judger(max_tokens=judger.max_tokens, prompt_style=style)
+            )
+
+    def sample_prelude(self) -> None:
+        self._apply_policy()
 
     def _mock_sample(self, item, gen):
         """Dry-run path: no weights, but the same record shape."""
@@ -74,6 +100,7 @@ class _MASMethod(Method):
         if self.mock:
             return self._mock_sample(item, gen)
         from ..backends import _seed_everything
+        self._apply_policy()
         _seed_everything(gen.seed)
 
         agents, steps, domain, conf = self._plan(item)
@@ -102,6 +129,8 @@ class _MASMethod(Method):
                 "router_confidence": round(conf, 4) if conf is not None else None,
                 "agents": agents,
                 "latent_steps": steps,
+                "kv_handoff": self.args.get("kv_handoff", True),
+                "prompt_style": self.args.get("prompt_style", "reason_first"),
                 "latent_steps_total": res.latent_steps_total,
                 "per_agent": [
                     {k: o.get(k) for k in ("agent", "output_tokens", "latency_ms", "mode")}
@@ -118,9 +147,25 @@ class TextMAS(_MASMethod):
 
 
 class LatentMAS(_MASMethod):
+    """As shipped before the fixes: cache discarded, answer-first judger prompt."""
     name = "latent-mas"
     pipeline_name = "true_latent"
-    description = "src's true_latent: intermediate agents reason in latent space only."
+    description = "true_latent as originally shipped (cache discarded, answer-first prompt)."
+    defaults = {"kv_handoff": False, "prompt_style": "answer_first"}
+
+
+class LatentMASPaper(_MASMethod):
+    """
+    The LatentMAS reference configuration: the latent working memory reaches the
+    decoder and the judger reasons before it answers.
+
+    latent-mas -> latent-mas-kv -> latent-mas-paper is an ablation ladder; each
+    rung changes exactly one thing, so a paired test attributes the difference.
+    """
+    name = "latent-mas-paper"
+    pipeline_name = "true_latent"
+    description = "Reference configuration: KV handoff + reason-first judger prompt."
+    defaults = {"kv_handoff": True, "prompt_style": "reason_first"}
 
 
 class SequentialMAS(_MASMethod):
@@ -145,7 +190,8 @@ class LatentKVMAS(_MASMethod):
     """
     name = "latent-mas-kv"
     pipeline_name = "true_latent"
-    description = "true_latent + latent KV cache handed to the final decoder (mechanism ablation)."
+    description = "KV handoff only, legacy prompt - isolates the cache fix."
+    defaults = {"kv_handoff": True, "prompt_style": "answer_first"}
 
     def sample(self, item: EvalItem, gen: GenSettings) -> Sample:
         if self.mock:
@@ -154,6 +200,7 @@ class LatentKVMAS(_MASMethod):
         from ..backends import _seed_everything
         from src.core.latent_reasoner import get_cache_length
 
+        self._apply_policy()
         _seed_everything(gen.seed)
         agents, steps, domain, conf = self._plan(item)
 
@@ -214,6 +261,8 @@ class LatentKVMAS(_MASMethod):
                 "routed_domain": domain,
                 "router_confidence": round(conf, 4) if conf is not None else None,
                 "agents": agents, "latent_steps": steps,
+                "kv_handoff": True,
+                "prompt_style": self.args.get("prompt_style", "answer_first"),
                 "latent_prefix_len": past_len,
                 "latent_steps_total": steps * (len(agents) - 1),
                 "per_agent": per_agent,

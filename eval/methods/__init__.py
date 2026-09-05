@@ -13,11 +13,14 @@ from .base import Method, Sample
 from .baselines import (
     DirectBaseline, CoTBaseline, JudgerBaseline, LogLikelihoodBaseline,
 )
-from .mas import TextMAS, LatentMAS, LatentKVMAS, SequentialMAS, RouterOnly
+from .mas import (TextMAS, LatentMAS, LatentMASPaper, LatentKVMAS,
+                  SequentialMAS, RouterOnly)
+from .multilora import MultiLoRA
 
 _ALL = [
     DirectBaseline, CoTBaseline, JudgerBaseline, LogLikelihoodBaseline,
-    TextMAS, LatentMAS, LatentKVMAS, SequentialMAS, RouterOnly,
+    TextMAS, LatentMAS, LatentKVMAS, LatentMASPaper, SequentialMAS,
+    MultiLoRA, RouterOnly,
 ]
 
 METHOD_REGISTRY: Dict[str, type] = {cls.name: cls for cls in _ALL}
@@ -26,9 +29,15 @@ METHOD_REGISTRY: Dict[str, type] = {cls.name: cls for cls in _ALL}
 METHOD_GROUPS: Dict[str, List[str]] = {
     "all": [c.name for c in _ALL],
     "baselines": ["baseline-direct", "baseline-cot", "baseline-judger", "baseline-loglik"],
-    "mas": ["text-mas", "latent-mas", "latent-mas-kv", "sequential-mas"],
-    "latent": ["latent-mas", "latent-mas-kv"],
+    "mas": ["text-mas", "latent-mas", "latent-mas-kv", "latent-mas-paper",
+            "sequential-mas"],
+    "latent": ["latent-mas", "latent-mas-kv", "latent-mas-paper"],
     "core": ["baseline-cot", "baseline-judger", "text-mas", "latent-mas", "latent-mas-kv"],
+    # each rung changes exactly one thing from the rung below
+    "ladder": ["baseline-cot", "baseline-judger", "latent-mas", "latent-mas-kv",
+               "latent-mas-paper"],
+    # the recommended architecture against the two controls that matter
+    "recommended": ["baseline-cot", "latent-mas-paper", "multi-lora"],
 }
 
 
@@ -50,8 +59,20 @@ def expand_methods(names: List[str]) -> List[str]:
 
 
 def build_method(name: str, backend: Backend, cfg: EvalConfig) -> Method:
+    """
+    Resolve a method's arguments.
+
+    Precedence: global config defaults < the method class's own defaults <
+    explicit --set overrides. The middle layer is what lets latent-mas and
+    latent-mas-paper differ by construction while still honouring --set.
+    """
     cls = METHOD_REGISTRY[name]
-    return cls(backend, cfg.args_for(name), cfg)
+    args = dict(cfg.args_for(name))
+    explicit = set(cfg.method_args.get(name, {}))
+    for k, v in getattr(cls, "defaults", {}).items():
+        if k not in explicit:
+            args[k] = v
+    return cls(backend, args, cfg)
 
 
 def backend_for(name: str) -> str:

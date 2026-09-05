@@ -67,6 +67,9 @@ class AgentConfig:
     top_p: float = 0.9
     system_prompt: str = ""
     user_prompt_template: str = ""
+    # "reason_first" follows the LatentMAS reference prompts (reason, then answer).
+    # "answer_first" is the legacy behaviour kept so the two can be compared.
+    prompt_style: str = "reason_first"
     
     def __post_init__(self):
         if not self.adapter_name:
@@ -95,6 +98,12 @@ class AgentConfig:
                 "Balance multiple perspectives and resolve conflicts."
             ),
             AgentRole.JUDGER: (
+                "You are a Judger Agent responsible for final decisions. "
+                "Evaluate all evidence and reasoning to select the best answer. "
+                "Reason step by step through the options, rule out the wrong ones, "
+                "and only then commit. "
+                "You MUST end your response with \\boxed{ANSWER}."
+            ) if self.prompt_style == "reason_first" else (
                 "You are a Judger Agent responsible for final decisions. "
                 "Evaluate all evidence and reasoning to select the best answer. "
                 "Be decisive and provide clear justification. "
@@ -162,6 +171,12 @@ class AgentConfig:
                 "3. Improved answer"
             ),
             AgentRole.JUDGER: (
+                "{question}\n\n"
+                "Reason step by step through the problem, considering each option and "
+                "ruling out the wrong ones. Only after your reasoning is complete, give "
+                "the final answer on its own last line as \\boxed{{ANSWER}} "
+                "(the option letter for multiple choice)."
+            ) if self.prompt_style == "reason_first" else (
                 "Make the final decision:\n\n"
                 "Question: {question}\n\n"
                 "Based on all analysis, select the best answer.\n"

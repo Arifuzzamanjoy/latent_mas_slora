@@ -114,8 +114,12 @@ class LoRAAdapterManager:
         self._initial_memory = self._get_gpu_memory()
     
     def _get_gpu_memory(self) -> int:
-        """Get current GPU memory usage in bytes"""
-        if torch.cuda.is_available():
+        """Get current GPU memory usage in bytes (0 when not on a CUDA device).
+
+        cuda.is_available() alone is not enough: the host can have a GPU while
+        this system is configured for CPU, and memory_allocated("cpu") raises.
+        """
+        if torch.cuda.is_available() and str(self.device).startswith("cuda"):
             return torch.cuda.memory_allocated(self.device)
         return 0
     

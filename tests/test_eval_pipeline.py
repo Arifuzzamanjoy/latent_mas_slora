@@ -309,3 +309,59 @@ def test_duplicate_ids_would_drop_items_from_a_segment():
     assert len(keys) == 1                      # 10 items, 1 dedup key -> 9 lost
     fixed = _ensure_unique_ids(colliding)
     assert len({("m", 0, i.id) for i in fixed}) == 10
+
+
+# ─── multi-lora composition ──────────────────────────────────────────────────
+
+from eval.methods.multilora import MultiLoRA
+
+
+def test_degenerate_probe_detects_identical_adapters():
+    """Zero-init LoRA is an identity function: every adapter scores the same."""
+    same = [("a", 305.123), ("b", 305.123), ("c", 305.123)]
+    assert MultiLoRA.is_degenerate(same)
+
+
+def test_degenerate_probe_passes_distinguishable_adapters():
+    assert not MultiLoRA.is_degenerate([("a", 300.0), ("b", 312.0), ("c", 295.0)])
+    assert not MultiLoRA.is_degenerate([("a", 1.0)])          # single adapter: n/a
+
+
+def test_compose_takes_top_k_with_normalized_weights():
+    m = MultiLoRA.__new__(MultiLoRA)
+    m.top_k = 2
+    names, weights = m._compose([("a", 1.0), ("b", 9.0), ("c", 5.0)])
+    assert names == ["b", "c"]                                 # ranked, truncated
+    assert weights[0] > weights[1]                             # higher score, higher weight
+    assert abs(sum(weights) - 1.0) < 1e-6
+    assert all(w >= 0 for w in weights)
+
+
+def test_compose_handles_negative_scores():
+    """entropy mode yields negative scores; weights must stay non-negative."""
+    m = MultiLoRA.__new__(MultiLoRA)
+    m.top_k = 3
+    _, weights = m._compose([("a", -5.0), ("b", -1.0), ("c", -3.0)])
+    assert all(w >= 0 for w in weights) and abs(sum(weights) - 1.0) < 1e-6
+
+
+def test_ablation_ladder_changes_one_thing_per_rung():
+    """latent-mas -> latent-mas-kv -> latent-mas-paper must differ by one knob."""
+    from eval.methods import METHOD_REGISTRY
+    rungs = ["latent-mas", "latent-mas-kv", "latent-mas-paper"]
+    d = [METHOD_REGISTRY[r].defaults for r in rungs]
+    assert d[0] == {"kv_handoff": False, "prompt_style": "answer_first"}
+    assert d[1] == {"kv_handoff": True, "prompt_style": "answer_first"}
+    assert d[2] == {"kv_handoff": True, "prompt_style": "reason_first"}
+    for lo, hi in zip(d, d[1:]):
+        assert sum(lo[k] != hi[k] for k in lo) == 1, "each rung changes exactly one knob"
+
+
+def test_judger_prompt_styles_differ_as_intended():
+    from src.agents.configs import AgentConfig
+    rf = AgentConfig.judger()
+    af = AgentConfig.judger(prompt_style="answer_first")
+    assert rf.prompt_style == "reason_first"                   # new default
+    assert "FIRST, then provide reasoning" in af.user_prompt_template
+    assert "FIRST, then provide reasoning" not in rf.user_prompt_template
+    assert "A, B, C, or D" not in rf.system_prompt              # works for numeric too

@@ -91,6 +91,7 @@ class LatentMASSystem:
         latent_steps: int = 15,
         latent_realign: bool = True,
         max_loaded_adapters: int = 20,
+        kv_handoff: bool = True,
     ):
         self.config = SystemConfig(
             model_name=model_name,
@@ -108,6 +109,7 @@ class LatentMASSystem:
             self.config.device = "cpu"
         
         self.device = self.config.device
+        self.kv_handoff = kv_handoff
         
         os.makedirs(cache_dir, exist_ok=True)
         
@@ -231,6 +233,7 @@ class LatentMASSystem:
             reasoner=self._reasoner,
             device=self.device,
             latent_steps=self.config.latent_steps,
+            kv_handoff=self.kv_handoff,
         )
         
         self._initialized = True
