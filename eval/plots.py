@@ -483,11 +483,20 @@ def plot_live(records: List[Dict[str, Any]], out: Path, total: Optional[int] = N
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))
     _declutter(fig, _end_labels(ax, ends))
     _legend_below(ax, plt, ncol=min(4, len(series)))
+    # Methods run sequentially, so records/methods under-reports the one in
+    # flight and over-reports the ones not started. Show each method's own
+    # progress instead.
     done = len(records)
-    per_method = f"{done // max(1, len(series))}/{total}" if total else str(done)
+    parts = [f"{n} {len(v)}" + (f"/{total}" if total else "")
+             for n, v in sorted(series.items())]
+    subtitle = "  ·  ".join(parts[:4]) + ("  ·  …" if len(parts) > 4 else "")
     _style(ax, plt, xlabel="items scored per method", ylabel="running accuracy (%)",
-           grid_axis="both",
-           title=f"{title} — {per_method} items · {len(series)} methods")
+           grid_axis="both", title=f"{title} — {done} records")
+    # re-set the title with extra pad so the per-method line fits beneath it
+    ax.set_title(f"{title} — {done} records", color=INK, fontsize=12,
+                 fontweight="bold", loc="left", pad=30)
+    ax.text(0, 1.012, subtitle, transform=ax.transAxes, ha="left", va="bottom",
+            color=INK_2, fontsize=9)
     return _save(fig, out / "live.png", plt)
 
 
