@@ -16,7 +16,7 @@ from .baselines import (
     JudgerBaseline,
     LogLikelihoodBaseline,
 )
-from .mas import LatentKVMAS, LatentMAS, LatentMASPaper, RouterOnly, SequentialMAS, TextMAS
+from .mas import LatentKVMAS, LatentMAS, LatentMASSLoRA, RouterOnly, SequentialMAS, TextMAS
 from .multilora import MultiLoRA
 
 _ALL = [
@@ -27,7 +27,7 @@ _ALL = [
     TextMAS,
     LatentMAS,
     LatentKVMAS,
-    LatentMASPaper,
+    LatentMASSLoRA,
     SequentialMAS,
     MultiLoRA,
     RouterOnly,
@@ -35,12 +35,17 @@ _ALL = [
 
 METHOD_REGISTRY: Dict[str, type] = {cls.name: cls for cls in _ALL}
 
+# Old names kept working so existing commands and scripts do not break.
+ALIASES: Dict[str, str] = {
+    "latent-mas-paper": "latent-mas-slora",
+}
+
 # Convenience groups usable anywhere a method name is accepted.
 METHOD_GROUPS: Dict[str, List[str]] = {
     "all": [c.name for c in _ALL],
     "baselines": ["baseline-direct", "baseline-cot", "baseline-judger", "baseline-loglik"],
-    "mas": ["text-mas", "latent-mas", "latent-mas-kv", "latent-mas-paper", "sequential-mas"],
-    "latent": ["latent-mas", "latent-mas-kv", "latent-mas-paper"],
+    "mas": ["text-mas", "latent-mas", "latent-mas-kv", "latent-mas-slora", "sequential-mas"],
+    "latent": ["latent-mas", "latent-mas-kv", "latent-mas-slora"],
     "core": ["baseline-cot", "baseline-judger", "text-mas", "latent-mas", "latent-mas-kv"],
     # each rung changes exactly one thing from the rung below
     "ladder": [
@@ -48,10 +53,10 @@ METHOD_GROUPS: Dict[str, List[str]] = {
         "baseline-judger",
         "latent-mas",
         "latent-mas-kv",
-        "latent-mas-paper",
+        "latent-mas-slora",
     ],
     # the recommended architecture against the two controls that matter
-    "recommended": ["baseline-cot", "latent-mas-paper", "multi-lora"],
+    "recommended": ["baseline-cot", "latent-mas-slora", "multi-lora"],
 }
 
 
@@ -59,7 +64,9 @@ def expand_methods(names: List[str]) -> List[str]:
     """Expand group names, drop duplicates, preserve order."""
     out: List[str] = []
     for n in names:
-        for m in METHOD_GROUPS.get(n.strip(), [n.strip()]):
+        key = ALIASES.get(n.strip(), n.strip())
+        for m in METHOD_GROUPS.get(key, [key]):
+            m = ALIASES.get(m, m)
             if m not in out:
                 out.append(m)
     unknown = [m for m in out if m not in METHOD_REGISTRY]

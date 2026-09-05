@@ -4,12 +4,18 @@ Multi-agent methods.
 All of these drive src/ - they are the thing under test. Each one is selectable
 independently so a run can isolate a single mechanism:
 
-  text-mas       every agent decodes text (the classic multi-agent control)
-  latent-mas     src's true_latent as written
-  latent-mas-kv  true_latent with the latent KV cache actually handed to the
-                 final agent's decoder (see the note in LatentKVMAS)
-  sequential-mas the chain-of-agents pipeline
-  router-only    routing decision only, no generation
+  text-mas          every agent decodes text (the classic multi-agent control)
+  latent-mas        true_latent as originally shipped: cache discarded,
+                    answer-first judger prompt
+  latent-mas-kv     the cache reaches the decoder; prompt unchanged
+  latent-mas-slora  LatentMAS-SLoRA, the working configuration: switchable role
+                    adapters, cache handoff, reason-first prompt
+  sequential-mas    the chain-of-agents pipeline
+  router-only       routing decision only, no generation
+
+All of the mas methods switch a role adapter per hop; the three latent variants
+differ only in whether the cache reaches the decoder and how the judger is
+prompted.
 """
 
 import time
@@ -180,18 +186,23 @@ class LatentMAS(_MASMethod):
     defaults = {"kv_handoff": False, "prompt_style": "answer_first"}
 
 
-class LatentMASPaper(_MASMethod):
+class LatentMASSLoRA(_MASMethod):
     """
-    The LatentMAS reference configuration: the latent working memory reaches the
-    decoder and the judger reasons before it answers.
+    LatentMAS-SLoRA: the working configuration of this project.
 
-    latent-mas -> latent-mas-kv -> latent-mas-paper is an ablation ladder; each
-    rung changes exactly one thing, so a paired test attributes the difference.
+    Role-specialized adapters switch per hop (Planner -> Expert -> Critic ->
+    Judger), the shared latent working memory reaches the decoder, and the judger
+    reasons before it answers.
+
+    Every mas method switches adapters; what distinguishes this one is the two
+    corrections. latent-mas -> latent-mas-kv -> latent-mas-slora is an ablation
+    ladder in which each rung changes exactly one thing, so a paired test can
+    attribute the difference to it.
     """
 
-    name = "latent-mas-paper"
+    name = "latent-mas-slora"
     pipeline_name = "true_latent"
-    description = "Reference configuration: KV handoff + reason-first judger prompt."
+    description = "LatentMAS-SLoRA: switchable role adapters + KV handoff + reason-first prompt."
     defaults = {"kv_handoff": True, "prompt_style": "reason_first"}
 
 

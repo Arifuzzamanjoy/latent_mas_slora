@@ -36,7 +36,7 @@ paired McNemar test can attribute any difference.
 | baseline-judger | 59.1% | [50.4, 67.2] | 228 | 568 | **4.9s** |
 | latent-mas *(as originally shipped)* | 59.8% | [51.1, 68.0] | 215 | 1552 | 21.5s |
 | latent-mas-kv | 59.1% | [50.4, 67.2] | 263 | 1562 | 21.1s |
-| latent-mas-paper *(reference config)* | **61.4%** | [52.7, 69.4] | 519 | 1842 | 36.4s |
+| latent-mas-slora *(reference config)* | **61.4%** | [52.7, 69.4] | 519 | 1842 | 36.4s |
 
 Paired, same items:
 
@@ -100,7 +100,7 @@ print(result.final_answer)
 python run_eval.py --methods ladder --dataset medqa --fraction 0.1 --max-new-tokens 2048
 
 # a single method on 10% of a dataset, with a live plot
-python run_eval.py --methods latent-mas-paper --dataset medqa --fraction 0.1 --live-plot
+python run_eval.py --methods latent-mas-slora --dataset medqa --fraction 0.1 --live-plot
 
 # data-scaling curve
 python run_eval.py --methods core --dataset medqa --fractions 0.01,0.1,1.0

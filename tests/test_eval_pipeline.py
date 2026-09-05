@@ -415,10 +415,10 @@ def test_compose_handles_negative_scores():
 
 
 def test_ablation_ladder_changes_one_thing_per_rung():
-    """latent-mas -> latent-mas-kv -> latent-mas-paper must differ by one knob."""
+    """latent-mas -> latent-mas-kv -> latent-mas-slora must differ by one knob."""
     from eval.methods import METHOD_REGISTRY
 
-    rungs = ["latent-mas", "latent-mas-kv", "latent-mas-paper"]
+    rungs = ["latent-mas", "latent-mas-kv", "latent-mas-slora"]
     d = [METHOD_REGISTRY[r].defaults for r in rungs]
     assert d[0] == {"kv_handoff": False, "prompt_style": "answer_first"}
     assert d[1] == {"kv_handoff": True, "prompt_style": "answer_first"}
@@ -506,3 +506,10 @@ def test_compose_uniform_when_every_score_is_zero():
     m.top_k = 2
     _, w = m._compose([("a", 0.0), ("b", 0.0)])
     assert w == [0.5, 0.5]
+
+
+def test_old_method_name_still_resolves():
+    """latent-mas-paper was renamed; existing commands must keep working."""
+    assert expand_methods(["latent-mas-paper"]) == ["latent-mas-slora"]
+    assert "latent-mas-slora" in expand_methods(["ladder"])
+    assert "latent-mas-paper" not in expand_methods(["ladder"])

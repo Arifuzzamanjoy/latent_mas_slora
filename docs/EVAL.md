@@ -68,10 +68,13 @@ Select with `--methods a,b,c`. Each is fully independent; run one or all.
 | `text-mas` | system | `pipeline="hierarchical"`, every agent decodes text | Classic multi-agent control |
 | `latent-mas` | system | true_latent **as originally shipped**: cache discarded, answer-first judger prompt | The system as it was |
 | `latent-mas-kv` | system | KV handoff only, legacy prompt | Isolates the cache fix |
-| `latent-mas-paper` | system | KV handoff **+ reason-first judger prompt** | The LatentMAS reference configuration |
+| `latent-mas-slora` | system | Switchable role adapters + KV handoff **+ reason-first judger prompt** | LatentMAS-SLoRA: the working configuration |
 | `multi-lora` | system | Probe every resident adapter, merge top-k for this instance, one prompt + latent steps | The recommended architecture (see §7a) |
 | `sequential-mas` | system | `pipeline="sequential"` chain-of-agents | Alternative topology |
 | `router-only` | none | Semantic router domain classification, no generation | Router quality, measured separately and cheaply |
+
+`latent-mas-paper` is accepted as an alias for `latent-mas-slora`, so older
+commands and scripts keep working.
 
 **Groups** (usable anywhere a name is):
 
@@ -80,9 +83,9 @@ Select with `--methods a,b,c`. Each is fully independent; run one or all.
 | `all` | every method |
 | `baselines` | direct, cot, judger, loglik |
 | `mas` | text-mas, latent-mas, latent-mas-kv, sequential-mas |
-| `latent` | latent-mas, latent-mas-kv, latent-mas-paper |
-| `ladder` | baseline-cot, baseline-judger, latent-mas, latent-mas-kv, latent-mas-paper |
-| `recommended` | baseline-cot, latent-mas-paper, multi-lora |
+| `latent` | latent-mas, latent-mas-kv, latent-mas-slora |
+| `ladder` | baseline-cot, baseline-judger, latent-mas, latent-mas-kv, latent-mas-slora |
+| `recommended` | baseline-cot, latent-mas-slora, multi-lora |
 | `core` | baseline-cot, baseline-judger, text-mas, latent-mas, latent-mas-kv |
 
 `baseline-loglik` skips non-multiple-choice items (they are recorded as
@@ -382,7 +385,7 @@ paired McNemar test attributes the difference to that one change:
 |---|---|---|
 | `latent-mas` | ✗ | answer_first |
 | `latent-mas-kv` | ✓ | answer_first |
-| `latent-mas-paper` | ✓ | reason_first |
+| `latent-mas-slora` | ✓ | reason_first |
 
 ```bash
 python run_eval.py --methods ladder --dataset medqa --fraction 0.1 --max-new-tokens 2048
