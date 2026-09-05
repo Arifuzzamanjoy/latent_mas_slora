@@ -58,6 +58,7 @@ class SequentialPipeline:
         max_new_tokens: Optional[int] = None,
         temperature: Optional[float] = None,
         accumulate_context: bool = True,
+        task_type: Optional[str] = None,
     ) -> PipelineResult:
         """
         Run sequential pipeline.
@@ -69,6 +70,8 @@ class SequentialPipeline:
             max_new_tokens: Override max tokens
             temperature: Override temperature
             accumulate_context: Whether to pass all previous outputs or just the last
+            task_type: "numeric" | "mcq" | "text"; selects the answer format
+                instruction given to the agent whose output is scored
 
         Returns:
             PipelineResult
@@ -90,7 +93,12 @@ class SequentialPipeline:
                 ctx = self.memory.get_agent_output(agents[i - 1]) if i > 0 else context
 
             # Build prompt
-            prompt = self.executor.build_prompt(config, question, ctx[:1500])
+            prompt = self.executor.build_prompt(
+                config,
+                question,
+                ctx[:1500],
+                task_type=task_type if i == len(agents) - 1 else None,
+            )
 
             # Tokenize
             encoded = self.tokenizer(

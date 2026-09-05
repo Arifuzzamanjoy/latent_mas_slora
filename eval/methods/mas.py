@@ -129,6 +129,10 @@ class _MASMethod(Method):
             max_new_tokens=gen.max_new_tokens,
             temperature=gen.temperature,
             self_consistency=1,  # voting is the runner's job, for all methods alike
+            # The scored agent needs the item's answer format: the role prompts
+            # are task-neutral, so without this a numeric item gets the generic
+            # \boxed{ANSWER} instruction and the model is free to box a letter.
+            task_type=item.task_type,
         )
         latency = int((time.time() - t0) * 1000)
 
@@ -140,6 +144,7 @@ class _MASMethod(Method):
             pred=ex.answer,
             extract_rule=ex.rule,
             extract_failed=ex.failed,
+            extract_strict=ex.strict,
             prompt_tokens=prompt_toks,
             completion_tokens=completion,
             latency_ms=latency,
@@ -283,7 +288,13 @@ class LatentKVMAS(_MASMethod):
         # 2. Final agent decodes *conditioned on* the accumulated latent cache.
         final_name = agents[-1]
         cfg_f = p.pool.activate(final_name)
-        prompt = p.executor.build_prompt(cfg_f, item.question, "")
+        prompt = p.executor.build_prompt(
+            cfg_f,
+            item.question,
+            "",
+            task_type=item.task_type,
+            latent_context=True,
+        )
         enc = tok(prompt, return_tensors="pt", truncation=True, max_length=4096)
         input_ids = enc["input_ids"].to(device)
         n_prompt = int(input_ids.shape[1])
@@ -318,6 +329,7 @@ class LatentKVMAS(_MASMethod):
             pred=ex.answer,
             extract_rule=ex.rule,
             extract_failed=ex.failed,
+            extract_strict=ex.strict,
             prompt_tokens=prompt_tokens,
             completion_tokens=n_new,
             latency_ms=latency,

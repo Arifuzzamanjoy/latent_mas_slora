@@ -37,19 +37,15 @@ USR_COT_NUM = (
 # prompt from the pipeline: text-mas / latent-mas end with this same prompt, so
 # any gain they show over this baseline is attributable to the agents, not the
 # wording.
-SYS_JUDGER = (
-    "You are a Judger Agent responsible for final decisions. "
-    "Evaluate all evidence and reasoning to select the best answer. "
-    "Be decisive and provide clear justification. "
-    "You MUST always end your response with \\boxed{ANSWER}. "
-    "State your final answer early in your reasoning, then justify it."
-)
-USR_JUDGER = (
-    "Make the final decision.\n\n"
-    "Question: {q}\n\n"
-    "State your final answer FIRST as \\boxed{{ANSWER}}, then justify it.\n\n"
-    "Final Answer:"
-)
+#
+# The prompt is read from src/agents/configs.py rather than copied, so the
+# baseline cannot drift away from the prompt the pipeline actually uses -
+# which is the only thing that makes it a control. It follows --prompt-style
+# like the mas methods do: `answer_first` (the default, for continuity with
+# earlier runs) forces the answer before the reasoning, which on a
+# chain-of-thought dataset is a no-CoT floor rather than a like-for-like
+# comparison. Use `--set baseline-judger.prompt_style=reason_first` to compare
+# the judger framing against CoT with the reasoning order held constant.
 
 
 class _PromptBaseline(Method):
@@ -85,9 +81,22 @@ class CoTBaseline(_PromptBaseline):
 class JudgerBaseline(_PromptBaseline):
     name = "baseline-judger"
     description = "Bare model with the repo's Judger prompt. Isolates prompt from pipeline."
-    sys_prompt = SYS_JUDGER
-    usr_mcq = USR_JUDGER
-    usr_num = USR_JUDGER
+    defaults = {"prompt_style": "answer_first"}
+
+    def sample(self, item: EvalItem, gen: GenSettings) -> Sample:
+        from src.agents.configs import AgentConfig, answer_format_instruction
+
+        style = self.args.get("prompt_style", "answer_first")
+        judger = AgentConfig.judger(prompt_style=style)
+
+        user = judger.user_prompt_template.format(question=item.question)
+        fmt = answer_format_instruction(item.task_type)
+        if fmt:
+            user = f"{user}\n\n{fmt}"
+
+        prompt = self.backend.chat_prompt(judger.system_prompt, user)
+        out = self.backend.generate(prompt, gen, num_choices=item.num_choices)
+        return self._finish(out, item, {"prompt_style": style})
 
 
 class LogLikelihoodBaseline(Method):

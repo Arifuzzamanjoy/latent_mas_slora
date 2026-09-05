@@ -83,6 +83,7 @@ class HierarchicalPipeline:
         max_new_tokens: Optional[int] = None,
         temperature: Optional[float] = None,
         return_hidden_states: bool = False,
+        task_type: Optional[str] = None,
     ) -> PipelineResult:
         """
         Run the hierarchical pipeline.
@@ -93,6 +94,8 @@ class HierarchicalPipeline:
             max_new_tokens: Override max tokens per agent
             temperature: Override temperature for all agents
             return_hidden_states: Include hidden states in result
+            task_type: "numeric" | "mcq" | "text"; selects the answer format
+                instruction given to the agent whose output is scored
 
         Returns:
             PipelineResult with all agent outputs and final answer
@@ -114,7 +117,14 @@ class HierarchicalPipeline:
 
             # Build prompt
             context = self.memory.get_agent_output(agents[i - 1]) if i > 0 else ""
-            prompt = self.executor.build_prompt(config, question, context[:500])
+            # Only the last agent's text is returned as final_answer, so only it
+            # is given the task's answer format instruction.
+            prompt = self.executor.build_prompt(
+                config,
+                question,
+                context[:500],
+                task_type=task_type if i == len(agents) - 1 else None,
+            )
 
             # Tokenize
             encoded = self.tokenizer(
@@ -280,6 +290,7 @@ class HierarchicalPipeline:
         max_new_tokens: Optional[int] = None,
         temperature: Optional[float] = None,
         return_hidden_states: bool = False,
+        task_type: Optional[str] = None,
     ) -> PipelineResult:
         """
         TRUE LatentMAS: Only final agent generates text.
@@ -305,12 +316,22 @@ class HierarchicalPipeline:
 
             # Build prompt - for latent agents, use minimal context
             if i == 0:
-                # First agent gets the question
-                prompt = self.executor.build_prompt(config, question, "")
-            else:
-                # Subsequent agents: minimal prompt, rely on latent state
+                # First agent gets the question (and the format instruction too
+                # when it is also the last, i.e. a single-agent pipeline)
                 prompt = self.executor.build_prompt(
-                    config, question, "[Latent context from previous agents]"
+                    config, question, "", task_type=task_type if is_final else None
+                )
+            else:
+                # Subsequent agents: minimal prompt, rely on latent state.
+                # The final agent is the only one that decodes, so it is the one
+                # that needs the task's answer format; it is also the one reading
+                # the accumulated cache, so it gets the noise clause.
+                prompt = self.executor.build_prompt(
+                    config,
+                    question,
+                    "[Latent context from previous agents]",
+                    task_type=task_type if is_final else None,
+                    latent_context=is_final and self.kv_handoff,
                 )
 
             encoded = self.tokenizer(

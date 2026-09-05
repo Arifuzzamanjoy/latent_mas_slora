@@ -10,7 +10,12 @@ Handles:
 import threading
 from typing import Any, Dict, List, Optional
 
-from .configs import AgentConfig, AgentRole
+from .configs import (
+    LATENT_NOISE_CLAUSE,
+    AgentConfig,
+    AgentRole,
+    answer_format_instruction,
+)
 
 
 class AgentPool:
@@ -209,6 +214,8 @@ class AgentExecutor:
         question: str,
         context: str = "",
         chat_template: bool = True,
+        task_type: Optional[str] = None,
+        latent_context: bool = False,
     ) -> str:
         """
         Build prompt for an agent.
@@ -218,11 +225,26 @@ class AgentExecutor:
             question: Input question
             context: Optional context from previous agents
             chat_template: Whether to use chat template
+            task_type: "numeric" | "mcq" | "text". Appends the matching answer
+                format instruction, because the role templates are deliberately
+                task-neutral - see ANSWER_FORMAT in configs.py. Pass this for
+                any agent whose output is scored; omitting it leaves the generic
+                \boxed{ANSWER} instruction in place.
+            latent_context: True when this agent decodes on top of the shared
+                latent working memory, which adds the clause telling it the
+                latent prefix may be noise.
         """
         user_content = agent.user_prompt_template.format(question=question)
 
         if context:
             user_content = f"Context from previous analysis:\n{context}\n\n{user_content}"
+
+        if latent_context:
+            user_content = f"{user_content}\n\n{LATENT_NOISE_CLAUSE}"
+
+        fmt = answer_format_instruction(task_type)
+        if fmt:
+            user_content = f"{user_content}\n\n{fmt}"
 
         if chat_template:
             messages = [

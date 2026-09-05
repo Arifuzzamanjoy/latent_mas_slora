@@ -538,3 +538,107 @@ def test_trailing_malformed_box_does_not_mask_a_good_one():
 
     m = extract_answer("\\boxed{B} then \\boxed{~}", "mcq")
     assert m.answer == "B" and m.strict is True
+
+
+def test_role_prompts_are_task_neutral():
+    """
+    No role template may hardcode an answer format.
+
+    Regression guard for the bug that cost four of six errors on GSM8K in
+    eval_runs/20260905-195324-458ba3227aec: the Judger template said "(the
+    option letter for multiple choice)" on every item, so on a numeric task the
+    model solved the problem and then emitted \\boxed{A}.
+    """
+    pytest.importorskip("torch", reason="src package imports torch at package level")
+    from src.agents.configs import AgentConfig
+
+    for style in ("reason_first", "answer_first"):
+        j = AgentConfig.judger(prompt_style=style)
+        blob = (j.user_prompt_template + j.system_prompt).lower()
+        assert "option" not in blob
+        assert "multiple choice" not in blob
+
+
+def test_answer_format_instruction_is_task_specific():
+    pytest.importorskip("torch", reason="src package imports torch at package level")
+    from src.agents.configs import answer_format_instruction
+
+    assert "number" in answer_format_instruction("numeric")
+    assert "option letter" in answer_format_instruction("mcq")
+    # unknown / absent task type must not invent a format
+    assert answer_format_instruction(None) == ""
+
+
+def test_build_prompt_appends_task_format_and_noise_clause():
+    pytest.importorskip("torch", reason="src package imports torch at package level")
+    from src.agents.agent_pool import AgentExecutor
+    from src.agents.configs import AgentConfig
+
+    class _Tok:
+        def apply_chat_template(self, messages, tokenize, add_generation_prompt):
+            return "\n".join(m["content"] for m in messages)
+
+    ex = AgentExecutor.__new__(AgentExecutor)
+    ex.tokenizer = _Tok()
+    cfg = AgentConfig.judger()
+
+    numeric = ex.build_prompt(cfg, "2+2?", task_type="numeric")
+    assert "must be a single number" in numeric
+    assert "must be the option letter" not in numeric
+
+    mcq = ex.build_prompt(cfg, "Pick one", task_type="mcq")
+    assert "must be the option letter" in mcq
+
+    plain = ex.build_prompt(cfg, "2+2?")
+    assert "must be a single number" not in plain
+    assert "must be the option letter" not in plain
+
+    latent = ex.build_prompt(cfg, "2+2?", task_type="numeric", latent_context=True)
+    assert "may contain irrelevant" in latent
+    assert "may contain irrelevant" not in numeric
+
+
+def test_every_pipeline_entrypoint_accepts_task_type():
+    """
+    LatentMASSystem.run() forwards **kwargs, so a pipeline that does not accept
+    task_type fails at call time on a real model rather than in the dry run
+    (mas methods short-circuit to _mock_sample without a GPU).
+    """
+    pytest.importorskip("torch", reason="src package imports torch at package level")
+    import inspect
+
+    from src.pipelines.hierarchical import HierarchicalPipeline
+    from src.pipelines.sequential import SequentialPipeline
+
+    entrypoints = [
+        HierarchicalPipeline.run,
+        HierarchicalPipeline.run_true_latent,
+        SequentialPipeline.run,
+    ]
+    for fn in entrypoints:
+        assert "task_type" in inspect.signature(fn).parameters, fn.__qualname__
+
+    # the self-consistency wrappers reach those via **kwargs
+    for fn in (
+        HierarchicalPipeline.run_with_self_consistency,
+        HierarchicalPipeline.run_true_latent_with_self_consistency,
+    ):
+        kinds = {p.kind for p in inspect.signature(fn).parameters.values()}
+        assert inspect.Parameter.VAR_KEYWORD in kinds, fn.__qualname__
+
+
+def test_judger_baseline_follows_prompt_style():
+    """baseline-judger must be able to run reason-first, not only as a no-CoT floor."""
+    pytest.importorskip("torch", reason="src package imports torch at package level")
+    from eval.methods.baselines import JudgerBaseline
+
+    assert JudgerBaseline.defaults["prompt_style"] == "answer_first"
+    src = inspect_source(JudgerBaseline.sample)
+    assert "prompt_style" in src
+    assert "AgentConfig.judger" in src  # reads the pipeline's prompt, not a copy
+
+
+def inspect_source(fn):
+    import inspect
+
+    return inspect.getsource(fn)
