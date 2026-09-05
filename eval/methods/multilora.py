@@ -164,10 +164,14 @@ class MultiLoRA(Method):
         ranked = (live or ranked)[:max(1, self.top_k)]
         names = [n for n, _ in ranked]
         raw = [s for _, s in ranked]
-        lo = min(raw)
-        shifted = [s - lo + 1e-6 for s in raw]      # keep weights non-negative
-        total = sum(shifted) or 1.0
-        return names, [w / total for w in shifted]
+        # Scores are contribution magnitudes (>= 0 by construction), so normalize
+        # them directly. Subtracting the minimum first - the obvious-looking
+        # alternative - always drives the lowest-ranked survivor to zero weight,
+        # which silently turns any top_k into top_k-1.
+        total = sum(raw)
+        if total <= 0:
+            return names, [1.0 / len(names)] * len(names)
+        return names, [s / total for s in raw]
 
     def _activate(self, names: List[str], weights: List[float]) -> str:
         """Merge the selected adapters into one weight set and activate it."""

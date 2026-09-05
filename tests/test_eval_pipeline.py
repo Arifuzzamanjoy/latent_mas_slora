@@ -407,3 +407,23 @@ def test_compose_ties_break_deterministically_by_name():
 def test_all_zero_scores_are_degenerate():
     from eval.methods.multilora import MultiLoRA
     assert MultiLoRA.is_degenerate([("a", 0.0), ("b", 0.0), ("c", 0.0)])
+
+
+def test_compose_gives_every_selected_adapter_nonzero_weight():
+    """Regression: min-subtraction zeroed the lowest survivor, making top_k -> top_k-1."""
+    from eval.methods.multilora import MultiLoRA
+    m = MultiLoRA.__new__(MultiLoRA)
+    m.top_k = 3
+    names, w = m._compose([("a", 10.0), ("b", 6.0), ("c", 2.0)])
+    assert len(names) == 3
+    assert all(x > 0.0 for x in w), f"every selected adapter must contribute: {w}"
+    assert abs(sum(w) - 1.0) < 1e-9
+    assert w[0] > w[1] > w[2]                      # weight follows score
+
+
+def test_compose_uniform_when_every_score_is_zero():
+    from eval.methods.multilora import MultiLoRA
+    m = MultiLoRA.__new__(MultiLoRA)
+    m.top_k = 2
+    _, w = m._compose([("a", 0.0), ("b", 0.0)])
+    assert w == [0.5, 0.5]
