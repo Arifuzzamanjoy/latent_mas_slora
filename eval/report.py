@@ -153,9 +153,10 @@ def render_console(summary: Dict[str, Any]) -> str:
         f"latent_steps={cfg['latent_steps']} router={cfg['use_router']}",
         f"wall clock : {summary['wall_clock_s']}s",
         "",
-        f"{'method':<18} {'n':>5} {'acc':>7} {'95% CI':>16} {'parse fail':>11} "
-        f"{'tok/item':>9} {'tok/correct':>12} {'p50 ms':>8} {'ECE':>6}",
-        "-" * 96,
+        f"{'method':<18} {'n':>5} {'acc':>7} {'strict':>7} {'95% CI':>16} "
+        f"{'parse fail':>11} {'fmt viol':>9} {'tok/item':>9} {'tok/correct':>12} "
+        f"{'p50 ms':>8} {'ECE':>6}",
+        "-" * 116,
     ]
 
     for name, m in summary["methods"].items():
@@ -169,8 +170,11 @@ def render_console(summary: Dict[str, Any]) -> str:
         ci = f"[{_pct(m['ci']['low'])}, {_pct(m['ci']['high'])}]"
         ece = m["calibration"].get("ece")
         lines.append(
-            f"{name:<18} {m['n']:>5} {_pct(m['accuracy']):>7} {ci:>16} "
-            f"{_pct(m['parse_failure_rate']):>11} {m['tokens']['total_mean']:>9.0f} "
+            f"{name:<18} {m['n']:>5} {_pct(m['accuracy']):>7} "
+            f"{_pct(m.get('strict_accuracy', m['accuracy'])):>7} {ci:>16} "
+            f"{_pct(m['parse_failure_rate']):>11} "
+            f"{_pct(m.get('format_violation_rate', 0.0)):>9} "
+            f"{m['tokens']['total_mean']:>9.0f} "
             f"{str(m['tokens']['total_per_correct']):>12} {m['latency_ms']['p50']:>8.0f} "
             f"{(f'{ece:.3f}' if ece is not None else '-'):>6}"
         )
@@ -242,22 +246,25 @@ def render_markdown(summary: Dict[str, Any]) -> str:
 
     L.append("## Results\n")
     L.append(
-        "| method | n | accuracy | 95% CI | parse fail | tokens/item | tokens/correct | "
-        "latency p50 | latency p95 | ECE |"
+        "| method | n | accuracy | strict | 95% CI | parse fail | fmt viol | tokens/item | "
+        "tokens/correct | latency p50 | latency p95 | ECE |"
     )
-    L.append("|---|---:|---:|---|---:|---:|---:|---:|---:|---:|")
+    L.append("|---|---:|---:|---:|---|---:|---:|---:|---:|---:|---:|---:|")
     for name, m in summary["methods"].items():
         if name == "router-only":
             r = m["routing"]
             L.append(
-                f"| `{name}` | {m['n']} | {_pct(r['accuracy'])} | macro-F1 {r['macro_f1']} "
-                f"| - | - | - | {m['latency_ms']['mean']:.0f} | - | - |"
+                f"| `{name}` | {m['n']} | {_pct(r['accuracy'])} | - | "
+                f"macro-F1 {r['macro_f1']} | - | - | - | - | "
+                f"{m['latency_ms']['mean']:.0f} | - | - |"
             )
             continue
         ece = m["calibration"].get("ece")
         L.append(
             f"| `{name}` | {m['n']} | **{_pct(m['accuracy'])}** | "
+            f"{_pct(m.get('strict_accuracy', m['accuracy']))} | "
             f"[{_pct(m['ci']['low'])}, {_pct(m['ci']['high'])}] | {_pct(m['parse_failure_rate'])} | "
+            f"{_pct(m.get('format_violation_rate', 0.0))} | "
             f"{m['tokens']['total_mean']:.0f} | {m['tokens']['total_per_correct']} | "
             f"{m['latency_ms']['p50']:.0f} | {m['latency_ms']['p95']:.0f} | "
             f"{ece if ece is not None else '-'} |"

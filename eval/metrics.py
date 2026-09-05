@@ -288,6 +288,14 @@ def summarize_records(
         "ci": {"method": "wilson", "low": round(wl, 4), "high": round(wh, 4), "level": conf},
         "bootstrap_ci": {"low": round(bl, 4), "high": round(bh, 4), "n_boot": bootstrap},
         "parse_failure_rate": round(sum(1 for r in records if r.get("extract_failed")) / n, 4),
+        # lm-evaluation-harness convention: "strict" counts only answers the
+        # model emitted in the requested \boxed{} format, "accuracy" above is the
+        # flexible variant that also accepts an answer stated in prose. A gap
+        # between them is a prompt problem, not a reasoning result.
+        "strict_accuracy": round(
+            sum(1 for r in records if r["correct"] and r.get("extract_strict", True)) / n, 4
+        ),
+        "format_violation_rate": round(sum(1 for r in records if r.get("format_violation")) / n, 4),
         "unknown_rate": round(sum(1 for r in records if r.get("pred") == "UNKNOWN") / n, 4),
         "tokens": {
             "prompt_total": sum(prompt_toks),

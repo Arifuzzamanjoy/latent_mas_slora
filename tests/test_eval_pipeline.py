@@ -514,3 +514,27 @@ def test_old_method_name_still_resolves():
     assert expand_methods(["latent-mas-paper"]) == ["latent-mas-slora"]
     assert "latent-mas-slora" in expand_methods(["ladder"])
     assert "latent-mas-paper" not in expand_methods(["ladder"])
+
+
+def test_numeric_boxed_letter_is_a_format_violation_not_a_confident_answer():
+    """\\boxed{A} on a numeric item must never be reported as a clean extraction."""
+    from eval.extract import extract_answer
+
+    r = extract_answer("Thus, Ahito ran 16 miles.\n\n\\boxed{C}", "numeric")
+    assert r.strict is False
+    assert r.format_violation is True
+    assert r.rule != "boxed_text"  # the old rule that hid this as a success
+    assert r.answer == "16"  # flexible recovery, reported as non-strict
+
+    good = extract_answer("so \\boxed{18}", "numeric")
+    assert good.strict is True and good.format_violation is False and good.answer == "18"
+
+
+def test_trailing_malformed_box_does_not_mask_a_good_one():
+    from eval.extract import extract_answer
+
+    r = extract_answer("\\boxed{42} ... restating: \\boxed{see above}", "numeric")
+    assert r.answer == "42" and r.strict is True
+
+    m = extract_answer("\\boxed{B} then \\boxed{~}", "mcq")
+    assert m.answer == "B" and m.strict is True
