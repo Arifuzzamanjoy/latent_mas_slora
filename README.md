@@ -171,6 +171,61 @@ These are measured, not hypothetical. Read them before trusting any result.
    explanation for the flat ladder.
 4. **`--max-new-tokens` applies to every agent**, not just the final one, which
    inflates `text-mas` cost and makes its token counts non-comparable.
+5. **Router accuracy is measured on three domains, not five.** There is no
+   `code` dataset in `eval/data.py`, so `code` and `general` routing are
+   exercised only by hand-written probes. The 96.2% below is math / medical /
+   reasoning; treat the other two as untested.
+6. **Router gold labels are a repo convention.** `arc` is labelled `reasoning`
+   and `gsm8k` is labelled `math` by the loaders. That is a reasonable choice,
+   not ground truth about which pipeline answers best — the router is scored
+   against the labels, not against downstream accuracy.
+
+### Fixed, and worth knowing about
+
+**The semantic router was returning a near-uniform posterior.** Four compounding
+faults, each measurable on 450 labelled items (150 GSM8K / MedQA / ARC):
+
+| stage | accuracy | macro-F1 |
+|---|---:|---:|
+| as shipped | 51.3% | 0.384 |
+| + keyword hygiene | 63.3% | 0.408 |
+| + word boundaries, centred softmax | 71.6% | 0.436 |
+| + math word-problem exemplars | 85.6% | 0.518 |
+| + reasoning exemplars, tiebreaker removed | **96.2%** | **0.722** |
+
+1. `"if "`, `"for "`, `"while "`, `"class"` and `"return"` were `code` keywords.
+   They fire on 164/400 and 127/400 GSM8K word problems — *"**If** there are 30
+   sheets…"*, *"…**for** his drawing"*.
+2. Keywords matched as substrings, so `"sin"` fired on "u**sin**g", `"iv"` on
+   "g**iv**e"/"f**iv**e", `"log"` on "bio**log**y", `"tan"` on "impor**tan**t".
+3. `_semantic_score` returned `(cos + 1) / 2`. Cosines against these centroids
+   live in roughly [0.0, 0.35], so adding a constant 0.5 to all five domains and
+   normalizing compressed every confidence into a 0.22–0.28 band. Because that
+   band sits entirely below the `confidence < 0.30` guard in `get_best_domain`,
+   the keyword-rescoring tiebreaker fired on **199 of 200 items** — the keyword
+   score, with `"if "` in it, silently decided every route.
+4. `math` exemplars were all symbolic (`"Find the derivative of sin(x²)"`), so
+   the centroid sat far from grade-school arithmetic.
+
+Scores are now centred before a temperature-0.10 softmax, keyword evidence is a
+bounded `tanh` nudge rather than 40% of the blend, and the tiebreaker is gone.
+Confidence is calibrated — accuracy by confidence bin runs 64% / 86% / 99% / 99%
+— so the `GENERAL` fallback threshold means something again.
+
+**Answer formats are per task, not per role** (`ANSWER_FORMAT` in
+`src/agents/configs.py`). The Judger template used to end with "(the option
+letter for multiple choice)" on every item, inherited from MedQA. On GSM8K the
+model would solve the problem, state the right number in prose, and then emit
+`\boxed{A}` — scored as a confident wrong answer. It caused four of six errors
+in `eval_runs/20260905-195324-458ba3227aec` and cost ~15pp of apparent accuracy.
+
+The harness reported `parse fail 0.0%` throughout, because `extract_numeric()`
+treated a box holding no number as a successful extraction. Both are fixed:
+role prompts are task-neutral and the format instruction is appended from the
+item's `task_type`, and every result now carries `strict_accuracy` and
+`format_violation_rate` alongside `accuracy` (see [docs/EVAL.md](docs/EVAL.md)).
+Any future run where the model answers in the wrong format shows it in the
+table instead of losing it into the accuracy column.
 
 ## Development
 
