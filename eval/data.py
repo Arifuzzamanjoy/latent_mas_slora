@@ -233,6 +233,32 @@ HF_DATASETS = {
 
 # ─── Entry point ─────────────────────────────────────────────────────────────
 
+def _slug(spec: str) -> str:
+    """Filesystem/id-safe tag for a dataset spec: 'mmlu:college_mathematics' -> 'mmlu-college_mathematics'."""
+    return re.sub(r"[^A-Za-z0-9_.-]+", "-", spec.strip()).strip("-")
+
+
+def _ensure_unique_ids(items: List[EvalItem]) -> List[EvalItem]:
+    """
+    Guarantee globally unique item ids.
+
+    Ids are the join key for resume, for paired statistics and for permutation
+    grouping, so a collision does not merely rename an item - the runner treats
+    the duplicate as work already done and silently drops it. Disambiguate here,
+    loudly, rather than losing items downstream.
+    """
+    seen: Dict[str, int] = {}
+    for it in items:
+        n = seen.get(it.id, 0)
+        seen[it.id] = n + 1
+        if n:
+            it.id = f"{it.id}#{n + 1}"
+    dupes = sum(v - 1 for v in seen.values() if v > 1)
+    if dupes:
+        print(f"[data] warning: {dupes} duplicate item id(s) disambiguated with a '#n' suffix")
+    return items
+
+
 def load_dataset(spec: str, split: Optional[str] = None,
                  cache_dir: Optional[str] = None) -> List[EvalItem]:
     """
@@ -244,15 +270,21 @@ def load_dataset(spec: str, split: Optional[str] = None,
     """
     spec = spec.strip()
     if spec == "sample":
-        return load_local("data/sample_data.json")
+        return _ensure_unique_ids(load_local("data/sample_data.json"))
     if spec.startswith("local:"):
-        return load_local(spec[len("local:"):])
+        return _ensure_unique_ids(load_local(spec[len("local:"):]))
     if spec.startswith("mix:"):
+        # Sub-datasets number their items independently (two MMLU subjects both
+        # emit mmlu-0, mmlu-1, ...), so every part is namespaced by its spec.
         out: List[EvalItem] = []
         for part in spec[len("mix:"):].split(","):
-            out.extend(load_dataset(part.strip(), split, cache_dir))
-        return out
-    return load_hf(spec, split, cache_dir)
+            part = part.strip()
+            tag = _slug(part)
+            for it in load_dataset(part, split, cache_dir):
+                it.id = f"{tag}/{it.id}"
+                out.append(it)
+        return _ensure_unique_ids(out)
+    return _ensure_unique_ids(load_hf(spec, split, cache_dir))
 
 
 # ─── Segmentation ────────────────────────────────────────────────────────────

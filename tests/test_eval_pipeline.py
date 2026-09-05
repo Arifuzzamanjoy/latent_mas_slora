@@ -267,3 +267,45 @@ def test_live_plot_is_written(tmp_path):
     recs += [{"method": "m2", "correct": i % 3 == 0} for i in range(10)]
     p = plot_live(recs, tmp_path, total=10)
     assert p and Path(p).exists() and Path(p).stat().st_size > 5000
+
+
+# ─── id uniqueness (regression: mix: collapsed 150 items to 96) ──────────────
+
+from eval.data import _ensure_unique_ids, _slug
+
+
+def test_ensure_unique_ids_disambiguates():
+    items = [EvalItem(id="x", question="q", gold="A") for _ in range(3)]
+    items.append(EvalItem(id="y", question="q", gold="A"))
+    out = _ensure_unique_ids(items)
+    assert [i.id for i in out] == ["x", "x#2", "x#3", "y"]
+
+
+def test_ensure_unique_ids_leaves_unique_ids_alone():
+    items = [EvalItem(id=f"i{k}", question="q", gold="A") for k in range(5)]
+    assert [i.id for i in _ensure_unique_ids(items)] == ["i0", "i1", "i2", "i3", "i4"]
+
+
+def test_slug_is_id_safe():
+    assert _slug("mmlu:college_mathematics") == "mmlu-college_mathematics"
+    assert _slug("mix:a,b") == "mix-a-b"
+
+
+def test_local_file_with_duplicate_ids_is_disambiguated(tmp_path):
+    import json as _json
+    f = tmp_path / "dup.json"
+    f.write_text(_json.dumps([
+        {"id": 1, "question": "q1\nA. a\nB. b", "gold_letter": "A"},
+        {"id": 1, "question": "q2\nA. a\nB. b", "gold_letter": "B"},
+    ]))
+    items = load_dataset(f"local:{f}")
+    assert len({i.id for i in items}) == 2, "duplicate ids must not collapse"
+
+
+def test_duplicate_ids_would_drop_items_from_a_segment():
+    """The failure mode the fix prevents: dedup keys collapse a segment."""
+    colliding = [EvalItem(id="same", question=f"q{k}", gold="A") for k in range(10)]
+    keys = {(("m", 0, i.id)) for i in colliding}
+    assert len(keys) == 1                      # 10 items, 1 dedup key -> 9 lost
+    fixed = _ensure_unique_ids(colliding)
+    assert len({("m", 0, i.id) for i in fixed}) == 10

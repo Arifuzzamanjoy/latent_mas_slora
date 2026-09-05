@@ -116,6 +116,17 @@ class Runner:
               f"fraction={cfg.fraction} offset={cfg.offset} limit={cfg.limit} "
               f"seed={cfg.data_seed} -> {len(items)} items")
         print(f"[data] {describe_segment(items)}")
+
+        ids = [i.id for i in items]
+        if len(set(ids)) != len(ids):
+            from collections import Counter
+            dupes = [k for k, v in Counter(ids).items() if v > 1]
+            raise SystemExit(
+                f"[data] {len(ids) - len(set(ids))} duplicate item id(s) in the segment "
+                f"(e.g. {dupes[:3]}). Ids are the join key for resume and for paired "
+                f"statistics, so duplicates would be silently dropped. This is a loader "
+                f"bug - please report the --dataset spec."
+            )
         return items
 
     # -- execution ----------------------------------------------------------
@@ -125,8 +136,19 @@ class Runner:
         if not items:
             raise SystemExit("segment is empty - check --fraction/--limit/--offset")
 
+        seg_path = self.run_dir / "segment.json"
+        if self.cfg.resume and self.records and seg_path.exists():
+            prior_ids = json.loads(seg_path.read_text()).get("item_ids", [])
+            if prior_ids and prior_ids != [i.id for i in items]:
+                raise SystemExit(
+                    f"[runner] refusing to resume '{self.run_name}': the segment no longer "
+                    f"matches the one those records were written against "
+                    f"({len(prior_ids)} items then, {len(items)} now).\n"
+                    f"          Appending would double-count. Use a new --run-name."
+                )
+
         self.cfg.save(self.run_dir / "config.json")
-        (self.run_dir / "segment.json").write_text(json.dumps(
+        seg_path.write_text(json.dumps(
             {"spec": self.cfg.dataset, **describe_segment(items),
              "item_ids": [i.id for i in items]}, indent=2))
 
