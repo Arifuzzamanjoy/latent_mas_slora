@@ -1,10 +1,10 @@
 """LoRA module"""
 
 from .adapter_manager import (
-    LoRAAdapterManager,
+    QWEN25_LORA_REGISTRY,
     AdapterRouter,
     ExternalLoRAInfo,
-    QWEN25_LORA_REGISTRY,
+    LoRAAdapterManager,
 )
 
 __all__ = [

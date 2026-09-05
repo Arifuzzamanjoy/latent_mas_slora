@@ -1,11 +1,11 @@
 """Core components for LatentMAS"""
 
-from .latent_memory import LatentMemory, KVCacheManager
-from .latent_reasoner import LatentReasoner, LatentFusion, LatentReasoningResult
+from .latent_memory import KVCacheManager, LatentMemory
+from .latent_reasoner import LatentFusion, LatentReasoner, LatentReasoningResult
 
 __all__ = [
     "LatentMemory",
-    "KVCacheManager", 
+    "KVCacheManager",
     "LatentReasoner",
     "LatentFusion",
     "LatentReasoningResult",

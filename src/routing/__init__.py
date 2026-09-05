@@ -5,12 +5,12 @@ Provides semantic routing for automatic LoRA and pipeline selection
 based on prompt analysis.
 """
 
-from .domain_profiles import Domain, DomainProfile, DOMAIN_PROFILES
-from .semantic_router import SemanticRouter, get_router, auto_route
+from .domain_profiles import DOMAIN_PROFILES, Domain, DomainProfile
+from .semantic_router import SemanticRouter, auto_route, get_router
 
 __all__ = [
     "Domain",
-    "DomainProfile", 
+    "DomainProfile",
     "DOMAIN_PROFILES",
     "SemanticRouter",
     "get_router",

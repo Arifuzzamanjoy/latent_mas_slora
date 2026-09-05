@@ -49,3 +49,12 @@ logs/
 # OS
 .DS_Store
 Thumbs.db
+
+# Evaluation runs and artifacts
+eval_runs/
+*.png
+!docs/**/*.png
+
+# Tooling caches
+.ruff_cache/
+.pytest_cache/
