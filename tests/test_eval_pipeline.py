@@ -434,8 +434,9 @@ def test_judger_prompt_styles_differ_as_intended():
     rf = AgentConfig.judger()
     af = AgentConfig.judger(prompt_style="answer_first")
     assert rf.prompt_style == "reason_first"  # new default
-    assert "FIRST, then provide reasoning" in af.user_prompt_template
-    assert "FIRST, then provide reasoning" not in rf.user_prompt_template
+    # the assertion used to look for wording this template has never contained
+    assert "State your final answer FIRST" in af.user_prompt_template
+    assert "State your final answer FIRST" not in rf.user_prompt_template
     assert "A, B, C, or D" not in rf.system_prompt  # works for numeric too
 
 
