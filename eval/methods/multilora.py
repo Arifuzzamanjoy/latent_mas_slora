@@ -301,6 +301,7 @@ class MultiLoRA(Method):
             pred=ex.answer,
             extract_rule=ex.rule,
             extract_failed=ex.failed,
+            extract_strict=ex.strict,
             prompt_tokens=int(input_ids.shape[1]),
             completion_tokens=n_new,
             latency_ms=latency,

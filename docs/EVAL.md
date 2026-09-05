@@ -429,6 +429,8 @@ Per method, in `report.md` and `summary.json`:
 | `ci` | Wilson score interval — well behaved at small n |
 | `bootstrap_ci` | Percentile bootstrap over items |
 | `parse_failure_rate` | Fraction where extraction found nothing. **Read this before the accuracy.** A high rate means you are measuring formatting, not reasoning |
+| `strict_accuracy` | Accuracy counting only answers the model emitted in the requested `\boxed{}` format |
+| `format_violation_rate` | Fraction where the model answered, but not in the requested format — e.g. `\boxed{A}` on a numeric item. **A gap between `accuracy` and `strict_accuracy` is a prompt bug, not a reasoning result** |
 | `unknown_rate` | Fraction predicted `UNKNOWN` |
 | `tokens.*` | Prompt / completion / total, mean and sum |
 | `tokens.total_per_correct` | Tokens spent per correct answer — the efficiency metric that decides whether a pipeline is worth it |
@@ -438,6 +440,30 @@ Per method, in `report.md` and `summary.json`:
 | `per_seed_accuracy` | Accuracy per seed — run-to-run spread is often larger than the effect being claimed |
 | `position_consistency` | With `--permute-options`, fraction of items answered the same way regardless of where the answer sits |
 | `extract_rules` | Which extraction rule fired, and how often |
+
+### Strict vs flexible extraction
+
+Following lm-evaluation-harness's GSM8K convention, every answer is scored twice:
+
+- **strict** — the model emitted the format the prompt asked for (`rule = boxed`)
+- **flexible** — the answer was recovered from prose after a malformed box
+
+`parse_failure_rate` counts only items where *nothing* could be extracted.
+It does not catch the more common failure: the model solves the problem, states
+the answer correctly in prose, and then boxes the wrong kind of token. That
+shows up in `format_violation_rate`.
+
+This is not theoretical. In `eval_runs/20260905-195324-458ba3227aec`,
+`latent-mas-slora` scored 76.9% against CoT's 96.2% with `parse fail 0.0%`. Four
+of its six errors were `\boxed{A}` emitted on GSM8K items whose prose contained
+the right number, because the Judger template said "(the option letter for
+multiple choice)" on every task. The reasoning was fine; the format instruction
+was wrong. The fix is per-task answer formats (`ANSWER_FORMAT` in
+`src/agents/configs.py`); `format_violation_rate` is what makes the next
+occurrence visible instead of silent.
+
+Flexible recovery is a diagnostic, not a repair. Its last-number fallback
+returns 2 for "3 loaves of bread cost $4 more than 2 bagels".
 
 Paired comparisons against the reference method:
 

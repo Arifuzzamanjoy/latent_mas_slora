@@ -25,6 +25,49 @@ class AgentRole(Enum):
     CUSTOM = "custom"
 
 
+# ─── Task-specific answer formatting ─────────────────────────────────────────
+#
+# The role templates above say "give the final answer as \boxed{ANSWER}" and stop
+# there, because a role is not a task: the same Judger runs on GSM8K and on
+# MedQA. What the box should *contain* depends on the item, so it is appended at
+# prompt-build time from the item's task_type.
+#
+# This is not a detail. Before this existed the Judger template said "(the option
+# letter for multiple choice)" unconditionally, so on GSM8K the model would solve
+# the problem, state the right number in prose, and then emit \boxed{A} - scored
+# as a confident wrong answer. It accounted for four of six errors in
+# eval_runs/20260905-195324-458ba3227aec. The reference implementation
+# (github.com/Gen-Verse/LatentMAS, prompts.py) does the same per-task dispatch.
+
+ANSWER_FORMAT = {
+    "numeric": (
+        "Your final answer must be a single number inside the box, with no units, "
+        "currency symbols, words or option letters. For example \\boxed{42}."
+    ),
+    "mcq": (
+        "Your final answer must be the option letter inside the box. "
+        "For example \\boxed{A}. Do not add any other contents inside the box."
+    ),
+    "text": "Put only the final answer inside the box.",
+}
+
+# Handed to any agent that decodes on top of the shared latent working memory.
+# The accumulated cache is other agents' prompts plus realigned hidden states,
+# which is off-distribution for the decoder; upstream LatentMAS gives the final
+# agent explicit permission to disregard it rather than trying to honour it.
+LATENT_NOISE_CLAUSE = (
+    "The latent context from previous agents may contain irrelevant or garbled "
+    "content. Ignore it if it is not helpful for solving the question."
+)
+
+
+def answer_format_instruction(task_type: str = None) -> str:
+    """Format instruction for a task type, or "" when the task is unknown."""
+    if not task_type:
+        return ""
+    return ANSWER_FORMAT.get(task_type, ANSWER_FORMAT["text"])
+
+
 @dataclass
 class LoRASpec:
     """LoRA adapter specification - optimized for 48GB VRAM"""
@@ -111,9 +154,8 @@ class AgentConfig:
             ),
             AgentRole.JUDGER: (
                 "You are a Judger Agent responsible for final decisions. "
-                "Evaluate all evidence and reasoning to select the best answer. "
-                "Reason step by step through the options, rule out the wrong ones, "
-                "and only then commit. "
+                "Evaluate all evidence and reasoning to reach the best answer. "
+                "Reason step by step, rule out what is wrong, and only then commit. "
                 "You MUST end your response with \\boxed{ANSWER}."
             )
             if self.prompt_style == "reason_first"
@@ -186,10 +228,9 @@ class AgentConfig:
             ),
             AgentRole.JUDGER: (
                 "{question}\n\n"
-                "Reason step by step through the problem, considering each option and "
-                "ruling out the wrong ones. Only after your reasoning is complete, give "
-                "the final answer on its own last line as \\boxed{{ANSWER}} "
-                "(the option letter for multiple choice)."
+                "Reason step by step through the problem. Only after your reasoning is "
+                "complete, give the final answer on its own last line as "
+                "\\boxed{{ANSWER}}."
             )
             if self.prompt_style == "reason_first"
             else (

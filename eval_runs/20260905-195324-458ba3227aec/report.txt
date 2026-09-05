@@ -1,0 +1,21 @@
+
+================================================================================================
+EVAL 20260905-195324-458ba3227aec
+================================================================================================
+model      : Qwen/Qwen2.5-7B-Instruct (bfloat16)
+dataset    : gsm8k  n=26  fraction=0.02  limit=None  offset=0  data_seed=0
+domains    : {'math': 26}
+decoding   : temp=0.0 top_p=0.9 max_new_tokens=512 seeds=[0] sc=1
+protocol   : scoring=generate permute=none latent_steps=10 router=True
+wall clock : 526.4s
+
+method                 n     acc           95% CI  parse fail  tok/item  tok/correct   p50 ms    ECE
+------------------------------------------------------------------------------------------------
+baseline-cot          26   96.2%   [81.1%, 99.3%]        0.0%       395        411.2     5749  0.038
+latent-mas-slora      26   76.9%   [58.0%, 89.0%]        0.0%       902       1172.0    12367  0.231
+
+Paired comparisons vs baseline-cot (McNemar, same items):
+------------------------------------------------------------------------------------------------
+method                 Δacc          95% CI of Δ   wins  losses          p
+latent-mas-slora     -19.2%      [-34.6%, -7.7%]      0       5     0.0625
+================================================================================================

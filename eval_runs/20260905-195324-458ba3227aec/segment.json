@@ -1,0 +1,41 @@
+{
+  "spec": "gsm8k",
+  "n": 26,
+  "by_domain": {
+    "math": 26
+  },
+  "by_source": {
+    "gsm8k": 26
+  },
+  "by_task_type": {
+    "numeric": 26
+  },
+  "item_ids": [
+    "gsm8k-1101",
+    "gsm8k-120",
+    "gsm8k-474",
+    "gsm8k-991",
+    "gsm8k-192",
+    "gsm8k-1020",
+    "gsm8k-350",
+    "gsm8k-480",
+    "gsm8k-883",
+    "gsm8k-1062",
+    "gsm8k-799",
+    "gsm8k-1257",
+    "gsm8k-1070",
+    "gsm8k-1234",
+    "gsm8k-590",
+    "gsm8k-446",
+    "gsm8k-1302",
+    "gsm8k-265",
+    "gsm8k-175",
+    "gsm8k-554",
+    "gsm8k-1161",
+    "gsm8k-625",
+    "gsm8k-605",
+    "gsm8k-1110",
+    "gsm8k-204",
+    "gsm8k-789"
+  ]
+}

@@ -1,0 +1,27 @@
+
+================================================================================================
+EVAL all-baselines-gsm8k
+================================================================================================
+model      : Qwen/Qwen2.5-7B-Instruct (bfloat16)
+dataset    : gsm8k  n=26  fraction=0.02  limit=None  offset=0  data_seed=0
+domains    : {'math': 26}
+decoding   : temp=0.0 top_p=0.9 max_new_tokens=512 seeds=[0] sc=1
+protocol   : scoring=generate permute=none latent_steps=10 router=True
+wall clock : 2289.5s
+
+method                 n     acc  strict           95% CI  parse fail  fmt viol  tok/item  tok/correct   p50 ms    ECE
+--------------------------------------------------------------------------------------------------------------------
+baseline-direct       26   23.1%   23.1%   [11.0%, 42.0%]        0.0%      0.0%       114        494.5      165  0.769
+baseline-cot          26   96.2%   96.2%   [81.1%, 99.3%]        0.0%      0.0%       395        411.2     5834  0.038
+baseline-judger       26   34.6%   34.6%   [19.4%, 53.8%]        0.0%      0.0%       420       1214.8     4838  0.654
+text-mas              26   96.2%   96.2%   [81.1%, 99.3%]        0.0%      0.0%      2418       2514.6    61809  0.038
+latent-mas-slora      26   92.3%   92.3%   [75.9%, 97.9%]        0.0%      0.0%       880        953.8    11419  0.077
+
+Paired comparisons vs baseline-cot (McNemar, same items):
+------------------------------------------------------------------------------------------------
+method                 Δacc          95% CI of Δ   wins  losses          p
+baseline-direct      -73.1%     [-88.5%, -53.8%]      0      19     0.0000
+baseline-judger      -61.5%     [-80.8%, -42.3%]      0      16     0.0000
+text-mas              +0.0%       [+0.0%, +0.0%]      0       0     1.0000
+latent-mas-slora      -3.8%      [-11.5%, +0.0%]      0       1     1.0000
+================================================================================================

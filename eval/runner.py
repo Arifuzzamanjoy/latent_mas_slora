@@ -286,6 +286,7 @@ class Runner:
         p_tok = c_tok = lat = 0
         rules: List[str] = []
         failed = 0
+        strict_ok = True
         extras: List[Dict[str, Any]] = []
         error = None
 
@@ -301,11 +302,13 @@ class Runner:
                 votes.append(UNKNOWN)
                 rules.append("error")
                 failed += 1
+                strict_ok = False
                 continue
             votes.append(smp.pred)
             texts.append(smp.text)
             rules.append(smp.extract_rule)
             failed += int(smp.extract_failed)
+            strict_ok = strict_ok and smp.extract_strict
             p_tok += smp.prompt_tokens
             c_tok += smp.completion_tokens
             lat += smp.latency_ms
@@ -334,6 +337,9 @@ class Runner:
             "self_consistency": k,
             "extract_rule": rules[0] if rules else "?",
             "extract_failed": failed == k,
+            # the model produced an answer but not in the requested format
+            "extract_strict": strict_ok,
+            "format_violation": (not strict_ok) and failed != k,
             "prompt_tokens": p_tok,
             "completion_tokens": c_tok,
             "total_tokens": p_tok + c_tok,

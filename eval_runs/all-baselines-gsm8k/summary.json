@@ -1,0 +1,471 @@
+{
+  "run": "all-baselines-gsm8k",
+  "config": {
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "device": "cuda",
+    "dtype": "bfloat16",
+    "cache_dir": "/home/caches",
+    "dataset": "gsm8k",
+    "split": null,
+    "fraction": 0.02,
+    "limit": null,
+    "offset": 0,
+    "data_seed": 0,
+    "shuffle": true,
+    "stratify_by": "domain",
+    "min_per_group": 1,
+    "methods": [
+      "baseline-direct",
+      "baseline-cot",
+      "baseline-judger",
+      "text-mas",
+      "latent-mas-slora"
+    ],
+    "method_args": {
+      "latent-mas-slora": {
+        "latent_steps": 4
+      }
+    },
+    "max_new_tokens": 512,
+    "temperature": 0.0,
+    "top_p": 0.9,
+    "seeds": [
+      0
+    ],
+    "self_consistency": 1,
+    "latent_steps": 10,
+    "agents": null,
+    "use_router": true,
+    "adaptive_latent_steps": true,
+    "latent_steps_explicit": false,
+    "kv_handoff": true,
+    "prompt_style": "reason_first",
+    "adapter_policy": "logo",
+    "top_k": 3,
+    "loras": [],
+    "permute_options": "none",
+    "scoring": "generate",
+    "out_dir": "eval_runs",
+    "run_name": "all-baselines-gsm8k",
+    "resume": true,
+    "save_generations": true,
+    "report_markdown": true,
+    "plots": true,
+    "live_plot": false,
+    "live_every": 5,
+    "progress_every": 1,
+    "dry_run": false,
+    "bootstrap": 2000,
+    "ci": 0.95,
+    "compare_to": null,
+    "fingerprint": "002a181d87c6"
+  },
+  "segment": {
+    "spec": "gsm8k",
+    "n": 26,
+    "by_domain": {
+      "math": 26
+    },
+    "by_source": {
+      "gsm8k": 26
+    },
+    "by_task_type": {
+      "numeric": 26
+    }
+  },
+  "wall_clock_s": 2289.5,
+  "methods": {
+    "baseline-direct": {
+      "n": 26,
+      "correct": 6,
+      "accuracy": 0.2308,
+      "ci": {
+        "method": "wilson",
+        "low": 0.1103,
+        "high": 0.4205,
+        "level": 0.95
+      },
+      "bootstrap_ci": {
+        "low": 0.0769,
+        "high": 0.3846,
+        "n_boot": 2000
+      },
+      "parse_failure_rate": 0.0,
+      "strict_accuracy": 0.2308,
+      "format_violation_rate": 0.0,
+      "unknown_rate": 0.0,
+      "tokens": {
+        "prompt_total": 2778,
+        "completion_total": 189,
+        "total": 2967,
+        "prompt_mean": 106.8,
+        "completion_mean": 7.3,
+        "total_mean": 114.1,
+        "completion_per_correct": 31.5,
+        "total_per_correct": 494.5
+      },
+      "latency_ms": {
+        "mean": 196.7,
+        "p50": 165,
+        "p95": 251,
+        "total_s": 5.1
+      },
+      "calibration": {
+        "ece": 0.7692,
+        "brier": 0.7692,
+        "bins": [
+          {
+            "bin": 9,
+            "n": 26,
+            "avg_confidence": 1.0,
+            "accuracy": 0.2308
+          }
+        ]
+      },
+      "by_domain": {
+        "math": {
+          "n": 26,
+          "correct": 6,
+          "accuracy": 0.2308,
+          "ci_low": 0.1103,
+          "ci_high": 0.4205
+        }
+      },
+      "extract_rules": {
+        "boxed": 26
+      },
+      "position_consistency": null,
+      "per_seed_accuracy": {
+        "0": 0.2308
+      },
+      "errors": 0
+    },
+    "baseline-cot": {
+      "n": 26,
+      "correct": 25,
+      "accuracy": 0.9615,
+      "ci": {
+        "method": "wilson",
+        "low": 0.8111,
+        "high": 0.9932,
+        "level": 0.95
+      },
+      "bootstrap_ci": {
+        "low": 0.8846,
+        "high": 1.0,
+        "n_boot": 2000
+      },
+      "parse_failure_rate": 0.0,
+      "strict_accuracy": 0.9615,
+      "format_violation_rate": 0.0,
+      "unknown_rate": 0.0,
+      "tokens": {
+        "prompt_total": 3402,
+        "completion_total": 6878,
+        "total": 10280,
+        "prompt_mean": 130.8,
+        "completion_mean": 264.5,
+        "total_mean": 395.4,
+        "completion_per_correct": 275.1,
+        "total_per_correct": 411.2
+      },
+      "latency_ms": {
+        "mean": 6057.7,
+        "p50": 5834,
+        "p95": 8463,
+        "total_s": 157.5
+      },
+      "calibration": {
+        "ece": 0.0385,
+        "brier": 0.0385,
+        "bins": [
+          {
+            "bin": 9,
+            "n": 26,
+            "avg_confidence": 1.0,
+            "accuracy": 0.9615
+          }
+        ]
+      },
+      "by_domain": {
+        "math": {
+          "n": 26,
+          "correct": 25,
+          "accuracy": 0.9615,
+          "ci_low": 0.8111,
+          "ci_high": 0.9932
+        }
+      },
+      "extract_rules": {
+        "boxed": 26
+      },
+      "position_consistency": null,
+      "per_seed_accuracy": {
+        "0": 0.9615
+      },
+      "errors": 0
+    },
+    "baseline-judger": {
+      "n": 26,
+      "correct": 9,
+      "accuracy": 0.3462,
+      "ci": {
+        "method": "wilson",
+        "low": 0.1941,
+        "high": 0.5378,
+        "level": 0.95
+      },
+      "bootstrap_ci": {
+        "low": 0.1538,
+        "high": 0.5385,
+        "n_boot": 2000
+      },
+      "parse_failure_rate": 0.0,
+      "strict_accuracy": 0.3462,
+      "format_violation_rate": 0.0,
+      "unknown_rate": 0.0,
+      "tokens": {
+        "prompt_total": 4870,
+        "completion_total": 6063,
+        "total": 10933,
+        "prompt_mean": 187.3,
+        "completion_mean": 233.2,
+        "total_mean": 420.5,
+        "completion_per_correct": 673.7,
+        "total_per_correct": 1214.8
+      },
+      "latency_ms": {
+        "mean": 5433.5,
+        "p50": 4838,
+        "p95": 9146,
+        "total_s": 141.3
+      },
+      "calibration": {
+        "ece": 0.6538,
+        "brier": 0.6538,
+        "bins": [
+          {
+            "bin": 9,
+            "n": 26,
+            "avg_confidence": 1.0,
+            "accuracy": 0.3462
+          }
+        ]
+      },
+      "by_domain": {
+        "math": {
+          "n": 26,
+          "correct": 9,
+          "accuracy": 0.3462,
+          "ci_low": 0.1941,
+          "ci_high": 0.5378
+        }
+      },
+      "extract_rules": {
+        "boxed": 26
+      },
+      "position_consistency": null,
+      "per_seed_accuracy": {
+        "0": 0.3462
+      },
+      "errors": 0
+    },
+    "text-mas": {
+      "n": 26,
+      "correct": 25,
+      "accuracy": 0.9615,
+      "ci": {
+        "method": "wilson",
+        "low": 0.8111,
+        "high": 0.9932,
+        "level": 0.95
+      },
+      "bootstrap_ci": {
+        "low": 0.8846,
+        "high": 1.0,
+        "n_boot": 2000
+      },
+      "parse_failure_rate": 0.0,
+      "strict_accuracy": 0.9615,
+      "format_violation_rate": 0.0,
+      "unknown_rate": 0.0,
+      "tokens": {
+        "prompt_total": 25104,
+        "completion_total": 37760,
+        "total": 62864,
+        "prompt_mean": 965.5,
+        "completion_mean": 1452.3,
+        "total_mean": 2417.8,
+        "completion_per_correct": 1510.4,
+        "total_per_correct": 2514.6
+      },
+      "latency_ms": {
+        "mean": 63848.4,
+        "p50": 61809,
+        "p95": 77225,
+        "total_s": 1660.1
+      },
+      "calibration": {
+        "ece": 0.0385,
+        "brier": 0.0385,
+        "bins": [
+          {
+            "bin": 9,
+            "n": 26,
+            "avg_confidence": 1.0,
+            "accuracy": 0.9615
+          }
+        ]
+      },
+      "by_domain": {
+        "math": {
+          "n": 26,
+          "correct": 25,
+          "accuracy": 0.9615,
+          "ci_low": 0.8111,
+          "ci_high": 0.9932
+        }
+      },
+      "extract_rules": {
+        "boxed": 26
+      },
+      "position_consistency": null,
+      "per_seed_accuracy": {
+        "0": 0.9615
+      },
+      "errors": 0
+    },
+    "latent-mas-slora": {
+      "n": 26,
+      "correct": 24,
+      "accuracy": 0.9231,
+      "ci": {
+        "method": "wilson",
+        "low": 0.7586,
+        "high": 0.9786,
+        "level": 0.95
+      },
+      "bootstrap_ci": {
+        "low": 0.8077,
+        "high": 1.0,
+        "n_boot": 2000
+      },
+      "parse_failure_rate": 0.0,
+      "strict_accuracy": 0.9231,
+      "format_violation_rate": 0.0,
+      "unknown_rate": 0.0,
+      "tokens": {
+        "prompt_total": 16752,
+        "completion_total": 6138,
+        "total": 22890,
+        "prompt_mean": 644.3,
+        "completion_mean": 236.1,
+        "total_mean": 880.4,
+        "completion_per_correct": 255.8,
+        "total_per_correct": 953.8
+      },
+      "latency_ms": {
+        "mean": 11517.8,
+        "p50": 11419,
+        "p95": 15786,
+        "total_s": 299.5
+      },
+      "calibration": {
+        "ece": 0.0769,
+        "brier": 0.0769,
+        "bins": [
+          {
+            "bin": 9,
+            "n": 26,
+            "avg_confidence": 1.0,
+            "accuracy": 0.9231
+          }
+        ]
+      },
+      "by_domain": {
+        "math": {
+          "n": 26,
+          "correct": 24,
+          "accuracy": 0.9231,
+          "ci_low": 0.7586,
+          "ci_high": 0.9786
+        }
+      },
+      "extract_rules": {
+        "boxed": 26
+      },
+      "position_consistency": null,
+      "per_seed_accuracy": {
+        "0": 0.9231
+      },
+      "errors": 0
+    }
+  },
+  "reference_method": "baseline-cot",
+  "comparisons": {
+    "baseline-direct": {
+      "vs": "baseline-cot",
+      "n_paired": 26,
+      "accuracy": 0.2308,
+      "reference_accuracy": 0.9615,
+      "delta": -0.7307692307692308,
+      "ci_low": -0.8846153846153846,
+      "ci_high": -0.5384615384615385,
+      "mcnemar": {
+        "a_only": 0,
+        "b_only": 19,
+        "discordant": 19,
+        "p_value": 4e-06,
+        "test": "exact_binomial"
+      }
+    },
+    "baseline-judger": {
+      "vs": "baseline-cot",
+      "n_paired": 26,
+      "accuracy": 0.3462,
+      "reference_accuracy": 0.9615,
+      "delta": -0.6153846153846154,
+      "ci_low": -0.8076923076923077,
+      "ci_high": -0.42307692307692313,
+      "mcnemar": {
+        "a_only": 0,
+        "b_only": 16,
+        "discordant": 16,
+        "p_value": 3.1e-05,
+        "test": "exact_binomial"
+      }
+    },
+    "text-mas": {
+      "vs": "baseline-cot",
+      "n_paired": 26,
+      "accuracy": 0.9615,
+      "reference_accuracy": 0.9615,
+      "delta": 0.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "mcnemar": {
+        "a_only": 0,
+        "b_only": 0,
+        "discordant": 0,
+        "p_value": 1.0,
+        "test": "none"
+      }
+    },
+    "latent-mas-slora": {
+      "vs": "baseline-cot",
+      "n_paired": 26,
+      "accuracy": 0.9231,
+      "reference_accuracy": 0.9615,
+      "delta": -0.038461538461538436,
+      "ci_low": -0.11538461538461542,
+      "ci_high": 0.0,
+      "mcnemar": {
+        "a_only": 0,
+        "b_only": 1,
+        "discordant": 1,
+        "p_value": 1.0,
+        "test": "exact_binomial"
+      }
+    }
+  }
+}

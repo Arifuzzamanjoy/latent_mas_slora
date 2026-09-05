@@ -26,6 +26,9 @@ class Sample:
     pred: str
     extract_rule: str = "raw"
     extract_failed: bool = False
+    # False when the answer was recovered from prose because the model did not
+    # emit the requested \boxed{} format. Scored separately: see eval/extract.py.
+    extract_strict: bool = True
     prompt_tokens: int = 0
     completion_tokens: int = 0
     latency_ms: int = 0
@@ -56,6 +59,7 @@ class Method:
             pred=ex.answer,
             extract_rule=ex.rule,
             extract_failed=ex.failed,
+            extract_strict=ex.strict,
             prompt_tokens=out.prompt_tokens,
             completion_tokens=out.completion_tokens,
             latency_ms=out.latency_ms,

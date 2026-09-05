@@ -1,0 +1,21 @@
+
+================================================================================================
+EVAL postfix-gsm8k
+================================================================================================
+model      : Qwen/Qwen2.5-7B-Instruct (bfloat16)
+dataset    : gsm8k  n=26  fraction=0.02  limit=None  offset=0  data_seed=0
+domains    : {'math': 26}
+decoding   : temp=0.0 top_p=0.9 max_new_tokens=512 seeds=[0] sc=1
+protocol   : scoring=generate permute=none latent_steps=10 router=True
+wall clock : 449.3s
+
+method                 n     acc  strict           95% CI  parse fail  fmt viol  tok/item  tok/correct   p50 ms    ECE
+--------------------------------------------------------------------------------------------------------------------
+baseline-cot          26   96.2%   96.2%   [81.1%, 99.3%]        0.0%      0.0%       395        411.2     5711  0.038
+latent-mas-slora      26   96.2%   96.2%   [81.1%, 99.3%]        0.0%      0.0%       883        918.0    10391  0.038
+
+Paired comparisons vs baseline-cot (McNemar, same items):
+------------------------------------------------------------------------------------------------
+method                 Δacc          95% CI of Δ   wins  losses          p
+latent-mas-slora      +0.0%       [+0.0%, +0.0%]      0       0     1.0000
+================================================================================================

@@ -1,0 +1,57 @@
+{
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "device": "cuda",
+  "dtype": "bfloat16",
+  "cache_dir": "/home/caches",
+  "dataset": "gsm8k",
+  "split": null,
+  "fraction": 0.02,
+  "limit": null,
+  "offset": 0,
+  "data_seed": 0,
+  "shuffle": true,
+  "stratify_by": "domain",
+  "min_per_group": 1,
+  "methods": [
+    "baseline-cot",
+    "latent-mas-slora"
+  ],
+  "method_args": {
+    "latent-mas-slora": {
+      "latent_steps": 4
+    }
+  },
+  "max_new_tokens": 512,
+  "temperature": 0.0,
+  "top_p": 0.9,
+  "seeds": [
+    0
+  ],
+  "self_consistency": 1,
+  "latent_steps": 10,
+  "agents": null,
+  "use_router": true,
+  "adaptive_latent_steps": true,
+  "latent_steps_explicit": false,
+  "kv_handoff": true,
+  "prompt_style": "reason_first",
+  "adapter_policy": "logo",
+  "top_k": 3,
+  "loras": [],
+  "permute_options": "none",
+  "scoring": "generate",
+  "out_dir": "eval_runs",
+  "run_name": "postfix-gsm8k",
+  "resume": true,
+  "save_generations": true,
+  "report_markdown": true,
+  "plots": true,
+  "live_plot": false,
+  "live_every": 5,
+  "progress_every": 1,
+  "dry_run": false,
+  "bootstrap": 2000,
+  "ci": 0.95,
+  "compare_to": null,
+  "fingerprint": "5f593521dc51"
+}

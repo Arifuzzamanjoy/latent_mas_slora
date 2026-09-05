@@ -1,0 +1,221 @@
+{
+  "run": "20260905-195324-458ba3227aec",
+  "config": {
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "device": "cuda",
+    "dtype": "bfloat16",
+    "cache_dir": "/home/caches",
+    "dataset": "gsm8k",
+    "split": null,
+    "fraction": 0.02,
+    "limit": null,
+    "offset": 0,
+    "data_seed": 0,
+    "shuffle": true,
+    "stratify_by": "domain",
+    "min_per_group": 1,
+    "methods": [
+      "baseline-cot",
+      "latent-mas-slora"
+    ],
+    "method_args": {
+      "latent-mas-slora": {
+        "latent_steps": 4
+      }
+    },
+    "max_new_tokens": 512,
+    "temperature": 0.0,
+    "top_p": 0.9,
+    "seeds": [
+      0
+    ],
+    "self_consistency": 1,
+    "latent_steps": 10,
+    "agents": null,
+    "use_router": true,
+    "adaptive_latent_steps": true,
+    "kv_handoff": true,
+    "prompt_style": "reason_first",
+    "adapter_policy": "logo",
+    "top_k": 3,
+    "loras": [],
+    "permute_options": "none",
+    "scoring": "generate",
+    "out_dir": "eval_runs",
+    "run_name": null,
+    "resume": true,
+    "save_generations": true,
+    "report_markdown": true,
+    "plots": true,
+    "live_plot": false,
+    "live_every": 5,
+    "progress_every": 1,
+    "dry_run": false,
+    "bootstrap": 2000,
+    "ci": 0.95,
+    "compare_to": null,
+    "fingerprint": "458ba3227aec"
+  },
+  "segment": {
+    "spec": "gsm8k",
+    "n": 26,
+    "by_domain": {
+      "math": 26
+    },
+    "by_source": {
+      "gsm8k": 26
+    },
+    "by_task_type": {
+      "numeric": 26
+    }
+  },
+  "wall_clock_s": 526.4,
+  "methods": {
+    "baseline-cot": {
+      "n": 26,
+      "correct": 25,
+      "accuracy": 0.9615,
+      "ci": {
+        "method": "wilson",
+        "low": 0.8111,
+        "high": 0.9932,
+        "level": 0.95
+      },
+      "bootstrap_ci": {
+        "low": 0.8846,
+        "high": 1.0,
+        "n_boot": 2000
+      },
+      "parse_failure_rate": 0.0,
+      "unknown_rate": 0.0,
+      "tokens": {
+        "prompt_total": 3402,
+        "completion_total": 6878,
+        "total": 10280,
+        "prompt_mean": 130.8,
+        "completion_mean": 264.5,
+        "total_mean": 395.4,
+        "completion_per_correct": 275.1,
+        "total_per_correct": 411.2
+      },
+      "latency_ms": {
+        "mean": 5906.4,
+        "p50": 5749,
+        "p95": 8125,
+        "total_s": 153.6
+      },
+      "calibration": {
+        "ece": 0.0385,
+        "brier": 0.0385,
+        "bins": [
+          {
+            "bin": 9,
+            "n": 26,
+            "avg_confidence": 1.0,
+            "accuracy": 0.9615
+          }
+        ]
+      },
+      "by_domain": {
+        "math": {
+          "n": 26,
+          "correct": 25,
+          "accuracy": 0.9615,
+          "ci_low": 0.8111,
+          "ci_high": 0.9932
+        }
+      },
+      "extract_rules": {
+        "boxed": 26
+      },
+      "position_consistency": null,
+      "per_seed_accuracy": {
+        "0": 0.9615
+      },
+      "errors": 0
+    },
+    "latent-mas-slora": {
+      "n": 26,
+      "correct": 20,
+      "accuracy": 0.7692,
+      "ci": {
+        "method": "wilson",
+        "low": 0.5795,
+        "high": 0.8897,
+        "level": 0.95
+      },
+      "bootstrap_ci": {
+        "low": 0.6154,
+        "high": 0.9231,
+        "n_boot": 2000
+      },
+      "parse_failure_rate": 0.0,
+      "unknown_rate": 0.0,
+      "tokens": {
+        "prompt_total": 15796,
+        "completion_total": 7645,
+        "total": 23441,
+        "prompt_mean": 607.5,
+        "completion_mean": 294.0,
+        "total_mean": 901.6,
+        "completion_per_correct": 382.2,
+        "total_per_correct": 1172.0
+      },
+      "latency_ms": {
+        "mean": 12597.4,
+        "p50": 12367,
+        "p95": 16795,
+        "total_s": 327.5
+      },
+      "calibration": {
+        "ece": 0.2308,
+        "brier": 0.2308,
+        "bins": [
+          {
+            "bin": 9,
+            "n": 26,
+            "avg_confidence": 1.0,
+            "accuracy": 0.7692
+          }
+        ]
+      },
+      "by_domain": {
+        "math": {
+          "n": 26,
+          "correct": 20,
+          "accuracy": 0.7692,
+          "ci_low": 0.5795,
+          "ci_high": 0.8897
+        }
+      },
+      "extract_rules": {
+        "boxed_text": 4,
+        "boxed": 22
+      },
+      "position_consistency": null,
+      "per_seed_accuracy": {
+        "0": 0.7692
+      },
+      "errors": 0
+    }
+  },
+  "reference_method": "baseline-cot",
+  "comparisons": {
+    "latent-mas-slora": {
+      "vs": "baseline-cot",
+      "n_paired": 26,
+      "accuracy": 0.7692,
+      "reference_accuracy": 0.9615,
+      "delta": -0.1923076923076923,
+      "ci_low": -0.34615384615384615,
+      "ci_high": -0.07692307692307687,
+      "mcnemar": {
+        "a_only": 0,
+        "b_only": 5,
+        "discordant": 5,
+        "p_value": 0.0625,
+        "test": "exact_binomial"
+      }
+    }
+  }
+}

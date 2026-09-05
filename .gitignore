@@ -58,3 +58,10 @@ eval_runs/
 # Tooling caches
 .ruff_cache/
 .pytest_cache/
+
+# published evidence cited in README/EVAL.md
+!eval_runs/
+eval_runs/*
+!eval_runs/20260905-195324-458ba3227aec/
+!eval_runs/postfix-gsm8k/
+!eval_runs/all-baselines-gsm8k/
