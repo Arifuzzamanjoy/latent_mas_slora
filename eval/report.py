@@ -261,12 +261,18 @@ def render_markdown(summary: Dict[str, Any]) -> str:
     return "\n".join(L)
 
 
-def write_reports(summary: Dict[str, Any], run_dir: Path, markdown: bool = True) -> None:
+def write_reports(summary: Dict[str, Any], run_dir: Path, markdown: bool = True,
+                  plots: bool = False) -> None:
     console = render_console(summary)
     print(console)
     (run_dir / "report.txt").write_text(console)
     if markdown:
         (run_dir / "report.md").write_text(render_markdown(summary))
+    if plots:
+        from .plots import make_all
+        made = make_all(summary, run_dir)
+        if made:
+            print(f"[plots] {len(made)} figures -> {run_dir}")
 
 
 def report_only(run_dir: str) -> Dict[str, Any]:
@@ -280,5 +286,7 @@ def report_only(run_dir: str) -> Dict[str, Any]:
     summary = build_summary(cfg, records, items, 0.0, d.name)
     summary["segment"] = {"spec": seg.get("spec", cfg.dataset), **{k: v for k, v in seg.items() if k != "item_ids"}}
     (d / "summary.json").write_text(json.dumps(summary, indent=2, default=str))
-    write_reports(summary, d, markdown=True)
+    # --report-only regenerates everything derived from records.jsonl,
+    # figures included - that is what "derived" is supposed to mean
+    write_reports(summary, d, markdown=True, plots=True)
     return summary

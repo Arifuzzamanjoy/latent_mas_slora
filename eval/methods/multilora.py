@@ -75,29 +75,65 @@ class MultiLoRA(Method):
 
     # -- adapter selection -------------------------------------------------
     def _candidates(self) -> List[str]:
-        return [self.system._pool.get(n).adapter_name
-                for n in self.system._pool.list_agents()]
+        """
+        Every adapter resident on the model, not just the role adapters.
+
+        Adapters pulled in with --loras are registered on the model but belong to
+        no agent, so a pool-only list made them unreachable: they would load,
+        occupy memory, and never participate. Composition is exactly where an
+        externally trained adapter is useful, so it is included here.
+        """
+        names = [self.system._pool.get(n).adapter_name
+                 for n in self.system._pool.list_agents()]
+        for extra in getattr(self.system.model, "peft_config", {}):
+            if extra not in names and extra != MIX_ADAPTER:
+                names.append(extra)
+        return names
 
     def _probe(self, input_ids, attn) -> List[Tuple[str, float]]:
-        """One prefill per adapter; score it from the activation signal."""
+        """
+        Score each adapter by how much it *changes* the computation.
+
+        LoGo's signal is the norm of the LoRA activations, i.e. the adapter's
+        contribution - not the norm of the final hidden state. Scoring the latter
+        is actively wrong here: an identity adapter inherits the base model's
+        norm, while a trained adapter shifts it in either direction, so the
+        untrained adapters can outrank the real one. Measuring the deviation
+        from the base model instead makes an identity adapter score exactly 0.0
+        by construction, so it can never win.
+        """
         import torch
+
+        def last_hidden():
+            with torch.no_grad():
+                out = self.system.model(input_ids=input_ids, attention_mask=attn,
+                                        output_hidden_states=True, return_dict=True)
+            return out.hidden_states[-1][:, -1, :].float(), out.logits[:, -1, :].float()
+
+        model = self.system.model
+        try:
+            with model.disable_adapter():
+                h_base, lg_base = last_hidden()
+        except Exception:                      # no PEFT wrapper: nothing to compare
+            h_base, lg_base = last_hidden()
 
         scores: List[Tuple[str, float]] = []
         for adapter in self._candidates():
             try:
-                self.system.model.set_adapter(adapter)
+                model.set_adapter(adapter)
             except Exception:
                 continue
-            with torch.no_grad():
-                out = self.system.model(input_ids=input_ids, attention_mask=attn,
-                                        output_hidden_states=True, return_dict=True)
+            h_a, lg_a = last_hidden()
             if self.score_mode == "entropy":
-                logp = torch.log_softmax(out.logits[:, -1, :].float(), dim=-1)
-                ent = -(logp.exp() * logp).sum(-1).item()
-                score = -ent            # confident (low entropy) ranks higher
+                lp_a = torch.log_softmax(lg_a, dim=-1)
+                lp_b = torch.log_softmax(lg_base, dim=-1)
+                # KL(adapter || base): how much the adapter moves the distribution
+                score = float((lp_a.exp() * (lp_a - lp_b)).sum(-1).item())
             else:
-                score = float(out.hidden_states[-1][:, -1, :].float().norm().item())
+                score = float((h_a - h_base).norm().item())
             scores.append((adapter, score))
+        # deterministic order so ties never depend on registration order
+        scores.sort(key=lambda kv: (-kv[1], kv[0]))
         return scores
 
     @staticmethod
@@ -113,13 +149,19 @@ class MultiLoRA(Method):
         if len(scores) < 2:
             return False
         vals = [v for _, v in scores]
+        if max(abs(v) for v in vals) < 1e-9:
+            return True                      # every adapter contributes nothing
         spread = max(vals) - min(vals)
         scale = max(abs(v) for v in vals) or 1.0
         return spread / scale < 1e-6
 
     def _compose(self, scores: List[Tuple[str, float]]) -> Tuple[List[str], List[float]]:
         """Top-k by score, weights normalized over the survivors."""
-        ranked = sorted(scores, key=lambda kv: kv[1], reverse=True)[:max(1, self.top_k)]
+        # deterministic: score desc, then name - never registration order
+        ranked = sorted(scores, key=lambda kv: (-kv[1], kv[0]))
+        # an adapter that changes nothing is not a candidate while a real one exists
+        live = [kv for kv in ranked if kv[1] > 1e-9]
+        ranked = (live or ranked)[:max(1, self.top_k)]
         names = [n for n, _ in ranked]
         raw = [s for _, s in ranked]
         lo = min(raw)

@@ -365,3 +365,45 @@ def test_judger_prompt_styles_differ_as_intended():
     assert "FIRST, then provide reasoning" in af.user_prompt_template
     assert "FIRST, then provide reasoning" not in rf.user_prompt_template
     assert "A, B, C, or D" not in rf.system_prompt              # works for numeric too
+
+
+def test_multilora_candidates_include_externally_loaded_adapters():
+    """--loras adapters must be able to participate, not just sit in memory."""
+    from eval.methods.multilora import MultiLoRA
+
+    class _Pool:
+        def list_agents(self): return ["Planner"]
+        def get(self, n): return type("C", (), {"adapter_name": "planner_lora"})()
+
+    class _Model:
+        peft_config = {"planner_lora": 1, "reasoning_lora": 1, "_logo_mix": 1}
+
+    m = MultiLoRA.__new__(MultiLoRA)
+    m.system = type("S", (), {"_pool": _Pool(), "model": _Model()})()
+    got = m._candidates()
+    assert "reasoning_lora" in got, "externally loaded adapter must be reachable"
+    assert "_logo_mix" not in got, "the merge target must never be a candidate"
+
+
+def test_compose_never_picks_an_identity_adapter_over_a_real_one():
+    """Regression: top_k=1 used to select an untrained adapter by tie-break."""
+    from eval.methods.multilora import MultiLoRA
+    m = MultiLoRA.__new__(MultiLoRA)
+    m.top_k = 1
+    names, _ = m._compose([("planner_lora", 0.0), ("medical_lora", 0.0),
+                           ("reasoning_lora", 149.9)])
+    assert names == ["reasoning_lora"]
+
+
+def test_compose_ties_break_deterministically_by_name():
+    from eval.methods.multilora import MultiLoRA
+    m = MultiLoRA.__new__(MultiLoRA)
+    m.top_k = 2
+    a, _ = m._compose([("b_lora", 5.0), ("a_lora", 5.0), ("c_lora", 5.0)])
+    b, _ = m._compose([("c_lora", 5.0), ("b_lora", 5.0), ("a_lora", 5.0)])
+    assert a == b == ["a_lora", "b_lora"], "order must not depend on registration order"
+
+
+def test_all_zero_scores_are_degenerate():
+    from eval.methods.multilora import MultiLoRA
+    assert MultiLoRA.is_degenerate([("a", 0.0), ("b", 0.0), ("c", 0.0)])
