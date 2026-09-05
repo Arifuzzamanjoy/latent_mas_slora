@@ -132,8 +132,11 @@ class _MASMethod(Method):
                 "kv_handoff": self.args.get("kv_handoff", True),
                 "prompt_style": self.args.get("prompt_style", "reason_first"),
                 "latent_steps_total": res.latent_steps_total,
+                # keep the adapter on each step: the chain's whole claim is that a
+                # different LoRA is active at each hop, so the trace has to show it
                 "per_agent": [
-                    {k: o.get(k) for k in ("agent", "output_tokens", "latency_ms", "mode")}
+                    {k: o.get(k) for k in ("agent", "adapter", "output_tokens",
+                                           "latency_ms", "mode", "latent_prefix_len")}
                     for o in res.agent_outputs
                 ],
             },
