@@ -1,0 +1,60 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "latent-mas-slora"
+version = "0.2.0"
+description = "Latent-space multi-agent reasoning with composable LoRA adapters, and an evaluation harness for measuring whether it works"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = [
+    "torch>=2.1.0",
+    "transformers>=4.40.0",
+    "peft>=0.10.0",
+    "accelerate>=0.27.0",
+    "safetensors>=0.4.0",
+    "huggingface_hub>=0.21.0",
+    "numpy>=1.24.0",
+    "tqdm>=4.66.0",
+]
+
+[project.optional-dependencies]
+eval = ["datasets>=2.18.0", "matplotlib>=3.7.0", "sentence-transformers>=2.2.0"]
+quant = ["bitsandbytes>=0.43.0"]
+dev = ["pytest>=8.0.0", "ruff>=0.6.0"]
+
+[project.scripts]
+latentmas-eval = "run_eval:main"
+
+[tool.setuptools]
+packages = ["src", "src.agents", "src.core", "src.lora", "src.pipelines",
+            "src.routing", "eval", "eval.methods"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q --strict-markers"
+markers = ["gpu: requires a CUDA device and model weights"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+# Markdown is excluded: the formatter rewrites Python snippets inside docs,
+# collapsing comment alignment that is deliberate there.
+exclude = ["venv", ".venv", "eval_runs", "*.md"]
+
+[tool.ruff.lint]
+# Correctness and hygiene, not style modernization: pyupgrade (UP) would rewrite
+# typing annotations across the whole codebase for no behavioural gain.
+select = ["E", "F", "W", "I", "B"]
+ignore = [
+    "E501",  # line length is the formatter's job; prose in docstrings exceeds it
+    "B008",  # not applicable: no framework-style default calls here
+    "B905",  # zip(strict=) would change runtime behaviour on ragged inputs
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["E402"]   # sys.path setup must precede imports
+"tools/*" = ["E402"]
+"run_eval.py" = ["E402"]

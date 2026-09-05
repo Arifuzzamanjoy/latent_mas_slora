@@ -5,9 +5,9 @@ Everything the harness does is a function of an EvalConfig, and the config is
 written into every result file so a run can be reproduced from its output.
 """
 
-import json
 import hashlib
-from dataclasses import dataclass, field, asdict
+import json
+from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -15,8 +15,9 @@ from typing import Any, Dict, List, Optional
 @dataclass
 class GenSettings:
     """Decoding settings applied uniformly to every method."""
+
     max_new_tokens: int = 512
-    temperature: float = 0.0          # 0.0 -> greedy (deterministic)
+    temperature: float = 0.0  # 0.0 -> greedy (deterministic)
     top_p: float = 0.9
     seed: int = 0
 
@@ -30,7 +31,7 @@ class EvalConfig:
     # ── model ──
     model: str = "Qwen/Qwen2.5-7B-Instruct"
     device: str = "cuda"
-    dtype: str = "bfloat16"           # bfloat16 | float16 | float32 | 4bit
+    dtype: str = "bfloat16"  # bfloat16 | float16 | float32 | 4bit
     cache_dir: str = "/home/caches"
 
     # ── data ──
@@ -67,8 +68,8 @@ class EvalConfig:
     loras: List[str] = field(default_factory=list)
 
     # ── protocol ──
-    permute_options: str = "none"     # none | cyclic | all
-    scoring: str = "generate"         # generate | loglikelihood
+    permute_options: str = "none"  # none | cyclic | all
+    scoring: str = "generate"  # generate | loglikelihood
 
     # ── output ──
     out_dir: str = "eval_runs"
@@ -112,8 +113,16 @@ class EvalConfig:
     def fingerprint(self) -> str:
         """Stable hash of the settings that affect results (not of output paths)."""
         d = asdict(self)
-        for k in ("out_dir", "run_name", "resume", "save_generations",
-                  "report_markdown", "bootstrap", "ci", "compare_to"):
+        for k in (
+            "out_dir",
+            "run_name",
+            "resume",
+            "save_generations",
+            "report_markdown",
+            "bootstrap",
+            "ci",
+            "compare_to",
+        ):
             d.pop(k, None)
         return hashlib.sha256(json.dumps(d, sort_keys=True, default=str).encode()).hexdigest()[:12]
 

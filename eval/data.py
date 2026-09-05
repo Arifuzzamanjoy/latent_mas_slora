@@ -10,9 +10,9 @@ always a subset of the 50% slice for the same seed.
 """
 
 import json
-import re
 import random
-from dataclasses import dataclass, field, asdict
+import re
+from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -23,12 +23,12 @@ LETTERS = "ABCDEFGHIJ"
 @dataclass
 class EvalItem:
     id: str
-    question: str                       # fully rendered prompt body (with choices)
-    gold: str                           # letter for mcq, string for numeric/text
-    choices: List[str] = field(default_factory=list)   # choice texts, no letters
+    question: str  # fully rendered prompt body (with choices)
+    gold: str  # letter for mcq, string for numeric/text
+    choices: List[str] = field(default_factory=list)  # choice texts, no letters
     domain: str = "general"
     source: str = "local"
-    task_type: str = "mcq"              # mcq | numeric | text
+    task_type: str = "mcq"  # mcq | numeric | text
     metadata: Dict[str, Any] = field(default_factory=dict)
 
     @property
@@ -45,12 +45,19 @@ class EvalItem:
         if gold_idx >= 0:
             new_gold = LETTERS[choice_order.index(gold_idx)]
         stem = self.metadata.get("stem", self.question.split("\n" + LETTERS[0] + ".")[0])
-        body = stem.rstrip() + "\n" + "\n".join(
-            f"{LETTERS[i]}. {c}" for i, c in enumerate(new_choices)
+        body = (
+            stem.rstrip()
+            + "\n"
+            + "\n".join(f"{LETTERS[i]}. {c}" for i, c in enumerate(new_choices))
         )
         return EvalItem(
-            id=self.id, question=body, gold=new_gold, choices=new_choices,
-            domain=self.domain, source=self.source, task_type=self.task_type,
+            id=self.id,
+            question=body,
+            gold=new_gold,
+            choices=new_choices,
+            domain=self.domain,
+            source=self.source,
+            task_type=self.task_type,
             metadata={**self.metadata, "permutation": choice_order, "orig_gold": self.gold},
         )
 
@@ -63,23 +70,27 @@ def _render(stem: str, choices: List[str]) -> str:
 
 # ─── Local files ─────────────────────────────────────────────────────────────
 
+
 def _parse_local_record(rec: Dict[str, Any], idx: int, source: str) -> EvalItem:
     q = rec.get("question") or rec.get("prompt") or ""
     choices = rec.get("choices") or rec.get("options") or []
-    if isinstance(choices, dict):                     # {"A": "...", "B": "..."}
+    if isinstance(choices, dict):  # {"A": "...", "B": "..."}
         choices = [choices[k] for k in sorted(choices)]
 
     gold = str(rec.get("gold_letter") or rec.get("answer") or rec.get("gold") or "").strip()
-    task_type = rec.get("task_type") or ("mcq" if re.fullmatch(r"[A-J]", gold.upper()) else "numeric")
+    task_type = rec.get("task_type") or (
+        "mcq" if re.fullmatch(r"[A-J]", gold.upper()) else "numeric"
+    )
 
     stem = q
-    if not choices and "\n" in q:                     # choices embedded in the question text
+    if not choices and "\n" in q:  # choices embedded in the question text
         lines = q.split("\n")
-        opt_idx = next((i for i, l in enumerate(lines)
-                        if re.match(r"^\s*[A-J][.)]\s", l)), None)
+        opt_idx = next(
+            (i for i, line in enumerate(lines) if re.match(r"^\s*[A-J][.)]\s", line)), None
+        )
         if opt_idx is not None:
             stem = "\n".join(lines[:opt_idx])
-            choices = [re.sub(r"^\s*[A-J][.)]\s*", "", l) for l in lines[opt_idx:] if l.strip()]
+            choices = [re.sub(r"^\s*[A-J][.)]\s*", "", ln) for ln in lines[opt_idx:] if ln.strip()]
 
     if task_type == "mcq":
         m = re.search(r"([A-J])", gold.upper())
@@ -105,7 +116,7 @@ def load_local(path: str) -> List[EvalItem]:
         raise FileNotFoundError(f"dataset file not found: {p}")
 
     if p.suffix == ".jsonl":
-        records = [json.loads(l) for l in p.read_text().splitlines() if l.strip()]
+        records = [json.loads(line) for line in p.read_text().splitlines() if line.strip()]
     else:
         records = json.loads(p.read_text())
         if isinstance(records, dict):
@@ -116,13 +127,16 @@ def load_local(path: str) -> List[EvalItem]:
 
 # ─── HuggingFace datasets ────────────────────────────────────────────────────
 
+
 def _hf(path: str, name: Optional[str], split: str, cache_dir: Optional[str]):
     from datasets import load_dataset as hf_load
+
     return hf_load(path, name, split=split, cache_dir=cache_dir)
 
 
-def load_hf(spec: str, split: Optional[str], cache_dir: Optional[str],
-            max_items: Optional[int] = None) -> List[EvalItem]:
+def load_hf(
+    spec: str, split: Optional[str], cache_dir: Optional[str], max_items: Optional[int] = None
+) -> List[EvalItem]:
     """Load one of the registered HF benchmarks. `spec` may carry a suffix,
     e.g. mmlu:anatomy."""
     base, _, arg = spec.partition(":")
@@ -134,17 +148,35 @@ def load_hf(spec: str, split: Optional[str], cache_dir: Optional[str],
             opts = r["options"]
             choices = [opts[k] for k in sorted(opts)]
             gold = r.get("answer_idx") or ""
-            items.append(EvalItem(f"medqa-{i}", _render(r["question"], choices),
-                                  str(gold).strip().upper(), choices, "medical", "medqa",
-                                  "mcq", {"stem": r["question"]}))
+            items.append(
+                EvalItem(
+                    f"medqa-{i}",
+                    _render(r["question"], choices),
+                    str(gold).strip().upper(),
+                    choices,
+                    "medical",
+                    "medqa",
+                    "mcq",
+                    {"stem": r["question"]},
+                )
+            )
 
     elif base == "medmcqa":
         ds = _hf("openlifescienceai/medmcqa", None, split or "validation", cache_dir)
         for i, r in enumerate(ds):
             choices = [r["opa"], r["opb"], r["opc"], r["opd"]]
-            items.append(EvalItem(f"medmcqa-{i}", _render(r["question"], choices),
-                                  LETTERS[int(r["cop"])], choices, "medical", "medmcqa",
-                                  "mcq", {"stem": r["question"], "subject": r.get("subject_name")}))
+            items.append(
+                EvalItem(
+                    f"medmcqa-{i}",
+                    _render(r["question"], choices),
+                    LETTERS[int(r["cop"])],
+                    choices,
+                    "medical",
+                    "medmcqa",
+                    "mcq",
+                    {"stem": r["question"], "subject": r.get("subject_name")},
+                )
+            )
 
     elif base == "pubmedqa":
         ds = _hf("qiaojin/PubMedQA", arg or "pqa_labeled", split or "train", cache_dir)
@@ -153,26 +185,52 @@ def load_hf(spec: str, split: Optional[str], cache_dir: Optional[str],
             ctx = " ".join(r["context"]["contexts"]) if isinstance(r.get("context"), dict) else ""
             stem = f"{ctx}\n\nQuestion: {r['question']}"
             gold = LETTERS[choices.index(r["final_decision"])]
-            items.append(EvalItem(f"pubmedqa-{i}", _render(stem, choices), gold, choices,
-                                  "medical", "pubmedqa", "mcq", {"stem": stem}))
+            items.append(
+                EvalItem(
+                    f"pubmedqa-{i}",
+                    _render(stem, choices),
+                    gold,
+                    choices,
+                    "medical",
+                    "pubmedqa",
+                    "mcq",
+                    {"stem": stem},
+                )
+            )
 
     elif base == "mmlu":
         ds = _hf("cais/mmlu", arg or "all", split or "test", cache_dir)
         for i, r in enumerate(ds):
             choices = list(r["choices"])
-            items.append(EvalItem(f"mmlu-{i}", _render(r["question"], choices),
-                                  LETTERS[int(r["answer"])], choices,
-                                  r.get("subject", "general"), "mmlu", "mcq",
-                                  {"stem": r["question"], "subject": r.get("subject")}))
+            items.append(
+                EvalItem(
+                    f"mmlu-{i}",
+                    _render(r["question"], choices),
+                    LETTERS[int(r["answer"])],
+                    choices,
+                    r.get("subject", "general"),
+                    "mmlu",
+                    "mcq",
+                    {"stem": r["question"], "subject": r.get("subject")},
+                )
+            )
 
     elif base == "mmlu_pro":
         ds = _hf("TIGER-Lab/MMLU-Pro", None, split or "test", cache_dir)
         for i, r in enumerate(ds):
             choices = list(r["options"])
-            items.append(EvalItem(f"mmlupro-{i}", _render(r["question"], choices),
-                                  str(r["answer"]).strip().upper(), choices,
-                                  r.get("category", "general"), "mmlu_pro", "mcq",
-                                  {"stem": r["question"]}))
+            items.append(
+                EvalItem(
+                    f"mmlupro-{i}",
+                    _render(r["question"], choices),
+                    str(r["answer"]).strip().upper(),
+                    choices,
+                    r.get("category", "general"),
+                    "mmlu_pro",
+                    "mcq",
+                    {"stem": r["question"]},
+                )
+            )
 
     elif base == "arc":
         ds = _hf("allenai/ai2_arc", arg or "ARC-Challenge", split or "test", cache_dir)
@@ -181,35 +239,77 @@ def load_hf(spec: str, split: Optional[str], cache_dir: Optional[str],
             labels = list(r["choices"]["label"])
             key = str(r["answerKey"])
             gold = LETTERS[labels.index(key)] if key in labels else key
-            items.append(EvalItem(f"arc-{i}", _render(r["question"], choices), gold, choices,
-                                  "reasoning", "arc", "mcq", {"stem": r["question"]}))
+            items.append(
+                EvalItem(
+                    f"arc-{i}",
+                    _render(r["question"], choices),
+                    gold,
+                    choices,
+                    "reasoning",
+                    "arc",
+                    "mcq",
+                    {"stem": r["question"]},
+                )
+            )
 
     elif base == "gsm8k":
         ds = _hf("openai/gsm8k", arg or "main", split or "test", cache_dir)
         for i, r in enumerate(ds):
             gold = r["answer"].split("####")[-1].strip()
-            items.append(EvalItem(f"gsm8k-{i}", r["question"], gold, [], "math", "gsm8k",
-                                  "numeric", {"stem": r["question"], "rationale": r["answer"]}))
+            items.append(
+                EvalItem(
+                    f"gsm8k-{i}",
+                    r["question"],
+                    gold,
+                    [],
+                    "math",
+                    "gsm8k",
+                    "numeric",
+                    {"stem": r["question"], "rationale": r["answer"]},
+                )
+            )
 
     elif base == "math500":
         ds = _hf("HuggingFaceH4/MATH-500", None, split or "test", cache_dir)
         for i, r in enumerate(ds):
-            items.append(EvalItem(f"math500-{i}", r["problem"], str(r["answer"]), [],
-                                  "math", "math500", "numeric",
-                                  {"stem": r["problem"], "level": r.get("level")}))
+            items.append(
+                EvalItem(
+                    f"math500-{i}",
+                    r["problem"],
+                    str(r["answer"]),
+                    [],
+                    "math",
+                    "math500",
+                    "numeric",
+                    {"stem": r["problem"], "level": r.get("level")},
+                )
+            )
 
     elif base == "gpqa":
         ds = _hf("Idavidrein/gpqa", arg or "gpqa_diamond", split or "train", cache_dir)
         for i, r in enumerate(ds):
-            choices = [r["Correct Answer"], r["Incorrect Answer 1"],
-                       r["Incorrect Answer 2"], r["Incorrect Answer 3"]]
+            choices = [
+                r["Correct Answer"],
+                r["Incorrect Answer 1"],
+                r["Incorrect Answer 2"],
+                r["Incorrect Answer 3"],
+            ]
             rng = random.Random(i)
             order = list(range(4))
             rng.shuffle(order)
             shuffled = [choices[j] for j in order]
-            items.append(EvalItem(f"gpqa-{i}", _render(r["Question"], shuffled),
-                                  LETTERS[order.index(0)], shuffled, "reasoning", "gpqa",
-                                  "mcq", {"stem": r["Question"]}))
+            items.append(
+                EvalItem(
+                    f"gpqa-{i}",
+                    _render(r["Question"], shuffled),
+                    LETTERS[order.index(0)],
+                    shuffled,
+                    "reasoning",
+                    "gpqa",
+                    "mcq",
+                    {"stem": r["Question"]},
+                )
+            )
     else:
         raise ValueError(f"unknown dataset '{spec}'. See --list-datasets.")
 
@@ -219,19 +319,20 @@ def load_hf(spec: str, split: Optional[str], cache_dir: Optional[str],
 
 
 HF_DATASETS = {
-    "medqa":    "MedQA-USMLE 4-option (medical, test)",
-    "medmcqa":  "MedMCQA (medical, validation)",
+    "medqa": "MedQA-USMLE 4-option (medical, test)",
+    "medmcqa": "MedMCQA (medical, validation)",
     "pubmedqa": "PubMedQA pqa_labeled, yes/no/maybe (medical)",
-    "mmlu":     "MMLU, ':subject' selects a config e.g. mmlu:anatomy",
+    "mmlu": "MMLU, ':subject' selects a config e.g. mmlu:anatomy",
     "mmlu_pro": "MMLU-Pro, 10 options (lower guess floor)",
-    "arc":      "ARC-Challenge, ':ARC-Easy' for the easy split",
-    "gsm8k":    "GSM8K grade-school math (numeric)",
-    "math500":  "MATH-500 (numeric)",
-    "gpqa":     "GPQA, ':gpqa_diamond' by default (gated dataset)",
+    "arc": "ARC-Challenge, ':ARC-Easy' for the easy split",
+    "gsm8k": "GSM8K grade-school math (numeric)",
+    "math500": "MATH-500 (numeric)",
+    "gpqa": "GPQA, ':gpqa_diamond' by default (gated dataset)",
 }
 
 
 # ─── Entry point ─────────────────────────────────────────────────────────────
+
 
 def _slug(spec: str) -> str:
     """Filesystem/id-safe tag for a dataset spec: 'mmlu:college_mathematics' -> 'mmlu-college_mathematics'."""
@@ -259,8 +360,9 @@ def _ensure_unique_ids(items: List[EvalItem]) -> List[EvalItem]:
     return items
 
 
-def load_dataset(spec: str, split: Optional[str] = None,
-                 cache_dir: Optional[str] = None) -> List[EvalItem]:
+def load_dataset(
+    spec: str, split: Optional[str] = None, cache_dir: Optional[str] = None
+) -> List[EvalItem]:
     """
     spec forms:
       sample                  -> data/sample_data.json (the repo's 5 questions)
@@ -272,12 +374,12 @@ def load_dataset(spec: str, split: Optional[str] = None,
     if spec == "sample":
         return _ensure_unique_ids(load_local("data/sample_data.json"))
     if spec.startswith("local:"):
-        return _ensure_unique_ids(load_local(spec[len("local:"):]))
+        return _ensure_unique_ids(load_local(spec[len("local:") :]))
     if spec.startswith("mix:"):
         # Sub-datasets number their items independently (two MMLU subjects both
         # emit mmlu-0, mmlu-1, ...), so every part is namespaced by its spec.
         out: List[EvalItem] = []
-        for part in spec[len("mix:"):].split(","):
+        for part in spec[len("mix:") :].split(","):
             part = part.strip()
             tag = _slug(part)
             for it in load_dataset(part, split, cache_dir):
@@ -288,6 +390,7 @@ def load_dataset(spec: str, split: Optional[str] = None,
 
 
 # ─── Segmentation ────────────────────────────────────────────────────────────
+
 
 def segment(
     items: List[EvalItem],
@@ -337,12 +440,12 @@ def segment(
             keep: List[EvalItem] = []
             for _, g in sorted(groups.items()):
                 n = max(min_per_group, round(len(g) * fraction)) if g else 0
-                keep.extend(g[:n])           # prefix -> nested across fractions
+                keep.extend(g[:n])  # prefix -> nested across fractions
             order = {id(it): i for i, it in enumerate(pool)}
             pool = sorted(keep, key=lambda it: order[id(it)])
         else:
             n = max(1, round(len(pool) * fraction))
-            pool = pool[:n]   # never empty: a sub-item fraction still yields one
+            pool = pool[:n]  # never empty: a sub-item fraction still yields one
 
     if limit is not None:
         pool = pool[:limit]
@@ -352,6 +455,7 @@ def segment(
 
 def describe_segment(items: List[EvalItem]) -> Dict[str, Any]:
     from collections import Counter
+
     return {
         "n": len(items),
         "by_domain": dict(Counter(i.domain for i in items)),

@@ -13,23 +13,27 @@ independently so a run can isolate a single mechanism:
 """
 
 import time
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 
 from ..config import GenSettings
 from ..data import EvalItem
-from ..extract import UNKNOWN, extract_answer
+from ..extract import extract_answer
 from .base import Method, Sample
 
 DEFAULT_PIPELINES = {
-    "medical":   ["Planner", "MedicalExpert", "Critic", "Judger"],
-    "math":      ["Planner", "MathExpert", "Critic", "Judger"],
-    "code":      ["Planner", "CodeExpert", "Critic", "Judger"],
+    "medical": ["Planner", "MedicalExpert", "Critic", "Judger"],
+    "math": ["Planner", "MathExpert", "Critic", "Judger"],
+    "code": ["Planner", "CodeExpert", "Critic", "Judger"],
     "reasoning": ["Planner", "Critic", "Refiner", "Judger"],
-    "general":   ["Planner", "Critic", "Refiner", "Judger"],
+    "general": ["Planner", "Critic", "Refiner", "Judger"],
 }
 
 DEFAULT_LATENT_STEPS = {
-    "medical": 15, "math": 12, "code": 10, "reasoning": 12, "general": 8,
+    "medical": 15,
+    "math": 12,
+    "code": 10,
+    "reasoning": 12,
+    "general": 8,
 }
 
 
@@ -44,6 +48,7 @@ class _MASMethod(Method):
         self._router = None
         if args.get("use_router", True) and not self.mock:
             from src.routing import SemanticRouter
+
             self._router = SemanticRouter()
         if not self.mock:
             self._apply_policy()
@@ -78,8 +83,11 @@ class _MASMethod(Method):
         steps = self.args.get("latent_steps", self.cfg.latent_steps)
         prompt = f"{self.name}|{'>'.join(agents)}|{item.question}"
         out = self.backend.generate(prompt, gen, num_choices=item.num_choices)
-        return self._finish(out, item, {"routed_domain": item.domain, "agents": agents,
-                                        "latent_steps": steps, "mock": True})
+        return self._finish(
+            out,
+            item,
+            {"routed_domain": item.domain, "agents": agents, "latent_steps": steps, "mock": True},
+        )
 
     def _plan(self, item: EvalItem):
         """Choose agent list and latent steps for this item."""
@@ -100,6 +108,7 @@ class _MASMethod(Method):
         if self.mock:
             return self._mock_sample(item, gen)
         from ..backends import _seed_everything
+
         self._apply_policy()
         _seed_everything(gen.seed)
 
@@ -113,7 +122,7 @@ class _MASMethod(Method):
             agents=agents,
             max_new_tokens=gen.max_new_tokens,
             temperature=gen.temperature,
-            self_consistency=1,          # voting is the runner's job, for all methods alike
+            self_consistency=1,  # voting is the runner's job, for all methods alike
         )
         latency = int((time.time() - t0) * 1000)
 
@@ -121,9 +130,13 @@ class _MASMethod(Method):
         completion = sum(o.get("output_tokens", 0) for o in res.agent_outputs)
         prompt_toks = max(0, res.total_tokens - completion)
         return Sample(
-            text=res.final_answer, pred=ex.answer, extract_rule=ex.rule,
-            extract_failed=ex.failed, prompt_tokens=prompt_toks,
-            completion_tokens=completion, latency_ms=latency,
+            text=res.final_answer,
+            pred=ex.answer,
+            extract_rule=ex.rule,
+            extract_failed=ex.failed,
+            prompt_tokens=prompt_toks,
+            completion_tokens=completion,
+            latency_ms=latency,
             extra={
                 "routed_domain": domain,
                 "router_confidence": round(conf, 4) if conf is not None else None,
@@ -135,8 +148,17 @@ class _MASMethod(Method):
                 # keep the adapter on each step: the chain's whole claim is that a
                 # different LoRA is active at each hop, so the trace has to show it
                 "per_agent": [
-                    {k: o.get(k) for k in ("agent", "adapter", "output_tokens",
-                                           "latency_ms", "mode", "latent_prefix_len")}
+                    {
+                        k: o.get(k)
+                        for k in (
+                            "agent",
+                            "adapter",
+                            "output_tokens",
+                            "latency_ms",
+                            "mode",
+                            "latent_prefix_len",
+                        )
+                    }
                     for o in res.agent_outputs
                 ],
             },
@@ -151,6 +173,7 @@ class TextMAS(_MASMethod):
 
 class LatentMAS(_MASMethod):
     """As shipped before the fixes: cache discarded, answer-first judger prompt."""
+
     name = "latent-mas"
     pipeline_name = "true_latent"
     description = "true_latent as originally shipped (cache discarded, answer-first prompt)."
@@ -165,6 +188,7 @@ class LatentMASPaper(_MASMethod):
     latent-mas -> latent-mas-kv -> latent-mas-paper is an ablation ladder; each
     rung changes exactly one thing, so a paired test attributes the difference.
     """
+
     name = "latent-mas-paper"
     pipeline_name = "true_latent"
     description = "Reference configuration: KV handoff + reason-first judger prompt."
@@ -191,6 +215,7 @@ class LatentKVMAS(_MASMethod):
     Decoding is a manual loop rather than model.generate() so the cache
     semantics do not depend on the transformers version.
     """
+
     name = "latent-mas-kv"
     pipeline_name = "true_latent"
     description = "KV handoff only, legacy prompt - isolates the cache fix."
@@ -199,9 +224,9 @@ class LatentKVMAS(_MASMethod):
     def sample(self, item: EvalItem, gen: GenSettings) -> Sample:
         if self.mock:
             return self._mock_sample(item, gen)
-        import torch
-        from ..backends import _seed_everything
         from src.core.latent_reasoner import get_cache_length
+
+        from ..backends import _seed_everything
 
         self._apply_policy()
         _seed_everything(gen.seed)
@@ -227,14 +252,22 @@ class LatentKVMAS(_MASMethod):
             attn = enc["attention_mask"].to(device)
 
             res = p.reasoner.reason(
-                input_ids=input_ids, attention_mask=attn, num_steps=steps,
+                input_ids=input_ids,
+                attention_mask=attn,
+                num_steps=steps,
                 past_key_values=p.memory.get_kv_cache(),
             )
             p.memory.store_hidden_state(name, res.final_hidden)
             p.memory.update_kv_cache(res.kv_cache)
             prompt_tokens += int(input_ids.shape[1])
-            per_agent.append({"agent": name, "output_tokens": 0, "mode": "latent_only",
-                              "latency_ms": int((time.time() - a_start) * 1000)})
+            per_agent.append(
+                {
+                    "agent": name,
+                    "output_tokens": 0,
+                    "mode": "latent_only",
+                    "latency_ms": int((time.time() - a_start) * 1000),
+                }
+            )
 
         # 2. Final agent decodes *conditioned on* the accumulated latent cache.
         final_name = agents[-1]
@@ -248,22 +281,40 @@ class LatentKVMAS(_MASMethod):
         cache = p.memory.get_kv_cache()
         past_len = get_cache_length(cache)
         text, n_new = self._decode(
-            input_ids, cache, past_len, gen, tok, device,
-            temperature=gen.temperature, top_p=gen.top_p,
+            input_ids,
+            cache,
+            past_len,
+            gen,
+            tok,
+            device,
+            temperature=gen.temperature,
+            top_p=gen.top_p,
         )
 
         latency = int((time.time() - t0) * 1000)
         ex = extract_answer(text, item.task_type, item.num_choices)
-        per_agent.append({"agent": final_name, "output_tokens": n_new,
-                          "mode": "latent+text(kv)", "latency_ms": latency})
+        per_agent.append(
+            {
+                "agent": final_name,
+                "output_tokens": n_new,
+                "mode": "latent+text(kv)",
+                "latency_ms": latency,
+            }
+        )
 
         return Sample(
-            text=text, pred=ex.answer, extract_rule=ex.rule, extract_failed=ex.failed,
-            prompt_tokens=prompt_tokens, completion_tokens=n_new, latency_ms=latency,
+            text=text,
+            pred=ex.answer,
+            extract_rule=ex.rule,
+            extract_failed=ex.failed,
+            prompt_tokens=prompt_tokens,
+            completion_tokens=n_new,
+            latency_ms=latency,
             extra={
                 "routed_domain": domain,
                 "router_confidence": round(conf, 4) if conf is not None else None,
-                "agents": agents, "latent_steps": steps,
+                "agents": agents,
+                "latent_steps": steps,
                 "kv_handoff": True,
                 "prompt_style": self.args.get("prompt_style", "answer_first"),
                 "latent_prefix_len": past_len,
@@ -294,8 +345,13 @@ class LatentKVMAS(_MASMethod):
             for _ in range(gen.max_new_tokens):
                 seen += int(cur.shape[1])
                 mask = torch.ones((1, seen), dtype=torch.long, device=device)
-                out = model(input_ids=cur, attention_mask=mask,
-                            past_key_values=cache, use_cache=True, return_dict=True)
+                out = model(
+                    input_ids=cur,
+                    attention_mask=mask,
+                    past_key_values=cache,
+                    use_cache=True,
+                    return_dict=True,
+                )
                 cache = out.past_key_values
                 logits = out.logits[:, -1, :].float()
 
@@ -333,6 +389,7 @@ class RouterOnly(Method):
     semantic router picking the right pipeline?" separately from "does the
     pipeline answer correctly?". Cheap enough to run on 100% of the data.
     """
+
     name = "router-only"
     backend_kind = "none"
     description = "Semantic router domain classification, scored against dataset domain labels."
@@ -340,6 +397,7 @@ class RouterOnly(Method):
     def __init__(self, backend, args, cfg):
         super().__init__(backend, args, cfg)
         from src.routing import SemanticRouter
+
         self.router = SemanticRouter(
             model_name=args.get("router_model", "all-MiniLM-L6-v2"),
             use_embeddings=args.get("use_embeddings", not cfg.dry_run),
@@ -348,16 +406,23 @@ class RouterOnly(Method):
 
     def sample(self, item: EvalItem, gen: GenSettings) -> Sample:
         t0 = time.time()
-        domain, conf = self.router.get_best_domain(item.question,
-                                                   confidence_threshold=self.threshold)
+        domain, conf = self.router.get_best_domain(
+            item.question, confidence_threshold=self.threshold
+        )
         ranked = self.router.route(item.question, top_k=5)
         return Sample(
-            text=domain.value, pred=domain.value, extract_rule="router",
-            extract_failed=False, prompt_tokens=0, completion_tokens=0,
+            text=domain.value,
+            pred=domain.value,
+            extract_rule="router",
+            extract_failed=False,
+            prompt_tokens=0,
+            completion_tokens=0,
             latency_ms=int((time.time() - t0) * 1000),
-            extra={"confidence": round(conf, 4),
-                   "ranked": [(d.value, round(s, 4)) for d, s in ranked],
-                   "gold_domain": item.domain},
+            extra={
+                "confidence": round(conf, 4),
+                "ranked": [(d.value, round(s, 4)) for d, s in ranked],
+                "gold_domain": item.domain,
+            },
         )
 
     def gold_of(self, item: EvalItem) -> str:

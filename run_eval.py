@@ -47,78 +47,141 @@ def build_parser() -> argparse.ArgumentParser:
     g = p.add_argument_group("discovery")
     g.add_argument("--list-methods", action="store_true", help="print methods and exit")
     g.add_argument("--list-datasets", action="store_true", help="print datasets and exit")
-    g.add_argument("--report-only", metavar="RUN_DIR",
-                   help="rebuild report from an existing run directory and exit")
-    g.add_argument("--print-config", action="store_true",
-                   help="print the resolved config as JSON and exit")
+    g.add_argument(
+        "--report-only",
+        metavar="RUN_DIR",
+        help="rebuild report from an existing run directory and exit",
+    )
+    g.add_argument(
+        "--print-config", action="store_true", help="print the resolved config as JSON and exit"
+    )
 
     g = p.add_argument_group("model")
     g.add_argument("--model", default="Qwen/Qwen2.5-7B-Instruct")
     g.add_argument("--device", default="cuda")
-    g.add_argument("--dtype", default="bfloat16",
-                   choices=["bfloat16", "float16", "float32", "4bit"])
+    g.add_argument(
+        "--dtype", default="bfloat16", choices=["bfloat16", "float16", "float32", "4bit"]
+    )
     g.add_argument("--cache-dir", default="/home/caches")
 
     g = p.add_argument_group("data")
-    g.add_argument("--dataset", default="sample",
-                   help="sample | local:path.json | medqa | gsm8k | mmlu:anatomy | mix:a,b")
+    g.add_argument(
+        "--dataset",
+        default="sample",
+        help="sample | local:path.json | medqa | gsm8k | mmlu:anatomy | mix:a,b",
+    )
     g.add_argument("--split", default=None, help="override the dataset split")
-    g.add_argument("--fraction", default="1.0",
-                   help="fraction of the dataset (0.1 = 10%%, 0.001 = 0.1%%). "
-                        "A percentage also works: 0.1%%. Any value > 0 is allowed; "
-                        "a fraction below one item still evaluates one item")
-    g.add_argument("--fractions", default=None,
-                   help="comma list, runs one eval per fraction and draws the "
-                        "scaling curve, e.g. 0.001,0.01,0.1,1.0")
-    g.add_argument("--min-per-group", type=int, default=1,
-                   help="items each stratum keeps at tiny fractions (0 = allow "
-                        "a stratum to drop out entirely)")
+    g.add_argument(
+        "--fraction",
+        default="1.0",
+        help="fraction of the dataset (0.1 = 10%%, 0.001 = 0.1%%). "
+        "A percentage also works: 0.1%%. Any value > 0 is allowed; "
+        "a fraction below one item still evaluates one item",
+    )
+    g.add_argument(
+        "--fractions",
+        default=None,
+        help="comma list, runs one eval per fraction and draws the "
+        "scaling curve, e.g. 0.001,0.01,0.1,1.0",
+    )
+    g.add_argument(
+        "--min-per-group",
+        type=int,
+        default=1,
+        help="items each stratum keeps at tiny fractions (0 = allow "
+        "a stratum to drop out entirely)",
+    )
     g.add_argument("--limit", type=int, default=None, help="hard cap on item count")
     g.add_argument("--offset", type=int, default=0, help="skip this many items first")
     g.add_argument("--data-seed", type=int, default=0, help="seed for the segment shuffle")
-    g.add_argument("--no-shuffle", action="store_true",
-                   help="keep dataset order (slices become the first N items)")
-    g.add_argument("--stratify-by", default="domain",
-                   help="field to stratify the segment on, or 'none'")
+    g.add_argument(
+        "--no-shuffle",
+        action="store_true",
+        help="keep dataset order (slices become the first N items)",
+    )
+    g.add_argument(
+        "--stratify-by", default="domain", help="field to stratify the segment on, or 'none'"
+    )
 
     g = p.add_argument_group("methods")
-    g.add_argument("--methods", default="baseline-cot",
-                   help="comma list of method names or groups: " + ", ".join(METHOD_GROUPS))
-    g.add_argument("--set", dest="set_args", action="append", default=[], metavar="M.KEY=VAL",
-                   help="per-method override, repeatable, e.g. --set latent-mas.latent_steps=25")
+    g.add_argument(
+        "--methods",
+        default="baseline-cot",
+        help="comma list of method names or groups: " + ", ".join(METHOD_GROUPS),
+    )
+    g.add_argument(
+        "--set",
+        dest="set_args",
+        action="append",
+        default=[],
+        metavar="M.KEY=VAL",
+        help="per-method override, repeatable, e.g. --set latent-mas.latent_steps=25",
+    )
 
     g = p.add_argument_group("decoding")
     g.add_argument("--max-new-tokens", type=int, default=512)
     g.add_argument("--temperature", type=float, default=0.0, help="0.0 = greedy")
     g.add_argument("--top-p", type=float, default=0.9)
     g.add_argument("--seeds", default="0", help="comma list of run seeds, e.g. 0,1,2")
-    g.add_argument("--self-consistency", type=int, default=1,
-                   help="samples per item, majority-voted (needs --temperature > 0)")
+    g.add_argument(
+        "--self-consistency",
+        type=int,
+        default=1,
+        help="samples per item, majority-voted (needs --temperature > 0)",
+    )
 
     g = p.add_argument_group("multi-agent")
     g.add_argument("--latent-steps", type=int, default=10)
-    g.add_argument("--agents", default=None,
-                   help="comma list to force a fixed pipeline, e.g. Planner,Critic,Judger")
+    g.add_argument(
+        "--agents",
+        default=None,
+        help="comma list to force a fixed pipeline, e.g. Planner,Critic,Judger",
+    )
     g.add_argument("--no-router", action="store_true", help="disable semantic routing")
-    g.add_argument("--no-adaptive-steps", action="store_true",
-                   help="do not vary latent steps by routed domain")
+    g.add_argument(
+        "--no-adaptive-steps", action="store_true", help="do not vary latent steps by routed domain"
+    )
     g.add_argument("--loras", default="", help="comma list of registry LoRAs to load")
-    g.add_argument("--kv-handoff", dest="kv_handoff", action="store_true", default=None,
-                   help="hand the latent KV cache to the final decoder (reference behaviour)")
-    g.add_argument("--no-kv-handoff", dest="kv_handoff", action="store_false",
-                   help="discard the cache before decoding (legacy behaviour)")
-    g.add_argument("--prompt-style", default=None, choices=["reason_first", "answer_first"],
-                   help="judger prompt order; reason_first matches the reference")
-    g.add_argument("--adapter-policy", default=None,
-                   choices=["logo", "merge", "same", "none"],
-                   help="how multi-lora composes adapters (default logo: probe, top-k, merge)")
-    g.add_argument("--top-k", type=int, default=None,
-                   help="adapters merged per instance by multi-lora (default 3)")
+    g.add_argument(
+        "--kv-handoff",
+        dest="kv_handoff",
+        action="store_true",
+        default=None,
+        help="hand the latent KV cache to the final decoder (reference behaviour)",
+    )
+    g.add_argument(
+        "--no-kv-handoff",
+        dest="kv_handoff",
+        action="store_false",
+        help="discard the cache before decoding (legacy behaviour)",
+    )
+    g.add_argument(
+        "--prompt-style",
+        default=None,
+        choices=["reason_first", "answer_first"],
+        help="judger prompt order; reason_first matches the reference",
+    )
+    g.add_argument(
+        "--adapter-policy",
+        default=None,
+        choices=["logo", "merge", "same", "none"],
+        help="how multi-lora composes adapters (default logo: probe, top-k, merge)",
+    )
+    g.add_argument(
+        "--top-k",
+        type=int,
+        default=None,
+        help="adapters merged per instance by multi-lora (default 3)",
+    )
 
     g = p.add_argument_group("protocol")
     g.add_argument("--scoring", default="generate", choices=["generate", "loglikelihood"])
-    g.add_argument("--permute-options", default="none", choices=["none", "cyclic", "all"],
-                   help="answer-position bias test")
+    g.add_argument(
+        "--permute-options",
+        default="none",
+        choices=["none", "cyclic", "all"],
+        help="answer-position bias test",
+    )
 
     g = p.add_argument_group("output")
     g.add_argument("--out-dir", default="eval_runs")
@@ -127,25 +190,40 @@ def build_parser() -> argparse.ArgumentParser:
     g.add_argument("--no-generations", action="store_true", help="do not store model text")
     g.add_argument("--no-markdown", action="store_true")
     g.add_argument("--no-plots", action="store_true", help="skip comparison figures")
-    g.add_argument("--live-plot", action="store_true",
-                   help="refresh live.png while the eval runs")
-    g.add_argument("--live-every", type=int, default=5,
-                   help="records between live.png refreshes (default 5)")
-    g.add_argument("--scaling-from", default=None, metavar="DIR",
-                   help="build scaling.png from every run under DIR, then exit")
-    g.add_argument("--progress", type=int, default=1, metavar="N",
-                   help="print a progress line every N items (default 1, 0 = silent)")
+    g.add_argument("--live-plot", action="store_true", help="refresh live.png while the eval runs")
+    g.add_argument(
+        "--live-every", type=int, default=5, help="records between live.png refreshes (default 5)"
+    )
+    g.add_argument(
+        "--scaling-from",
+        default=None,
+        metavar="DIR",
+        help="build scaling.png from every run under DIR, then exit",
+    )
+    g.add_argument(
+        "--progress",
+        type=int,
+        default=1,
+        metavar="N",
+        help="print a progress line every N items (default 1, 0 = silent)",
+    )
     g.add_argument("-v", "--verbose", action="store_true")
 
     g = p.add_argument_group("analysis")
     g.add_argument("--bootstrap", type=int, default=2000, help="bootstrap resamples, 0 disables")
     g.add_argument("--ci", type=float, default=0.95)
-    g.add_argument("--compare-to", default=None,
-                   help="reference method for paired tests (default: first baseline present)")
+    g.add_argument(
+        "--compare-to",
+        default=None,
+        help="reference method for paired tests (default: first baseline present)",
+    )
 
     g = p.add_argument_group("execution")
-    g.add_argument("--dry-run", action="store_true",
-                   help="mock backend: no weights, no GPU, exercises the full pipeline")
+    g.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="mock backend: no weights, no GPU, exercises the full pipeline",
+    )
     g.add_argument("--config", default=None, help="load an EvalConfig json and apply args on top")
 
     return p
@@ -218,11 +296,13 @@ def _hf_login() -> None:
     that gets committed.
     """
     import os
+
     token = os.environ.get("HF_TOKEN") or os.environ.get("HUGGING_FACE_HUB_TOKEN")
     if not token:
         return
     try:
         from huggingface_hub import login
+
         login(token=token, add_to_git_credential=False)
         print("[hf] authenticated from HF_TOKEN")
     except Exception as e:
@@ -256,11 +336,13 @@ def main() -> int:
 
     if a.report_only:
         from eval.report import report_only
+
         report_only(a.report_only)
         return 0
 
     if a.scaling_from:
         from eval.plots import scaling_from_runs
+
         root = Path(a.scaling_from)
         runs = sorted(d for d in root.iterdir() if (d / "summary.json").exists())
         path = scaling_from_runs(runs, root)
@@ -274,13 +356,16 @@ def main() -> int:
         return 0
 
     if a.self_consistency > 1 and a.temperature == 0.0:
-        print("[warn] --self-consistency > 1 with greedy decoding produces identical samples; "
-              "set --temperature 0.7 for real vote diversity.")
+        print(
+            "[warn] --self-consistency > 1 with greedy decoding produces identical samples; "
+            "set --temperature 0.7 for real vote diversity."
+        )
 
     from eval.runner import Runner
 
-    fractions = ([parse_fraction(x) for x in a.fractions.split(",")]
-                 if a.fractions else [cfg.fraction])
+    fractions = (
+        [parse_fraction(x) for x in a.fractions.split(",")] if a.fractions else [cfg.fraction]
+    )
     base_run_name = cfg.run_name
     run_dirs = []
 
@@ -295,6 +380,7 @@ def main() -> int:
 
     if len(run_dirs) > 1 and cfg.plots:
         from eval.plots import scaling_from_runs
+
         path = scaling_from_runs(run_dirs, Path(cfg.out_dir))
         if path:
             print(f"[plots] scaling curve across {len(run_dirs)} fractions -> {path}")

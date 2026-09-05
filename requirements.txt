@@ -1,18 +1,21 @@
-# Core Dependencies
-torch>=2.1.0
-transformers>=4.40.0
-peft>=0.10.0
-accelerate>=0.27.0
-bitsandbytes>=0.43.0
+# Runtime dependencies.
+# Pinned to the versions this project is tested against; see requirements-dev.txt
+# for tooling and pyproject.toml for the loose ranges used when installing as a
+# library.
+torch==2.14.0
+transformers==5.16.1
+peft==0.20.0
+accelerate==1.14.0
 safetensors>=0.4.0
-
-# Optional: vLLM for production serving
-# vllm>=0.4.0  # Uncomment if using vLLM backend
-
-# Utilities
-tqdm>=4.66.0
-numpy>=1.24.0
 huggingface_hub>=0.21.0
+numpy==2.4.6
+tqdm>=4.66.0
 
-# Evaluation
-datasets>=2.18.0
+# Evaluation harness
+datasets==5.0.1
+matplotlib==3.11.1
+sentence-transformers==6.0.1
+scipy==1.17.1
+
+# Optional: 4-bit quantization (--dtype 4bit)
+# bitsandbytes>=0.43.0

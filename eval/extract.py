@@ -7,7 +7,7 @@ every prediction carries the rule that produced it and whether it failed.
 
 import re
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List
 
 UNKNOWN = "UNKNOWN"
 
@@ -16,15 +16,16 @@ _LETTERS = "ABCDEFGHIJ"
 
 @dataclass
 class ExtractResult:
-    answer: str          # normalized prediction, or UNKNOWN
-    rule: str            # which rule fired ("boxed", "answer_is", "last_line", ...)
-    failed: bool         # True when nothing matched
+    answer: str  # normalized prediction, or UNKNOWN
+    rule: str  # which rule fired ("boxed", "answer_is", "last_line", ...)
+    failed: bool  # True when nothing matched
 
 
 # ─── Multiple choice ─────────────────────────────────────────────────────────
 
+
 def _letter_class(num_choices: int) -> str:
-    return _LETTERS[:max(2, min(num_choices, len(_LETTERS)))]
+    return _LETTERS[: max(2, min(num_choices, len(_LETTERS)))]
 
 
 def extract_mcq(text: str, num_choices: int = 4) -> ExtractResult:
@@ -60,7 +61,7 @@ def extract_mcq(text: str, num_choices: int = 4) -> ExtractResult:
             return ExtractResult(m.group(1).upper(), rule, False)
 
     # 3. Last non-empty line containing a stand-alone letter
-    lines = [l.strip() for l in text.split("\n") if l.strip()]
+    lines = [ln.strip() for ln in text.split("\n") if ln.strip()]
     if lines:
         found = re.findall(rf"\b({cls})\b", lines[-1].upper())
         if found:
@@ -137,6 +138,7 @@ def majority_vote(votes: List[str]) -> tuple:
     Returns (winner, counts_dict, agreement_fraction).
     """
     from collections import Counter
+
     valid = [v for v in votes if v != UNKNOWN]
     pool = valid or list(votes)
     counts = Counter(pool)

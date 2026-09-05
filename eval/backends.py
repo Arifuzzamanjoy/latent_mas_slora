@@ -19,7 +19,7 @@ import gc
 import hashlib
 import time
 from dataclasses import dataclass
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Tuple
 
 from .config import EvalConfig, GenSettings
 
@@ -39,7 +39,9 @@ class GenOutput:
 
 def _seed_everything(seed: int) -> None:
     import random as _random
+
     import torch
+
     _random.seed(seed)
     torch.manual_seed(seed)
     if torch.cuda.is_available():
@@ -55,6 +57,7 @@ class Backend:
     def peak_vram_gb(self) -> float:
         try:
             import torch
+
             if torch.cuda.is_available():
                 return torch.cuda.max_memory_allocated() / 1e9
         except Exception:
@@ -64,6 +67,7 @@ class Backend:
 
 # ─── Plain HuggingFace ───────────────────────────────────────────────────────
 
+
 class HFBackend(Backend):
     kind = "hf"
 
@@ -72,8 +76,7 @@ class HFBackend(Backend):
         from transformers import AutoModelForCausalLM, AutoTokenizer
 
         self.cfg = cfg
-        dtype_map = {"bfloat16": torch.bfloat16, "float16": torch.float16,
-                     "float32": torch.float32}
+        dtype_map = {"bfloat16": torch.bfloat16, "float16": torch.float16, "float32": torch.float32}
         print(f"[backend:hf] loading {cfg.model} ({cfg.dtype})")
         t0 = time.time()
         self.tokenizer = AutoTokenizer.from_pretrained(cfg.model, cache_dir=cfg.cache_dir)
@@ -83,9 +86,10 @@ class HFBackend(Backend):
         kwargs: Dict[str, Any] = {"cache_dir": cfg.cache_dir}
         if cfg.dtype == "4bit":
             from transformers import BitsAndBytesConfig
+
             kwargs["quantization_config"] = BitsAndBytesConfig(
-                load_in_4bit=True, bnb_4bit_compute_dtype=torch.bfloat16,
-                bnb_4bit_quant_type="nf4")
+                load_in_4bit=True, bnb_4bit_compute_dtype=torch.bfloat16, bnb_4bit_quant_type="nf4"
+            )
         else:
             kwargs["dtype"] = dtype_map.get(cfg.dtype, torch.bfloat16)
 
@@ -101,6 +105,7 @@ class HFBackend(Backend):
 
     def generate(self, prompt: str, gen: GenSettings, num_choices: int = 4) -> GenOutput:
         import torch
+
         _seed_everything(gen.seed)
         enc = self.tokenizer(prompt, return_tensors="pt").to(self.cfg.device)
         kw: Dict[str, Any] = {
@@ -128,24 +133,27 @@ class HFBackend(Backend):
         measurement entirely.
         """
         import torch
+
         scores: List[float] = []
         ctx = self.tokenizer(prompt, return_tensors="pt").to(self.cfg.device)
         n_ctx = ctx["input_ids"].shape[1]
         for cont in continuations:
-            cont_ids = self.tokenizer(cont, return_tensors="pt",
-                                      add_special_tokens=False)["input_ids"].to(self.cfg.device)
+            cont_ids = self.tokenizer(cont, return_tensors="pt", add_special_tokens=False)[
+                "input_ids"
+            ].to(self.cfg.device)
             ids = torch.cat([ctx["input_ids"], cont_ids], dim=1)
             with torch.no_grad():
                 logits = self.model(ids).logits
             logprobs = torch.log_softmax(logits[:, :-1].float(), dim=-1)
             target = ids[:, 1:]
             picked = logprobs.gather(2, target.unsqueeze(-1)).squeeze(-1)
-            cont_lp = picked[:, n_ctx - 1:]
+            cont_lp = picked[:, n_ctx - 1 :]
             scores.append(float(cont_lp.mean().item()))
         return scores, n_ctx
 
     def free(self) -> None:
         import torch
+
         del self.model
         gc.collect()
         if torch.cuda.is_available():
@@ -154,14 +162,16 @@ class HFBackend(Backend):
 
 # ─── LatentMAS system ────────────────────────────────────────────────────────
 
+
 class SystemBackend(Backend):
     kind = "system"
 
     def __init__(self, cfg: EvalConfig, agent_max_tokens: int = 50):
         import sys
         from pathlib import Path
+
         sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-        from src import LatentMASSystem, AgentConfig
+        from src import AgentConfig, LatentMASSystem
 
         self.cfg = cfg
         print(f"[backend:system] building LatentMASSystem on {cfg.model}")
@@ -189,11 +199,14 @@ class SystemBackend(Backend):
             print(f"[backend:system] registry LoRA '{lora}': {'loaded' if ok else 'FAILED'}")
 
         self.tokenizer = self.system.tokenizer
-        print(f"[backend:system] ready in {time.time() - t0:.1f}s "
-              f"({len(self.system._pool.list_agents())} agents)")
+        print(
+            f"[backend:system] ready in {time.time() - t0:.1f}s "
+            f"({len(self.system._pool.list_agents())} agents)"
+        )
 
     def free(self) -> None:
         import torch
+
         del self.system
         gc.collect()
         if torch.cuda.is_available():
@@ -202,6 +215,7 @@ class SystemBackend(Backend):
 
 # ─── Mock ────────────────────────────────────────────────────────────────────
 
+
 class MockBackend(Backend):
     """Deterministic pseudo-model for --dry-run.
 
@@ -209,6 +223,7 @@ class MockBackend(Backend):
     self-consistency produces genuine vote spread - enough to exercise every
     downstream code path without a GPU.
     """
+
     kind = "mock"
 
     def __init__(self, cfg: EvalConfig):
@@ -237,6 +252,7 @@ class MockBackend(Backend):
 
 
 # ─── Factory ─────────────────────────────────────────────────────────────────
+
 
 def build_backend(kind: str, cfg: EvalConfig, dry_run: bool = False) -> Backend:
     if dry_run or kind == "mock":

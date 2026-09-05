@@ -10,7 +10,7 @@ numbers comes from the method itself.
 """
 
 from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 
 from ..backends import Backend, GenOutput
 from ..config import EvalConfig, GenSettings
@@ -21,6 +21,7 @@ from ..extract import extract_answer
 @dataclass
 class Sample:
     """One sample from one method on one item."""
+
     text: str
     pred: str
     extract_rule: str = "raw"
@@ -39,7 +40,7 @@ class Method:
     """Base class. Subclasses implement sample()."""
 
     name: str = "base"
-    backend_kind: str = "hf"          # hf | system | mock | none
+    backend_kind: str = "hf"  # hf | system | mock | none
     description: str = ""
 
     def __init__(self, backend: Backend, args: Dict[str, Any], cfg: EvalConfig):
@@ -51,9 +52,14 @@ class Method:
     def _finish(self, out: GenOutput, item: EvalItem, extra: Optional[Dict] = None) -> Sample:
         ex = extract_answer(out.text, item.task_type, item.num_choices)
         return Sample(
-            text=out.text, pred=ex.answer, extract_rule=ex.rule, extract_failed=ex.failed,
-            prompt_tokens=out.prompt_tokens, completion_tokens=out.completion_tokens,
-            latency_ms=out.latency_ms, extra={**(out.extra or {}), **(extra or {})},
+            text=out.text,
+            pred=ex.answer,
+            extract_rule=ex.rule,
+            extract_failed=ex.failed,
+            prompt_tokens=out.prompt_tokens,
+            completion_tokens=out.completion_tokens,
+            latency_ms=out.latency_ms,
+            extra={**(out.extra or {}), **(extra or {})},
         )
 
     # -- interface ----------------------------------------------------------

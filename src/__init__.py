@@ -10,16 +10,16 @@ A production-grade implementation combining:
 Optimized for 24-48GB VRAM with full BF16 precision.
 """
 
-from .system import LatentMASSystem, DOMAIN_AGENTS
 from .agents.configs import AgentConfig, AgentRole, LoRASpec
 from .core.latent_memory import LatentMemory
 from .lora.adapter_manager import LoRAAdapterManager
 from .routing import Domain, SemanticRouter, auto_route
+from .system import DOMAIN_AGENTS, LatentMASSystem
 
 __version__ = "0.1.0"
 __all__ = [
     "LatentMASSystem",
-    "AgentConfig", 
+    "AgentConfig",
     "AgentRole",
     "LoRASpec",
     "LatentMemory",

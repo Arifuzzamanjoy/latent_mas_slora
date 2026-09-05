@@ -13,25 +13,28 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import pytest
 
-from eval.data import EvalItem, segment, load_dataset
-from eval.extract import extract_mcq, extract_numeric, is_correct, majority_vote, UNKNOWN
-from eval.metrics import mcnemar, wilson_interval, calibration, classification_report
+from eval.data import EvalItem, load_dataset, segment
+from eval.extract import UNKNOWN, extract_mcq, extract_numeric, is_correct, majority_vote
 from eval.methods import METHOD_REGISTRY, expand_methods
+from eval.metrics import calibration, classification_report, mcnemar, wilson_interval
 from eval.runner import permutations_for
-
 
 # ─── extraction ──────────────────────────────────────────────────────────────
 
-@pytest.mark.parametrize("text,expected,rule", [
-    ("reasoning...\n\\boxed{C}", "C", "boxed"),
-    ("\\boxed{B} then \\boxed{D}", "D", "boxed"),          # last box wins
-    ("The final answer is (B).", "B", "answer_is"),
-    ("Therefore the correct option is: A", "A", "option_is"),
-    ("The answer depends on the context.\nB", "B", "last_line"),
-    ("Choice D is correct.", "D", "is_correct"),
-    ("[Self-Consistency Vote: A]\n\nblah", "A", "sc_header"),
-    ("...ends with\nC", "C", "last_line"),
-])
+
+@pytest.mark.parametrize(
+    "text,expected,rule",
+    [
+        ("reasoning...\n\\boxed{C}", "C", "boxed"),
+        ("\\boxed{B} then \\boxed{D}", "D", "boxed"),  # last box wins
+        ("The final answer is (B).", "B", "answer_is"),
+        ("Therefore the correct option is: A", "A", "option_is"),
+        ("The answer depends on the context.\nB", "B", "last_line"),
+        ("Choice D is correct.", "D", "is_correct"),
+        ("[Self-Consistency Vote: A]\n\nblah", "A", "sc_header"),
+        ("...ends with\nC", "C", "last_line"),
+    ],
+)
 def test_mcq_rules(text, expected, rule):
     r = extract_mcq(text)
     assert (r.answer, r.rule) == (expected, rule)
@@ -48,11 +51,14 @@ def test_mcq_respects_choice_count():
     assert extract_mcq("\\boxed{H}", num_choices=4).answer == UNKNOWN
 
 
-@pytest.mark.parametrize("text,expected", [
-    ("so the answer is \\boxed{42}", "42"),
-    ("#### 1,024", "1024"),
-    ("final answer: $18.00", "18"),
-])
+@pytest.mark.parametrize(
+    "text,expected",
+    [
+        ("so the answer is \\boxed{42}", "42"),
+        ("#### 1,024", "1024"),
+        ("final answer: $18.00", "18"),
+    ],
+)
 def test_numeric(text, expected):
     assert extract_numeric(text).answer == expected
 
@@ -70,10 +76,18 @@ def test_unknown_never_scores_correct():
 
 # ─── segmentation ────────────────────────────────────────────────────────────
 
+
 def _items(n=100):
-    return [EvalItem(id=str(i), question=f"q{i}", gold="A",
-                     choices=["a", "b", "c", "d"],
-                     domain=["medical", "math", "code"][i % 3]) for i in range(n)]
+    return [
+        EvalItem(
+            id=str(i),
+            question=f"q{i}",
+            gold="A",
+            choices=["a", "b", "c", "d"],
+            domain=["medical", "math", "code"][i % 3],
+        )
+        for i in range(n)
+    ]
 
 
 def test_fractions_are_nested():
@@ -115,9 +129,15 @@ def test_sample_dataset_loads():
 
 # ─── permutation ─────────────────────────────────────────────────────────────
 
+
 def test_permutation_moves_the_gold_letter():
-    item = EvalItem(id="x", question="stem\nA. w\nB. x\nC. y\nD. z", gold="C",
-                    choices=["w", "x", "y", "z"], metadata={"stem": "stem"})
+    item = EvalItem(
+        id="x",
+        question="stem\nA. w\nB. x\nC. y\nD. z",
+        gold="C",
+        choices=["w", "x", "y", "z"],
+        metadata={"stem": "stem"},
+    )
     perms = permutations_for(item, "cyclic")
     assert len(perms) == 4
     for p in perms:
@@ -132,6 +152,7 @@ def test_permutation_none_is_identity():
 
 
 # ─── metrics ─────────────────────────────────────────────────────────────────
+
 
 def test_mcnemar_uses_only_discordant_pairs():
     a = [True] * 10 + [True, True, False]
@@ -169,6 +190,7 @@ def test_classification_report_macro_f1():
 
 # ─── registry ────────────────────────────────────────────────────────────────
 
+
 def test_groups_expand_and_dedupe():
     got = expand_methods(["baselines", "baseline-cot"])
     assert got[0] == "baseline-direct" and got.count("baseline-cot") == 1
@@ -190,10 +212,19 @@ def test_every_method_declares_a_backend():
 from eval.config import parse_fraction
 
 
-@pytest.mark.parametrize("raw,expected", [
-    ("1.0", 1.0), ("0.5", 0.5), ("0.01", 0.01), ("0.001", 0.001),
-    ("0.0001", 0.0001), ("50%", 0.5), ("1%", 0.01), ("0.1%", 0.001),
-])
+@pytest.mark.parametrize(
+    "raw,expected",
+    [
+        ("1.0", 1.0),
+        ("0.5", 0.5),
+        ("0.01", 0.01),
+        ("0.001", 0.001),
+        ("0.0001", 0.0001),
+        ("50%", 0.5),
+        ("1%", 0.01),
+        ("0.1%", 0.001),
+    ],
+)
 def test_parse_fraction(raw, expected):
     assert parse_fraction(raw) == pytest.approx(expected)
 
@@ -205,13 +236,13 @@ def test_parse_fraction_rejects_out_of_range(bad):
 
 
 def test_tiny_fraction_still_returns_items():
-    pool = _items(1273)                       # MedQA-sized
+    pool = _items(1273)  # MedQA-sized
     assert len(segment(pool, fraction=0.001, stratify_by=None)) == 1
     assert len(segment(pool, fraction=0.0001, stratify_by=None)) == 1
 
 
 def test_tiny_fraction_keeps_one_per_domain_by_default():
-    pool = _items(1273)                       # 3 domains
+    pool = _items(1273)  # 3 domains
     assert len(segment(pool, fraction=0.001)) == 3
     assert len(segment(pool, fraction=0.001, min_per_group=0)) == 0
 
@@ -226,43 +257,76 @@ def test_tiny_fractions_are_still_nested():
 
 # ─── plots ───────────────────────────────────────────────────────────────────
 
+
 def test_plots_are_written(tmp_path):
     from eval.plots import make_all
+
     summary = {
         "segment": {"spec": "unit", "n": 20, "by_domain": {"math": 10, "code": 10}},
         "reference_method": "baseline-cot",
         "methods": {
-            "baseline-cot": {"n": 20, "accuracy": 0.5,
-                             "ci": {"low": 0.3, "high": 0.7},
-                             "tokens": {"total_mean": 300, "total_per_correct": 600},
-                             "latency_ms": {"p50": 1000, "p95": 2000, "mean": 1200},
-                             "calibration": {"ece": 0.1, "bins": [
-                                 {"bin": 5, "n": 10, "avg_confidence": 0.55, "accuracy": 0.5},
-                                 {"bin": 9, "n": 10, "avg_confidence": 0.95, "accuracy": 0.9}]},
-                             "by_domain": {"math": {"n": 10, "accuracy": 0.6},
-                                           "code": {"n": 10, "accuracy": 0.4}}},
-            "latent-mas": {"n": 20, "accuracy": 0.65,
-                           "ci": {"low": 0.45, "high": 0.85},
-                           "tokens": {"total_mean": 900, "total_per_correct": 1400},
-                           "latency_ms": {"p50": 9000, "p95": 12000, "mean": 9500},
-                           "calibration": {"ece": 0.2, "bins": [
-                               {"bin": 5, "n": 10, "avg_confidence": 0.55, "accuracy": 0.4},
-                               {"bin": 9, "n": 10, "avg_confidence": 0.95, "accuracy": 0.8}]},
-                           "by_domain": {"math": {"n": 10, "accuracy": 0.7},
-                                         "code": {"n": 10, "accuracy": 0.6}}},
+            "baseline-cot": {
+                "n": 20,
+                "accuracy": 0.5,
+                "ci": {"low": 0.3, "high": 0.7},
+                "tokens": {"total_mean": 300, "total_per_correct": 600},
+                "latency_ms": {"p50": 1000, "p95": 2000, "mean": 1200},
+                "calibration": {
+                    "ece": 0.1,
+                    "bins": [
+                        {"bin": 5, "n": 10, "avg_confidence": 0.55, "accuracy": 0.5},
+                        {"bin": 9, "n": 10, "avg_confidence": 0.95, "accuracy": 0.9},
+                    ],
+                },
+                "by_domain": {
+                    "math": {"n": 10, "accuracy": 0.6},
+                    "code": {"n": 10, "accuracy": 0.4},
+                },
+            },
+            "latent-mas": {
+                "n": 20,
+                "accuracy": 0.65,
+                "ci": {"low": 0.45, "high": 0.85},
+                "tokens": {"total_mean": 900, "total_per_correct": 1400},
+                "latency_ms": {"p50": 9000, "p95": 12000, "mean": 9500},
+                "calibration": {
+                    "ece": 0.2,
+                    "bins": [
+                        {"bin": 5, "n": 10, "avg_confidence": 0.55, "accuracy": 0.4},
+                        {"bin": 9, "n": 10, "avg_confidence": 0.95, "accuracy": 0.8},
+                    ],
+                },
+                "by_domain": {
+                    "math": {"n": 10, "accuracy": 0.7},
+                    "code": {"n": 10, "accuracy": 0.6},
+                },
+            },
         },
-        "comparisons": {"latent-mas": {"delta": 0.15, "ci_low": -0.05, "ci_high": 0.35,
-                                       "mcnemar": {"p_value": 0.03, "a_only": 5, "b_only": 1}}},
+        "comparisons": {
+            "latent-mas": {
+                "delta": 0.15,
+                "ci_low": -0.05,
+                "ci_high": 0.35,
+                "mcnemar": {"p_value": 0.03, "a_only": 5, "b_only": 1},
+            }
+        },
     }
     made = make_all(summary, tmp_path)
     names = {Path(p).name for p in made}
-    assert {"accuracy.png", "efficiency.png", "latency.png", "by_domain.png",
-            "deltas.png", "calibration.png"} <= names
+    assert {
+        "accuracy.png",
+        "efficiency.png",
+        "latency.png",
+        "by_domain.png",
+        "deltas.png",
+        "calibration.png",
+    } <= names
     assert all(Path(p).stat().st_size > 5000 for p in made)
 
 
 def test_live_plot_is_written(tmp_path):
     from eval.plots import plot_live
+
     recs = [{"method": "m1", "correct": i % 2 == 0} for i in range(10)]
     recs += [{"method": "m2", "correct": i % 3 == 0} for i in range(10)]
     p = plot_live(recs, tmp_path, total=10)
@@ -293,11 +357,16 @@ def test_slug_is_id_safe():
 
 def test_local_file_with_duplicate_ids_is_disambiguated(tmp_path):
     import json as _json
+
     f = tmp_path / "dup.json"
-    f.write_text(_json.dumps([
-        {"id": 1, "question": "q1\nA. a\nB. b", "gold_letter": "A"},
-        {"id": 1, "question": "q2\nA. a\nB. b", "gold_letter": "B"},
-    ]))
+    f.write_text(
+        _json.dumps(
+            [
+                {"id": 1, "question": "q1\nA. a\nB. b", "gold_letter": "A"},
+                {"id": 1, "question": "q2\nA. a\nB. b", "gold_letter": "B"},
+            ]
+        )
+    )
     items = load_dataset(f"local:{f}")
     assert len({i.id for i in items}) == 2, "duplicate ids must not collapse"
 
@@ -306,7 +375,7 @@ def test_duplicate_ids_would_drop_items_from_a_segment():
     """The failure mode the fix prevents: dedup keys collapse a segment."""
     colliding = [EvalItem(id="same", question=f"q{k}", gold="A") for k in range(10)]
     keys = {(("m", 0, i.id)) for i in colliding}
-    assert len(keys) == 1                      # 10 items, 1 dedup key -> 9 lost
+    assert len(keys) == 1  # 10 items, 1 dedup key -> 9 lost
     fixed = _ensure_unique_ids(colliding)
     assert len({("m", 0, i.id) for i in fixed}) == 10
 
@@ -324,15 +393,15 @@ def test_degenerate_probe_detects_identical_adapters():
 
 def test_degenerate_probe_passes_distinguishable_adapters():
     assert not MultiLoRA.is_degenerate([("a", 300.0), ("b", 312.0), ("c", 295.0)])
-    assert not MultiLoRA.is_degenerate([("a", 1.0)])          # single adapter: n/a
+    assert not MultiLoRA.is_degenerate([("a", 1.0)])  # single adapter: n/a
 
 
 def test_compose_takes_top_k_with_normalized_weights():
     m = MultiLoRA.__new__(MultiLoRA)
     m.top_k = 2
     names, weights = m._compose([("a", 1.0), ("b", 9.0), ("c", 5.0)])
-    assert names == ["b", "c"]                                 # ranked, truncated
-    assert weights[0] > weights[1]                             # higher score, higher weight
+    assert names == ["b", "c"]  # ranked, truncated
+    assert weights[0] > weights[1]  # higher score, higher weight
     assert abs(sum(weights) - 1.0) < 1e-6
     assert all(w >= 0 for w in weights)
 
@@ -348,6 +417,7 @@ def test_compose_handles_negative_scores():
 def test_ablation_ladder_changes_one_thing_per_rung():
     """latent-mas -> latent-mas-kv -> latent-mas-paper must differ by one knob."""
     from eval.methods import METHOD_REGISTRY
+
     rungs = ["latent-mas", "latent-mas-kv", "latent-mas-paper"]
     d = [METHOD_REGISTRY[r].defaults for r in rungs]
     assert d[0] == {"kv_handoff": False, "prompt_style": "answer_first"}
@@ -358,13 +428,15 @@ def test_ablation_ladder_changes_one_thing_per_rung():
 
 
 def test_judger_prompt_styles_differ_as_intended():
+    pytest.importorskip("torch", reason="src package imports torch at package level")
     from src.agents.configs import AgentConfig
+
     rf = AgentConfig.judger()
     af = AgentConfig.judger(prompt_style="answer_first")
-    assert rf.prompt_style == "reason_first"                   # new default
+    assert rf.prompt_style == "reason_first"  # new default
     assert "FIRST, then provide reasoning" in af.user_prompt_template
     assert "FIRST, then provide reasoning" not in rf.user_prompt_template
-    assert "A, B, C, or D" not in rf.system_prompt              # works for numeric too
+    assert "A, B, C, or D" not in rf.system_prompt  # works for numeric too
 
 
 def test_multilora_candidates_include_externally_loaded_adapters():
@@ -372,8 +444,11 @@ def test_multilora_candidates_include_externally_loaded_adapters():
     from eval.methods.multilora import MultiLoRA
 
     class _Pool:
-        def list_agents(self): return ["Planner"]
-        def get(self, n): return type("C", (), {"adapter_name": "planner_lora"})()
+        def list_agents(self):
+            return ["Planner"]
+
+        def get(self, n):
+            return type("C", (), {"adapter_name": "planner_lora"})()
 
     class _Model:
         peft_config = {"planner_lora": 1, "reasoning_lora": 1, "_logo_mix": 1}
@@ -388,15 +463,16 @@ def test_multilora_candidates_include_externally_loaded_adapters():
 def test_compose_never_picks_an_identity_adapter_over_a_real_one():
     """Regression: top_k=1 used to select an untrained adapter by tie-break."""
     from eval.methods.multilora import MultiLoRA
+
     m = MultiLoRA.__new__(MultiLoRA)
     m.top_k = 1
-    names, _ = m._compose([("planner_lora", 0.0), ("medical_lora", 0.0),
-                           ("reasoning_lora", 149.9)])
+    names, _ = m._compose([("planner_lora", 0.0), ("medical_lora", 0.0), ("reasoning_lora", 149.9)])
     assert names == ["reasoning_lora"]
 
 
 def test_compose_ties_break_deterministically_by_name():
     from eval.methods.multilora import MultiLoRA
+
     m = MultiLoRA.__new__(MultiLoRA)
     m.top_k = 2
     a, _ = m._compose([("b_lora", 5.0), ("a_lora", 5.0), ("c_lora", 5.0)])
@@ -406,23 +482,26 @@ def test_compose_ties_break_deterministically_by_name():
 
 def test_all_zero_scores_are_degenerate():
     from eval.methods.multilora import MultiLoRA
+
     assert MultiLoRA.is_degenerate([("a", 0.0), ("b", 0.0), ("c", 0.0)])
 
 
 def test_compose_gives_every_selected_adapter_nonzero_weight():
     """Regression: min-subtraction zeroed the lowest survivor, making top_k -> top_k-1."""
     from eval.methods.multilora import MultiLoRA
+
     m = MultiLoRA.__new__(MultiLoRA)
     m.top_k = 3
     names, w = m._compose([("a", 10.0), ("b", 6.0), ("c", 2.0)])
     assert len(names) == 3
     assert all(x > 0.0 for x in w), f"every selected adapter must contribute: {w}"
     assert abs(sum(w) - 1.0) < 1e-9
-    assert w[0] > w[1] > w[2]                      # weight follows score
+    assert w[0] > w[1] > w[2]  # weight follows score
 
 
 def test_compose_uniform_when_every_score_is_zero():
     from eval.methods.multilora import MultiLoRA
+
     m = MultiLoRA.__new__(MultiLoRA)
     m.top_k = 2
     _, w = m._compose([("a", 0.0), ("b", 0.0)])

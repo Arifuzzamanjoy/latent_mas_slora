@@ -12,13 +12,11 @@ that they are applied identically to every method:
 """
 
 import json
-import sys
 import time
 import traceback
-from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Optional
+from typing import Any, Dict, List, Optional
 
 from .backends import build_backend
 from .config import EvalConfig
@@ -26,8 +24,8 @@ from .data import EvalItem, describe_segment, load_dataset, segment
 from .extract import UNKNOWN, is_correct, majority_vote
 from .methods import backend_for, build_method, expand_methods
 
-
 # ─── Option permutation ──────────────────────────────────────────────────────
+
 
 def permutations_for(item: EvalItem, mode: str) -> List[Optional[List[int]]]:
     """
@@ -44,6 +42,7 @@ def permutations_for(item: EvalItem, mode: str) -> List[Optional[List[int]]]:
         return [[(i + s) % n for i in range(n)] for s in range(n)]
     if mode == "all":
         from itertools import permutations as iperm
+
         return [list(p) for p in iperm(range(n))]
     raise ValueError(f"unknown --permute-options mode: {mode}")
 
@@ -58,6 +57,7 @@ def _fmt_dur(seconds: float) -> str:
 
 
 # ─── Runner ──────────────────────────────────────────────────────────────────
+
 
 class Runner:
     def __init__(self, cfg: EvalConfig, dry_run: bool = False, verbose: bool = False):
@@ -82,8 +82,9 @@ class Runner:
             prior = json.loads(prior_cfg.read_text())
             if prior.get("fingerprint") and prior["fingerprint"] != cfg.fingerprint():
                 now = cfg.to_dict()
-                changed = [k for k in now
-                           if k in prior and k != "fingerprint" and prior[k] != now[k]]
+                changed = [
+                    k for k in now if k in prior and k != "fingerprint" and prior[k] != now[k]
+                ]
                 raise SystemExit(
                     f"[runner] refusing to resume '{self.run_name}': the settings "
                     f"changed since those records were written "
@@ -109,17 +110,27 @@ class Runner:
     def load_items(self) -> List[EvalItem]:
         cfg = self.cfg
         full = load_dataset(cfg.dataset, cfg.split, cfg.cache_dir)
-        items = segment(full, fraction=cfg.fraction, limit=cfg.limit, offset=cfg.offset,
-                        seed=cfg.data_seed, shuffle=cfg.shuffle, stratify_by=cfg.stratify_by,
-                        min_per_group=cfg.min_per_group)
-        print(f"[data] {cfg.dataset}: {len(full)} items -> segment "
-              f"fraction={cfg.fraction} offset={cfg.offset} limit={cfg.limit} "
-              f"seed={cfg.data_seed} -> {len(items)} items")
+        items = segment(
+            full,
+            fraction=cfg.fraction,
+            limit=cfg.limit,
+            offset=cfg.offset,
+            seed=cfg.data_seed,
+            shuffle=cfg.shuffle,
+            stratify_by=cfg.stratify_by,
+            min_per_group=cfg.min_per_group,
+        )
+        print(
+            f"[data] {cfg.dataset}: {len(full)} items -> segment "
+            f"fraction={cfg.fraction} offset={cfg.offset} limit={cfg.limit} "
+            f"seed={cfg.data_seed} -> {len(items)} items"
+        )
         print(f"[data] {describe_segment(items)}")
 
         ids = [i.id for i in items]
         if len(set(ids)) != len(ids):
             from collections import Counter
+
             dupes = [k for k, v in Counter(ids).items() if v > 1]
             raise SystemExit(
                 f"[data] {len(ids) - len(set(ids))} duplicate item id(s) in the segment "
@@ -148,9 +159,16 @@ class Runner:
                 )
 
         self.cfg.save(self.run_dir / "config.json")
-        seg_path.write_text(json.dumps(
-            {"spec": self.cfg.dataset, **describe_segment(items),
-             "item_ids": [i.id for i in items]}, indent=2))
+        seg_path.write_text(
+            json.dumps(
+                {
+                    "spec": self.cfg.dataset,
+                    **describe_segment(items),
+                    "item_ids": [i.id for i in items],
+                },
+                indent=2,
+            )
+        )
 
         # Group by backend so a 7B model is loaded once per backend, not per method.
         groups: Dict[str, List[str]] = {}
@@ -193,7 +211,7 @@ class Runner:
         print(f"          args={method.info()['args']}")
 
         for seed in self.cfg.seeds:
-            for idx, item in enumerate(items):
+            for item in items:
                 for perm in permutations_for(item, self.cfg.permute_options):
                     variant = item.rendered(perm) if perm else item
                     record_id = item.id if perm is None else f"{item.id}#p{''.join(map(str, perm))}"
@@ -208,8 +226,16 @@ class Runner:
                     correct += int(rec["correct"])
                     self._progress(name, seed, rec, done, planned, correct, t_method)
 
-    def _progress(self, name: str, seed: int, rec: Dict[str, Any], done: int,
-                  planned: int, correct: int, t_method: float) -> None:
+    def _progress(
+        self,
+        name: str,
+        seed: int,
+        rec: Dict[str, Any],
+        done: int,
+        planned: int,
+        correct: int,
+        t_method: float,
+    ) -> None:
         """
         One line per item by default.
 
@@ -233,14 +259,25 @@ class Runner:
         elif rec.get("extract_failed"):
             flag = "  no-parse"
 
-        print(f"  [{name} s{seed}] {done:>4}/{planned}  {rec['record_id']:<14} "
-              f"{rec['pred']:>7} vs {rec['gold']:<7} {mark}  "
-              f"acc {100 * correct / done:5.1f}%  "
-              f"{rec['latency_ms'] / 1000:5.1f}s  {rec['total_tokens']:>5} tok  "
-              f"eta {_fmt_dur(remaining)}{flag}", flush=True)
+        print(
+            f"  [{name} s{seed}] {done:>4}/{planned}  {rec['record_id']:<14} "
+            f"{rec['pred']:>7} vs {rec['gold']:<7} {mark}  "
+            f"acc {100 * correct / done:5.1f}%  "
+            f"{rec['latency_ms'] / 1000:5.1f}s  {rec['total_tokens']:>5} tok  "
+            f"eta {_fmt_dur(remaining)}{flag}",
+            flush=True,
+        )
 
-    def _score_one(self, method, name: str, seed: int, variant: EvalItem,
-                   original: EvalItem, record_id: str, perm) -> Dict[str, Any]:
+    def _score_one(
+        self,
+        method,
+        name: str,
+        seed: int,
+        variant: EvalItem,
+        original: EvalItem,
+        record_id: str,
+        perm,
+    ) -> Dict[str, Any]:
         gen_base = self.cfg.gen(seed)
         k = max(1, self.cfg.self_consistency)
 
@@ -326,6 +363,7 @@ class Runner:
         self._since_live = 0
         try:
             from .plots import plot_live
+
             plot_live(self.records, self.run_dir, total=self._n_items or None)
         except Exception as e:
             print(f"[plots] live update failed: {type(e).__name__}: {e}")
@@ -333,16 +371,22 @@ class Runner:
     # -- analysis -----------------------------------------------------------
     def finalize(self, items: List[EvalItem], wall_s: float) -> Dict[str, Any]:
         from .report import build_summary, write_reports
+
         summary = build_summary(self.cfg, self.records, items, wall_s, self.run_name)
         (self.run_dir / "summary.json").write_text(json.dumps(summary, indent=2, default=str))
         write_reports(summary, self.run_dir, markdown=self.cfg.report_markdown)
 
         if self.cfg.plots:
             from .plots import make_all, plot_live
+
             made = make_all(summary, self.run_dir)
             if self.cfg.live_plot:
-                plot_live(self.records, self.run_dir, total=self._n_items or None,
-                          title="Running accuracy (final)")
+                plot_live(
+                    self.records,
+                    self.run_dir,
+                    total=self._n_items or None,
+                    title="Running accuracy (final)",
+                )
                 made.append(str(self.run_dir / "live.png"))
             if made:
                 print(f"[plots] {len(made)} figures -> {self.run_dir}")

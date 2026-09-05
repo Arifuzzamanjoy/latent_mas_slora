@@ -9,11 +9,10 @@ paired test on the items both methods actually saw.
 import math
 import random
 from collections import Counter, defaultdict
-from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional, Sequence, Tuple
-
+from typing import Any, Dict, List, Sequence, Tuple
 
 # ─── Intervals ───────────────────────────────────────────────────────────────
+
 
 def wilson_interval(k: int, n: int, conf: float = 0.95) -> Tuple[float, float]:
     """Wilson score interval - well behaved at small n and near 0/1."""
@@ -30,28 +29,53 @@ def wilson_interval(k: int, n: int, conf: float = 0.95) -> Tuple[float, float]:
 def _z_for(conf: float) -> float:
     # inverse normal CDF (Acklam), adequate for reporting
     p = 1 - (1 - conf) / 2
-    a = [-3.969683028665376e+01, 2.209460984245205e+02, -2.759285104469687e+02,
-         1.383577518672690e+02, -3.066479806614716e+01, 2.506628277459239e+00]
-    b = [-5.447609879822406e+01, 1.615858368580409e+02, -1.556989798598866e+02,
-         6.680131188771972e+01, -1.328068155288572e+01]
-    c = [-7.784894002430293e-03, -3.223964580411365e-01, -2.400758277161838e+00,
-         -2.549732539343734e+00, 4.374664141464968e+00, 2.938163982698783e+00]
-    d = [7.784695709041462e-03, 3.224671290700398e-01, 2.445134137142996e+00,
-         3.754408661907416e+00]
+    a = [
+        -3.969683028665376e01,
+        2.209460984245205e02,
+        -2.759285104469687e02,
+        1.383577518672690e02,
+        -3.066479806614716e01,
+        2.506628277459239e00,
+    ]
+    b = [
+        -5.447609879822406e01,
+        1.615858368580409e02,
+        -1.556989798598866e02,
+        6.680131188771972e01,
+        -1.328068155288572e01,
+    ]
+    c = [
+        -7.784894002430293e-03,
+        -3.223964580411365e-01,
+        -2.400758277161838e00,
+        -2.549732539343734e00,
+        4.374664141464968e00,
+        2.938163982698783e00,
+    ]
+    d = [7.784695709041462e-03, 3.224671290700398e-01, 2.445134137142996e00, 3.754408661907416e00]
     plow, phigh = 0.02425, 1 - 0.02425
     if p < plow:
         q = math.sqrt(-2 * math.log(p))
-        return (((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5]) / ((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1)
+        return (((((c[0] * q + c[1]) * q + c[2]) * q + c[3]) * q + c[4]) * q + c[5]) / (
+            (((d[0] * q + d[1]) * q + d[2]) * q + d[3]) * q + 1
+        )
     if p > phigh:
         q = math.sqrt(-2 * math.log(1 - p))
-        return -(((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5]) / ((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1)
+        return -(((((c[0] * q + c[1]) * q + c[2]) * q + c[3]) * q + c[4]) * q + c[5]) / (
+            (((d[0] * q + d[1]) * q + d[2]) * q + d[3]) * q + 1
+        )
     q = p - 0.5
     r = q * q
-    return (((((a[0]*r+a[1])*r+a[2])*r+a[3])*r+a[4])*r+a[5])*q / (((((b[0]*r+b[1])*r+b[2])*r+b[3])*r+b[4])*r+1)
+    return (
+        (((((a[0] * r + a[1]) * r + a[2]) * r + a[3]) * r + a[4]) * r + a[5])
+        * q
+        / (((((b[0] * r + b[1]) * r + b[2]) * r + b[3]) * r + b[4]) * r + 1)
+    )
 
 
-def bootstrap_interval(correct: Sequence[bool], n_boot: int = 2000,
-                       conf: float = 0.95, seed: int = 0) -> Tuple[float, float]:
+def bootstrap_interval(
+    correct: Sequence[bool], n_boot: int = 2000, conf: float = 0.95, seed: int = 0
+) -> Tuple[float, float]:
     """Percentile bootstrap over items."""
     n = len(correct)
     if n == 0 or n_boot <= 0:
@@ -69,8 +93,10 @@ def bootstrap_interval(correct: Sequence[bool], n_boot: int = 2000,
 
 # ─── Paired tests ────────────────────────────────────────────────────────────
 
-def mcnemar(a_correct: Sequence[bool], b_correct: Sequence[bool],
-            exact: bool = True) -> Dict[str, Any]:
+
+def mcnemar(
+    a_correct: Sequence[bool], b_correct: Sequence[bool], exact: bool = True
+) -> Dict[str, Any]:
     """
     Exact McNemar test on paired item outcomes.
 
@@ -79,15 +105,15 @@ def mcnemar(a_correct: Sequence[bool], b_correct: Sequence[bool],
     confidence intervals instead will call real differences insignificant.
     """
     assert len(a_correct) == len(b_correct), "paired test needs aligned items"
-    b01 = sum(1 for a, b in zip(a_correct, b_correct) if a and not b)   # a wins
-    b10 = sum(1 for a, b in zip(a_correct, b_correct) if b and not a)   # b wins
+    b01 = sum(1 for a, b in zip(a_correct, b_correct) if a and not b)  # a wins
+    b10 = sum(1 for a, b in zip(a_correct, b_correct) if b and not a)  # b wins
     n = b01 + b10
     if n == 0:
         return {"a_only": 0, "b_only": 0, "discordant": 0, "p_value": 1.0, "test": "none"}
 
     if exact and n <= 200:
         k = min(b01, b10)
-        tail = sum(math.comb(n, i) for i in range(0, k + 1)) / (2 ** n)
+        tail = sum(math.comb(n, i) for i in range(0, k + 1)) / (2**n)
         p = min(1.0, 2 * tail)
         test = "exact_binomial"
     else:
@@ -95,13 +121,16 @@ def mcnemar(a_correct: Sequence[bool], b_correct: Sequence[bool],
         p = math.erfc(math.sqrt(chi2 / 2))
         test = "chi2_continuity_corrected"
 
-    return {"a_only": b01, "b_only": b10, "discordant": n,
-            "p_value": round(p, 6), "test": test}
+    return {"a_only": b01, "b_only": b10, "discordant": n, "p_value": round(p, 6), "test": test}
 
 
-def paired_bootstrap_delta(a_correct: Sequence[bool], b_correct: Sequence[bool],
-                           n_boot: int = 2000, conf: float = 0.95,
-                           seed: int = 0) -> Dict[str, Any]:
+def paired_bootstrap_delta(
+    a_correct: Sequence[bool],
+    b_correct: Sequence[bool],
+    n_boot: int = 2000,
+    conf: float = 0.95,
+    seed: int = 0,
+) -> Dict[str, Any]:
     """Bootstrap CI for (acc_a - acc_b), resampling items jointly."""
     n = len(a_correct)
     if n == 0:
@@ -123,8 +152,10 @@ def paired_bootstrap_delta(a_correct: Sequence[bool], b_correct: Sequence[bool],
 
 # ─── Calibration ─────────────────────────────────────────────────────────────
 
-def calibration(confidences: Sequence[float], correct: Sequence[bool],
-                bins: int = 10) -> Dict[str, Any]:
+
+def calibration(
+    confidences: Sequence[float], correct: Sequence[bool], bins: int = 10
+) -> Dict[str, Any]:
     """
     ECE and Brier score.
 
@@ -150,13 +181,20 @@ def calibration(confidences: Sequence[float], correct: Sequence[bool],
         avg_conf = sum(c for c, _ in pts) / len(pts)
         acc = sum(1 for _, ok in pts if ok) / len(pts)
         ece += len(pts) / n * abs(avg_conf - acc)
-        rows.append({"bin": b, "n": len(pts), "avg_confidence": round(avg_conf, 4),
-                     "accuracy": round(acc, 4)})
+        rows.append(
+            {
+                "bin": b,
+                "n": len(pts),
+                "avg_confidence": round(avg_conf, 4),
+                "accuracy": round(acc, 4),
+            }
+        )
 
     return {"ece": round(ece, 4), "brier": round(brier, 4), "bins": rows}
 
 
 # ─── Classification (for router-only) ────────────────────────────────────────
+
 
 def classification_report(preds: Sequence[str], golds: Sequence[str]) -> Dict[str, Any]:
     labels = sorted(set(golds) | set(preds))
@@ -174,18 +212,27 @@ def classification_report(preds: Sequence[str], golds: Sequence[str]) -> Dict[st
         rec = tp / (tp + fn) if tp + fn else 0.0
         f1 = 2 * prec * rec / (prec + rec) if prec + rec else 0.0
         support = sum(matrix[lab].values())
-        per_label[lab] = {"precision": round(prec, 4), "recall": round(rec, 4),
-                          "f1": round(f1, 4), "support": support}
+        per_label[lab] = {
+            "precision": round(prec, 4),
+            "recall": round(rec, 4),
+            "f1": round(f1, 4),
+            "support": support,
+        }
         if support:
             f1s.append(f1)
 
     acc = sum(1 for p, g in zip(preds, golds) if p == g) / len(golds) if golds else 0.0
-    return {"accuracy": round(acc, 4),
-            "macro_f1": round(sum(f1s) / len(f1s), 4) if f1s else 0.0,
-            "per_label": per_label, "confusion": matrix, "labels": labels}
+    return {
+        "accuracy": round(acc, 4),
+        "macro_f1": round(sum(f1s) / len(f1s), 4) if f1s else 0.0,
+        "per_label": per_label,
+        "confusion": matrix,
+        "labels": labels,
+    }
 
 
 # ─── Aggregation ─────────────────────────────────────────────────────────────
+
 
 def percentile(values: Sequence[float], q: float) -> float:
     if not values:
@@ -195,8 +242,9 @@ def percentile(values: Sequence[float], q: float) -> float:
     return s[i]
 
 
-def summarize_records(records: List[Dict[str, Any]], bootstrap: int = 2000,
-                      conf: float = 0.95, seed: int = 0) -> Dict[str, Any]:
+def summarize_records(
+    records: List[Dict[str, Any]], bootstrap: int = 2000, conf: float = 0.95, seed: int = 0
+) -> Dict[str, Any]:
     """Aggregate per-item records for one method into a metrics block."""
     if not records:
         return {"n": 0}
@@ -219,9 +267,13 @@ def summarize_records(records: List[Dict[str, Any]], bootstrap: int = 2000,
     for dom, rows in sorted(groups.items()):
         kk = sum(1 for r in rows if r["correct"])
         lo, hi = wilson_interval(kk, len(rows), conf)
-        by_domain[dom] = {"n": len(rows), "correct": kk,
-                          "accuracy": round(kk / len(rows), 4),
-                          "ci_low": round(lo, 4), "ci_high": round(hi, 4)}
+        by_domain[dom] = {
+            "n": len(rows),
+            "correct": kk,
+            "accuracy": round(kk / len(rows), 4),
+            "ci_low": round(lo, 4),
+            "ci_high": round(hi, 4),
+        }
 
     wl, wh = wilson_interval(k, n, conf)
     bl, bh = bootstrap_interval(correct, bootstrap, conf, seed)

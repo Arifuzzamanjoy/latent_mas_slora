@@ -6,24 +6,18 @@ claim relative to one of these numbers, so they run on exactly the same items,
 seeds and decoding settings as the pipelines.
 """
 
-from typing import Any, Dict, List
-
 from ..config import GenSettings
-from ..data import EvalItem, LETTERS
+from ..data import LETTERS, EvalItem
 from ..extract import UNKNOWN
 from .base import Method, Sample
 
 # ─── Prompts ─────────────────────────────────────────────────────────────────
 
-SYS_DIRECT = (
-    "You are a careful expert. Answer with the single best option and nothing else."
-)
+SYS_DIRECT = "You are a careful expert. Answer with the single best option and nothing else."
 USR_DIRECT_MCQ = (
     "{q}\n\nRespond with only the letter of the correct option in the form \\boxed{{LETTER}}."
 )
-USR_DIRECT_NUM = (
-    "{q}\n\nRespond with only the final numeric answer in the form \\boxed{{ANSWER}}."
-)
+USR_DIRECT_NUM = "{q}\n\nRespond with only the final numeric answer in the form \\boxed{{ANSWER}}."
 
 SYS_COT = (
     "You are an expert clinician, mathematician and computer scientist. "
@@ -104,17 +98,27 @@ class LogLikelihoodBaseline(Method):
 
     Multiple-choice only; free-form items are skipped.
     """
+
     name = "baseline-loglik"
     backend_kind = "hf"
     description = "Option log-likelihood scoring (no generation, no answer extraction)."
 
     def sample(self, item: EvalItem, gen: GenSettings) -> Sample:
         import time
-        if item.task_type != "mcq" or not item.choices:
-            return Sample("", UNKNOWN, "unsupported", True, 0, 0, 0,
-                          {"skipped": "loglikelihood requires multiple choice"})
 
-        mode = self.args.get("loglik_mode", "option")   # option | letter
+        if item.task_type != "mcq" or not item.choices:
+            return Sample(
+                "",
+                UNKNOWN,
+                "unsupported",
+                True,
+                0,
+                0,
+                0,
+                {"skipped": "loglikelihood requires multiple choice"},
+            )
+
+        mode = self.args.get("loglik_mode", "option")  # option | letter
         user = f"{item.question}\n\nAnswer:"
         prompt = self.backend.chat_prompt(SYS_DIRECT, user)
 
@@ -127,8 +131,12 @@ class LogLikelihoodBaseline(Method):
         scores, n_ctx = self.backend.loglikelihood(prompt, conts)
         best = max(range(len(scores)), key=lambda i: scores[i])
         return Sample(
-            text=f"\\boxed{{{LETTERS[best]}}}", pred=LETTERS[best], extract_rule="loglik",
-            extract_failed=False, prompt_tokens=n_ctx, completion_tokens=0,
+            text=f"\\boxed{{{LETTERS[best]}}}",
+            pred=LETTERS[best],
+            extract_rule="loglik",
+            extract_failed=False,
+            prompt_tokens=n_ctx,
+            completion_tokens=0,
             latency_ms=int((time.time() - t0) * 1000),
             extra={"scores": [round(s, 4) for s in scores], "loglik_mode": mode},
         )

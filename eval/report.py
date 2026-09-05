@@ -14,7 +14,10 @@ from typing import Any, Dict, List, Optional
 from .config import EvalConfig
 from .data import EvalItem, describe_segment
 from .metrics import (
-    classification_report, mcnemar, paired_bootstrap_delta, summarize_records,
+    classification_report,
+    mcnemar,
+    paired_bootstrap_delta,
+    summarize_records,
 )
 
 
@@ -45,8 +48,13 @@ def _position_consistency(records: List[Dict[str, Any]]) -> Optional[float]:
     return round(stable / len(groups), 4)
 
 
-def build_summary(cfg: EvalConfig, records: List[Dict[str, Any]],
-                  items: List[EvalItem], wall_s: float, run_name: str) -> Dict[str, Any]:
+def build_summary(
+    cfg: EvalConfig,
+    records: List[Dict[str, Any]],
+    items: List[EvalItem],
+    wall_s: float,
+    run_name: str,
+) -> Dict[str, Any]:
     by_method: Dict[str, List[Dict]] = defaultdict(list)
     for r in records:
         by_method[r["method"]].append(r)
@@ -59,7 +67,9 @@ def build_summary(cfg: EvalConfig, records: List[Dict[str, Any]],
             methods[name] = {
                 "n": len(recs),
                 "routing": classification_report(preds, golds),
-                "latency_ms": {"mean": round(sum(r["latency_ms"] for r in recs) / max(1, len(recs)), 2)},
+                "latency_ms": {
+                    "mean": round(sum(r["latency_ms"] for r in recs) / max(1, len(recs)), 2)
+                },
                 "accuracy": classification_report(preds, golds)["accuracy"],
             }
             continue
@@ -89,8 +99,11 @@ def build_summary(cfg: EvalConfig, records: List[Dict[str, Any]],
         for name, recs in by_method.items():
             if name in (ref, "router-only"):
                 continue
-            pairs = [(bool(r["correct"]), ref_map[(r["seed"], r["record_id"])])
-                     for r in recs if (r["seed"], r["record_id"]) in ref_map]
+            pairs = [
+                (bool(r["correct"]), ref_map[(r["seed"], r["record_id"])])
+                for r in recs
+                if (r["seed"], r["record_id"]) in ref_map
+            ]
             if not pairs:
                 continue
             a = [p[0] for p in pairs]
@@ -116,6 +129,7 @@ def build_summary(cfg: EvalConfig, records: List[Dict[str, Any]],
 
 
 # ─── Rendering ───────────────────────────────────────────────────────────────
+
 
 def _pct(x: Optional[float]) -> str:
     return "-" if x is None else f"{100 * x:.1f}%"
@@ -147,8 +161,10 @@ def render_console(summary: Dict[str, Any]) -> str:
     for name, m in summary["methods"].items():
         if name == "router-only":
             r = m["routing"]
-            lines.append(f"{name:<18} {m['n']:>5} {_pct(r['accuracy']):>7} "
-                         f"{'macro-F1 ' + str(r['macro_f1']):>16}")
+            lines.append(
+                f"{name:<18} {m['n']:>5} {_pct(r['accuracy']):>7} "
+                f"{'macro-F1 ' + str(r['macro_f1']):>16}"
+            )
             continue
         ci = f"[{_pct(m['ci']['low'])}, {_pct(m['ci']['high'])}]"
         ece = m["calibration"].get("ece")
@@ -161,15 +177,20 @@ def render_console(summary: Dict[str, Any]) -> str:
 
     if summary["comparisons"]:
         ref = summary["reference_method"]
-        lines += ["", f"Paired comparisons vs {ref} (McNemar, same items):",
-                  "-" * 96,
-                  f"{'method':<18} {'Δacc':>8} {'95% CI of Δ':>20} {'wins':>6} {'losses':>7} {'p':>10}"]
+        lines += [
+            "",
+            f"Paired comparisons vs {ref} (McNemar, same items):",
+            "-" * 96,
+            f"{'method':<18} {'Δacc':>8} {'95% CI of Δ':>20} {'wins':>6} {'losses':>7} {'p':>10}",
+        ]
         for name, c in summary["comparisons"].items():
             d = f"{100 * c['delta']:+.1f}%"
             ci = f"[{100 * c['ci_low']:+.1f}%, {100 * c['ci_high']:+.1f}%]"
             mc = c["mcnemar"]
-            lines.append(f"{name:<18} {d:>8} {ci:>20} {mc['a_only']:>6} {mc['b_only']:>7} "
-                         f"{mc['p_value']:>10.4f}")
+            lines.append(
+                f"{name:<18} {d:>8} {ci:>20} {mc['a_only']:>6} {mc['b_only']:>7} "
+                f"{mc['p_value']:>10.4f}"
+            )
 
     lines.append("=" * 96)
     return "\n".join(lines)
@@ -183,25 +204,55 @@ def render_markdown(summary: Dict[str, Any]) -> str:
     L.append("## Configuration\n")
     L.append("| setting | value |")
     L.append("|---|---|")
-    for k in ("model", "dtype", "device", "dataset", "split", "fraction", "limit", "offset",
-              "data_seed", "shuffle", "stratify_by", "temperature", "top_p", "max_new_tokens",
-              "seeds", "self_consistency", "scoring", "permute_options", "latent_steps",
-              "agents", "use_router", "adaptive_latent_steps", "kv_handoff", "loras",
-              "bootstrap", "ci", "fingerprint"):
+    for k in (
+        "model",
+        "dtype",
+        "device",
+        "dataset",
+        "split",
+        "fraction",
+        "limit",
+        "offset",
+        "data_seed",
+        "shuffle",
+        "stratify_by",
+        "temperature",
+        "top_p",
+        "max_new_tokens",
+        "seeds",
+        "self_consistency",
+        "scoring",
+        "permute_options",
+        "latent_steps",
+        "agents",
+        "use_router",
+        "adaptive_latent_steps",
+        "kv_handoff",
+        "loras",
+        "bootstrap",
+        "ci",
+        "fingerprint",
+    ):
         if k in cfg:
             L.append(f"| `{k}` | `{cfg[k]}` |")
-    L.append(f"\nSegment: **n={seg['n']}**, domains `{seg['by_domain']}`, "
-             f"sources `{seg['by_source']}`. Wall clock {summary['wall_clock_s']}s.\n")
+    L.append(
+        f"\nSegment: **n={seg['n']}**, domains `{seg['by_domain']}`, "
+        f"sources `{seg['by_source']}`. Wall clock {summary['wall_clock_s']}s.\n"
+    )
 
     L.append("## Results\n")
-    L.append("| method | n | accuracy | 95% CI | parse fail | tokens/item | tokens/correct | "
-             "latency p50 | latency p95 | ECE |")
+    L.append(
+        "| method | n | accuracy | 95% CI | parse fail | tokens/item | tokens/correct | "
+        "latency p50 | latency p95 | ECE |"
+    )
     L.append("|---|---:|---:|---|---:|---:|---:|---:|---:|---:|")
     for name, m in summary["methods"].items():
         if name == "router-only":
             r = m["routing"]
-            L.append(f"| `{name}` | {m['n']} | {_pct(r['accuracy'])} | macro-F1 {r['macro_f1']} "
-                     f"| - | - | - | {m['latency_ms']['mean']:.0f} | - | - |")
+            L.append(
+                f"| `{name}` | {m['n']} | {_pct(r['accuracy'])} | macro-F1 {r['macro_f1']} "
+                f"| - | - | - | {m['latency_ms']['mean']:.0f} | - | - |"
+            )
             continue
         ece = m["calibration"].get("ece")
         L.append(
@@ -214,15 +265,19 @@ def render_markdown(summary: Dict[str, Any]) -> str:
 
     if summary["comparisons"]:
         L.append(f"\n## Paired comparisons vs `{summary['reference_method']}`\n")
-        L.append("McNemar's exact test on the items both methods answered. "
-                 "`wins` = correct here and wrong for the reference.\n")
+        L.append(
+            "McNemar's exact test on the items both methods answered. "
+            "`wins` = correct here and wrong for the reference.\n"
+        )
         L.append("| method | Δ accuracy | 95% CI of Δ | wins | losses | discordant | p |")
         L.append("|---|---:|---|---:|---:|---:|---:|")
         for name, c in summary["comparisons"].items():
             mc = c["mcnemar"]
-            L.append(f"| `{name}` | {100 * c['delta']:+.1f}% | "
-                     f"[{100 * c['ci_low']:+.1f}%, {100 * c['ci_high']:+.1f}%] | "
-                     f"{mc['a_only']} | {mc['b_only']} | {mc['discordant']} | {mc['p_value']} |")
+            L.append(
+                f"| `{name}` | {100 * c['delta']:+.1f}% | "
+                f"[{100 * c['ci_low']:+.1f}%, {100 * c['ci_high']:+.1f}%] | "
+                f"{mc['a_only']} | {mc['b_only']} | {mc['discordant']} | {mc['p_value']} |"
+            )
 
     L.append("\n## Per-domain accuracy\n")
     L.append("| method | " + " | ".join(sorted(seg["by_domain"])) + " |")
@@ -242,9 +297,11 @@ def render_markdown(summary: Dict[str, Any]) -> str:
     for name, m in summary["methods"].items():
         if "per_seed_accuracy" not in m:
             continue
-        L.append(f"| `{name}` | `{m['per_seed_accuracy']}` | "
-                 f"{_pct(m.get('position_consistency'))} | {_pct(m.get('unknown_rate'))} | "
-                 f"{m.get('errors', 0)} |")
+        L.append(
+            f"| `{name}` | `{m['per_seed_accuracy']}` | "
+            f"{_pct(m.get('position_consistency'))} | {_pct(m.get('unknown_rate'))} | "
+            f"{m.get('errors', 0)} |"
+        )
 
     if "router-only" in summary["methods"]:
         r = summary["methods"]["router-only"]["routing"]
@@ -252,17 +309,22 @@ def render_markdown(summary: Dict[str, Any]) -> str:
         L.append("| gold \\ pred | " + " | ".join(r["labels"]) + " |")
         L.append("|---|" + "---:|" * len(r["labels"]))
         for g in r["labels"]:
-            L.append(f"| **{g}** | " + " | ".join(str(r["confusion"][g][p]) for p in r["labels"]) + " |")
+            L.append(
+                f"| **{g}** | " + " | ".join(str(r["confusion"][g][p]) for p in r["labels"]) + " |"
+            )
 
     L.append("\n---\n")
-    L.append("Records: `records.jsonl` (one row per item × method × seed × permutation). "
-             "Config: `config.json`. Regenerate this report with "
-             "`python run_eval.py --report-only <run_dir>`.\n")
+    L.append(
+        "Records: `records.jsonl` (one row per item × method × seed × permutation). "
+        "Config: `config.json`. Regenerate this report with "
+        "`python run_eval.py --report-only <run_dir>`.\n"
+    )
     return "\n".join(L)
 
 
-def write_reports(summary: Dict[str, Any], run_dir: Path, markdown: bool = True,
-                  plots: bool = False) -> None:
+def write_reports(
+    summary: Dict[str, Any], run_dir: Path, markdown: bool = True, plots: bool = False
+) -> None:
     console = render_console(summary)
     print(console)
     (run_dir / "report.txt").write_text(console)
@@ -270,6 +332,7 @@ def write_reports(summary: Dict[str, Any], run_dir: Path, markdown: bool = True,
         (run_dir / "report.md").write_text(render_markdown(summary))
     if plots:
         from .plots import make_all
+
         made = make_all(summary, run_dir)
         if made:
             print(f"[plots] {len(made)} figures -> {run_dir}")
@@ -279,12 +342,20 @@ def report_only(run_dir: str) -> Dict[str, Any]:
     """Rebuild the summary and reports from an existing run directory."""
     d = Path(run_dir)
     cfg = EvalConfig.from_file(str(d / "config.json"))
-    records = [json.loads(l) for l in (d / "records.jsonl").read_text().splitlines() if l.strip()]
+    records = [
+        json.loads(line) for line in (d / "records.jsonl").read_text().splitlines() if line.strip()
+    ]
     seg = json.loads((d / "segment.json").read_text())
-    items = [EvalItem(id=i, question="", gold="", domain=dom)
-             for dom, n in seg["by_domain"].items() for i in [f"{dom}-{k}" for k in range(n)]]
+    items = [
+        EvalItem(id=i, question="", gold="", domain=dom)
+        for dom, n in seg["by_domain"].items()
+        for i in [f"{dom}-{k}" for k in range(n)]
+    ]
     summary = build_summary(cfg, records, items, 0.0, d.name)
-    summary["segment"] = {"spec": seg.get("spec", cfg.dataset), **{k: v for k, v in seg.items() if k != "item_ids"}}
+    summary["segment"] = {
+        "spec": seg.get("spec", cfg.dataset),
+        **{k: v for k, v in seg.items() if k != "item_ids"},
+    }
     (d / "summary.json").write_text(json.dumps(summary, indent=2, default=str))
     # --report-only regenerates everything derived from records.jsonl,
     # figures included - that is what "derived" is supposed to mean

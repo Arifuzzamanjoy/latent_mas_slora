@@ -5,13 +5,14 @@ Defines specialized agents for the multi-agent reasoning pipeline.
 Optimized for 24-48GB VRAM with larger LoRA ranks.
 """
 
-from enum import Enum
 from dataclasses import dataclass, field
-from typing import List, Optional
+from enum import Enum
+from typing import List
 
 
 class AgentRole(Enum):
     """Predefined agent roles with specialized behaviors"""
+
     PLANNER = "planner"
     CRITIC = "critic"
     REFINER = "refiner"
@@ -27,16 +28,26 @@ class AgentRole(Enum):
 @dataclass
 class LoRASpec:
     """LoRA adapter specification - optimized for 48GB VRAM"""
+
     rank: int = 32  # Increased from 16 for better capacity
     alpha: int = 64  # 2x rank
     dropout: float = 0.05
     target_modules: List[str] = field(
-        default_factory=lambda: ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
+        default_factory=lambda: [
+            "q_proj",
+            "k_proj",
+            "v_proj",
+            "o_proj",
+            "gate_proj",
+            "up_proj",
+            "down_proj",
+        ]
     )
-    
+
     def to_peft_config(self):
         """Convert to PEFT LoraConfig"""
         from peft import LoraConfig, TaskType
+
         return LoraConfig(
             task_type=TaskType.CAUSAL_LM,
             r=self.rank,
@@ -51,13 +62,14 @@ class LoRASpec:
 class AgentConfig:
     """
     Configuration for a specialized agent.
-    
+
     Each agent has:
     - Unique name and role
     - LoRA adapter specification
     - Generation parameters (temperature, max_tokens)
     - System prompt for role-specific behavior
     """
+
     name: str
     role: AgentRole
     adapter_name: str
@@ -70,7 +82,7 @@ class AgentConfig:
     # "reason_first" follows the LatentMAS reference prompts (reason, then answer).
     # "answer_first" is the legacy behaviour kept so the two can be compared.
     prompt_style: str = "reason_first"
-    
+
     def __post_init__(self):
         if not self.adapter_name:
             self.adapter_name = f"{self.name.lower()}_lora"
@@ -78,7 +90,7 @@ class AgentConfig:
             self.system_prompt = self._get_default_system_prompt()
         if not self.user_prompt_template:
             self.user_prompt_template = self._get_default_user_template()
-    
+
     def _get_default_system_prompt(self) -> str:
         """Get default system prompt based on role"""
         prompts = {
@@ -103,7 +115,9 @@ class AgentConfig:
                 "Reason step by step through the options, rule out the wrong ones, "
                 "and only then commit. "
                 "You MUST end your response with \\boxed{ANSWER}."
-            ) if self.prompt_style == "reason_first" else (
+            )
+            if self.prompt_style == "reason_first"
+            else (
                 "You are a Judger Agent responsible for final decisions. "
                 "Evaluate all evidence and reasoning to select the best answer. "
                 "Be decisive and provide clear justification. "
@@ -141,7 +155,7 @@ class AgentConfig:
             AgentRole.CUSTOM: "You are a helpful AI assistant.",
         }
         return prompts.get(self.role, prompts[AgentRole.CUSTOM])
-    
+
     def _get_default_user_template(self) -> str:
         """Get default user prompt template based on role"""
         templates = {
@@ -176,7 +190,9 @@ class AgentConfig:
                 "ruling out the wrong ones. Only after your reasoning is complete, give "
                 "the final answer on its own last line as \\boxed{{ANSWER}} "
                 "(the option letter for multiple choice)."
-            ) if self.prompt_style == "reason_first" else (
+            )
+            if self.prompt_style == "reason_first"
+            else (
                 "Make the final decision:\n\n"
                 "Question: {question}\n\n"
                 "Based on all analysis, select the best answer.\n"
@@ -196,7 +212,7 @@ class AgentConfig:
         }
         default = "Question: {question}\n\nProvide your analysis and answer."
         return templates.get(self.role, default)
-    
+
     @classmethod
     def planner(cls, **kwargs) -> "AgentConfig":
         """Create a Planner agent with optimized settings"""
@@ -210,7 +226,7 @@ class AgentConfig:
         }
         defaults.update(kwargs)
         return cls(**defaults)
-    
+
     @classmethod
     def critic(cls, **kwargs) -> "AgentConfig":
         """Create a Critic agent with optimized settings"""
@@ -224,7 +240,7 @@ class AgentConfig:
         }
         defaults.update(kwargs)
         return cls(**defaults)
-    
+
     @classmethod
     def refiner(cls, **kwargs) -> "AgentConfig":
         """Create a Refiner agent with optimized settings"""
@@ -238,7 +254,7 @@ class AgentConfig:
         }
         defaults.update(kwargs)
         return cls(**defaults)
-    
+
     @classmethod
     def judger(cls, **kwargs) -> "AgentConfig":
         """Create a Judger agent with optimized settings"""
@@ -252,7 +268,7 @@ class AgentConfig:
         }
         defaults.update(kwargs)
         return cls(**defaults)
-    
+
     @classmethod
     def medical(cls, **kwargs) -> "AgentConfig":
         """Create a Medical expert agent"""
@@ -266,7 +282,7 @@ class AgentConfig:
         }
         defaults.update(kwargs)
         return cls(**defaults)
-    
+
     @classmethod
     def math(cls, **kwargs) -> "AgentConfig":
         """Create a Math expert agent"""
@@ -280,7 +296,7 @@ class AgentConfig:
         }
         defaults.update(kwargs)
         return cls(**defaults)
-    
+
     @classmethod
     def coder(cls, **kwargs) -> "AgentConfig":
         """Create a Coding expert agent"""

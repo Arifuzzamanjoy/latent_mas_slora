@@ -11,16 +11,26 @@ from ..backends import Backend
 from ..config import EvalConfig
 from .base import Method, Sample
 from .baselines import (
-    DirectBaseline, CoTBaseline, JudgerBaseline, LogLikelihoodBaseline,
+    CoTBaseline,
+    DirectBaseline,
+    JudgerBaseline,
+    LogLikelihoodBaseline,
 )
-from .mas import (TextMAS, LatentMAS, LatentMASPaper, LatentKVMAS,
-                  SequentialMAS, RouterOnly)
+from .mas import LatentKVMAS, LatentMAS, LatentMASPaper, RouterOnly, SequentialMAS, TextMAS
 from .multilora import MultiLoRA
 
 _ALL = [
-    DirectBaseline, CoTBaseline, JudgerBaseline, LogLikelihoodBaseline,
-    TextMAS, LatentMAS, LatentKVMAS, LatentMASPaper, SequentialMAS,
-    MultiLoRA, RouterOnly,
+    DirectBaseline,
+    CoTBaseline,
+    JudgerBaseline,
+    LogLikelihoodBaseline,
+    TextMAS,
+    LatentMAS,
+    LatentKVMAS,
+    LatentMASPaper,
+    SequentialMAS,
+    MultiLoRA,
+    RouterOnly,
 ]
 
 METHOD_REGISTRY: Dict[str, type] = {cls.name: cls for cls in _ALL}
@@ -29,13 +39,17 @@ METHOD_REGISTRY: Dict[str, type] = {cls.name: cls for cls in _ALL}
 METHOD_GROUPS: Dict[str, List[str]] = {
     "all": [c.name for c in _ALL],
     "baselines": ["baseline-direct", "baseline-cot", "baseline-judger", "baseline-loglik"],
-    "mas": ["text-mas", "latent-mas", "latent-mas-kv", "latent-mas-paper",
-            "sequential-mas"],
+    "mas": ["text-mas", "latent-mas", "latent-mas-kv", "latent-mas-paper", "sequential-mas"],
     "latent": ["latent-mas", "latent-mas-kv", "latent-mas-paper"],
     "core": ["baseline-cot", "baseline-judger", "text-mas", "latent-mas", "latent-mas-kv"],
     # each rung changes exactly one thing from the rung below
-    "ladder": ["baseline-cot", "baseline-judger", "latent-mas", "latent-mas-kv",
-               "latent-mas-paper"],
+    "ladder": [
+        "baseline-cot",
+        "baseline-judger",
+        "latent-mas",
+        "latent-mas-kv",
+        "latent-mas-paper",
+    ],
     # the recommended architecture against the two controls that matter
     "recommended": ["baseline-cot", "latent-mas-paper", "multi-lora"],
 }
@@ -80,13 +94,16 @@ def backend_for(name: str) -> str:
 
 
 def list_methods() -> List[Dict[str, Any]]:
-    return [
-        {"name": c.name, "backend": c.backend_kind, "description": c.description}
-        for c in _ALL
-    ]
+    return [{"name": c.name, "backend": c.backend_kind, "description": c.description} for c in _ALL]
 
 
 __all__ = [
-    "Method", "Sample", "METHOD_REGISTRY", "METHOD_GROUPS",
-    "expand_methods", "build_method", "backend_for", "list_methods",
+    "Method",
+    "Sample",
+    "METHOD_REGISTRY",
+    "METHOD_GROUPS",
+    "expand_methods",
+    "build_method",
+    "backend_for",
+    "list_methods",
 ]

@@ -9,7 +9,7 @@ See docs/EVAL.md for the full settings reference.
 
 from .config import EvalConfig, GenSettings
 from .data import EvalItem, load_dataset, segment
-from .extract import extract_answer, ExtractResult
+from .extract import ExtractResult, extract_answer
 from .methods import METHOD_REGISTRY, build_method, list_methods
 
 __all__ = [

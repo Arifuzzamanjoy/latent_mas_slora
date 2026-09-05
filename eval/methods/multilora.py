@@ -24,7 +24,7 @@ The prompt is deliberately the same one baseline-cot uses, so `multi-lora` vs
 """
 
 import time
-from typing import Any, Dict, List, Optional, Tuple
+from typing import List, Tuple
 
 from ..config import GenSettings
 from ..data import EvalItem
@@ -38,14 +38,16 @@ MIX_ADAPTER = "_logo_mix"
 class MultiLoRA(Method):
     name = "multi-lora"
     backend_kind = "system"
-    description = ("LoGo-style: probe resident adapters, merge top-k per instance, "
-                   "one prompt + latent steps, single KV cache.")
+    description = (
+        "LoGo-style: probe resident adapters, merge top-k per instance, "
+        "one prompt + latent steps, single KV cache."
+    )
     defaults = {
-        "top_k": 3,                  # LoGo merges top-k; 3 is sane for 7 adapters
-        "score_mode": "norm",        # norm | entropy
-        "adapter_policy": "logo",    # logo | merge | same | none
-        "adapter": None,             # used when adapter_policy == "same"
-        "latent_steps": 50,          # paper's optimum band is 40-80
+        "top_k": 3,  # LoGo merges top-k; 3 is sane for 7 adapters
+        "score_mode": "norm",  # norm | entropy
+        "adapter_policy": "logo",  # logo | merge | same | none
+        "adapter": None,  # used when adapter_policy == "same"
+        "latent_steps": 50,  # paper's optimum band is 40-80
     }
 
     def __init__(self, backend, args, cfg):
@@ -60,18 +62,26 @@ class MultiLoRA(Method):
     # -- prompt ------------------------------------------------------------
     def _prompt(self, item: EvalItem) -> str:
         tmpl = USR_COT_MCQ if item.task_type == "mcq" else USR_COT_NUM
-        msgs = [{"role": "system", "content": SYS_COT},
-                {"role": "user", "content": tmpl.format(q=item.question)}]
+        msgs = [
+            {"role": "system", "content": SYS_COT},
+            {"role": "user", "content": tmpl.format(q=item.question)},
+        ]
         return self.system.tokenizer.apply_chat_template(
-            msgs, tokenize=False, add_generation_prompt=True)
+            msgs, tokenize=False, add_generation_prompt=True
+        )
 
     def _latent_prompt(self, item: EvalItem) -> str:
         """Prompt for the latent pass - thinking only, never decoded."""
-        msgs = [{"role": "system", "content": SYS_COT},
-                {"role": "user",
-                 "content": f"{item.question}\n\nThink through this problem carefully."}]
+        msgs = [
+            {"role": "system", "content": SYS_COT},
+            {
+                "role": "user",
+                "content": f"{item.question}\n\nThink through this problem carefully.",
+            },
+        ]
         return self.system.tokenizer.apply_chat_template(
-            msgs, tokenize=False, add_generation_prompt=True)
+            msgs, tokenize=False, add_generation_prompt=True
+        )
 
     # -- adapter selection -------------------------------------------------
     def _candidates(self) -> List[str]:
@@ -83,8 +93,7 @@ class MultiLoRA(Method):
         occupy memory, and never participate. Composition is exactly where an
         externally trained adapter is useful, so it is included here.
         """
-        names = [self.system._pool.get(n).adapter_name
-                 for n in self.system._pool.list_agents()]
+        names = [self.system._pool.get(n).adapter_name for n in self.system._pool.list_agents()]
         for extra in getattr(self.system.model, "peft_config", {}):
             if extra not in names and extra != MIX_ADAPTER:
                 names.append(extra)
@@ -106,15 +115,19 @@ class MultiLoRA(Method):
 
         def last_hidden():
             with torch.no_grad():
-                out = self.system.model(input_ids=input_ids, attention_mask=attn,
-                                        output_hidden_states=True, return_dict=True)
+                out = self.system.model(
+                    input_ids=input_ids,
+                    attention_mask=attn,
+                    output_hidden_states=True,
+                    return_dict=True,
+                )
             return out.hidden_states[-1][:, -1, :].float(), out.logits[:, -1, :].float()
 
         model = self.system.model
         try:
             with model.disable_adapter():
                 h_base, lg_base = last_hidden()
-        except Exception:                      # no PEFT wrapper: nothing to compare
+        except Exception:  # no PEFT wrapper: nothing to compare
             h_base, lg_base = last_hidden()
 
         scores: List[Tuple[str, float]] = []
@@ -150,7 +163,7 @@ class MultiLoRA(Method):
             return False
         vals = [v for _, v in scores]
         if max(abs(v) for v in vals) < 1e-9:
-            return True                      # every adapter contributes nothing
+            return True  # every adapter contributes nothing
         spread = max(vals) - min(vals)
         scale = max(abs(v) for v in vals) or 1.0
         return spread / scale < 1e-6
@@ -161,7 +174,7 @@ class MultiLoRA(Method):
         ranked = sorted(scores, key=lambda kv: (-kv[1], kv[0]))
         # an adapter that changes nothing is not a candidate while a real one exists
         live = [kv for kv in ranked if kv[1] > 1e-9]
-        ranked = (live or ranked)[:max(1, self.top_k)]
+        ranked = (live or ranked)[: max(1, self.top_k)]
         names = [n for n, _ in ranked]
         raw = [s for _, s in ranked]
         # Scores are contribution magnitudes (>= 0 by construction), so normalize
@@ -190,25 +203,27 @@ class MultiLoRA(Method):
         # 'linear' is tried first because it preserves the weighting exactly.
         for combo in ("linear", "cat"):
             try:
-                model.add_weighted_adapter(names, weights, MIX_ADAPTER,
-                                           combination_type=combo)
+                model.add_weighted_adapter(names, weights, MIX_ADAPTER, combination_type=combo)
                 model.set_adapter(MIX_ADAPTER)
                 return f"{MIX_ADAPTER}({combo})"
             except Exception:
                 continue
 
-        model.set_adapter(names[0])       # composition unavailable: fall back to top-1
+        model.set_adapter(names[0])  # composition unavailable: fall back to top-1
         return names[0]
 
     # -- main --------------------------------------------------------------
     def sample(self, item: EvalItem, gen: GenSettings) -> Sample:
         if self.mock:
-            out = self.backend.generate(f"{self.name}|{item.question}", gen,
-                                        num_choices=item.num_choices)
+            out = self.backend.generate(
+                f"{self.name}|{item.question}", gen, num_choices=item.num_choices
+            )
             return self._finish(out, item, {"mock": True, "adapter_policy": self.policy})
 
         import torch
+
         from ..backends import _seed_everything
+
         _seed_everything(gen.seed)
 
         p = self.system._pipeline
@@ -238,17 +253,19 @@ class MultiLoRA(Method):
             chosen = self._candidates()
             weights = [1.0 / len(chosen)] * len(chosen)
             active = self._activate(chosen, weights)
-        else:                                        # logo
+        else:  # logo
             t_probe = time.time()
             scores = self._probe(input_ids, attn)
             probe_ms = int((time.time() - t_probe) * 1000)
             degenerate = self.is_degenerate(scores)
             if degenerate and not self._warned:
                 self._warned = True
-                print("[multi-lora] WARNING: all adapters scored identically - they are "
-                      "indistinguishable (zero-initialised LoRA is an identity function). "
-                      "Selection is a no-op and this run measures the base model. "
-                      "Train the adapters before drawing conclusions.")
+                print(
+                    "[multi-lora] WARNING: all adapters scored identically - they are "
+                    "indistinguishable (zero-initialised LoRA is an identity function). "
+                    "Selection is a no-op and this run measures the base model. "
+                    "Train the adapters before drawing conclusions."
+                )
             chosen, weights = self._compose(scores)
             active = self._activate(chosen, weights)
 
@@ -259,25 +276,33 @@ class MultiLoRA(Method):
             cache = None
             latent_prefix = 0
             if steps > 0:
-                think = tok(self._latent_prompt(item), return_tensors="pt",
-                            truncation=True, max_length=4096)
+                think = tok(
+                    self._latent_prompt(item), return_tensors="pt", truncation=True, max_length=4096
+                )
                 res = p.reasoner.reason(
                     input_ids=think["input_ids"].to(device),
                     attention_mask=think["attention_mask"].to(device),
-                    num_steps=steps, past_key_values=None,
+                    num_steps=steps,
+                    past_key_values=None,
                 )
                 cache = res.kv_cache
                 from src.core.latent_reasoner import get_cache_length
+
                 latent_prefix = get_cache_length(cache)
 
             text, n_new = p._decode_with_cache(
-                input_ids, cache, gen.temperature, gen.top_p, gen.max_new_tokens)
+                input_ids, cache, gen.temperature, gen.top_p, gen.max_new_tokens
+            )
 
         latency = int((time.time() - t0) * 1000)
         ex = extract_answer(text, item.task_type, item.num_choices)
         return Sample(
-            text=text, pred=ex.answer, extract_rule=ex.rule, extract_failed=ex.failed,
-            prompt_tokens=int(input_ids.shape[1]), completion_tokens=n_new,
+            text=text,
+            pred=ex.answer,
+            extract_rule=ex.rule,
+            extract_failed=ex.failed,
+            prompt_tokens=int(input_ids.shape[1]),
+            completion_tokens=n_new,
             latency_ms=latency,
             extra={
                 "adapter_policy": self.policy,
