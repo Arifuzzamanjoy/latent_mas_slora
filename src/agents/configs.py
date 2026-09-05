@@ -121,7 +121,7 @@ class AgentConfig:
                 "You are a Judger Agent responsible for final decisions. "
                 "Evaluate all evidence and reasoning to select the best answer. "
                 "Be decisive and provide clear justification. "
-                "You MUST always end your response with \\boxed{LETTER} where LETTER is A, B, C, or D. "
+                "You MUST always end your response with \\boxed{ANSWER}. "
                 "State your final answer early in your reasoning, then justify it."
             ),
             AgentRole.CODER: (
@@ -193,11 +193,9 @@ class AgentConfig:
             )
             if self.prompt_style == "reason_first"
             else (
-                "Make the final decision:\n\n"
+                "Make the final decision.\n\n"
                 "Question: {question}\n\n"
-                "Based on all analysis, select the best answer.\n"
-                "For multiple choice, you MUST format your final answer as: \\boxed{{LETTER}}\n"
-                "State your chosen answer letter FIRST, then provide reasoning.\n\n"
+                "State your final answer FIRST as \\boxed{{ANSWER}}, then justify it.\n\n"
                 "Final Answer:"
             ),
             AgentRole.MEDICAL: (

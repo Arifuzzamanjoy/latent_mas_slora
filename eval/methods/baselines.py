@@ -41,14 +41,14 @@ SYS_JUDGER = (
     "You are a Judger Agent responsible for final decisions. "
     "Evaluate all evidence and reasoning to select the best answer. "
     "Be decisive and provide clear justification. "
-    "You MUST always end your response with \\boxed{LETTER} where LETTER is the option letter. "
+    "You MUST always end your response with \\boxed{ANSWER}. "
     "State your final answer early in your reasoning, then justify it."
 )
 USR_JUDGER = (
-    "Make the final decision:\n\nQuestion: {q}\n\n"
-    "Based on all analysis, select the best answer.\n"
-    "You MUST format your final answer as: \\boxed{{LETTER}}\n"
-    "State your chosen answer letter FIRST, then provide reasoning.\n\nFinal Answer:"
+    "Make the final decision.\n\n"
+    "Question: {q}\n\n"
+    "State your final answer FIRST as \\boxed{{ANSWER}}, then justify it.\n\n"
+    "Final Answer:"
 )
 
 
