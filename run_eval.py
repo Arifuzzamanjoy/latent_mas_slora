@@ -131,7 +131,12 @@ def build_parser() -> argparse.ArgumentParser:
     )
 
     g = p.add_argument_group("multi-agent")
-    g.add_argument("--latent-steps", type=int, default=10)
+    g.add_argument(
+        "--latent-steps",
+        type=int,
+        default=None,
+        help="latent steps per agent (default: per-domain, see DEFAULT_LATENT_STEPS)",
+    )
     g.add_argument(
         "--agents",
         default=None,
@@ -255,7 +260,9 @@ def config_from_args(a: argparse.Namespace) -> EvalConfig:
     cfg.seeds = [int(s) for s in str(a.seeds).split(",") if str(s).strip()]
     cfg.self_consistency = a.self_consistency
 
-    cfg.latent_steps = a.latent_steps
+    if a.latent_steps is not None:
+        cfg.latent_steps = a.latent_steps
+        cfg.latent_steps_explicit = True
     cfg.agents = [x.strip() for x in a.agents.split(",")] if a.agents else None
     cfg.use_router = not a.no_router
     cfg.adaptive_latent_steps = not a.no_adaptive_steps

@@ -642,3 +642,30 @@ def inspect_source(fn):
     import inspect
 
     return inspect.getsource(fn)
+
+
+def test_adaptive_latent_steps_branch_is_reachable():
+    """
+    Per-domain steps must actually apply, and an explicit setting must win.
+
+    EvalConfig.args_for() puts latent_steps into every method's args, so the old
+    `"latent_steps" not in self.args` guard was never true and adaptive stepping
+    silently never ran.
+    """
+    from eval.config import EvalConfig
+    from eval.methods.mas import DEFAULT_LATENT_STEPS, LatentMASSLoRA
+
+    cfg = EvalConfig()
+    m = LatentMASSLoRA.__new__(LatentMASSLoRA)
+    m.cfg, m.name = cfg, LatentMASSLoRA.name
+    m.args = cfg.args_for(LatentMASSLoRA.name)
+    assert m._steps_pinned() is False
+
+    cfg.latent_steps_explicit = True
+    assert m._steps_pinned() is True
+
+    cfg.latent_steps_explicit = False
+    cfg.method_args = {LatentMASSLoRA.name: {"latent_steps": 4}}
+    assert m._steps_pinned() is True
+
+    assert DEFAULT_LATENT_STEPS["math"] == 12

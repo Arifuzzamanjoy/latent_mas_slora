@@ -61,6 +61,10 @@ class EvalConfig:
     agents: Optional[List[str]] = None
     use_router: bool = True
     adaptive_latent_steps: bool = True
+    # Set by run_eval.py when --latent-steps was actually typed. Without it a
+    # pinned step count cannot be told apart from the dataclass default, and
+    # adaptive stepping would silently override what the user asked for.
+    latent_steps_explicit: bool = False
     kv_handoff: bool = True
     prompt_style: str = "reason_first"
     adapter_policy: str = "logo"

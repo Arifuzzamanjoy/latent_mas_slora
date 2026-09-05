@@ -106,9 +106,20 @@ class _MASMethod(Method):
             domain = d.value
 
         agents = forced or DEFAULT_PIPELINES.get(domain, DEFAULT_PIPELINES["general"])
-        if self.args.get("adaptive_latent_steps", True) and "latent_steps" not in self.args:
+        # Per-domain defaults apply unless the step count was set explicitly.
+        # The test used to be `"latent_steps" not in self.args`, which is never
+        # true: EvalConfig.args_for() puts latent_steps into every method's args
+        # unconditionally, so this branch was dead and adaptive stepping never
+        # ran. Ask the config which settings the user actually named instead.
+        if self.args.get("adaptive_latent_steps", True) and not self._steps_pinned():
             steps = DEFAULT_LATENT_STEPS.get(domain, steps)
         return agents, steps, domain, conf
+
+    def _steps_pinned(self) -> bool:
+        """True when latent_steps was set by the user, per-method or globally."""
+        if "latent_steps" in self.cfg.method_args.get(self.name, {}):
+            return True
+        return getattr(self.cfg, "latent_steps_explicit", False)
 
     def sample(self, item: EvalItem, gen: GenSettings) -> Sample:
         if self.mock:
