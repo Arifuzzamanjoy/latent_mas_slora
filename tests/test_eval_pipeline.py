@@ -669,3 +669,93 @@ def test_adaptive_latent_steps_branch_is_reachable():
     assert m._steps_pinned() is True
 
     assert DEFAULT_LATENT_STEPS["math"] == 12
+
+
+def test_router_keywords_exclude_ordinary_english():
+    """
+    Regression guard: 'if ', 'for ', 'while ', 'class' and 'return' were CODE
+    keywords. They fired on 164/400 and 127/400 GSM8K word problems ("If there
+    are 30 sheets...", "...for his drawing"), which routed grade-school
+    arithmetic to CodeExpert on 11 of 26 items.
+    """
+    pytest.importorskip("torch", reason="src package imports torch at package level")
+    from src.routing.domain_profiles import DOMAIN_PROFILES
+
+    banned = {
+        "if",
+        "for",
+        "while",
+        "class",
+        "return",
+        "error",
+        "fix",
+        "method",
+        "variable",
+        "problem",
+        "solution",
+        "how",
+        "why",
+        "explain",
+        "iv",
+    }
+    for domain, profile in DOMAIN_PROFILES.items():
+        for kw in profile.keywords + profile.negative_keywords:
+            assert kw.strip().lower() not in banned, f"{domain.value}: {kw!r}"
+
+
+def test_router_keyword_matching_is_word_bounded():
+    """Substring matching fired 'sin' on 'using', 'iv' on 'give', 'log' on 'biology'."""
+    pytest.importorskip("torch", reason="src package imports torch at package level")
+    from src.routing import SemanticRouter
+
+    m = SemanticRouter._matches
+    assert not m("sin", "we are using this")
+    assert not m("log", "a biology question")
+    assert not m("tan", "an important detail")
+    assert m("sin", "compute sin of x")
+    # symbolic keywords have no word boundary to anchor to, so they stay substrings
+    assert m("def ", "def foo():")
+    assert m("print(", "print(x)")
+
+
+def test_router_posterior_is_not_flat():
+    """
+    route() must produce a usable spread.
+
+    The old scoring shifted cosine to [0, 1] before normalizing across five
+    domains, which pinned every confidence into a 0.22-0.28 band. The 0.30
+    tiebreaker in get_best_domain() therefore fired on 199 of 200 items and the
+    keyword score silently decided every route.
+    """
+    pytest.importorskip("sentence_transformers", reason="router needs embeddings")
+    from src.routing import SemanticRouter
+
+    r = SemanticRouter()
+    math_q = "Janet has 3 boxes of 12 pencils each. How many pencils does she have?"
+    code_q = "Write a Python function that reverses a linked list"
+
+    d_math, c_math = r.get_best_domain(math_q)
+    d_code, c_code = r.get_best_domain(code_q)
+
+    assert d_math.value == "math", f"got {d_math.value} at {c_math:.3f}"
+    assert d_code.value == "code", f"got {d_code.value} at {c_code:.3f}"
+    assert c_math > 0.5 and c_code > 0.5
+
+
+def test_router_word_problems_are_math_not_code():
+    """The exact failure seen in eval_runs/20260905-195324-458ba3227aec."""
+    pytest.importorskip("sentence_transformers", reason="router needs embeddings")
+    from src.routing import SemanticRouter
+
+    r = SemanticRouter()
+    problems = [
+        "Amber, Micah, and Ahito ran 52 miles in total. Amber ran 8 miles. "
+        "Micah ran 3.5 times what Amber ran. How many miles did Ahito run?",
+        "Miguel uses 2 pads of paper a week for his drawing. If there are 30 "
+        "sheets of paper on a pad, how many sheets does he use a month?",
+        "A loaf of bread costs $2 and a bagel costs $1. How much more do 3 "
+        "loaves cost than 2 bagels?",
+    ]
+    for q in problems:
+        d, c = r.get_best_domain(q)
+        assert d.value == "math", f"{d.value} @ {c:.3f} for {q[:40]!r}"
